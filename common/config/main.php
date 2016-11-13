@@ -1,6 +1,14 @@
 <?php
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'sourceLanguage' => 'en-US',
+    'language' => 'en-US',
+    // Special modules for this application
+    'modules' => [
+        'markdown' => [
+            'class' => 'kartik\markdown\Module',
+        ]
+    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -23,11 +31,9 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/translations',
                     'fileMap' => [
-                        'app' => 'app.php',
-                        'common' => 'common.php',
-                        /** Models */
-                        'guide' => 'guide.php',
+
                     ],
+                    'on missingTranslations' => ['common\components\TranslationEventHandler', 'handleMissingTranslation'],
                 ],
             ],
         ],

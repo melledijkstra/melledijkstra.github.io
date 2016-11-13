@@ -2,31 +2,31 @@
 
 namespace backend\controllers;
 
+use backend\components\web\BackendController;
 use Yii;
 use common\models\Project;
 use common\models\search\ProjectSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
  */
-class ProjectController extends Controller
+class ProjectController extends BackendController
 {
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**

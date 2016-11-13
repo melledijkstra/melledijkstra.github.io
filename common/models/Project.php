@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -30,6 +32,14 @@ class Project extends ActiveRecord
     public static function tableName()
     {
         return 'projects';
+    }
+
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),[
+            TimestampBehavior::className(),
+            BlameableBehavior::className(),
+        ]);
     }
 
     /**

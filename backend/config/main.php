@@ -11,12 +11,9 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    // Special modules for this application
-    'modules' => [
-        'markdown' => [
-            'class' => 'kartik\markdown\Module',
-        ]
-    ],
+
+    'defaultRoute' => '/site/index',
+
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',

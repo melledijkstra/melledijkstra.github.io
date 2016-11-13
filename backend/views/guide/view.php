@@ -1,10 +1,15 @@
 <?php
 
+use common\assets\HighLightAsset;
 use yii\helpers\Html;
+use yii\web\View;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Guide */
+
+HighLightAsset::register($this);
+$this->registerJs('hljs.initHighlightingOnLoad();',View::POS_READY);
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('guide', 'Guides'), 'url' => ['index']];
@@ -31,17 +36,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'filename',
-            [
-                'attribute' => 'guide_text',
-                'value'     => $model->getGuide(),
-                'format'    => 'raw',
-            ],
-            'project',
-            'created_at',
-            'updated_at',
-            'created_by',
-            'updated_by',
+            'project0.title',
+            'created_at:datetime',
+            'updated_at:datetime',
+            'createdBy.username',
+            'updatedBy.username',
         ],
     ]) ?>
+
+    <h2><?= Yii::t('guide', 'Preview'); ?></h2>
+    <div class="mel-guide-preview">
+        <?= $model->renderGuide(); ?>
+    </div>
 
 </div>

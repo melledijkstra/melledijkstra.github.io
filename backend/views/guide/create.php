@@ -1,10 +1,15 @@
 <?php
 
+use common\assets\HighLightAsset;
 use yii\helpers\Html;
+use yii\web\View;
 
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Guide */
+
+HighLightAsset::register($this);
+$this->registerJs('hljs.initHighlightingOnLoad();',View::POS_READY);
 
 $this->title = Yii::t('guide', 'Create Guide');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('guide', 'Guides'), 'url' => ['index']];

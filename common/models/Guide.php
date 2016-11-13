@@ -4,6 +4,8 @@ namespace common\models;
 
 use kartik\markdown\Markdown;
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -12,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property string $title
  * @property string $filename
+ * @property string $filepath
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $created_by
@@ -30,7 +33,13 @@ class Guide extends ActiveRecord
      */
     public $guide_text;
 
-
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),[
+            TimestampBehavior::className(),
+            BlameableBehavior::className(),
+        ]);
+    }
 
     /**
      * @inheritdoc
@@ -42,19 +51,20 @@ class Guide extends ActiveRecord
 
     public function beforeSave($insert)
     {
-        if(parent::beforeSave($insert)) {
-            if($insert) {
-                $filename = Yii::getAlias('@frontend').'/guides/'.hash('md5',time()).'.md';
-                file_put_contents($filename,$this->guide_text);
-                $this->filename = $filename;
-            } else {
-                // remove older file
-
-                // create new markdown file
-            }
+        if(parent::beforeSave($insert) && $this->saveGuide($this->guide_text)) {
             return true;
         }
         return false;
+    }
+
+    public function beforeDelete()
+    {
+        if(parent::beforeDelete()) {
+            // Delete the file before deleting guide from database
+            return $this->deleteGuideFile();
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -63,7 +73,7 @@ class Guide extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'filename', 'guide_text'], 'required'],
+            [['title', 'guide_text'], 'required'],
             [['created_at', 'updated_at', 'created_by', 'updated_by', 'project'], 'integer'],
             [['title', 'filename'], 'string', 'max' => 255],
             [['guide_text'], 'string'],
@@ -118,8 +128,50 @@ class Guide extends ActiveRecord
     /**
      * @return string
      */
-    public function getGuide()
+    public function renderGuide()
     {
-        return Markdown::convert(file_get_contents($this->filename));
+        if(file_exists($this->filepath)) {
+            return Markdown::convert(file_get_contents($this->filepath));
+        } else {
+            return '<p style="color:red;">'.Yii::t('guide', 'This guide\'s file is not found, you might as well delete this guide').'</p>';
+        }
+    }
+
+    public function getFilePath() {
+        if(!empty($this->filename)) {
+            return Yii::getAlias('@frontend').'/guides/'.$this->filename;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Saves the guide text gives in file and removes the old file if present
+     * @param $guide_text
+     * @return bool true if file is saved otherwise false
+     */
+    private function saveGuide($guide_text)
+    {
+        $this->deleteGuideFile();
+        $filename = substr(hash('md5',time()),0,8).'.md';
+        $filepath = Yii::getAlias('@frontend').'/guides/'.$filename;
+        if(file_put_contents($filepath, $guide_text)) {
+            $this->filename = $filename;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Deletes the file associated with this Guide
+     * @return bool
+     */
+    private function deleteGuideFile()
+    {
+        if(!empty($this->filename) && file_exists($this->filepath)) {
+            return unlink($this->filepath);
+        }
+        return true;
     }
 }

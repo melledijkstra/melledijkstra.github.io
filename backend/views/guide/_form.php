@@ -15,9 +15,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'guide_text')->widget('kartik\markdown\MarkdownEditor') ?>
-
-    <?= $form->field($model, 'filename')->textInput() ?>
+    <?= $form->field($model, 'guide_text')->widget('kartik\markdown\MarkdownEditor',[
+        'footerMessage' => false,
+        'showExport' => false,
+    ]); ?>
 
     <?= $form->field($model, 'project')->dropDownList(
         Project::find()->select(['title','id'])->indexBy('id')->column(),

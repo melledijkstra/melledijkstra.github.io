@@ -15,7 +15,7 @@ h1,h2,h3 {
     BOOTSTRAP OVERRIDES
 */
 
-.breadcrumb, .form-control, .btn, .alert {
+.kv-md-editor, .breadcrumb, .form-control, .btn, .alert {
     border-radius: 0;
 }
 
@@ -35,4 +35,22 @@ h1,h2,h3 {
 
 .mel-navbar a:hover {
     color: #000 !important;
+}
+
+.mel-about-image {
+    height: 200px;
+    width: auto;
+}
+
+.mel-guide-preview {
+    background-color: #FFF;
+    padding: 5px;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+pre {
+    background-color: #2b2b2b;
+    color: #fff;
 }
