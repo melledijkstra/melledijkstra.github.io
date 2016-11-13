@@ -1,0 +1,38 @@
+/**
+* Melle's Stylesheet
+*/
+
+html, body {
+    background-color: #ededed;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1,h2,h3 {
+    font-weight: bold;
+}
+
+/*
+    BOOTSTRAP OVERRIDES
+*/
+
+.breadcrumb, .form-control, .btn, .alert {
+    border-radius: 0;
+}
+
+/*
+    MY STYLES
+*/
+
+.mel-navbar {
+    background-color: #FFF;
+    color: #2e2e2e;
+    border-bottom: 1px solid #939393;
+}
+
+.mel-navbar a {
+    color: #2e2e2e !important;
+}
+
+.mel-navbar a:hover {
+    color: #000 !important;
+}

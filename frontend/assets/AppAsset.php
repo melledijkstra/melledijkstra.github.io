@@ -13,6 +13,9 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/main.css',
+        // Roboto Font
+        'https://fonts.googleapis.com/css?family=Roboto',
     ];
     public $js = [
     ];
