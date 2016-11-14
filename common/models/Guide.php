@@ -67,6 +67,14 @@ class Guide extends ActiveRecord
         }
     }
 
+    public function afterFind()
+    {
+        if(file_exists($this->filepath)) {
+            $this->guide_text = file_get_contents($this->filepath);
+        }
+        parent::afterFind();
+    }
+
     /**
      * @inheritdoc
      */

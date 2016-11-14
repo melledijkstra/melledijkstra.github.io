@@ -1,5 +1,6 @@
 <?php
 return [
+    'name' => 'Melle Dijkstra',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'sourceLanguage' => 'en-US',
     'language' => 'en-US',
@@ -33,7 +34,7 @@ return [
                     'fileMap' => [
 
                     ],
-                    'on missingTranslations' => ['common\components\TranslationEventHandler', 'handleMissingTranslation'],
+                    'on missingTranslation' => ['common\components\TranslationEventHandler', 'handleMissingTranslation']
                 ],
             ],
         ],
