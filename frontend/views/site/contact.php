@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.
+        <?= Yii::t('app','Feel free to ask me anything! please fill out the following form to contact me. Thank you :)'); ?>
     </p>
 
     <div class="row">
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                    <?= Html::submitButton(Yii::t('common','Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

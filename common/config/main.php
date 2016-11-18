@@ -2,8 +2,8 @@
 return [
     'name' => 'Melle Dijkstra',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'sourceLanguage' => 'en-US',
     'language' => 'en-US',
+    'sourceLanguage' => 'en-US',
     // Special modules for this application
     'modules' => [
         'markdown' => [
@@ -31,11 +31,14 @@ return [
                 '*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/translations',
-                    'fileMap' => [
-
-                    ],
-                    'on missingTranslation' => ['common\components\TranslationEventHandler', 'handleMissingTranslation']
+                    'on missingTranslation' => ['common\components\TranslationEventHandler', 'handleMissingTranslation'],
                 ],
+                // This isn't included with the * translations, weird yii behaviour, so need to create separate app part in translations
+                'app' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@common/translations',
+                    'on missingTranslation' => ['common\components\TranslationEventHandler', 'handleMissingTranslation'],
+                ]
             ],
         ],
     ],

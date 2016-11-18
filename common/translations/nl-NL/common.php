@@ -13,4 +13,7 @@ return [
     'Updated At' => 'Aangepast op',
     'Created By' => 'Aangemaakt door',
     'Updated By' => 'Aangepast door',
+
+    /** Button Messages */
+    'Submit' => 'Versturen',
 ];

@@ -8,13 +8,11 @@
 
 namespace common\components;
 
-
 use yii\i18n\MissingTranslationEvent;
 
 class TranslationEventHandler
 {
     public static function handleMissingTranslation(MissingTranslationEvent $event) {
-        die(var_dump($event));
         $event->translatedMessage = "@MISSING: {$event->category}.{$event->message} FOR LANGUAGE {$event->language} @";
     }
 }

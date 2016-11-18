@@ -35,6 +35,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
+        ['label' => '<span class="glyphicon glyphicon-bookmark"></span> Projects', 'url' => ['/projects']],
         ['label' => '<span class="glyphicon glyphicon-book"></span> Guides', 'url' => ['/guides']],
         ['label' => '<span class="glyphicon glyphicon-user"></span> About', 'url' => ['/site/about']],
         ['label' => '<span class="glyphicon glyphicon-glass"></span> Contact', 'url' => ['/site/contact']],

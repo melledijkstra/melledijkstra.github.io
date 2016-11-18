@@ -11,7 +11,8 @@ class ProjectsController extends FrontendController
 {
     public function actionIndex()
     {
-        return $this->render('index');
+        $projects = Project::find()->all();
+        return $this->render('index',['projects' => $projects]);
     }
 
     public function actionView($title)
