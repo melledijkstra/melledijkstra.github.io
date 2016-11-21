@@ -33,7 +33,7 @@ return [
                     'basePath' => '@common/translations',
                     'on missingTranslation' => ['common\components\TranslationEventHandler', 'handleMissingTranslation'],
                 ],
-                // This isn't included with the * translations, weird yii behaviour, so need to create separate app part in translations
+                // This isn't included with the * translations, weird yii behaviour, so need to create separate 'app' part in translations
                 'app' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/translations',

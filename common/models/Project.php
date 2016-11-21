@@ -63,15 +63,15 @@ class Project extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('project', 'ID'),
-            'title' => Yii::t('project', 'Title'),
+            'id' => Yii::t('common', 'ID'),
+            'title' => Yii::t('common', 'Title'),
             'description' => Yii::t('project', 'Description'),
             'thumbnail' => Yii::t('project', 'Thumbnail'),
             'external_url' => Yii::t('project', 'External Url'),
-            'created_at' => Yii::t('project', 'Created At'),
-            'updated_at' => Yii::t('project', 'Updated At'),
-            'created_by' => Yii::t('project', 'Created By'),
-            'updated_by' => Yii::t('project', 'Updated By'),
+            'created_at' => Yii::t('common', 'Created At'),
+            'updated_at' => Yii::t('common', 'Updated At'),
+            'created_by' => Yii::t('common', 'Created By'),
+            'updated_by' => Yii::t('common', 'Updated By'),
         ];
     }
 

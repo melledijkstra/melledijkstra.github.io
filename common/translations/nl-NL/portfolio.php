@@ -17,19 +17,5 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Are you sure you want to delete this item?' => '',
-    'Create' => '',
-    'Create Guide' => '',
-    'Delete' => '',
-    'Guides' => '',
-    'Preview' => '',
-    'Reset' => '',
-    'Search' => '',
-    'This guide could not be found' => '',
-    'This guide\'s file is not found, you might as well delete this guide' => '',
-    'Update' => '',
-    'Update {modelClass}: ' => '',
-    'Guide Text' => '@@Guide Text@@',
-    'Filename' => 'Bestand',
-    'Title' => 'Titel',
+    'My Portfolio' => '',
 ];
