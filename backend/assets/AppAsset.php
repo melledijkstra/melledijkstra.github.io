@@ -13,8 +13,9 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        // TODO: find out how to have shared assets from backend and frontend
-        'http://portfolio.nl/css/main.css',
+        'http://portfolio.local/css/main.css',
+        // Google Font
+        'https://fonts.googleapis.com/css?family=Lato',
     ];
     public $js = [
     ];

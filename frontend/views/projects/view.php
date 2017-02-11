@@ -11,7 +11,7 @@ $this->title = $project->title;
 ?>
 <div class="row">
     <div class="col-sm-10">
-        <h1><?= $project->title ?> <small class="badge"><?= $project->createdBy->username; ?></small></h1>
+        <h1><?= $project->title ?> <small class="badge"><?= Yii::$app->formatter->asDate($project->created_at); ?></small></h1>
     </div>
     <div class="col-sm-2">
         <ul class="">

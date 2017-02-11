@@ -22,6 +22,15 @@ return [
         'authManager' => [
             'class' => 'yii\rbac\DbManager'
         ],
+        'formatter' => [
+            'class' => \yii\i18n\Formatter::className(),
+            'dateFormat'        => 'dd-MM-yyyy',
+            'datetimeFormat'    => 'dd-MM-yyyy hh:mm:ss',
+            'timeFormat'        => 'hh:mm:ss',
+            'decimalSeparator'  => ',',
+            'thousandSeparator' => '.',
+            'currencyCode'      => 'EUR',
+        ],
         // Disable caching assets in debug mode
         'assetManager' => [
             'forceCopy' => YII_DEBUG

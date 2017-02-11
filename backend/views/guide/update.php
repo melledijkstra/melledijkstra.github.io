@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Guide */
+/* @var \common\models\Category[] $categories */
 
 $this->title = Yii::t('guide', 'Update {modelClass}: ', [
     'modelClass' => 'Guide',
@@ -18,6 +19,7 @@ $this->params['breadcrumbs'][] = Yii::t('guide', 'Update');
 
     <?= $this->render('_form', [
         'model' => $model,
+        'categories' => $categories,
     ]) ?>
 
 </div>

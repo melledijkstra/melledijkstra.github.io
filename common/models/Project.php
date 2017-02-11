@@ -2,10 +2,8 @@
 
 namespace common\models;
 
+use common\components\db\FileUploadActiveRecord;
 use Yii;
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "projects".
@@ -15,17 +13,28 @@ use yii\db\ActiveRecord;
  * @property string $description
  * @property string $thumbnail
  * @property string $external_url
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $created_by
- * @property integer $updated_by
- *
- * @property Guide[] $guides
- * @property User $createdBy
- * @property User $updatedBy
  */
-class Project extends ActiveRecord
+class Project extends FileUploadActiveRecord
 {
+
+    /**
+     * Overridden allowed extensions
+     * @var array
+     */
+    protected $extensions = ['png', 'jpg', 'png', 'jpeg'];
+
+    /**
+     * Overridden attribute name for the column name
+     * @var string
+     */
+    protected $fileAttributeName = 'thumbnail';
+
+    /**
+     * Overridden attribute so that file isn't required
+     * @var bool
+     */
+    protected $fileRequired = false;
+
     /**
      * @inheritdoc
      */
@@ -34,27 +43,16 @@ class Project extends ActiveRecord
         return 'projects';
     }
 
-    public function behaviors()
-    {
-        return array_merge(parent::behaviors(),[
-            TimestampBehavior::className(),
-            BlameableBehavior::className(),
-        ]);
-    }
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
-        return [
+        return array_merge_recursive(parent::rules(),[
             [['title'], 'required'],
-            [['created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['title', 'description', 'thumbnail', 'external_url'], 'string', 'max' => 255],
             [['title'], 'unique'],
-            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
-            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
-        ];
+        ]);
     }
 
     /**
@@ -68,10 +66,6 @@ class Project extends ActiveRecord
             'description' => Yii::t('project', 'Description'),
             'thumbnail' => Yii::t('project', 'Thumbnail'),
             'external_url' => Yii::t('project', 'External Url'),
-            'created_at' => Yii::t('common', 'Created At'),
-            'updated_at' => Yii::t('common', 'Updated At'),
-            'created_by' => Yii::t('common', 'Created By'),
-            'updated_by' => Yii::t('common', 'Updated By'),
         ];
     }
 
@@ -84,18 +78,14 @@ class Project extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * Generate thumbnail link
      */
-    public function getCreatedBy()
+    public function getPublicLink()
     {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUpdatedBy()
-    {
-        return $this->hasOne(User::className(), ['id' => 'updated_by']);
+        if(!empty($this->thumbnail) && file_exists(self::$uploadFolder.$this->thumbnail)) {
+            return '/uploads/'.$this->tableName().'/'.$this->thumbnail;
+        } else {
+            return 'http://placehold.it/250x200';
+        }
     }
 }

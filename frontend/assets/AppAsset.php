@@ -14,8 +14,10 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/main.css',
-        // Roboto Font
-        'https://fonts.googleapis.com/css?family=Roboto',
+        // Google Font
+        'https://fonts.googleapis.com/css?family=Lato',
+        'https://fonts.googleapis.com/css?family=Special Elite',
+        '//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css',
     ];
     public $js = [
     ];

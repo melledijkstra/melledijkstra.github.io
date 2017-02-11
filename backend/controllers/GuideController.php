@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\components\web\BackendController;
+use common\models\Category;
 use Yii;
 use common\models\Guide;
 use common\models\search\GuideSearch;
@@ -70,6 +71,7 @@ class GuideController extends BackendController
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'categories' => Category::find()->all(),
             ]);
         }
     }
@@ -89,6 +91,7 @@ class GuideController extends BackendController
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'categories' => Category::find()->all(),
             ]);
         }
     }

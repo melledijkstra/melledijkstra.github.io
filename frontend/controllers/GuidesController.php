@@ -11,7 +11,9 @@ class GuidesController extends FrontendController
 {
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index', [
+            'guides' => Guide::find()->all(),
+        ]);
     }
 
     public function actionView($title)

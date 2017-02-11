@@ -12,7 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
 
-    'defaultRoute' => '/site/index',
+    'defaultRoute' => '/project',
 
     'components' => [
         'request' => [

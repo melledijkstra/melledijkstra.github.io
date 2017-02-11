@@ -39,7 +39,10 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body onload="$('#loader-wrap').fadeOut(500);">
+<div id="loader-wrap">
+    <div id="loader"></div>
+</div>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -52,10 +55,10 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => '<span class="glyphicon glyphicon-bookmark"></span> Projects', 'url' => ['/projects']],
-        ['label' => '<span class="glyphicon glyphicon-book"></span> Guides', 'url' => ['/guides']],
-        ['label' => '<span class="glyphicon glyphicon-user"></span> About', 'url' => ['/site/about']],
-        ['label' => '<span class="glyphicon glyphicon-glass"></span> Contact', 'url' => ['/site/contact']],
+        ['label' => '<span class="mdi mdi-ruler"></span> '.Yii::t('project', 'Projects'), 'url' => ['/projects']],
+        ['label' => '<span class="mdi mdi-book-multiple"></span> '.Yii::t('guide', 'Guides'), 'url' => ['/guides']],
+        ['label' => '<span class="mdi mdi-account"></span> '.Yii::t('remaining', 'Who am I?'), 'url' => ['/site/about']],
+        ['label' => '<span class="mdi mdi-glass-flute"></span> '.Yii::t('remaining','Contact'), 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
 //        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];

@@ -28,15 +28,13 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Melle Dijkstra Backend',
+        'brandLabel' => 'Melle Dijkstra\'s Backend',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'mel-navbar navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
+    $menuItems = [];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {

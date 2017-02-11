@@ -16,7 +16,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'thumbnail')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'uploadedFile')->fileInput() ?>
+
+    <?php
+        if(!$model->isNewRecord) {
+            echo Html::label(Yii::t('project', 'Delete current file?'));
+            echo '<br />';
+            echo Html::checkbox('deleteFile');
+        }
+    ?>
 
     <?= $form->field($model, 'external_url')->textInput(['maxlength' => true]) ?>
 

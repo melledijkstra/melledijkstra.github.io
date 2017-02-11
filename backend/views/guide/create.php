@@ -7,6 +7,7 @@ use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Guide */
+/* @var \common\models\Category[] $categories */
 
 HighLightAsset::register($this);
 $this->registerJs('hljs.initHighlightingOnLoad();',View::POS_READY);
@@ -21,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'categories' => $categories,
     ]) ?>
 
 </div>

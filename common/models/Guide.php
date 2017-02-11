@@ -2,11 +2,9 @@
 
 namespace common\models;
 
+use common\components\db\MActiveRecord;
 use kartik\markdown\Markdown;
 use Yii;
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "guides".
@@ -15,31 +13,19 @@ use yii\db\ActiveRecord;
  * @property string $title
  * @property string $filename
  * @property string $filepath
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $created_by
- * @property integer $updated_by
  * @property integer $project
  *
  * @property Project $project0
- * @property User $createdBy
- * @property User $updatedBy
+ * @property Category[] $categories
  */
-class Guide extends ActiveRecord
+class Guide extends MActiveRecord
 {
 
-    /**
-     * @var $guide_text string This is the markdown entered by a user which needs to be saved to a file
-     */
+    /** @var $guide_text string This is the markdown entered by a user which needs to be saved to a file */
     public $guide_text;
 
-    public function behaviors()
-    {
-        return array_merge(parent::behaviors(),[
-            TimestampBehavior::className(),
-            BlameableBehavior::className(),
-        ]);
-    }
+    /** @var array The linked categories */
+    public $category_ids = [];
 
     /**
      * @inheritdoc
@@ -51,17 +37,36 @@ class Guide extends ActiveRecord
 
     public function beforeSave($insert)
     {
-        if(parent::beforeSave($insert) && $this->saveGuide($this->guide_text)) {
+        if(parent::beforeSave($insert) && $this->saveGuideFile($this->guide_text)) {
             return true;
         }
         return false;
     }
 
+    public function afterSave($insert, $changedAttributes)
+    {
+        GuidesCategory::deleteAll(['guide_id' => $this->id]);
+        if(is_array($this->category_ids)) {
+            foreach($this->category_ids as $category_id) {
+                $this->link('categories', Category::findOne($category_id));
+            }
+        }
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function beforeDelete()
     {
         if(parent::beforeDelete()) {
+            // Try and unlink the file
+            if (file_exists($this->filepath)) {
+                unlink($this->filepath);
+            }
             // Delete the file before deleting guide from database
-            return $this->deleteGuideFile();
+            $this->deleteGuideFile();
+            return true;
         } else {
             return false;
         }
@@ -71,6 +76,9 @@ class Guide extends ActiveRecord
     {
         if(file_exists($this->filepath)) {
             $this->guide_text = file_get_contents($this->filepath);
+        }
+        foreach($this->categories as $category) {
+            $this->category_ids[] = $category->id;
         }
         parent::afterFind();
     }
@@ -82,13 +90,14 @@ class Guide extends ActiveRecord
     {
         return [
             [['title', 'guide_text'], 'required'],
-            [['created_at', 'updated_at', 'created_by', 'updated_by', 'project'], 'integer'],
+            [['project'], 'integer'],
             [['title', 'filename'], 'string', 'max' => 255],
             [['guide_text'], 'string'],
             [['title'], 'unique'],
+            [['category_ids'], 'each', 'rule' => [
+                'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id', 'message' => Yii::t('guide','This category does not exist'),
+            ]],
             [['project'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project' => 'id']],
-            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
-            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -101,10 +110,7 @@ class Guide extends ActiveRecord
             'id' => Yii::t('common', 'ID'),
             'title' => Yii::t('guide', 'Title'),
             'filename' => Yii::t('guide', 'Filename'),
-            'created_at' => Yii::t('common', 'Created At'),
-            'updated_at' => Yii::t('common', 'Updated At'),
-            'created_by' => Yii::t('common', 'Created By'),
-            'updated_by' => Yii::t('common', 'Updated By'),
+            'category_ids' => Yii::t('guide', 'Categories'),
             'project' => Yii::t('project', 'Project'),
         ];
     }
@@ -120,17 +126,8 @@ class Guide extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCreatedBy()
-    {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUpdatedBy()
-    {
-        return $this->hasOne(User::className(), ['id' => 'updated_by']);
+    public function getCategories() {
+        return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('guides_categories', ['guide_id' => 'id']);
     }
 
     /**
@@ -139,7 +136,9 @@ class Guide extends ActiveRecord
     public function renderGuide()
     {
         if(file_exists($this->filepath)) {
-            return Markdown::convert(file_get_contents($this->filepath));
+            return Markdown::convert(file_get_contents($this->filepath), [
+                'smartyPants' => false,
+            ],Markdown::SMARTYPANTS_ATTR_DO_NOTHING);
         } else {
             return '<p style="color:red;">'.Yii::t('guide', 'This guide\'s file is not found, you might as well delete this guide').'</p>';
         }
@@ -158,7 +157,7 @@ class Guide extends ActiveRecord
      * @param $guide_text
      * @return bool true if file is saved otherwise false
      */
-    private function saveGuide($guide_text)
+    private function saveGuideFile($guide_text)
     {
         $this->deleteGuideFile();
         $filename = substr(hash('md5',time()),0,8).'.md';
@@ -182,4 +181,24 @@ class Guide extends ActiveRecord
         }
         return true;
     }
+
+    /**
+     * Renders the categories from this Guide as labels
+     * @param $fontSize int The fontsize of the label
+     * @return string The categories as labels in html
+     */
+    public function renderCategories($fontSize = null)
+    {
+        $html = "";
+        $fontSize = (is_numeric($fontSize)) ? "style=\"font-size: {$fontSize};\"" : '';
+        foreach($this->categories as $category) {
+            $html .= "<div {$fontSize} class=\"label label-primary\">{$category->name}</div>";
+        }
+        return $html;
+    }
+
+    public function getRenderCategories() {
+        return $this->renderCategories(12);
+    }
+
 }

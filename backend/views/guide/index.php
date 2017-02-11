@@ -30,10 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'project',
                 'value' => 'project0.title',
             ],
+            [
+                'attribute' => 'category_ids',
+                'value' => 'renderCategories',
+                'format' => 'html',
+            ],
             'createdBy.username',
             'updatedBy.username',
-            'created_at:date',
-            'updated_at:date',
+            'created_at:datetime',
+            'updated_at:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

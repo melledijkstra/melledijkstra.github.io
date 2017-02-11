@@ -3,11 +3,13 @@
 namespace backend\controllers;
 
 use backend\components\web\BackendController;
+use common\components\db\MActiveRecord;
 use Yii;
 use common\models\Project;
 use common\models\search\ProjectSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -84,13 +86,18 @@ class ProjectController extends BackendController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if(Yii::$app->request->post('deleteFile', false) == true) {
+            $model->deleteFile();
         }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            // check if file is uploaded and store if so
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
