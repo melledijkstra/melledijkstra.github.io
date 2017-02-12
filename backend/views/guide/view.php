@@ -33,13 +33,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'title',
             'filename',
-            'project0.title',
+            [
+                'attribute' => 'project_id',
+                'value' => ($model->project) ? $model->project->title : null,
+            ],
             [
                 'attribute' => 'category_ids',
-                'value' => 'renderCategories',
+                'value' => $model->renderCategories(),
+                'format' => 'html',
             ],
             'created_at:datetime',
             'updated_at:datetime',

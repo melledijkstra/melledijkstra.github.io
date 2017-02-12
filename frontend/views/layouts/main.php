@@ -48,16 +48,16 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Melle Dijkstra',
+        'brandLabel' => 'Melle Dijkstra<span style="font-size: 30px; color: #E87B5A;">.</span>',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'mel-navbar navbar-fixed-top',
+            'class' => 'mel-navbar',
         ],
     ]);
     $menuItems = [
-        ['label' => '<span class="mdi mdi-ruler"></span> '.Yii::t('project', 'Projects'), 'url' => ['/projects']],
-        ['label' => '<span class="mdi mdi-book-multiple"></span> '.Yii::t('guide', 'Guides'), 'url' => ['/guides']],
-        ['label' => '<span class="mdi mdi-account"></span> '.Yii::t('remaining', 'Who am I?'), 'url' => ['/site/about']],
+        ['label' => '<span class="mdi mdi-buffer"></span> '.Yii::t('project', 'Projects'), 'url' => ['/projects']],
+        ['label' => '<span class="mdi mdi-book-open-page-variant"></span> '.Yii::t('guide', 'Guides'), 'url' => ['/guides']],
+        ['label' => '<span class="mdi mdi-account-card-details"></span> '.Yii::t('remaining', 'Who am I?'), 'url' => ['/site/about']],
         ['label' => '<span class="mdi mdi-glass-flute"></span> '.Yii::t('remaining','Contact'), 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
@@ -81,7 +81,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>

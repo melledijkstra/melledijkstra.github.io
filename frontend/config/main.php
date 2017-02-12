@@ -39,8 +39,8 @@ return [
         ],
         'urlManager' => [
             'rules' => [
-                'guides/<title>' => 'guides/view',
-                'projects/<title>' => 'projects/view',
+                'guides/<title:\S*>' => 'guides/view',
+                'projects/<title:\S*>' => 'projects/view',
             ],
         ],
     ],

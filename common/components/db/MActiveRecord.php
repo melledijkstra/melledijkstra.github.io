@@ -47,6 +47,7 @@ abstract class MActiveRecord extends ActiveRecord
     public function rules()
     {
         return array_merge_recursive(parent::rules(),[
+            [['created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
         ]);

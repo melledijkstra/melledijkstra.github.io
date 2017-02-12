@@ -3,7 +3,9 @@
 namespace common\models;
 
 use common\components\db\FileUploadActiveRecord;
+use common\components\Linkable;
 use Yii;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "projects".
@@ -13,8 +15,10 @@ use Yii;
  * @property string $description
  * @property string $thumbnail
  * @property string $external_url
+ *
+ * @property Guide[] $guides
  */
-class Project extends FileUploadActiveRecord
+class Project extends FileUploadActiveRecord implements Linkable
 {
 
     /**
@@ -74,7 +78,7 @@ class Project extends FileUploadActiveRecord
      */
     public function getGuides()
     {
-        return $this->hasMany(Guide::className(), ['project' => 'id']);
+        return $this->hasMany(Guide::className(), ['project_id' => 'id']);
     }
 
     /**
@@ -88,4 +92,23 @@ class Project extends FileUploadActiveRecord
             return 'http://placehold.it/250x200';
         }
     }
+
+    /**
+     * Returns the title of this project
+     * @param bool $withDashes If the project title should use dashes instead of spaces, this is used for links to this project
+     * @return mixed|string The title with or without dashes
+     */
+    public function getTitle($withDashes = false) {
+        if($withDashes) return str_replace(' ','-',$this->title);
+        return $this->title;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getLink()
+    {
+        return Url::to('/projects/'.$this->getTitle(true));
+    }
+
 }

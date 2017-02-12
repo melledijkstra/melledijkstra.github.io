@@ -8,7 +8,7 @@ use yii\bootstrap\Tabs;
 $this->title = Yii::t('project', 'Projects');
 
 ?>
-<div>
+<div class="container">
     <h1><?= Yii::t('portfolio', 'My Portfolio'); ?></h1>
 
     <div class="row">

@@ -3,8 +3,10 @@
 namespace common\models;
 
 use common\components\db\MActiveRecord;
+use common\components\Linkable;
 use kartik\markdown\Markdown;
 use Yii;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "guides".
@@ -13,12 +15,15 @@ use Yii;
  * @property string $title
  * @property string $filename
  * @property string $filepath
- * @property integer $project
+ * @property integer $project_id
+ * @property integer $difficulty
+ * @property integer $duration
  *
- * @property Project $project0
+ * @property Project $project
+ * @property Language $language
  * @property Category[] $categories
  */
-class Guide extends MActiveRecord
+class Guide extends MActiveRecord implements Linkable
 {
 
     /** @var $guide_text string This is the markdown entered by a user which needs to be saved to a file */
@@ -35,6 +40,21 @@ class Guide extends MActiveRecord
         return 'guides';
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function beforeValidate()
+    {
+        if(parent::beforeValidate()) {
+            $this->createUnknownCategories();
+            return true;
+        };
+        return false;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function beforeSave($insert)
     {
         if(parent::beforeSave($insert) && $this->saveGuideFile($this->guide_text)) {
@@ -43,6 +63,9 @@ class Guide extends MActiveRecord
         return false;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function afterSave($insert, $changedAttributes)
     {
         GuidesCategory::deleteAll(['guide_id' => $this->id]);
@@ -72,6 +95,9 @@ class Guide extends MActiveRecord
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     public function afterFind()
     {
         if(file_exists($this->filepath)) {
@@ -90,14 +116,15 @@ class Guide extends MActiveRecord
     {
         return [
             [['title', 'guide_text'], 'required'],
-            [['project'], 'integer'],
+            [['project_id', 'language_id', 'difficulty', 'duration'], 'integer'],
             [['title', 'filename'], 'string', 'max' => 255],
             [['guide_text'], 'string'],
             [['title'], 'unique'],
             [['category_ids'], 'each', 'rule' => [
                 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id', 'message' => Yii::t('guide','This category does not exist'),
             ]],
-            [['project'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project' => 'id']],
+            [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
+            [['language_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['language_id' => 'id']],
         ];
     }
 
@@ -111,16 +138,19 @@ class Guide extends MActiveRecord
             'title' => Yii::t('guide', 'Title'),
             'filename' => Yii::t('guide', 'Filename'),
             'category_ids' => Yii::t('guide', 'Categories'),
-            'project' => Yii::t('project', 'Project'),
+            'project_id' => Yii::t('project', 'Project'),
+            'difficulty' => Yii::t('guide', 'Difficulty'),
+            'duration' => Yii::t('guide', 'Duration'),
+            'language_id' => Yii::t('guide', 'Programming Language'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProject0()
+    public function getProject()
     {
-        return $this->hasOne(Project::className(), ['id' => 'project']);
+        return $this->hasOne(Project::className(), ['id' => 'project_id']);
     }
 
     /**
@@ -131,6 +161,20 @@ class Guide extends MActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLanguage() {
+       return $this->hasOne(Language::className(), ['id' => 'language_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGuidesCategories() {
+        return $this->hasMany(GuidesCategory::className(), ['guide_id' => 'id']);
+    }
+
+    /**
      * @return string
      */
     public function renderGuide()
@@ -138,7 +182,7 @@ class Guide extends MActiveRecord
         if(file_exists($this->filepath)) {
             return Markdown::convert(file_get_contents($this->filepath), [
                 'smartyPants' => false,
-            ],Markdown::SMARTYPANTS_ATTR_DO_NOTHING);
+            ], Markdown::SMARTYPANTS_ATTR_DO_NOTHING);
         } else {
             return '<p style="color:red;">'.Yii::t('guide', 'This guide\'s file is not found, you might as well delete this guide').'</p>';
         }
@@ -192,7 +236,7 @@ class Guide extends MActiveRecord
         $html = "";
         $fontSize = (is_numeric($fontSize)) ? "style=\"font-size: {$fontSize};\"" : '';
         foreach($this->categories as $category) {
-            $html .= "<div {$fontSize} class=\"label label-primary\">{$category->name}</div>";
+            $html .= "<div {$fontSize} class=\"label label-primary\">{$category->name}</div> ";
         }
         return $html;
     }
@@ -201,4 +245,40 @@ class Guide extends MActiveRecord
         return $this->renderCategories(12);
     }
 
+    /**
+     * Returns the title of this guide
+     * @param bool $withDashes If the guide title should use dashes instead of spaces, this is used for links to this guide
+     * @return mixed|string The title with or without dashes
+     */
+    public function getTitle($withDashes = false) {
+        if($withDashes) return str_replace(' ','-',$this->title);
+        return $this->title;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getLink()
+    {
+        return Url::to('/guides/'.$this->getTitle(true));
+    }
+
+    /**
+     * Creates any categories which don't exist in category list
+     */
+    private function createUnknownCategories()
+    {
+        // Go though every category
+        for($i = 0;$i < count($this->category_ids);$i++) {
+            // if the category is not a number then it doesn't exist yet
+            if(!is_numeric($this->category_ids[$i])) {
+                // create the new category
+                $cat = new Category(['name' => $this->category_ids[$i]]);
+                if($cat->save()) {
+                    // if it saves correctly override the spot with the new id
+                    $this->category_ids[$i] = $cat->id;
+                }
+            }
+        }
+    }
 }

@@ -17,7 +17,7 @@ class ProjectsController extends FrontendController
 
     public function actionView($title)
     {
-        if($project = Project::findOne(['title' => $title])) {
+        if($project = Project::findOne(['title' => str_replace('-',' ',$title)])) {
             return $this->render('view', ['project' => $project]);
         } else {
             throw new NotFoundHttpException(Yii::t('project',"Project with title '{$title}' could not be found"));

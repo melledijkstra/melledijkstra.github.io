@@ -1,6 +1,8 @@
 <?php
 
+use common\models\Language;
 use common\models\Project;
+use kartik\markdown\MarkdownEditor;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -17,10 +19,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'guide_text')->widget('kartik\markdown\MarkdownEditor',[
+    <?= $form->field($model, 'guide_text')->widget(MarkdownEditor::className(),[
         'footerMessage' => false,
         'showExport' => false,
     ]); ?>
+
+    <?= $form->field($model, 'language_id')->dropDownList(
+        Language::find()->select(['name','id'])->indexBy('id')->column(),
+        ['prompt' => 'Select Language']
+    ) ?>
 
     <?= $form->field($model, 'category_ids')->widget(Select2::className(), [
             'data' => \yii\helpers\ArrayHelper::map($categories, 'id', 'name'),
@@ -33,7 +40,7 @@ use yii\widgets\ActiveForm;
         ])
     ?>
 
-    <?= $form->field($model, 'project')->dropDownList(
+    <?= $form->field($model, 'project_id')->dropDownList(
         Project::find()->select(['title','id'])->indexBy('id')->column(),
         ['prompt' => 'Select Project']
     ) ?>

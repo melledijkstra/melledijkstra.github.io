@@ -2,26 +2,24 @@
 
 namespace common\models\search;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Guide;
+use common\models\Language;
 
 /**
- * GuideSearch represents the model behind the search form about `common\models\Guide`.
+ * LanguageSearch represents the model behind the search form about `common\models\Language`.
  */
-class GuideSearch extends Guide
+class LanguageSearch extends Language
 {
-
-    public $category_id;
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'category_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['title', 'filename'], 'safe'],
+            [['id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['name', 'color'], 'safe'],
         ];
     }
 
@@ -43,10 +41,7 @@ class GuideSearch extends Guide
      */
     public function search($params)
     {
-        // Always sort by the newest Guides
-        $query = Guide::find()->orderBy(['created_at' => SORT_DESC]);
-
-        $query->joinWith('guidesCategories');
+        $query = Language::find();
 
         // add conditions that should always apply here
 
@@ -54,11 +49,7 @@ class GuideSearch extends Guide
             'query' => $query,
         ]);
 
-        //die(var_dump($params));
-
-        if(!$this->load($params) && $this->validate()) {
-            return $dataProvider;
-        }
+        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -69,16 +60,14 @@ class GuideSearch extends Guide
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'project_id' => $this->project_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['guides_categories.category_id' => $this->category_id]);
-
-        $query->andFilterWhere(['like', 'guides.title', $this->title]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'color', $this->color]);
 
         return $dataProvider;
     }

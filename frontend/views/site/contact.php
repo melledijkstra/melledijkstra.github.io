@@ -11,16 +11,17 @@ use yii\captcha\Captcha;
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="container">
+    <div class="site-contact">
+        <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Yii::t('app','Feel free to ask me anything! please fill out the following form to contact me. Thank you :)'); ?>
-    </p>
+        <p>
+            <?= Yii::t('app', 'Feel free to ask me anything! please fill out the following form to contact me. Thank you :)'); ?>
+        </p>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+        <div class="row">
+            <div class="col-lg-5">
+                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
                 <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
 
@@ -35,11 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton(Yii::t('common','Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                    <?= Html::submitButton(Yii::t('common', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                 </div>
 
-            <?php ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
+            </div>
         </div>
     </div>
-
 </div>

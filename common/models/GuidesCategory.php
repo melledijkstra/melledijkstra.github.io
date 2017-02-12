@@ -10,8 +10,8 @@ use Yii;
  * @property integer $guide_id
  * @property integer $category_id
  *
- * @property Categories $category
- * @property Guides $guide
+ * @property Category $category
+ * @property Guide $guide
  */
 class GuidesCategory extends \yii\db\ActiveRecord
 {
@@ -31,8 +31,8 @@ class GuidesCategory extends \yii\db\ActiveRecord
         return [
             [['guide_id', 'category_id'], 'required'],
             [['guide_id', 'category_id'], 'integer'],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
-            [['guide_id'], 'exist', 'skipOnError' => true, 'targetClass' => Guides::className(), 'targetAttribute' => ['guide_id' => 'id']],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
+            [['guide_id'], 'exist', 'skipOnError' => true, 'targetClass' => Guide::className(), 'targetAttribute' => ['guide_id' => 'id']],
         ];
     }
 
@@ -52,7 +52,7 @@ class GuidesCategory extends \yii\db\ActiveRecord
      */
     public function getCategory()
     {
-        return $this->hasOne(Categories::className(), ['id' => 'category_id']);
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**
@@ -60,6 +60,6 @@ class GuidesCategory extends \yii\db\ActiveRecord
      */
     public function getGuide()
     {
-        return $this->hasOne(Guides::className(), ['id' => 'guide_id']);
+        return $this->hasOne(Guide::className(), ['id' => 'guide_id']);
     }
 }
