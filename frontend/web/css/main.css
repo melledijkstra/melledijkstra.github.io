@@ -7,26 +7,54 @@
  */
 
 /* BACKGROUND COLORS */
-.bg-primary {  background-color: rgba(231, 236, 239, 1);  color: #242424;  }
+.bg-primary {
+    background-color: rgba(231, 236, 239, 1);
+    color: #242424;
+}
 
-.bg-pundo {  background-color: rgba(240, 93, 94, 1);  color: white;  }
+.bg-pundo {
+    background-color: rgba(240, 93, 94, 1);
+    color: white;
+}
 
-.bg-beja {  background-color: rgba(216, 164, 127, 1);  }
+.bg-beja {
+    background-color: rgba(216, 164, 127, 1);
+}
 
-.bg-kollo {  background-color: rgba(15, 113, 115, 1);  color: white;  }
+.bg-kollo {
+    background-color: rgba(15, 113, 115, 1);
+    color: white;
+}
 
-.bg-darre {  background-color: rgba(39, 41, 50, 1);  color: white;  }
+.bg-darre {
+    background-color: rgba(39, 41, 50, 1);
+    color: white;
+}
 
 /* TEXT COLORS */
-.txt-primary {  background-color: rgba(231, 236, 239, 1); color: #242424;  }
+.txt-primary {
+    background-color: rgba(231, 236, 239, 1);
+    color: #242424;
+}
 
-.txt-pundo {  background-color: rgba(240, 93, 94, 1);  color: white;  }
+.txt-pundo {
+    background-color: rgba(240, 93, 94, 1);
+    color: white;
+}
 
-.txt-beja {  background-color: rgba(216, 164, 127, 1);  }
+.txt-beja {
+    background-color: rgba(216, 164, 127, 1);
+}
 
-.txt-kollo {  background-color: rgba(15, 113, 115, 1);  color: white;  }
+.txt-kollo {
+    background-color: rgba(15, 113, 115, 1);
+    color: white;
+}
 
-.txt-darre {  background-color: rgba(39, 41, 50, 1);  color: white;  }
+.txt-darre {
+    background-color: rgba(39, 41, 50, 1);
+    color: white;
+}
 
 /**
  * STANDARD STUFF
@@ -62,15 +90,19 @@ a:hover {
 }
 
 h1 {
-    font-family: "Special Elite", Helvetica, Arial, sans-serif;
+    font-family: "Raleway", Helvetica, Arial, sans-serif;
 }
 
 /*
     BOOTSTRAP AND Yii2 OVERRIDES
 */
 
-.kv-md-editor, .breadcrumb, .form-control, .btn, .alert {
+.kv-md-editor, .breadcrumb, .form-control, .btn, .alert, .badge, .label {
     border-radius: 0;
+}
+
+.wrap {
+    padding-bottom: 0;
 }
 
 .btn {
@@ -85,10 +117,6 @@ h1 {
     transition: all 0.5s;
 }
 
-.badge {
-    border-radius: 0;
-}
-
 .navbar > .container .navbar-brand {
     margin-left: 0;
 }
@@ -96,6 +124,23 @@ h1 {
 /*
     MY STYLES
 */
+
+/* HELPERS */
+.margin-5 { margin: 5px; }
+.margin-10 { margin: 10px; }
+.margin-15 { margin: 15px; }
+.margin-20 { margin: 20px; }
+
+.margin-tb-5 { margin: 5px 0; }
+.margin-tb-10 { margin: 10px 0; }
+.margin-tb-15 { margin: 15px 0; }
+.margin-tb-20 { margin: 20px 0; }
+
+.margin-lr-5 { margin: 0 5px; }
+.margin-lr-10 { margin: 0 10px; }
+.margin-lr-15 { margin: 0 15px; }
+.margin-lr-20 { margin: 0 20px; }
+
 
 /* LOADING SCREEN */
 #loader-wrap {
@@ -107,7 +152,7 @@ h1 {
     height: 100%;
     width: 100%;
 
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0, 0, 0, 0.8);
     z-index: 2000;
 }
 
@@ -120,11 +165,6 @@ h1 {
     left: 0;
     right: 0;
 
-    background-image: url('/favicons/favicon-96x96.png');
-    background-size: 50%;
-    background-repeat: no-repeat;
-    background-position: center center;
-
     margin: 20% auto;
 
     width: 120px;
@@ -135,13 +175,21 @@ h1 {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 hr {
@@ -150,7 +198,7 @@ hr {
 }
 
 .content {
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 15px;
 }
 
@@ -228,8 +276,8 @@ pre {
     text-align: center;
 
     -webkit-transition: all 0.6s ease;
-    -moz-transition:    all 0.6s ease;
-    -o-transition:      all 0.6s ease;
+    -moz-transition: all 0.6s ease;
+    -o-transition: all 0.6s ease;
 }
 
 .slide-up-desc {
@@ -246,8 +294,8 @@ pre {
     opacity: 0;
 
     -webkit-transition: all 0.6s ease;
-    -moz-transition:    all 0.6s ease;
-    -o-transition:      all 0.6s ease;
+    -moz-transition: all 0.6s ease;
+    -o-transition: all 0.6s ease;
 }
 
 .project-item:hover .slide-up-desc {
@@ -283,6 +331,7 @@ pre {
 
 .guide-title-link {
     font-family: "Lato", Helvetica, Arial, sans-serif;
+    display: inline-block;
 }
 
 .guide-title-link a {
@@ -292,4 +341,96 @@ pre {
 .guide-info {
     font-size: 13px;
     color: #9f9f9f;
+}
+
+/* GUIDES OVERVIEW PAGE */
+
+#guides-overview-page #grid {
+    margin: 0 auto;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+#guides-overview-page #grid .grid-item {
+    position: relative;
+}
+
+.newest-guide-preview {
+    display: inline-block;
+    text-align: left;
+    padding: 20px;
+}
+
+.newest-guide-preview h1 {
+    margin-top: 0;
+    max-width: 1000px;
+}
+
+.newest-guide-preview p {
+    max-width: 800px;
+}
+
+.newest-guide-preview span:last-child {
+    color: white;
+    padding: 5px;
+}
+
+#filter-options-navbar {
+    text-align: center;
+    width: 100%;
+    background-color: #e4e4e4;
+}
+
+#filter-options-navbar .options {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+#filter-options-navbar .options a {
+    font-size: 20px;
+    display: inline-block;
+    text-decoration: none;
+    padding: 20px;
+}
+
+#filter-options-navbar .options a.selected {
+    border-bottom: 10px solid #E87B5A;
+}
+
+#filter-options-navbar .options .badge {
+    background-color: #E87B5A;
+    color: white;
+}
+
+.programming-language-tooltip {
+    font-size: 13px;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Cards */
+
+.card {
+    background-color: white;
+    padding: 15px;
+
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
+    margin: 0;
 }

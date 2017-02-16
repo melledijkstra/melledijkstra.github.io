@@ -6,7 +6,6 @@ use yii\helpers\Html;
 
 $this->title = 'Melle Dijkstra';
 $this->params['breadcrumbs'][] = $this->title;
-$this->registerCssFile('');
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>

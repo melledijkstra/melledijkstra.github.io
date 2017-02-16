@@ -171,4 +171,12 @@ abstract class FileUploadActiveRecord extends MActiveRecord {
     {
         return time() . /* str_replace(' ', '_', $uploadedFile->baseName) . */ '.' . $uploadedFile->extension;
     }
+
+    /**
+     * Check if current file exists
+     */
+    public function fileExists()
+    {
+        return (!empty($this->{$this->fileAttributeName}) && file_exists(self::$uploadFolder.$this->{$this->fileAttributeName}));
+    }
 }

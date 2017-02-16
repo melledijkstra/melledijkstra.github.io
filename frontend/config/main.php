@@ -39,6 +39,7 @@ return [
         ],
         'urlManager' => [
             'rules' => [
+                '<alias:contact|about>' => 'site/<alias>',
                 'guides/<title:\S*>' => 'guides/view',
                 'projects/<title:\S*>' => 'projects/view',
             ],

@@ -11,6 +11,10 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 AppAsset::register($this);
+
+// Set canonical for SEO
+$this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canonical()]);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

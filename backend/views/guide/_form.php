@@ -19,6 +19,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'sneak_peek')->textarea(['rows' => 3, 'maxlength' => true]) ?>
+
     <?= $form->field($model, 'guide_text')->widget(MarkdownEditor::className(),[
         'footerMessage' => false,
         'showExport' => false,
@@ -26,7 +28,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'language_id')->dropDownList(
         Language::find()->select(['name','id'])->indexBy('id')->column(),
-        ['prompt' => 'Select Language']
+        ['prompt' => 'No specific programming language']
     ) ?>
 
     <?= $form->field($model, 'category_ids')->widget(Select2::className(), [

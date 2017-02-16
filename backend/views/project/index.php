@@ -25,8 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'thumbnail',
             'external_url:url',
-            'created_at:datetime',
-            'updated_at:datetime',
+            'created_at:date',
+            'updated_at:date',
             'createdBy.username',
             'updatedBy.username',
 

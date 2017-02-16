@@ -13,6 +13,7 @@ use yii\helpers\Url;
  *
  * @property integer $id
  * @property string $title
+ * @property string $sneak_peek
  * @property string $filename
  * @property string $filepath
  * @property integer $project_id
@@ -118,6 +119,7 @@ class Guide extends MActiveRecord implements Linkable
             [['title', 'guide_text'], 'required'],
             [['project_id', 'language_id', 'difficulty', 'duration'], 'integer'],
             [['title', 'filename'], 'string', 'max' => 255],
+            [['sneak_peek'], 'string', 'max' => 700],
             [['guide_text'], 'string'],
             [['title'], 'unique'],
             [['category_ids'], 'each', 'rule' => [
@@ -136,6 +138,7 @@ class Guide extends MActiveRecord implements Linkable
         return [
             'id' => Yii::t('common', 'ID'),
             'title' => Yii::t('guide', 'Title'),
+            'sneak_peek' => Yii::t('guide', 'Sneak Peek'),
             'filename' => Yii::t('guide', 'Filename'),
             'category_ids' => Yii::t('guide', 'Categories'),
             'project_id' => Yii::t('project', 'Project'),
@@ -269,14 +272,16 @@ class Guide extends MActiveRecord implements Linkable
     private function createUnknownCategories()
     {
         // Go though every category
-        for($i = 0;$i < count($this->category_ids);$i++) {
-            // if the category is not a number then it doesn't exist yet
-            if(!is_numeric($this->category_ids[$i])) {
-                // create the new category
-                $cat = new Category(['name' => $this->category_ids[$i]]);
-                if($cat->save()) {
-                    // if it saves correctly override the spot with the new id
-                    $this->category_ids[$i] = $cat->id;
+        if(is_array($this->category_ids)) {
+            for($i = 0;$i < count($this->category_ids);$i++) {
+                // if the category is not a number then it doesn't exist yet
+                if(!is_numeric($this->category_ids[$i])) {
+                    // create the new category
+                    $cat = new Category(['name' => $this->category_ids[$i]]);
+                    if($cat->save()) {
+                        // if it saves correctly override the spot with the new id
+                        $this->category_ids[$i] = $cat->id;
+                    }
                 }
             }
         }

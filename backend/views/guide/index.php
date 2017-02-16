@@ -22,7 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
 
-            'title',
+            [
+                'attribute' => 'title',
+                'value' => function($model, $key, $index, $column) {
+                    /** @var $model \common\models\Guide */
+                    return \yii\helpers\StringHelper::truncate($model->title, '30');
+                },
+            ],
             [
                 'attribute' => 'project',
                 'value' => 'project.title',
@@ -32,10 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'renderCategories',
                 'format' => 'html',
             ],
+            'language.name',
             'createdBy.username',
             'updatedBy.username',
-            'created_at:datetime',
-            'updated_at:datetime',
+            'created_at:date',
+            'updated_at:date',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
