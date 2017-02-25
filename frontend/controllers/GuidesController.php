@@ -2,7 +2,6 @@
 
 namespace frontend\controllers;
 
-use common\models\Category;
 use common\models\Guide;
 use common\models\GuidesCategory;
 use common\models\search\GuideSearch;
@@ -15,68 +14,64 @@ use yii\web\NotFoundHttpException;
 class GuidesController extends FrontendController
 {
 
+    /**
+     * The guides overview page
+     * @return string
+     */
     public function actionIndex()
     {
-        $last_visit_count = 0;
-        // check how many new guides are here since last visit
-        if(Yii::$app->request->cookies->has('last-visit')) {
-            $last_visit = (int)Yii::$app->request->cookies->get('last-visit')->value;
-            $last_visit_count = Guide::find()->where(['>', 'created_at', $last_visit])->count();
-        } else {
-            Yii::$app->response->cookies->add(new Cookie([
-                'name' => 'last-visit',
-                'value' => time(),
-            ]));
-        }
+        $last_visit_count = $this->checkNewestGuidesCount();
 
-        $guideDataProvider = new ActiveDataProvider([
-            'query' => Guide::find()->orderBy(['created_at' => SORT_DESC]),
-            'pagination' => false
-        ]);
-
-        $relations = GuidesCategory::find()->all();
+        $guideSearch = new GuideSearch();
+        $guideDataProvider = $guideSearch->search(Yii::$app->request->queryParams);
+        $guideDataProvider->pagination->pageSize = 30;
 
         return $this->render('index', [
+            'guideSearch' => $guideSearch,
             'guideDataProvider' => $guideDataProvider,
-            'newest_guide'      => Guide::find()->orderBy(['created_at' => SORT_DESC])->limit(1)->one(),
-            'filter'            => 'newest',
-            'last_visit_count'  => $last_visit_count,
+            'newest_guide' => Guide::find()->orderBy(['created_at' => SORT_DESC])->limit(1)->one(),
+            'last_visit_count' => $last_visit_count,
         ]);
     }
 
     /**
-     * Show all guides per category
+     * Shows a single guide
+     * @param $title string The title of the guide to search for
+     * @return string
+     * @throws NotFoundHttpException When a guide can't be found
      */
-    public function actionCategories() {
-        $guide_categories = GuidesCategory::find()->all();
-
-        $this->render('guide_category_overview', [
-            'guide_categories' => $guide_categories,
-        ]);
-    }
-
-    /**
-     * Shows all guides per language
-     */
-    public function actionLanguages() {
-        $guides = Guide::find()->all();
-
-        $guide_by_language = [];
-        foreach ($guides as $guide) {
-            /** @var $guide Guide */
-            $guide_by_language[$guide->language->name][] = $guide;
-        }
-
-        dd($guide_by_language);
-    }
-
     public function actionView($title)
     {
-        if($guide = Guide::findOne(['title' => str_replace('-',' ',$title)])) {
+        if ($guide = Guide::findOne(['title' => str_replace('-', ' ', $title)])) {
             return $this->render('view', ['guide' => $guide]);
         } else {
             throw new NotFoundHttpException(Yii::t('guide', 'This guide could not be found'));
         }
+    }
+
+    /**
+     * Check how many new guides are here since last visit.
+     * And updates a cookie accordingly
+     * @return int Count of new guides since last visit
+     */
+    private function checkNewestGuidesCount()
+    {
+        $last_visit_count = 0;
+        // check if user has a cookie with last visit time
+        if (Yii::$app->request->cookies->has('last-visit')) {
+            // Get the time of latest visit
+            $last_visit = (int)Yii::$app->request->cookies->get('last-visit')->value;
+            // get the count of all new guides since then
+            $last_visit_count = Guide::find()->where(['>', 'created_at', $last_visit])->count();
+        }
+
+        // update or create cookie with latest visit
+        Yii::$app->response->cookies->add(new Cookie([
+            'name' => 'last-visit',
+            'value' => time(),
+        ]));
+
+        return $last_visit_count;
     }
 
 }

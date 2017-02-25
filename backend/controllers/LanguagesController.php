@@ -2,18 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\components\web\BackendController;
-use common\models\Category;
 use Yii;
-use common\models\Guide;
-use common\models\search\GuideSearch;
+use common\models\Language;
+use common\models\search\LanguageSearch;
+use backend\components\web\BackendController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * GuideController implements the CRUD actions for Guide model.
+ * LanguageController implements the CRUD actions for Language model.
  */
-class GuideController extends BackendController
+class LanguagesController extends BackendController
 {
     /**
      * @inheritdoc
@@ -31,12 +30,12 @@ class GuideController extends BackendController
     }
 
     /**
-     * Lists all Guide models.
+     * Lists all Language models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new GuideSearch();
+        $searchModel = new LanguageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class GuideController extends BackendController
     }
 
     /**
-     * Displays a single Guide model.
+     * Displays a single Language model.
      * @param integer $id
      * @return mixed
      */
@@ -58,26 +57,25 @@ class GuideController extends BackendController
     }
 
     /**
-     * Creates a new Guide model.
+     * Creates a new Language model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Guide();
+        $model = new Language();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'categories' => Category::find()->all(),
             ]);
         }
     }
 
     /**
-     * Updates an existing Guide model.
+     * Updates an existing Language model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,13 +89,12 @@ class GuideController extends BackendController
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'categories' => Category::find()->all(),
             ]);
         }
     }
 
     /**
-     * Deletes an existing Guide model.
+     * Deletes an existing Language model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +107,15 @@ class GuideController extends BackendController
     }
 
     /**
-     * Finds the Guide model based on its primary key value.
+     * Finds the Language model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Guide the loaded model
+     * @return Language the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Guide::findOne($id)) !== null) {
+        if (($model = Language::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

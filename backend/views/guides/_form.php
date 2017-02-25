@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Guide;
 use common\models\Language;
 use common\models\Project;
 use kartik\markdown\MarkdownEditor;
@@ -20,6 +21,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'sneak_peek')->textarea(['rows' => 3, 'maxlength' => true]) ?>
+    <p>It is best to keep descriptions between 150 and 160 characters.</p>
 
     <?= $form->field($model, 'guide_text')->widget(MarkdownEditor::className(),[
         'footerMessage' => false,
@@ -41,6 +43,10 @@ use yii\widgets\ActiveForm;
             ]
         ])
     ?>
+
+    <?= $form->field($model, 'difficulty')->dropDownList(Guide::difficultyList(),
+        ['prompt' => 'Select difficulty']
+    ) ?>
 
     <?= $form->field($model, 'project_id')->dropDownList(
         Project::find()->select(['title','id'])->indexBy('id')->column(),

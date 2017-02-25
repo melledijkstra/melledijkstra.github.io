@@ -17,40 +17,7 @@ $this->title = $project->title;
             </h1>
         </div>
         <div class="col-sm-<?= (count($project->guides) > 0) ? '10' : '12' ?>">
-            <img src="<?= $project->getPublicLink(); ?>"/>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur cum distinctio dolor
-                eaque eius exercitationem inventore necessitatibus numquam odio, officiis pariatur placeat quia
-                repellendus repudiandae sit veniam vero voluptatum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur cum distinctio dolor
-                eaque eius exercitationem inventore necessitatibus numquam odio, officiis pariatur placeat quia
-                repellendus repudiandae sit veniam vero voluptatum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur cum distinctio dolor
-                eaque eius exercitationem inventore necessitatibus numquam odio, officiis pariatur placeat quia
-                repellendus repudiandae sit veniam vero voluptatum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur cum distinctio dolor
-                eaque eius exercitationem inventore necessitatibus numquam odio, officiis pariatur placeat quia
-                repellendus repudiandae sit veniam vero voluptatum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur cum distinctio dolor
-                eaque eius exercitationem inventore necessitatibus numquam odio, officiis pariatur placeat quia
-                repellendus repudiandae sit veniam vero voluptatum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur cum distinctio dolor
-                eaque eius exercitationem inventore necessitatibus numquam odio, officiis pariatur placeat quia
-                repellendus repudiandae sit veniam vero voluptatum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur cum distinctio dolor
-                eaque eius exercitationem inventore necessitatibus numquam odio, officiis pariatur placeat quia
-                repellendus repudiandae sit veniam vero voluptatum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur cum distinctio dolor
-                eaque eius exercitationem inventore necessitatibus numquam odio, officiis pariatur placeat quia
-                repellendus repudiandae sit veniam vero voluptatum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur cum distinctio dolor
-                eaque eius exercitationem inventore necessitatibus numquam odio, officiis pariatur placeat quia
-                repellendus repudiandae sit veniam vero voluptatum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur cum distinctio dolor
-                eaque eius exercitationem inventore necessitatibus numquam odio, officiis pariatur placeat quia
-                repellendus repudiandae sit veniam vero voluptatum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur cum distinctio dolor
-                eaque eius exercitationem inventore necessitatibus numquam odio, officiis pariatur placeat quia
-                repellendus repudiandae sit veniam vero voluptatum.</p>
+            <img class="img-responsive" src="<?= $project->getPublicLink(); ?>"/>
         </div>
         <?php if (count($project->guides) > 0): ?>
             <div class="col-sm-2">

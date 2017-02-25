@@ -38,6 +38,32 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+
+        $menuItems[] = ['label' => '<i class="mdi mdi-buffer"></i> Projects', 'items' =>
+            [
+                ['label' => '<i class="mdi mdi-view-list"></i> Overview', 'url' => ['/projects']],
+                ['label' => '<i class="mdi mdi-plus"></i> Create', 'url' => ['/projects/create']]
+            ]
+        ];
+        $menuItems[] = ['label' => '<i class="mdi mdi-book-open-page-variant"></i> Guides', 'items' =>
+            [
+                ['label' => '<i class="mdi mdi-view-list"></i> Overview', 'url' => ['/guides']],
+                ['label' => '<i class="mdi mdi-plus"></i> Create', 'url' => ['/guides/create']]
+            ]
+        ];
+        $menuItems[] = ['label' => '<i class="mdi mdi-bookmark"></i> Categories', 'items' =>
+            [
+                ['label' => '<i class="mdi mdi-view-list"></i> Overview', 'url' => ['/categories']],
+                ['label' => '<i class="mdi mdi-plus"></i> Create', 'url' => ['/categories/create']]
+            ]
+        ];
+        $menuItems[] = ['label' => '<i class="mdi mdi-translate"></i> Languages', 'items' =>
+            [
+                ['label' => '<i class="mdi mdi-view-list"></i> Overview', 'url' => ['/languages']],
+                ['label' => '<i class="mdi mdi-plus"></i> Create', 'url' => ['/languages/create']]
+            ]
+        ];
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -49,6 +75,7 @@ AppAsset::register($this);
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
+        'encodeLabels' => false,
         'items' => $menuItems,
     ]);
     NavBar::end();

@@ -2,26 +2,24 @@
 
 namespace backend\controllers;
 
-use backend\components\web\BackendController;
-use common\components\db\MActiveRecord;
 use Yii;
-use common\models\Project;
-use common\models\search\ProjectSearch;
+use common\models\Category;
+use common\models\search\CategorySearch;
+use backend\components\web\BackendController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * ProjectController implements the CRUD actions for Project model.
+ * CategoryController implements the CRUD actions for Category model.
  */
-class ProjectController extends BackendController
+class CategoriesController extends BackendController
 {
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
-        return array_merge(parent::behaviors(),[
+        return array_merge(parent::behaviors(), [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -32,12 +30,12 @@ class ProjectController extends BackendController
     }
 
     /**
-     * Lists all Project models.
+     * Lists all Category models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProjectSearch();
+        $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class ProjectController extends BackendController
     }
 
     /**
-     * Displays a single Project model.
+     * Displays a single Category model.
      * @param integer $id
      * @return mixed
      */
@@ -59,13 +57,13 @@ class ProjectController extends BackendController
     }
 
     /**
-     * Creates a new Project model.
+     * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Project();
+        $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -77,7 +75,7 @@ class ProjectController extends BackendController
     }
 
     /**
-     * Updates an existing Project model.
+     * Updates an existing Category model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -86,22 +84,17 @@ class ProjectController extends BackendController
     {
         $model = $this->findModel($id);
 
-        if(Yii::$app->request->post('deleteFile', false) == true) {
-            $model->deleteFile();
-        }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            // check if file is uploaded and store if so
             return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
-     * Deletes an existing Project model.
+     * Deletes an existing Category model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -114,15 +107,15 @@ class ProjectController extends BackendController
     }
 
     /**
-     * Finds the Project model based on its primary key value.
+     * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Project the loaded model
+     * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Project::findOne($id)) !== null) {
+        if (($model = Category::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => ($model->project) ? $model->project->title : null,
             ],
             'language.name',
+            'difficulty',
             [
                 'attribute' => 'category_ids',
                 'value' => $model->renderCategories(),

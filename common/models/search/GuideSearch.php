@@ -2,6 +2,7 @@
 
 namespace common\models\search;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Guide;
@@ -14,15 +15,37 @@ class GuideSearch extends Guide
 
     public $category_id;
 
+    public $content;
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'category_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['title', 'filename'], 'safe'],
+            [['id', 'project_id', 'category_id', 'language_id', 'difficulty', 'duration'], 'integer'],
+            [['title', 'content'], 'string'],
+            [['title'], 'safe'],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function formName()
+    {
+        return '';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return array_merge(parent::attributeLabels(), [
+            'content'       => Yii::t('guide-search', 'Title & Description'),
+            'category_id'   => Yii::t('guide-search', 'Category'),
+        ]);
     }
 
     /**
@@ -54,8 +77,6 @@ class GuideSearch extends Guide
             'query' => $query,
         ]);
 
-        //die(var_dump($params));
-
         if(!$this->load($params) && $this->validate()) {
             return $dataProvider;
         }
@@ -69,16 +90,21 @@ class GuideSearch extends Guide
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'project_id' => $this->project_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
+            'project_id'                    => $this->project_id,
+            'difficulty'                    => $this->difficulty,
+            'duration'                      => $this->duration,
+            'language_id'                   => $this->language_id,
+            'guides_categories.category_id' => $this->category_id,
+            'created_at'                    => $this->created_at,
+            'updated_at'                    => $this->updated_at,
+            'created_by'                    => $this->created_by,
+            'updated_by'                    => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['guides_categories.category_id' => $this->category_id]);
-
-        $query->andFilterWhere(['like', 'guides.title', $this->title]);
+        $query->andFilterWhere(['or',
+            ['like', 'guides.title', $this->content],
+            ['like', 'guides.sneak_peek', $this->content],
+        ]);
 
         return $dataProvider;
     }

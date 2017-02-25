@@ -107,14 +107,23 @@ h1 {
 
 .btn {
     border: none;
-}
-
-.btn-primary {
-    background-color: #E87B5A;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
     transition: all 0.5s;
+}
+
+.btn-primary {
+    background-color: #E87B5A;
+}
+
+.btn-default {
+    background-color: #d3d3d3;
+}
+
+.btn-default:hover {
+    color: #fff;
+    background-color: #7f7f7f;
 }
 
 .navbar > .container .navbar-brand {
@@ -140,7 +149,6 @@ h1 {
 .margin-lr-10 { margin: 0 10px; }
 .margin-lr-15 { margin: 0 15px; }
 .margin-lr-20 { margin: 0 20px; }
-
 
 /* LOADING SCREEN */
 #loader-wrap {
@@ -219,7 +227,7 @@ hr {
 }
 
 .mel-navbar a {
-    font-size: 25px;
+    font-size: 20px;
     -webkit-transition: color 0.3s;
     -moz-transition: color 0.3s;
     -o-transition: color 0.3s;
@@ -234,6 +242,7 @@ hr {
 }
 
 .mel-navbar a.navbar-brand {
+    font-size: 25px;
     border-bottom: 3px solid #E87B5A;
 }
 
@@ -278,6 +287,14 @@ pre {
     -webkit-transition: all 0.6s ease;
     -moz-transition: all 0.6s ease;
     -o-transition: all 0.6s ease;
+}
+
+.project-item:hover {
+    -webkit-transform:scale(1.05); /* Safari and Chrome */
+    -moz-transform:scale(1.05); /* Firefox */
+    -ms-transform:scale(1.05); /* IE 9 */
+    -o-transform:scale(1.05); /* Opera */
+    transform:scale(1.05);
 }
 
 .slide-up-desc {
@@ -348,7 +365,6 @@ pre {
 #guides-overview-page #grid {
     margin: 0 auto;
     padding-bottom: 30px;
-    padding-top: 30px;
 }
 
 #guides-overview-page #grid .grid-item {
@@ -373,33 +389,6 @@ pre {
 .newest-guide-preview span:last-child {
     color: white;
     padding: 5px;
-}
-
-#filter-options-navbar {
-    text-align: center;
-    width: 100%;
-    background-color: #e4e4e4;
-}
-
-#filter-options-navbar .options {
-    display: inline-block;
-    margin: 0 auto;
-}
-
-#filter-options-navbar .options a {
-    font-size: 20px;
-    display: inline-block;
-    text-decoration: none;
-    padding: 20px;
-}
-
-#filter-options-navbar .options a.selected {
-    border-bottom: 10px solid #E87B5A;
-}
-
-#filter-options-navbar .options .badge {
-    background-color: #E87B5A;
-    color: white;
 }
 
 .programming-language-tooltip {
@@ -434,3 +423,17 @@ pre {
 .card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
     margin: 0;
 }
+
+/* Link Pager */
+
+.link-pager-active a {
+    color: #fff !important;
+    background-color: #E87B5A !important;
+}
+
+.border-radiusless * {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+

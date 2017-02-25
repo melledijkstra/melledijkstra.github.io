@@ -40,8 +40,17 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
     <meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Html::encode($this->title).((isset(Yii::$app->params['titleSuffix'])) ? Yii::$app->params['titleSuffix'] : '') ?></title>
     <?php $this->head() ?>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-61555186-3', 'auto');
+        ga('send', 'pageview');
+    </script>
 </head>
 <body onload="$('#loader-wrap').fadeOut(500);">
 <div id="loader-wrap">
@@ -85,12 +94,10 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
     NavBar::end();
     ?>
 
-    <div>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
-</div>
+    <?= Alert::widget() ?>
+    <?= $content ?>
 
+</div>
 <?php $this->endBody() ?>
 </body>
 </html>

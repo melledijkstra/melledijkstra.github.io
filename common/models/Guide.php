@@ -17,6 +17,7 @@ use yii\helpers\Url;
  * @property string $filename
  * @property string $filepath
  * @property integer $project_id
+ * @property integer $language_id
  * @property integer $difficulty
  * @property integer $duration
  *
@@ -26,6 +27,7 @@ use yii\helpers\Url;
  */
 class Guide extends MActiveRecord implements Linkable
 {
+    const MAX_DIFFICULTY = 5;
 
     /** @var $guide_text string This is the markdown entered by a user which needs to be saved to a file */
     public $guide_text;
@@ -187,7 +189,7 @@ class Guide extends MActiveRecord implements Linkable
                 'smartyPants' => false,
             ], Markdown::SMARTYPANTS_ATTR_DO_NOTHING);
         } else {
-            return '<p style="color:red;">'.Yii::t('guide', 'This guide\'s file is not found, you might as well delete this guide').'</p>';
+            return '<p style="color:red;">'.Yii::t('guide', 'This guide\'s file is not found!').'</p>';
         }
     }
 
@@ -285,5 +287,17 @@ class Guide extends MActiveRecord implements Linkable
                 }
             }
         }
+    }
+
+    /**
+     * Generate list of difficulties which are available
+     */
+    public static function difficultyList()
+    {
+        $list = [];
+        for($i = 1; $i <= self::MAX_DIFFICULTY; $i++) {
+            $list[$i] = $i;
+        }
+        return $list;
     }
 }

@@ -26,7 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'color',
+            [
+                'attribute' => 'color',
+                'value' => function($model, $key, $index, $column) {
+                    /** @var $model \common\models\Language */
+                    return "<span style=\"padding: 5px;color: white;background-color: {$model->color};\">{$model->name}</span>";
+                },
+                'format' => 'html',
+            ],
             'created_at',
             'updated_at',
             // 'created_by',

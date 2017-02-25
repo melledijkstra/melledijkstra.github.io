@@ -16,6 +16,7 @@ class AppAsset extends AssetBundle
         'http://portfolio.local/css/main.css',
         // Google Font
         'https://fonts.googleapis.com/css?family=Lato',
+        '//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css',
     ];
     public $js = [
     ];

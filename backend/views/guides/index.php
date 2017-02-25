@@ -33,11 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'project',
                 'value' => 'project.title',
             ],
-            [
-                'attribute' => 'category_ids',
-                'value' => 'renderCategories',
-                'format' => 'html',
-            ],
             'language.name',
             'createdBy.username',
             'updatedBy.username',

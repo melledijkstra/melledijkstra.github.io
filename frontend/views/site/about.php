@@ -2,15 +2,28 @@
 
 /* @var $this yii\web\View */
 
-use yii\helpers\Html;
+$this->title = 'About';
 
-$this->title = 'Melle Dijkstra';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col col-xs-12 col-md-6 col-lg-3">
+                <div class="card">
+                    <img src="/images/melle_mountains_square.jpg" class="mel-about-image img-circle"/>
+                </div>
+            </div>
+            <div class="col col-xs-12 col-md-6 col-lg-3">
+                <div class="card">
+                    <p>Hi this is me!, bla die bla die bla</p>
+                </div>
+            </div>
+            <div class="col col-xs-12 col-md-6 col-lg-3">
 
-    <img src="/images/melle_mountains_square.jpg" class="mel-about-image img-circle" />
-    <p>Hi this is me!, bla die bla die bla</p>
+            </div>
+            <div class="col col-xs-12 col-md-6 col-lg-3">
 
+            </div>
+        </div>
+    </div>
 </div>
