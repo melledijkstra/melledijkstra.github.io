@@ -1,10 +1,8 @@
 <?php
 
-
+/* @var $project \common\models\Project */
 /* @var $this yii\web\View */
 use yii\helpers\Url;
-
-/* @var $project \common\models\Project */
 
 $this->title = $project->title;
 

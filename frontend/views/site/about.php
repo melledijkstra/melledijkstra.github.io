@@ -6,11 +6,14 @@ $this->title = 'About';
 
 ?>
 <div class="site-about">
+    <div class="jumbotron" style="background-image: url();">
+        <img src="/images/melle_mountains_square.jpg" class="mel-about-image img-circle"/>
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col col-xs-12 col-md-6 col-lg-3">
                 <div class="card">
-                    <img src="/images/melle_mountains_square.jpg" class="mel-about-image img-circle"/>
+                    text
                 </div>
             </div>
             <div class="col col-xs-12 col-md-6 col-lg-3">

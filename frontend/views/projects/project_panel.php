@@ -9,7 +9,7 @@
 use yii\helpers\Url;
 
 ?>
-<a href="<?= Url::to(['/projects/'.$project->getTitle(true)]); ?>">
+<a class="no-link" href="<?= Url::to(['/projects/'.$project->getTitle(true)]); ?>">
     <div class="project-item" style="background-image: url('<?= $project->getPublicLink(); ?>');">
         <div class="slide-up-desc">
             <h4><?= $project->title ?></h4>

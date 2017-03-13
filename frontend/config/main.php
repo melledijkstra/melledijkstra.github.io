@@ -11,7 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
-    'defaultRoute' => '/projects',
+    'defaultRoute' => '/guides',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
@@ -39,7 +39,7 @@ return [
         ],
         'urlManager' => [
             'rules' => [
-                '<alias:contact|about>' => 'site/<alias>',
+                '<alias:about>' => 'site/<alias>',
                 '<controller>/<action:index>' => '<controller>/<action>',
                 'guides/<title:\S*>'    => 'guides/view',
                 'projects/<title:\S*>'  => 'projects/view',

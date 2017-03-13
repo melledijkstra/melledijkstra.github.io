@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use common\components\db\MActiveRecord;
+use common\components\db\FileUploadActiveRecord;
 use common\components\Linkable;
 use kartik\markdown\Markdown;
 use Yii;
@@ -25,8 +25,10 @@ use yii\helpers\Url;
  * @property Language $language
  * @property Category[] $categories
  */
-class Guide extends MActiveRecord implements Linkable
+class Guide extends FileUploadActiveRecord implements Linkable
 {
+
+    /** The maximum  difficulty a guide can get */
     const MAX_DIFFICULTY = 5;
 
     /** @var $guide_text string This is the markdown entered by a user which needs to be saved to a file */
@@ -34,6 +36,10 @@ class Guide extends MActiveRecord implements Linkable
 
     /** @var array The linked categories */
     public $category_ids = [];
+
+    protected $extensions = ['png','jpg','jpeg','gif'];
+
+    protected $fileAttributeName = 'thumbnail';
 
     /**
      * @inheritdoc
@@ -117,10 +123,10 @@ class Guide extends MActiveRecord implements Linkable
      */
     public function rules()
     {
-        return [
+        return array_merge(parent::rules(),[
             [['title', 'guide_text'], 'required'],
             [['project_id', 'language_id', 'difficulty', 'duration'], 'integer'],
-            [['title', 'filename'], 'string', 'max' => 255],
+            [['title', 'filename', 'thumbnail'], 'string', 'max' => 255],
             [['sneak_peek'], 'string', 'max' => 700],
             [['guide_text'], 'string'],
             [['title'], 'unique'],
@@ -129,7 +135,7 @@ class Guide extends MActiveRecord implements Linkable
             ]],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
             [['language_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['language_id' => 'id']],
-        ];
+        ]);
     }
 
     /**
@@ -252,20 +258,20 @@ class Guide extends MActiveRecord implements Linkable
 
     /**
      * Returns the title of this guide
-     * @param bool $withDashes If the guide title should use dashes instead of spaces, this is used for links to this guide
+     * @param bool $slug If the guide title should use dashes instead of spaces, this is used for links to this guide
      * @return mixed|string The title with or without dashes
      */
-    public function getTitle($withDashes = false) {
-        if($withDashes) return str_replace(' ','-',$this->title);
+    public function getTitle($slug = false) {
+        if($slug) return strtolower(str_replace(' ','-',$this->title));
         return $this->title;
     }
 
     /**
      * @inheritdoc
      */
-    public function getLink()
+    public function getLink($absolute = false)
     {
-        return Url::to('/guides/'.$this->getTitle(true));
+        return Url::to('/guides/'.$this->getTitle(true), $absolute);
     }
 
     /**

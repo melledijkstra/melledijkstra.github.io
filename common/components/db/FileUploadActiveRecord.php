@@ -11,6 +11,7 @@ namespace common\components\db;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\UploadedFile;
 
 abstract class FileUploadActiveRecord extends MActiveRecord {
@@ -38,7 +39,7 @@ abstract class FileUploadActiveRecord extends MActiveRecord {
     /**
      * @var string The upload folder path
      */
-    protected static $uploadFolder;
+    protected static $uploadPath;
 
     /**
      * @inheritdoc
@@ -59,11 +60,11 @@ abstract class FileUploadActiveRecord extends MActiveRecord {
             if(!is_null($this->uploadedFile)) {
                 $this->deleteFile();
                 // if directory not exists (file_exists also works on dir)
-                if(!file_exists(self::$uploadFolder)) {
-                    FileHelper::createDirectory(self::$uploadFolder);
+                if(!file_exists(self::$uploadPath)) {
+                    FileHelper::createDirectory(self::$uploadPath);
                 }
                 $filename = $this->generateFileName($this->uploadedFile);
-                if($this->uploadedFile->saveAs(self::$uploadFolder.$filename)) {
+                if($this->uploadedFile->saveAs(self::$uploadPath.$filename)) {
                     $this->{$this->fileAttributeName} = $filename;
                     return true;
                 }
@@ -85,7 +86,7 @@ abstract class FileUploadActiveRecord extends MActiveRecord {
 
         if($this->fileRequired && $this->isNewRecord) $rules[] = [['uploadedFile'], 'required'];
 
-        return array_merge_recursive(parent::rules(), $rules);
+        return array_merge(parent::rules(), $rules);
     }
 
     public function attributeLabels()
@@ -101,7 +102,7 @@ abstract class FileUploadActiveRecord extends MActiveRecord {
     public function init()
     {
         parent::init();
-        self::$uploadFolder = Yii::getAlias('@frontend').'/web/uploads/'.$this->tableName().'/';
+        self::$uploadPath = Yii::getAlias('@frontend').'/web/uploads/'.$this->tableName().'/';
     }
 
     /**
@@ -147,19 +148,21 @@ abstract class FileUploadActiveRecord extends MActiveRecord {
      */
     public function filePath()
     {
-        if(!empty($this->{$this->fileAttributeName}) && file_exists(self::$uploadFolder.$this->{$this->fileAttributeName})) {
-            return self::$uploadFolder.$this->{$this->fileAttributeName};
+        if(!empty($this->{$this->fileAttributeName}) && file_exists(self::$uploadPath.$this->{$this->fileAttributeName})) {
+            return self::$uploadPath.$this->{$this->fileAttributeName};
         }
         return null;
     }
 
     /**
      * Retrieve public link to the file
+     * @param bool $absolute if the link should be absolute
      * @return string
      */
-    public function getPublicLink()
+    public function getPublicLink($absolute = false)
     {
-        return '/uploads/'.$this->tableName().'/'.$this->{$this->fileAttributeName};
+        $url = ($absolute) ? Url::base(true) : '';
+        return $url.'/uploads/'.$this->tableName().'/'.$this->{$this->fileAttributeName};
     }
 
     /**
@@ -169,6 +172,7 @@ abstract class FileUploadActiveRecord extends MActiveRecord {
      */
     protected function generateFileName($uploadedFile)
     {
+        // TODO: this won't work for multiple file, the time would be the same and overwrite previous file
         return time() . /* str_replace(' ', '_', $uploadedFile->baseName) . */ '.' . $uploadedFile->extension;
     }
 
@@ -177,6 +181,15 @@ abstract class FileUploadActiveRecord extends MActiveRecord {
      */
     public function fileExists()
     {
-        return (!empty($this->{$this->fileAttributeName}) && file_exists(self::$uploadFolder.$this->{$this->fileAttributeName}));
+        return (!empty($this->{$this->fileAttributeName}) && file_exists(self::$uploadPath.$this->{$this->fileAttributeName}));
     }
+
+    /**
+     * Checks if this model has a file name set
+     */
+    public function hasFile()
+    {
+        return !empty($this->{$this->fileAttributeName});
+    }
+
 }

@@ -46,7 +46,7 @@ abstract class MActiveRecord extends ActiveRecord
      */
     public function rules()
     {
-        return array_merge_recursive(parent::rules(),[
+        return array_merge(parent::rules(),[
             [['created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
@@ -59,6 +59,7 @@ abstract class MActiveRecord extends ActiveRecord
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [
+            'id'         => Yii::t('common', 'ID'),
             'created_at' => Yii::t('common', 'Created At'),
             'updated_at' => Yii::t('common', 'Updated At'),
             'created_by' => Yii::t('common', 'Created By'),

@@ -28,6 +28,8 @@ use yii\widgets\ActiveForm;
         'showExport' => false,
     ]); ?>
 
+    <?= $form->field($model, 'uploadedFile')->fileInput(); ?>
+
     <?= $form->field($model, 'language_id')->dropDownList(
         Language::find()->select(['name','id'])->indexBy('id')->column(),
         ['prompt' => 'No specific programming language']

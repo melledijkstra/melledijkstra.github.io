@@ -10,6 +10,13 @@ use yii\web\NotFoundHttpException;
 
 class ProjectsController extends FrontendController
 {
+
+    public function beforeAction($action)
+    {
+        throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
+        return parent::beforeAction($action);
+    }
+
     /**
      * Overview of all Projects
      * @return string

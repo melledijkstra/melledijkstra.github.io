@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'project_id',
                 'value' => ($model->project) ? $model->project->title : null,
             ],
+            'thumbnail',
             'language.name',
             'difficulty',
             [
@@ -54,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <h2><?= Yii::t('guide', 'Preview'); ?></h2>
-    <div class="mel-guide-preview">
+    <div class="guide-preview">
         <?= $model->renderGuide(); ?>
     </div>
 

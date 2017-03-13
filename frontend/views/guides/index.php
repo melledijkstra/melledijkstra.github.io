@@ -25,6 +25,12 @@ if(Yii::$app->request->isAjax && isset(Yii::$app->params['titleSuffix'])) {
 
 \frontend\assets\MasonryAsset::register($this);
 
+$this->registerLinkTag([
+    'href'  => '/feed/atom',
+    'type'  => 'application/atom+xml',
+    'rel'   => 'alternate',
+], 'feed');
+
 $this->registerJs(<<<JSCRIPT
 var mason = $('#grid').masonry({
     columnWidth: '.grid-sizer',
@@ -40,6 +46,9 @@ $(document).on('pjax:success', function() {
         percentPosition: true
     });
 });
+
+$(document).on('pjax:start', function() { $('#guide-loader-wrap').show(); });
+$(document).on('pjax:end', function() { $('#guide-loader-wrap').hide(); });
 JSCRIPT
     , View::POS_END);
 
@@ -56,9 +65,44 @@ $this->registerCss('
 <div id="guides-overview-page">
     <div class="container-fluid">
         <div class="row">
-            <div class="col col-xs-12 col-md-3 col-md-push-9">
+            <div class="col col-xs-12 col-md-9">
+                <?php Pjax::begin([
+                    'timeout' => false,
+                    'enablePushState' => true,
+                    'id' => 'update-view',
+                    'formSelector' => '#guide-filter-form',
+                    'submitEvent' => 'submit'
+                ]); ?>
+                <div class="no-gutter" id="grid">
+                    <div class="grid-sizer col-xs-12 col-sm-12 col-md-12 col-lg-4"></div>
+                    <?php
+                    if($guideDataProvider->count > 0) {
+                        foreach ($guideDataProvider->models as $guide) {
+                            /** @var $guide Guide */
+                            echo $this->render('guide_view', [
+                                'guide' => $guide,
+                            ]);
+                        }
+                    } else {
+                        echo '<div class="grid-item col-xs-12">';
+                        echo '<div class="grid-item-content">
+<p class="text-center">'.Yii::t('guide', 'No guides found for your specific filter').'</p>
+</div>';
+                        echo '</div>';
+                    }
+                    ?>
+                </div>
+                <?= \yii\widgets\LinkPager::widget([
+                    'activePageCssClass' => 'link-pager-active',
+                    'nextPageCssClass'  => 'link-pager-next-page',
+                    'prevPageCssClass'   => 'link-pager-prev-page',
+                    'pagination' => $guideDataProvider->pagination
+                ]); ?>
+                <?php Pjax::end(); ?>
+            </div>
+            <div class="col col-xs-12 col-md-3">
                 <div class="affix">
-                    <h3>Filter form</h3>
+                    <h3>Search guides</h3>
 
                     <?php $form = ActiveForm::begin([
                         'action' => '/guides',
@@ -79,46 +123,14 @@ $this->registerCss('
 
                     <?= $form->field($guideSearch, 'language_id')->dropDownList(ArrayHelper::map(Language::find()->select(['id', 'name'])->asArray()->all(), 'id', 'name'), ['prompt' => 'Select Language']); ?>
 
-                    <?= Html::submitButton('Search', ['class' => 'btn btn-primary']); ?>
-                    <?= Html::resetButton('Reset', ['class' => 'btn btn-default']); ?>
+                    <?= Html::submitButton('Search', ['class' => 'btn btn-block btn-primary']); ?>
+
+                    <div class="margin-tb-10" id="guide-loader-wrap">
+                        <div class="loader"></div>
+                    </div>
 
                     <?php ActiveForm::end(); ?>
                 </div>
-            </div>
-            <div class="col col-xs-12 col-md-9 col-md-pull-3">
-                <?php Pjax::begin([
-                    'timeout' => false,
-                    'enablePushState' => true,
-                    'id' => 'update-view',
-                    'formSelector' => '#guide-filter-form',
-                    'submitEvent' => 'submit'
-                ]); ?>
-                <div id="grid">
-                    <div class="grid-sizer col-xs-12 col-sm-6 col-md-4 col-lg-3"></div>
-                    <?php
-                    if($guideDataProvider->count > 0) {
-                        foreach ($guideDataProvider->models as $guide) {
-                            /** @var $guide Guide */
-                            echo $this->render('guide_view', [
-                                'guide' => $guide,
-                            ]);
-                        }
-                    } else {
-                        echo '<div class="grid-item col-xs-12">';
-                        echo '<div class="grid-item-content">
-<p class="text-center">'.Yii::t('guide', 'No guides found for your specific filter').'</p>
-</div>';
-                        echo '</div>';
-                    }
-                    ?>
-                </div>
-                <?= \yii\widgets\LinkPager::widget([
-                    'activePageCssClass' => 'link-pager-active',
-                    'nextPageCssClass'  => 'border-radiusless',
-                    'prevPageCssClass'   => 'border-radiusless',
-                    'pagination' => $guideDataProvider->pagination
-                ]); ?>
-                <?php Pjax::end(); ?>
             </div>
         </div>
     </div>

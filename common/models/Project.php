@@ -25,7 +25,7 @@ class Project extends FileUploadActiveRecord implements Linkable
      * Overridden allowed extensions
      * @var array
      */
-    protected $extensions = ['png', 'jpg', 'png', 'jpeg'];
+    protected $extensions = ['png', 'jpg', 'jpeg'];
 
     /**
      * Overridden attribute name for the column name
@@ -64,13 +64,12 @@ class Project extends FileUploadActiveRecord implements Linkable
      */
     public function attributeLabels()
     {
-        return [
-            'id' => Yii::t('common', 'ID'),
+        return array_merge(parent::attributeLabels(),[
             'title' => Yii::t('common', 'Title'),
             'description' => Yii::t('project', 'Description'),
             'thumbnail' => Yii::t('project', 'Thumbnail'),
             'external_url' => Yii::t('project', 'External Url'),
-        ];
+        ]);
     }
 
     /**
@@ -82,12 +81,13 @@ class Project extends FileUploadActiveRecord implements Linkable
     }
 
     /**
-     * Generate thumbnail link
+     * @inheritdoc
      */
-    public function getPublicLink()
+    public function getPublicLink($absolute = false)
     {
-        if(!empty($this->thumbnail) && file_exists(self::$uploadFolder.$this->thumbnail)) {
-            return '/uploads/'.$this->tableName().'/'.$this->thumbnail;
+        if(!empty($this->thumbnail) && file_exists(self::$uploadPath.$this->thumbnail)) {
+            $url = ($absolute) ? Url::base(true) : '';
+            return $url.'/uploads/'.$this->tableName().'/'.$this->thumbnail;
         } else {
             return 'http://placehold.it/250x200';
         }
@@ -95,11 +95,11 @@ class Project extends FileUploadActiveRecord implements Linkable
 
     /**
      * Returns the title of this project
-     * @param bool $withDashes If the project title should use dashes instead of spaces, this is used for links to this project
+     * @param bool $slug If the project title should use dashes and lowercase instead of spaces, this is used for links to this project
      * @return mixed|string The title with or without dashes
      */
-    public function getTitle($withDashes = false) {
-        if($withDashes) return str_replace(' ','-',$this->title);
+    public function getTitle($slug = false) {
+        if($slug) return strtolower(str_replace(' ','-',$this->title));
         return $this->title;
     }
 

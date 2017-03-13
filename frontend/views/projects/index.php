@@ -8,14 +8,15 @@ use yii\bootstrap\Tabs;
 $this->title = Yii::t('project', 'Projects');
 
 ?>
-<div class="container">
-    <h1><?= Yii::t('portfolio', 'My Portfolio'); ?></h1>
 
-    <div class="row">
-        <?php foreach ($projects as $project): ?>
-            <div class="col col-sm-12 col-md-4 col-lg-3">
-                <?= $this->render('project_panel', ['project' => $project]) ?>
-            </div>
-        <?php endforeach; ?>
-    </div>
+<div class="text-center">
+    <h1 class="portfolio-title">Portfolio</h1>
+</div>
+
+<div class="row no-margin no-gutter">
+    <?php foreach ($projects as $project): ?>
+        <div class="col col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <?= $this->render('project_panel', ['project' => $project]) ?>
+        </div>
+    <?php endforeach; ?>
 </div>
