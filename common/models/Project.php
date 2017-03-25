@@ -54,6 +54,7 @@ class Project extends FileUploadActiveRecord implements Linkable
     {
         return array_merge_recursive(parent::rules(),[
             [['title'], 'required'],
+            [['title'], 'match', 'pattern' => '/^[a-zA-Z0-9_ -]*$/'],
             [['title', 'description', 'thumbnail', 'external_url'], 'string', 'max' => 255],
             [['title'], 'unique'],
         ]);

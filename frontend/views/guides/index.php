@@ -32,10 +32,16 @@ $this->registerLinkTag([
 ], 'feed');
 
 $this->registerJs(<<<JSCRIPT
-var mason = $('#grid').masonry({
+var grid = $('#grid');
+var mason = grid.masonry({
     columnWidth: '.grid-sizer',
     itemSelector: '.grid-item',
     percentPosition: true,
+});
+
+grid.imagesLoaded(function() {
+    // init Masonry after all images have loaded
+    mason.masonry();
 });
 
 // refresh the masonry layout when the guides are updated with pjax

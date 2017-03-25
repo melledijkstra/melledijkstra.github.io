@@ -130,6 +130,7 @@ class Guide extends FileUploadActiveRecord implements Linkable
             [['sneak_peek'], 'string', 'max' => 700],
             [['guide_text'], 'string'],
             [['title'], 'unique'],
+            [['title'], 'match', 'pattern' => '/^[a-zA-Z0-9_ -]*$/'],
             [['category_ids'], 'each', 'rule' => [
                 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id', 'message' => Yii::t('guide','This category does not exist'),
             ]],

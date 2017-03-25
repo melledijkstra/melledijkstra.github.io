@@ -48,6 +48,11 @@ hr {
     background-color: #E87B5A;
 }
 
+iframe {
+    border: none;
+    border-radius: 0;
+}
+
 /*
  * H2. Bootstrap and Yii2 overrides
  */
@@ -438,9 +443,9 @@ a > .project-item {
 
     z-index: 1000;
     position: fixed;
-    left: -360px;
+    left: -310px;
     padding: 10px;
-    width: 350px;
+    width: 300px;
     height: 100%;
     overflow-y: auto;
 
@@ -480,7 +485,7 @@ a > .project-item {
 
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
-    margin-left: 350px;
+    margin-left: 300px;
 }
 
 /* Sidebar Styles */
@@ -543,12 +548,12 @@ a > .project-item {
 
 @media(min-width: 1300px) {
     #sidebar-wrapper {
-        width: 350px;
+        width: 300px;
     }
 
     #page-content-wrapper {
         position: relative;
-        padding-left: 350px;
+        padding-left: 300px;
     }
 }
 
@@ -623,7 +628,6 @@ a > .project-item {
 .card {
     position: relative;
     background-color: white;
-    padding: 15px;
 
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
@@ -635,6 +639,10 @@ a > .project-item {
     transition: all 0.3s;
 
     border-radius: 2px;
+}
+
+.card-content {
+    padding: 15px;
 }
 
 .card h1,

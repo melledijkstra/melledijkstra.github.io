@@ -18,20 +18,22 @@ $cardStyling = ($guide->language) ? "style='border-bottom: 3px solid {$guide->la
         <?php if($guide->hasFile()): ?>
         <img class="img-responsive" src="<?= $guide->getPublicLink(); ?>" />
         <?php endif; ?>
-        <?php if (!is_null($guide->language)): ?>
-            <small class="programming-language-tooltip"
-                   style="background-color: <?= $guide->language->color; ?>;"> <?= Html::encode($guide->language->name); ?></small>
-        <?php endif; ?>
-        <h2 class="guide-title-link">
-            <a data-pjax="0" href="<?= $guide->getLink(); ?>"><?= Html::encode($guide->title); ?></a>
-        </h2>
-        <div class="guide-info">
-            <i class="mdi mdi-clock"></i> <?= Yii::$app->formatter->asDate($guide->created_at, 'medium'); ?><br />
-            <?php if(count($guide->categories) > 0): ?>
-                <i class="mdi mdi-tag"></i> <small><?= $guide->renderCategories() ?></small>
+        <div class="card-content">
+            <?php if (!is_null($guide->language)): ?>
+                <small class="programming-language-tooltip"
+                       style="background-color: <?= $guide->language->color; ?>;"> <?= Html::encode($guide->language->name); ?></small>
             <?php endif; ?>
+            <h2 class="guide-title-link">
+                <a data-pjax="0" href="<?= $guide->getLink(); ?>"><?= Html::encode($guide->title); ?></a>
+            </h2>
+            <div class="guide-info">
+                <i class="mdi mdi-clock"></i> <?= Yii::$app->formatter->asDate($guide->created_at, 'medium'); ?><br />
+                <?php if(count($guide->categories) > 0): ?>
+                    <i class="mdi mdi-tag"></i> <small><?= $guide->renderCategories(14) ?></small>
+                <?php endif; ?>
+            </div>
+            <?php if (!is_null($guide->sneak_peek)) echo '<p>' . Html::encode($guide->sneak_peek) . '</p>' ?>
+            <a href="<?= $guide->getLink() ?>">Read more</a>
         </div>
-        <?php if (!is_null($guide->sneak_peek)) echo '<p>' . Html::encode($guide->sneak_peek) . '</p>' ?>
-        <a href="<?= $guide->getLink() ?>">Read more</a>
     </div>
 </div>
