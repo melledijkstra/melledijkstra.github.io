@@ -17,8 +17,10 @@ class m170211_025002_create_default_admin_account extends Migration
 
     public function down()
     {
-        echo "m170211_025002_create_default_admin_account cannot be reverted.\n";
-
-        return false;
+        $user = \common\models\User::findByEmail('admin@gmail.com');
+        if($user != null) {
+            echo 'user "'.$user->username.'" deleted';
+            $user->delete();
+        }
     }
 }
