@@ -20,8 +20,6 @@ class GuidesController extends FrontendController
      */
     public function actionIndex()
     {
-        $last_visit_count = $this->checkNewestGuidesCount();
-
         $guideSearch = new GuideSearch();
         $guideDataProvider = $guideSearch->search(Yii::$app->request->queryParams);
         $guideDataProvider->pagination->pageSize = 30;
@@ -29,8 +27,6 @@ class GuidesController extends FrontendController
         return $this->render('index', [
             'guideSearch' => $guideSearch,
             'guideDataProvider' => $guideDataProvider,
-            'newest_guide' => Guide::find()->orderBy(['created_at' => SORT_DESC])->limit(1)->one(),
-            'last_visit_count' => $last_visit_count,
         ]);
     }
 

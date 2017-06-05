@@ -13,7 +13,7 @@ use yii\helpers\Html;
 $cardStyling = ($guide->language) ? "style='border-bottom: 3px solid {$guide->language->color};'" : '';
 
 ?>
-<div class="grid-item col-xs-12 col-sm-12 col-md-12 col-lg-4">
+<div class="grid-item col-xs-12 col-sm-12 col-md-6 col-lg-4">
     <div class="card margin-10" <?= $cardStyling ?>>
         <?php if($guide->hasFile()): ?>
         <img class="img-responsive" src="<?= $guide->getPublicLink(); ?>" />

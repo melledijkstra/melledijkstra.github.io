@@ -31,7 +31,7 @@ AppAsset::register($this);
         'brandLabel' => 'Melle Dijkstra\'s Backend',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'mel-navbar navbar-fixed-top',
+            'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [];

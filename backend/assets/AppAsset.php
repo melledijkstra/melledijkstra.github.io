@@ -13,6 +13,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/main.css',
         'http://portfolio.local/css/main.css',
         // Google Font
         'https://fonts.googleapis.com/css?family=Lato',

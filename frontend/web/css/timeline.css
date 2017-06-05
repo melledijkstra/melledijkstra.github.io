@@ -1,0 +1,92 @@
+#page-content-wrapper {
+    background: linear-gradient(to bottom right, #C0A2E8, #85a8d4);
+}
+
+ul.timeline {
+    list-style-type: none;
+    margin: 50px;
+    padding: 0;
+    position: relative;
+}
+
+ul.timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border: 1px dashed #d3d3d3;
+}
+
+ul.timeline li {
+    position: relative;
+
+    background: rgba(200,200,200,0.2);
+    color: #fff;
+    display: block;
+    margin: 50px 60px;
+    padding: 15px;
+
+    border-radius: 5px;
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+ul.timeline li .emblem {
+    display: inline-block;
+    position: absolute;
+    left: calc(50% - 15px);
+    border-radius: 50%;
+    text-align: center;
+    width: auto;
+    background: #aaaaaa;
+    top: -10px;
+    font-size: 20px;
+    padding: 5px;
+    border: 1px solid white;
+}
+
+ul.timeline li p {
+    margin: 5px 0;
+}
+
+ul.timeline li p:first-of-type {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+ul.timeline li:before {
+    margin: -20px;
+    border: 1px solid black;
+}
+
+ul.timeline li > span {
+    position: absolute;
+    top: 0;
+    left: -60px;
+    width: 0;
+    height: 100%;
+    border: 1px solid #fafafa;
+}
+
+ul.timeline li > span:before, ul.timeline li > span:after {
+    content: '';
+
+    position: absolute;
+    left: -6px;
+    border-radius: 50%;
+    background-color: #84B9E9;
+    border: 2px solid white;
+    height: 12px;
+    width: 12px;
+}
+
+ul.timeline li > span:before {
+    top: -6px;
+}
+
+ul.timeline li > span:after {
+    bottom: -6px;
+}

@@ -7,7 +7,7 @@ $this->title = 'About';
 ?>
 <div class="site-about">
     <div class="jumbotron" style="background-image: url();">
-        <img src="/images/melle_mountains_square.jpg" class="mel-about-image img-circle"/>
+        <img style="height: 200px;width: auto;" src="/images/melle_mountains_square.jpg" class="mel-about-image img-circle"/>
     </div>
     <div class="container-fluid">
         <div class="row">

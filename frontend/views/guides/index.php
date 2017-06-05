@@ -19,17 +19,19 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('guides', 'Guides');
 
-if(Yii::$app->request->isAjax && isset(Yii::$app->params['titleSuffix'])) {
+if (Yii::$app->request->isAjax && isset(Yii::$app->params['titleSuffix'])) {
     $this->title .= Yii::$app->params['titleSuffix'];
 }
 
 \frontend\assets\MasonryAsset::register($this);
 
 $this->registerLinkTag([
-    'href'  => '/feed/atom',
-    'type'  => 'application/atom+xml',
-    'rel'   => 'alternate',
+    'href' => '/feed/atom',
+    'type' => 'application/atom+xml',
+    'rel' => 'alternate',
 ], 'feed');
+
+$this->registerJs("$('#page-loader-wrap').fadeOut(500);",View::POS_LOAD);
 
 $this->registerJs(<<<JSCRIPT
 var grid = $('#grid');
@@ -67,7 +69,9 @@ $this->registerCss('
 }');
 
 ?>
-
+<div id="page-loader-wrap">
+    <div class="loader"></div>
+</div>
 <div id="guides-overview-page">
     <div class="container-fluid">
         <div class="row">
@@ -80,9 +84,9 @@ $this->registerCss('
                     'submitEvent' => 'submit'
                 ]); ?>
                 <div class="no-gutter" id="grid">
-                    <div class="grid-sizer col-xs-12 col-sm-12 col-md-12 col-lg-4"></div>
+                    <div class="grid-sizer col-xs-12 col-sm-12 col-md-6 col-lg-4"></div>
                     <?php
-                    if($guideDataProvider->count > 0) {
+                    if ($guideDataProvider->count > 0) {
                         foreach ($guideDataProvider->models as $guide) {
                             /** @var $guide Guide */
                             echo $this->render('guide_view', [
@@ -90,18 +94,14 @@ $this->registerCss('
                             ]);
                         }
                     } else {
-                        echo '<div class="grid-item col-xs-12">';
-                        echo '<div class="grid-item-content">
-<p class="text-center">'.Yii::t('guide', 'No guides found for your specific filter').'</p>
-</div>';
-                        echo '</div>';
+                        echo $this->render('empty_guides');
                     }
                     ?>
                 </div>
                 <?= \yii\widgets\LinkPager::widget([
                     'activePageCssClass' => 'link-pager-active',
-                    'nextPageCssClass'  => 'link-pager-next-page',
-                    'prevPageCssClass'   => 'link-pager-prev-page',
+                    'nextPageCssClass' => 'link-pager-next-page',
+                    'prevPageCssClass' => 'link-pager-prev-page',
                     'pagination' => $guideDataProvider->pagination
                 ]); ?>
                 <?php Pjax::end(); ?>
@@ -119,15 +119,28 @@ $this->registerCss('
 
                     <?= $form->field($guideSearch, 'content') ?>
 
-                    <?= $form->field($guideSearch, 'difficulty')->dropDownList(Guide::difficultyList(), ['prompt' => 'Select Difficulty']) ?>
+                    <?= $form->field($guideSearch, 'difficulty')->dropDownList(Guide::difficultyList(),
+                        ['prompt' => 'Select Difficulty']) ?>
 
-                    <?//= $form->field($guideSearch, 'duration')->dropDownList(Guide::durationList(), ['prompt' => 'Select Duration']) ?>
+                    <? //= $form->field($guideSearch, 'duration')->dropDownList(Guide::durationList(), ['prompt' => 'Select Duration']) ?>
 
-                    <?= $form->field($guideSearch, 'project_id')->dropDownList(ArrayHelper::map(Project::find()->select(['id', 'title'])->asArray()->all(), 'id', 'title'), ['prompt' => 'Select Project']) ?>
+                    <?= $form->field($guideSearch,
+                        'project_id')->dropDownList(ArrayHelper::map(Project::find()->select([
+                        'id',
+                        'title'
+                    ])->asArray()->all(), 'id', 'title'), ['prompt' => 'Select Project']) ?>
 
-                    <?= $form->field($guideSearch, 'category_id')->dropDownList(ArrayHelper::map(Category::find()->select(['id', 'name'])->asArray()->all(), 'id', 'name'), ['prompt' => 'Select Category']); ?>
+                    <?= $form->field($guideSearch,
+                        'category_id')->dropDownList(ArrayHelper::map(Category::find()->select([
+                        'id',
+                        'name'
+                    ])->asArray()->all(), 'id', 'name'), ['prompt' => 'Select Category']); ?>
 
-                    <?= $form->field($guideSearch, 'language_id')->dropDownList(ArrayHelper::map(Language::find()->select(['id', 'name'])->asArray()->all(), 'id', 'name'), ['prompt' => 'Select Language']); ?>
+                    <?= $form->field($guideSearch,
+                        'language_id')->dropDownList(ArrayHelper::map(Language::find()->select([
+                        'id',
+                        'name'
+                    ])->asArray()->all(), 'id', 'name'), ['prompt' => 'Select Language']); ?>
 
                     <?= Html::submitButton('Search', ['class' => 'btn btn-block btn-primary']); ?>
 

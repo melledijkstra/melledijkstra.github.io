@@ -10,7 +10,7 @@ use common\widgets\Alert;
 
 AppAsset::register($this);
 
-$this->title = $this->title ? $this->title : 'An interesting page';
+$this->title = $this->title ? $this->title : 'A forgotten title';
 
 // Set canonical for SEO
 $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canonical()]);
@@ -59,10 +59,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
         ga('send', 'pageview');
     </script>
 </head>
-<body onload="$('#page-loader-wrap').fadeOut(500);">
-<div id="page-loader-wrap">
-    <div class="loader"></div>
-</div>
+<body>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -107,40 +104,34 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                        Start Bootstrap
+                        Work in progress!!
                     </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
                 </li>
                 <li>
                     <a href="#">Overview</a>
                 </li>
                 <li>
-                    <a href="#">Events</a>
+                    <a href="#">Guides</a>
+                </li>
+                <li>
+                    <a href="#">Projects</a>
                 </li>
                 <li>
                     <a href="#">About</a>
                 </li>
                 <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
                     <a href="#">Contact</a>
                 </li>
             </ul>
-            <h3>Categories</h3>
-            <div class="margin-tb-10">
-                <?= implode(', ', Category::find()->select('name')->column()); ?>
+            <h3 class="margin-20">Categories</h3>
+            <div class="margin-20">
+                <u><?= implode('</u>, <u>', Category::find()->select('name')->column()); ?></u>
             </div>
             <div class="text-lg text-center">
-                <span class="mdi mdi-facebook"></span>
-                <span class="mdi mdi-twitter"></span>
-                <span class="mdi mdi-linkedin"></span>
-                <span class="mdi mdi-dribbble"></span>
+                <span style="color: #3B5998;" class="mdi mdi-facebook"></span>
+                <span style="color: #50ABF1;" class="mdi mdi-twitter"></span>
+                <span style="color: #0077B5;" class="mdi mdi-linkedin"></span>
+                <span style="color: #C32361;" class="mdi mdi-dribbble"></span>
             </div>
         </div>
         <div id="page-content-wrapper">

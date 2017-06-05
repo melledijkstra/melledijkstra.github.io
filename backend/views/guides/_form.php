@@ -12,6 +12,24 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\Guide */
 /* @var $categories common\models\Category[] */
 /* @var $form yii\widgets\ActiveForm */
+
+$this->registerJs(
+    '
+function previewImg(input) {
+
+    if (input.files && input.files[0]) {
+        console.log("has a file");
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $("#imgpreview").attr("src", e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+', \yii\web\View::POS_BEGIN);
+
 ?>
 
 <div class="guide-form">
@@ -28,7 +46,11 @@ use yii\widgets\ActiveForm;
         'showExport' => false,
     ]); ?>
 
-    <?= $form->field($model, 'uploadedFile')->fileInput(); ?>
+    <?= $form->field($model, 'uploadedFile')->fileInput([
+        'onchange' => 'previewImg(this);',
+    ]); ?>
+
+    <img style="height: 100px;width:auto;" id="imgpreview" src="/images/preview.jpg" alt="preview" />
 
     <?= $form->field($model, 'language_id')->dropDownList(
         Language::find()->select(['name','id'])->indexBy('id')->column(),
