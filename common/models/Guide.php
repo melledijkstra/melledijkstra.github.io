@@ -3,6 +3,7 @@
 namespace common\models;
 
 use common\components\db\FileUploadActiveRecord;
+use common\components\db\ImageUploadActiveRecord;
 use common\components\Linkable;
 use kartik\markdown\Markdown;
 use Yii;
@@ -24,11 +25,12 @@ use yii\helpers\Url;
  * @property Project $project
  * @property Language $language
  * @property Category[] $categories
+ * @property string $thumbnail
  */
-class Guide extends FileUploadActiveRecord implements Linkable
+class Guide extends ImageUploadActiveRecord implements Linkable
 {
 
-    /** The maximum  difficulty a guide can get */
+    /** The maximum difficulty a guide can get */
     const MAX_DIFFICULTY = 5;
 
     /** @var $guide_text string This is the markdown entered by a user which needs to be saved to a file */
@@ -40,6 +42,10 @@ class Guide extends FileUploadActiveRecord implements Linkable
     protected $extensions = ['png','jpg','jpeg','gif'];
 
     protected $fileAttributeName = 'thumbnail';
+
+    protected $height = 400;
+
+    protected $width = 650;
 
     /**
      * @inheritdoc

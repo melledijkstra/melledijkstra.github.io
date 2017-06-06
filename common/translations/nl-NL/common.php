@@ -17,6 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    /** Attributes */
     'Title' => '',
     'Created At' => 'Gemaakt op',
     'Created By' => 'Aangemaakt door',
@@ -24,4 +25,12 @@ return [
     'Submit' => 'Versturen',
     'Updated At' => 'Aangepast op',
     'Updated By' => 'Aangepast door',
+
+    /** Messages */
+    'Are you sure you want to delete this item?' => 'Weet je zeker dat je dit item wilt verwijderen?',
+    'Create' => 'Aanmaken',
+    'Create {modelClass}' => '{modelClass} aanmaken',
+    'Update' => 'Aanpassen',
+    'Update {modelClass}' => '{modelClass} aanpassen',
+    'Delete' => 'Verwijderen',
 ];

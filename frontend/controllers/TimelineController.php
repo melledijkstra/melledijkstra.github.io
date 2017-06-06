@@ -14,12 +14,12 @@ use frontend\components\FrontendController;
 class TimelineController extends FrontendController
 {
 
-    /**
-     * default action
-     * @return string
-     */
-    public function actionIndex() {
-        return $this->render('index');
-    }
+//    /**
+//     * default action
+//     * @return string
+//     */
+//    public function actionIndex() {
+//        return $this->render('index');
+//    }
 
 }

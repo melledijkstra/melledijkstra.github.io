@@ -14,7 +14,6 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/main.css',
-        'http://portfolio.local/css/main.css',
         // Google Font
         'https://fonts.googleapis.com/css?family=Lato',
         '//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css',
@@ -25,4 +24,16 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
+
+    /**
+     * @inheritDoc
+     */
+    public function init()
+    {
+        // add dynamic css from frontend
+        $this->css[] = \Yii::$app->params['frontendUrl'].'/css/main.css';
+        parent::init();
+    }
+
+
 }

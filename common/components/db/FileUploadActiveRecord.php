@@ -14,6 +14,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
 
+/**
+ * FileUploadActiveRecord has all the functionality to save files for ActiveRecords.
+ * @property string $htmlLink
+ */
 abstract class FileUploadActiveRecord extends MActiveRecord {
 
     /**
@@ -64,7 +68,7 @@ abstract class FileUploadActiveRecord extends MActiveRecord {
                     FileHelper::createDirectory(self::$uploadPath);
                 }
                 $filename = $this->generateFileName($this->uploadedFile);
-                if($this->uploadedFile->saveAs(self::$uploadPath.$filename)) {
+                if($this->uploadedFile->saveAs(self::$uploadPath.$filename, true)) {
                     $this->{$this->fileAttributeName} = $filename;
                     return true;
                 }

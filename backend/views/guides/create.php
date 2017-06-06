@@ -10,9 +10,9 @@ use yii\web\View;
 /* @var \common\models\Category[] $categories */
 
 HighLightAsset::register($this);
-$this->registerJs('hljs.initHighlightingOnLoad();',View::POS_READY);
+$this->registerJs('hljs.initHighlightingOnLoad();', View::POS_READY);
 
-$this->title = Yii::t('guide', 'Create Guide');
+$this->title = Yii::t('common', 'Create {modelClass}', ['modelClass' => Yii::t('guide', 'Guide')]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('guide', 'Guides'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

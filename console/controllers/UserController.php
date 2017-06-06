@@ -30,10 +30,10 @@ class UserController extends Controller
      */
     public function actionCreateUser() {
         $userInfo = [];
-        $userInfo['username'] = $this->prompt('Choose username: ');
-        $userInfo['email'] = $this->prompt('Choose email: ');
-        $userInfo['role'] = $this->prompt('Choose role (0,1): ',[0,1]);
-        $userInfo['password'] = $this->prompt('Choose password: ');
+        $userInfo['username'] = $this->prompt('Choose username:');
+        $userInfo['email'] = $this->prompt('Choose email:');
+        $userInfo['role'] = $this->prompt('Choose role (0,1):',[0,1]);
+        $userInfo['password'] = $this->prompt('Choose password:');
 
         foreach ($userInfo as $key => $value) {
             if(empty($value)) {
@@ -62,7 +62,7 @@ class UserController extends Controller
      * Change the password of a user
      */
     public function actionChangePassword() {
-        $usernameOrEmail = $this->prompt('Username of email of user: ');
+        $usernameOrEmail = $this->prompt('Username of email of user:');
         /** @var User $user */
         $user = User::find()->where([
             'OR',
@@ -74,16 +74,16 @@ class UserController extends Controller
             echo 'User with this email or username does not exist';
         } else {
             echo "User found (username: $user->username, email: $user->email)\n";
-            $password = $this->prompt('Type new password: ');
+            $password = $this->prompt('Type new password:');
             if(empty($password)) {
-                echo 'Password is empty';
+                echo "Password is empty\n";
                 exit;
             }
             $user->setPassword($password);
             if($user->save()) {
-                echo 'Password changed correctly';
+                echo "Password changed correctly\n";
             } else {
-                echo 'Something went wrong';
+                echo "Something went wrong";
                 print_r($user->errors);
             }
         }

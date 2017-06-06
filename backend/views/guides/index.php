@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('guide', 'Create Guide'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('common', 'Create {modelClass}', ['modelClass' => Yii::t('guide', 'Guide')]), ['create'],
+            ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'attribute' => 'title',
-                'value' => function($model, $key, $index, $column) {
+                'value' => function ($model, $key, $index, $column) {
                     /** @var $model \common\models\Guide */
                     return \yii\helpers\StringHelper::truncate($model->title, '30');
                 },

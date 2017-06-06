@@ -10,17 +10,9 @@ html, body {
     height: 100%;
     color: #3C4A53;
     background-color: #F1F1F1;
-    /*noinspection CssUnknownTarget*/
-    /*background-image: url('/images/particles.jpg');*/
     font-family: 'Lato', sans-serif;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
-
-    /*background-image: url('/images/chocolate-bar.png');*/
-    /*background-repeat: no-repeat;*/
-    /*background-position: 80% 20%;*/
-    /*background-size: 20% auto;*/
-    /*background-attachment: fixed;*/
 }
 
 a {
@@ -545,17 +537,31 @@ a > .project-item {
     margin-bottom: 20px;
 }
 
-.guide-title-link {
+/* GUIDE ITEM STYLING */
+
+.guide-item-image {
+    /*background-size: cover;*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    width: 100%;
+    height: auto;
+}
+
+.guide-item-title {
     font-size: 24px;
     font-family: "Lato", Helvetica, Arial, sans-serif;
     display: inline-block;
 }
 
-.guide-title-link a {
+.guide-item-title a {
     color: inherit;
 }
 
-.guide-info {
+.guide-item-sneak-peek {
+    margin: 10px 0;
+}
+
+.guide-item-info {
     font-size: 13px;
     color: #9f9f9f;
 }
@@ -597,7 +603,8 @@ a > .project-item {
     -o-transition: all 0.3s;
     transition: all 0.3s;
 
-    border-radius: 2px;
+    border-radius: 3px;
+    overflow: hidden;
 }
 
 .card-content {

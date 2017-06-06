@@ -71,7 +71,7 @@ class GuidesController extends BackendController
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'categories' => Category::find()->all(),
+                'categories' => Category::find()->asArray()->all(),
             ]);
         }
     }
