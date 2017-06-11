@@ -14,7 +14,7 @@ $metastuff = [
     'keywords' => implode(' ', array_merge($guide->getCategories()->select('name')->column(),
         [$guide->language ? $guide->language->name : ''])),
     'twitter:card' => 'summary',
-    'twitter:title' => $this->title,
+    'twitter:title' => $guide->title,
     'twitter:site' => '@dijkstrascience',
 ];
 if (!empty($guide->sneak_peek)) {
