@@ -320,6 +320,6 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      */
     public function hasImage()
     {
-        return ($this->thumbnail === null);
+        return ($this->thumbnail !== null);
     }
 }
