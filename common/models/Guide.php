@@ -313,4 +313,13 @@ class Guide extends ImageUploadActiveRecord implements Linkable
         }
         return $list;
     }
+
+    /**
+     * Checks if this guide has an image
+     * @return bool whether guide has image or not
+     */
+    public function hasImage()
+    {
+        return ($this->thumbnail === null);
+    }
 }

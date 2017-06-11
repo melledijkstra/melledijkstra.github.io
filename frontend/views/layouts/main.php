@@ -36,9 +36,9 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
     <link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
     <link rel="manifest" href="/favicons/manifest.json">
-    <meta name="msapplication-TileColor" content="#337ab7">
+    <meta name="msapplication-TileColor" content="#E87B5A">
     <meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#E87B5A">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) . ((isset(Yii::$app->params['titleSuffix'])) ? Yii::$app->params['titleSuffix'] : '') ?></title>
     <?php $this->head() ?>
@@ -61,7 +61,6 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
 </head>
 <body>
 <?php $this->beginBody() ?>
-
 <div class="wrap">
     <?php
     //    NavBar::begin([
@@ -108,33 +107,31 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
                     </a>
                 </li>
                 <li>
-                    <a href="#">Overview</a>
+                    <a href="/guides">Guides</a>
                 </li>
                 <li>
-                    <a href="#">Guides</a>
+                    <a href="/projects">Projects</a>
                 </li>
                 <li>
-                    <a href="#">Projects</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    <a href="/about">Who's behind all this?</a>
                 </li>
             </ul>
-            <h3 class="margin-20">Categories</h3>
+            <h3 class="margin-20"><?= Yii::t('category', 'Categories'); ?></h3>
             <div class="margin-20">
                 <u><?= implode('</u>, <u>', Category::find()->select('name')->column()); ?></u>
             </div>
-            <div class="text-lg text-center">
-                <span style="color: #3B5998;" class="mdi mdi-facebook"></span>
-                <span style="color: #50ABF1;" class="mdi mdi-twitter"></span>
-                <span style="color: #0077B5;" class="mdi mdi-linkedin"></span>
-                <span style="color: #C32361;" class="mdi mdi-dribbble"></span>
+            <div class="text-lg text-center shadow-text">
+                <a target="_blank" href="https://github.com/MelleDijkstra"><span style="color: #333333;" class="mdi mdi-github-circle"></span></a>
+                <a target="_blank" href="https://twitter.com/dijkstrascience"><span style="color: #50ABF1;" class="mdi mdi-twitter"></span></a>
+                <a target="_blank" href="https://linkedin.com/in/melledijkstra"><span style="color: #0077B5;" class="mdi mdi-linkedin"></span></a>
+                <a target="_blank" href="https://stackoverflow.com/users/3298540/melle-dijkstra"><span style="color: #F48024;" class="mdi mdi-stackoverflow"></span></a>
             </div>
         </div>
         <div id="page-content-wrapper">
+            <div class="padding-10 wip-banner text-center">
+                <span class="text-md mdi mdi-worker"></span>
+                <p>This site is currently in progress, please browse around! But be aware of bugs or mispelled words.</p>
+            </div>
             <div class="visible-xs">
                 <button type="button" class="toggler navbar-toggle collapsed"
                         onclick="$('#wrapper').toggleClass('toggled');" data-toggle="collapse">

@@ -25,6 +25,7 @@ if (Yii::$app->request->isAjax && isset(Yii::$app->params['titleSuffix'])) {
 
 \frontend\assets\MasonryAsset::register($this);
 
+// let bots know there also is a feed
 $this->registerLinkTag([
     'href' => '/feed/atom',
     'type' => 'application/atom+xml',

@@ -633,6 +633,25 @@ a > .project-item {
     border-radius: 0 !important;
 }
 
-.text-lg {
-    font-size: 2em;
+.text-lg { font-size: 2em; }
+.text-md { font-size: 1.5em; }
+.text-sm { font-size: 0.8em; }
+
+.shadow-text span {
+    -webkit-transition: text-shadow 0.1s linear;
+    -moz-transition: text-shadow 0.1s linear;
+    -ms-transition: text-shadow 0.1s linear;
+    -o-transition: text-shadow 0.1s linear;
+    transition: text-shadow 0.1s linear;
+
+    text-shadow: 1px 2px 2px rgba(0,0,0,0.4);
+}
+
+.shadow-text span:hover {
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+.wip-banner {
+    background-color: #E87B5A;
+    color: #FFFFFF;
 }
