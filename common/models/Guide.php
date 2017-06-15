@@ -136,7 +136,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
             [['sneak_peek'], 'string', 'max' => 700],
             [['guide_text'], 'string'],
             [['title'], 'unique'],
-            [['title'], 'match', 'pattern' => '/^[a-zA-Z0-9_ -]*$/'],
+            [['title'], 'match', 'pattern' => '/^[a-zA-Z0-9_ ]*$/'],
             [['category_ids'], 'each', 'rule' => [
                 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id', 'message' => Yii::t('guide','This category does not exist'),
             ]],
@@ -252,7 +252,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     public function renderCategories($fontSize = null)
     {
         $html = "";
-        $fontSize = (is_numeric($fontSize)) ? "style=\"font-size: {$fontSize};\"" : '';
+        $fontSize = (is_numeric($fontSize)) ? "style=\"font-size: {$fontSize}px;\"" : '';
         foreach($this->categories as $category) {
             $html .= "<span {$fontSize} class=\"label label-primary\">{$category->name}</span> ";
         }

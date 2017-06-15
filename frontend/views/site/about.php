@@ -12,7 +12,7 @@ $this->title = 'About';
 ?>
 <div class="site-about">
     <div class="jumbotron">
-        <img style="height: 200px;width: auto;" src="/images/melle_mountains_square.jpg"
+        <img src="/images/me_in_mountains.jpg"
              class="mel-about-image img-circle" alt="image of myself"/>
     </div>
     <div class="container-fluid">

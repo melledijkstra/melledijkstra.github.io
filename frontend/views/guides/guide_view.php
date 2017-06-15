@@ -34,7 +34,7 @@ $cardStyling = ($guide->language) ? "style='border-bottom: 3px solid {$guide->la
                 <?php if (count($guide->categories) > 0): ?>
                     <div class="guide-item-categories">
                         <i class="mdi mdi-tag"></i>
-                        <small><?= $guide->renderCategories(14) ?></small>
+                        <small><?= $guide->renderCategories(11); ?></small>
                     </div>
                 <?php endif; ?>
             </div>

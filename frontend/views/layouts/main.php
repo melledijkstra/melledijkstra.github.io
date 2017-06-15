@@ -99,7 +99,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <h1 class="text-center"><a class="no-link" href="/">Melle Dijkstra<span class="brand-dot">.</span></a><br/>
-                <small>A place of thought</small>
+                 <small>A place of thought</small>
             </h1>
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
@@ -114,8 +114,8 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
                     <a href="/about">Who's behind all this?</a>
                 </li>
             </ul>
-            <h3 class="margin-20"><?= Yii::t('category', 'Categories'); ?></h3>
-            <div class="margin-20">
+            <h4 class="margin-lr-20 margin-tb-15"><?= Yii::t('category', 'Categories'); ?></h4>
+            <div class="margin-lr-20 margin-tb-15">
                 <em><?= implode('</em>, <em>', Category::find()->select('name')->column()); ?></em>
             </div>
             <div class="text-lg text-center shadow-text">
