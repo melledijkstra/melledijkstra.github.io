@@ -24,6 +24,11 @@ class GuidesController extends FrontendController
         $guideDataProvider = $guideSearch->search(Yii::$app->request->queryParams);
         $guideDataProvider->pagination->pageSize = 30;
 
+        $this->view->registerMetaTag([
+            'name' => 'description',
+            'content' => 'Learn anything about Science related topics. This is is where I share my latest knowledge and try to guide you through it.',
+        ]);
+
         return $this->render('index', [
             'guideSearch' => $guideSearch,
             'guideDataProvider' => $guideDataProvider,

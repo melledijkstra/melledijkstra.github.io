@@ -42,6 +42,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) . ((isset(Yii::$app->params['titleSuffix'])) ? Yii::$app->params['titleSuffix'] : '') ?></title>
     <?php $this->head() ?>
+    <!-- Google Analytics -->
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -110,27 +111,30 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
                     <a href="/guides">Guides</a>
                 </li>
                 <li>
-                    <a href="/projects">Projects</a>
-                </li>
-                <li>
                     <a href="/about">Who's behind all this?</a>
                 </li>
             </ul>
             <h3 class="margin-20"><?= Yii::t('category', 'Categories'); ?></h3>
             <div class="margin-20">
-                <u><?= implode('</u>, <u>', Category::find()->select('name')->column()); ?></u>
+                <em><?= implode('</em>, <em>', Category::find()->select('name')->column()); ?></em>
             </div>
             <div class="text-lg text-center shadow-text">
-                <a target="_blank" href="https://github.com/MelleDijkstra"><span style="color: #333333;" class="mdi mdi-github-circle"></span></a>
-                <a target="_blank" href="https://twitter.com/dijkstrascience"><span style="color: #50ABF1;" class="mdi mdi-twitter"></span></a>
-                <a target="_blank" href="https://linkedin.com/in/melledijkstra"><span style="color: #0077B5;" class="mdi mdi-linkedin"></span></a>
-                <a target="_blank" href="https://stackoverflow.com/users/3298540/melle-dijkstra"><span style="color: #F48024;" class="mdi mdi-stackoverflow"></span></a>
+                <a target="_blank" href="https://github.com/MelleDijkstra"><span
+                            style="color: #333333;" class="mdi mdi-github-circle"></span><span class="hidden">my github account</span></a>
+                <a target="_blank" href="https://twitter.com/dijkstrascience"><span
+                            style="color: #50ABF1;" class="mdi mdi-twitter"></span><span class="hidden">my twitter account</span></a>
+                <a target="_blank" href="https://linkedin.com/in/melledijkstra"><span
+                            style="color: #0077B5;" class="mdi mdi-linkedin"></span><span class="hidden">my linkedin account</span></a>
+                <a target="_blank" href="https://stackoverflow.com/users/3298540/melle-dijkstra"
+                ><span style="color: #F48024;"
+                       class="mdi mdi-stackoverflow"></span><span class="hidden">my stackoverflow account</span></a>
             </div>
         </div>
         <div id="page-content-wrapper">
             <div class="padding-10 wip-banner text-center">
                 <span class="text-md mdi mdi-worker"></span>
-                <p>This site is currently in progress, please browse around! But be aware of bugs or mispelled words.</p>
+                <p>This site is currently in progress, please browse around! But be aware of bugs or mispelled
+                    words.</p>
             </div>
             <div class="visible-xs">
                 <button type="button" class="toggler navbar-toggle collapsed"

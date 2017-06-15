@@ -28,7 +28,7 @@ function previewImg(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
-        var img = $("<img class='guide-item-image center-block img-responsive' />");
+        var img = $("<img class='guide-item-image center-block img-responsive' alt='guide image'/>");
         $(".guide-item-content").before(img);
 
         reader.onload = function (e) {

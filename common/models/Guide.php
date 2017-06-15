@@ -254,7 +254,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
         $html = "";
         $fontSize = (is_numeric($fontSize)) ? "style=\"font-size: {$fontSize};\"" : '';
         foreach($this->categories as $category) {
-            $html .= "<div {$fontSize} class=\"label label-primary\">{$category->name}</div> ";
+            $html .= "<span {$fontSize} class=\"label label-primary\">{$category->name}</span> ";
         }
         return $html;
     }

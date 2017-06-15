@@ -6,8 +6,36 @@ use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $guide \common\models\Guide */
 
+// Highlight code with hljs library
 HighLightAsset::register($this);
 $this->registerJs('hljs.initHighlightingOnLoad();', View::POS_READY);
+
+// Place this tag in your head or just before your close body tag.
+$this->registerJsFile('https://apis.google.com/js/platform.js', [
+    'async' => '',
+    'defer' => '',
+]);
+
+// twitter stuff
+$this->registerJs(<<<JS
+window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));
+JS
+, View::POS_BEGIN);
 
 // SEO stuff
 $metastuff = [
@@ -15,7 +43,7 @@ $metastuff = [
         [$guide->language ? $guide->language->name : ''])),
     'twitter:card' => 'summary',
     'twitter:title' => $guide->title,
-    'twitter:site' => '@dijkstrascience',
+    'twitter:creator' => '@dijkstrascience',
 ];
 if (!empty($guide->sneak_peek)) {
     $metastuff['description'] = $guide->sneak_peek;
@@ -33,24 +61,29 @@ foreach ($metastuff as $name => $content) {
     ], $name);
 }
 
-// <meta name="twitter:card" content="summary">
-// <meta name="twitter:title" content="title">
-// <meta name="twitter:description" content="description">
+$this->registerCss(<<<CSS
+#disqus_thread {
+    margin-top: 50px;
+}
+CSS
+);
 
 $this->title = $guide->title;
 
 ?>
-<style type="text/css">
-    #disqus_thread {
-        margin-top: 50px;
-    }
-</style>
 <div id="guide-view-page">
     <div id="guide-view" class="container-fluid">
         <div class="jumbotron">
             <h1 class="guide-title"><?= $guide->title ?></h1>
-            <small class="guide-date"><?= Yii::$app->formatter->asDate($guide->created_at, 'medium'); ?>
-                - <?= $guide->createdBy->username; ?></small>
+            <div>
+                <small class="guide-date"><?= Yii::$app->formatter->asDate($guide->created_at, 'medium'); ?>
+                    - <?= $guide->createdBy->username; ?></small>
+            </div>
+            <div class="margin-10 guide-share-bar">
+                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=<?= $this->title ?>&url=<?= $guide->getLink(true); ?>&via=dijkstrascience">Tweet</a>
+                <div class="g-plusone"></div>
+                <!-- facebook share? -->
+            </div>
         </div>
         <div class="guide-container">
             <?= $guide->renderGuide(); ?>
@@ -72,6 +105,7 @@ $this->title = $guide->title;
                 (d.head || d.body).appendChild(s);
             })();
         </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
     </div>
 </div>

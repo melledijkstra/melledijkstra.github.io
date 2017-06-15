@@ -40,7 +40,7 @@ return [
         'urlManager' => [
             'rules' => [
                 '<alias:about>' => 'site/<alias>',
-                '<controller>/<action:index>' => '<controller>/<action>',
+                '<controller>' => '<controller>/index',
                 'guides/<title:\S*>'    => 'guides/view',
                 'projects/<title:\S*>'  => 'projects/view',
             ],

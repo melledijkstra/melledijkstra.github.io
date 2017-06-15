@@ -16,8 +16,8 @@ $cardStyling = ($guide->language) ? "style='border-bottom: 3px solid {$guide->la
 <div class="grid-item col-xs-12 col-sm-12 col-md-6 col-lg-4">
     <div id="guide-item<?= $guide->id ?>" class="guide-item card margin-10" <?= $cardStyling ?>>
         <?php if ($guide->hasFile()): ?>
-            <img class="guide-item-image center-block img-responsive"
-                 src="<?= $guide->getPublicLink(true); ?>" />
+            <a href="<?= $guide->getLink(); ?>"><img class="guide-item-image center-block img-responsive"
+                 src="<?= $guide->getPublicLink(true); ?>" alt="guide image" /></a>
         <?php endif; ?>
         <div class="guide-item-content card-content">
             <?php if (!is_null($guide->language)): ?>
@@ -39,7 +39,6 @@ $cardStyling = ($guide->language) ? "style='border-bottom: 3px solid {$guide->la
                 <?php endif; ?>
             </div>
             <?php if (!is_null($guide->sneak_peek)) echo '<p class="guide-item-sneak-peek">' . Html::encode($guide->sneak_peek) . '</p>' ?>
-            <a href="<?= $guide->getLink() ?>">Read more</a>
         </div>
     </div>
 </div>

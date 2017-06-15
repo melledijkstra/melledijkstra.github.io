@@ -15,7 +15,7 @@ $this->title = $project->title;
             </h1>
         </div>
         <div class="col-sm-<?= (count($project->guides) > 0) ? '10' : '12' ?>">
-            <img class="img-responsive" src="<?= $project->getPublicLink(); ?>"/>
+            <img class="img-responsive" src="<?= $project->getPublicLink(); ?>" alt="project image"/>
         </div>
         <?php if (count($project->guides) > 0): ?>
             <div class="col-sm-2">
