@@ -32,7 +32,7 @@ $this->registerLinkTag([
     'rel' => 'alternate',
 ], 'feed');
 
-$this->registerJs("$('#page-loader-wrap').fadeOut(500);",View::POS_LOAD);
+$this->registerJs("$('#page-loader-wrap').fadeOut(500);", View::POS_LOAD);
 
 $this->registerJs(<<<JSCRIPT
 var grid = $('#grid');
@@ -103,6 +103,9 @@ $this->registerCss('
                     'activePageCssClass' => 'link-pager-active',
                     'nextPageCssClass' => 'link-pager-next-page',
                     'prevPageCssClass' => 'link-pager-prev-page',
+                    'pageCssClass' => 'link-pager-page',
+                    'nextPageLabel' => '<span class="mdi mdi-arrow-right-bold"></span>',
+                    'prevPageLabel' => '<span class="mdi mdi-arrow-left-bold"></span>',
                     'pagination' => $guideDataProvider->pagination
                 ]); ?>
                 <?php Pjax::end(); ?>

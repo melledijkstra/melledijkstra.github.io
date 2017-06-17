@@ -45,6 +45,23 @@ iframe {
     border-radius: 0;
 }
 
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0 !important;
+    -webkit-appearance:none;
+}
+
 /*
  * H2. Bootstrap and Yii2 overrides
  */
@@ -91,6 +108,14 @@ iframe {
 
 .navbar > .container .navbar-brand {
     margin-left: 0;
+}
+
+pre code {
+    white-space: inherit;
+}
+
+.modal-content {
+    border-radius: 0;
 }
 
 /*
@@ -143,6 +168,10 @@ iframe {
 .no-link:visited,
 .no-link:focus { color: inherit; text-decoration: inherit; }
 
+.text-lg { font-size: 2em; }
+.text-md { font-size: 1.5em; }
+.text-sm { font-size: 0.8em; }
+
 /**
  * Melle's Colors :D
  */
@@ -172,6 +201,7 @@ iframe {
 }
 
 /* TEXT COLORS */
+
 .txt-primary {
     background-color: rgba(231, 236, 239, 1);
     color: #242424;
@@ -197,6 +227,7 @@ iframe {
 }
 
 /* LOADING SCREEN */
+
 #page-loader-wrap {
     position: fixed;
     top: 0;
@@ -256,13 +287,6 @@ iframe {
     100% {
         -webkit-transform: rotate(360deg);
     }
-}
-
-.toggler {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
 }
 
 .brand-dot {
@@ -351,14 +375,16 @@ a > .project-item {
 /** SIDE NAVIGATION */
 
 /* Toggle Button */
-.sidebar-toggler {
-    float: right;
-    margin: 5px;
-    background-color: transparent;
-    z-index: 1001;
+.navbar-toggle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    background-color: rgba(255,255,255,0.35);
+    border-radius: 0;
 }
 
-.sidebar-toggler .icon-bar {
+.navbar-toggle .icon-bar {
     display: block;
     width: 22px;
     height: 2px;
@@ -366,8 +392,8 @@ a > .project-item {
     background-color: #888;
 }
 
-.sidebar-toggler .icon-bar + .icon-bar {
-    margin-top: 4px;
+.navbar-toggle .icon-bar + .icon-bar {
+    margin-top: 5px;
 }
 
 /* Toggle Styles */
@@ -382,6 +408,25 @@ a > .project-item {
     transition: all 0.5s ease;
 }
 
+#page-content-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: auto;
+
+    -webkit-transition: margin 0.5s ease;
+    -moz-transition: margin 0.5s ease;
+    -o-transition: margin 0.5s ease;
+    transition: margin 0.5s ease;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    /*margin-left: 300px;*/
+}
+
+/* SIDEBAR STYLES */
+
 #sidebar-wrapper {
     background: #FFF;
 
@@ -393,7 +438,7 @@ a > .project-item {
     position: fixed;
     top: 0;
     left: -310px;
-    padding: 10px;
+    padding: 25px;
     width: 300px;
     height: 100%;
     overflow-y: auto;
@@ -422,25 +467,6 @@ a > .project-item {
     left: 0;
 }
 
-#page-content-wrapper {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    overflow: auto;
-
-    -webkit-transition: margin 0.5s ease;
-    -moz-transition: margin 0.5s ease;
-    -o-transition: margin 0.5s ease;
-    transition: margin 0.5s ease;
-}
-
-#wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    /*margin-left: 300px;*/
-}
-
-/* Sidebar Styles */
-
 .sidebar-nav {
     width: 100%;
     margin: 0;
@@ -449,7 +475,7 @@ a > .project-item {
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
+    /*text-indent: 20px;*/
     line-height: 40px;
 }
 
@@ -485,10 +511,15 @@ a > .project-item {
     background: none;
 }
 
-@media(min-width: 800px) {
+/** SIDE BAR LOGIC */
+@media(min-width: 550px) {
     #sidebar-wrapper {
         width: 250px;
         left: 0;
+    }
+
+    .navbar-toggle {
+        display: none;
     }
 
     #page-content-wrapper {
@@ -497,7 +528,7 @@ a > .project-item {
     }
 }
 
-@media(min-width: 1300px) {
+@media(min-width: 950px) {
     #sidebar-wrapper {
         width: 300px;
     }
@@ -542,8 +573,8 @@ a > .project-item {
 .guide-item-image {
     width: 100%;
     height: auto;
-    max-height: 800px;
-    max-width: 600px;
+    max-height: 1000px;
+    max-width: 800px;
 }
 
 .guide-item-title {
@@ -619,6 +650,12 @@ a > .project-item {
 
 /* Link Pager */
 
+.link-pager-page a,
+.link-pager-next-page a,
+.link-pager-prev-page a {
+    color: #c2664e !important;
+}
+
 .link-pager-active a {
     color: #fff !important;
     background-color: #E87B5A !important;
@@ -629,10 +666,6 @@ a > .project-item {
     -moz-border-radius: 0 !important;
     border-radius: 0 !important;
 }
-
-.text-lg { font-size: 2em; }
-.text-md { font-size: 1.5em; }
-.text-sm { font-size: 0.8em; }
 
 .shadow-text span {
     -webkit-transition: text-shadow 0.1s linear;

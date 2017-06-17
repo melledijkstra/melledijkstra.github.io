@@ -29,11 +29,11 @@ $cardStyling = ($guide->language) ? "style='border-bottom: 3px solid {$guide->la
             </h2>
             <div class="guide-item-info">
                 <div class="guide-item-time">
-                    <i class="mdi mdi-clock"></i> <?= Yii::$app->formatter->asDate($guide->created_at, 'medium'); ?>
+                    <span class="mdi mdi-clock"></span> <?= Yii::$app->formatter->asDate($guide->created_at, 'medium'); ?>
                 </div>
                 <?php if (count($guide->categories) > 0): ?>
                     <div class="guide-item-categories">
-                        <i class="mdi mdi-tag"></i>
+                        <span class="mdi mdi-tag"></span>
                         <small><?= $guide->renderCategories(11); ?></small>
                     </div>
                 <?php endif; ?>

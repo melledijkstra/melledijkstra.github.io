@@ -18,61 +18,24 @@ use yii\widgets\ActiveForm;
 $modeldummy = $model;
 $modeldummy->created_at = time();
 
-$JS = /** @lang JavaScript */
-<<<JS
-function previewImg(input) {
-    var imgPreview = $(".guide-item-image");
-    if(imgPreview.length > 0) {
-        imgPreview.remove();
-    }
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+$this->registerJsFile('/js/guide_form.js', ['depends' => \yii\web\JqueryAsset::className()]);
 
-        var img = $("<img class='guide-item-image center-block img-responsive' alt='guide image'/>");
-        $(".guide-item-content").before(img);
-
-        reader.onload = function (e) {
-            img.attr("src", e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function setSneakPeek(value) {
-    var sneak_peek = $(".guide-item-sneak-peek");
-    if(sneak_peek.length > 0) {
-        sneak_peek.remove();
-    }
-
-    if(value !== "") {
-        $(".guide-item-info").after("<p class='guide-item-sneak-peek'>"+value+"</p>");
-    }
-}
-
-function setCategories(selectedItems) {
-    console.log(selectedItems);
-    var guideCategories = $(".guide-item-categories");
-    
-    if(guideCategories.length > 0) {
-        guideCategories.remove();
-    }
-    
-    if(selectedItems.length > 0) {
-        guideCategories = $("<div class='guide-item-categories'><i class='mdi mdi-tag'></i> <small></small></div>");
-        var small = guideCategories.find('small');
-        for(var i = 0;i < selectedItems.length;i++) {
-            small.append("<div class='label label-primary'>"+selectedItems[i].text+"</div> ");
-        }
-        $(".guide-item-time").after(guideCategories);
-    }
-}
-JS;
-
-$this->registerJs($JS, \yii\web\View::POS_BEGIN);
-
+\yii\bootstrap\Modal::begin([
+    'header' => '<h3>Paste image upload</h3>',
+    'options' => [
+        'id' => 'paste-image-modal',
+    ]
+]);
 ?>
 
+<div class="margin-tb-20 center-text center-block">
+    <img class="center-block" id="uploadImagePreview" src="#" alt="paste upload image preview" />
+</div>
+<button class="btn btn-primary btn-lg center-block">Upload image and use in guide</button>
+
+<?php
+\yii\bootstrap\Modal::end();
+?>
 <div class="guide-form">
 
     <?php $form = ActiveForm::begin(); ?>

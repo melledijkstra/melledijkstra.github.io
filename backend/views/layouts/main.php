@@ -39,28 +39,33 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
 
-        $menuItems[] = ['label' => '<i class="mdi mdi-buffer"></i> Projects', 'items' =>
+        $menuItems[] = ['label' => '<span class="mdi mdi-buffer"></span> Projects', 'items' =>
             [
-                ['label' => '<i class="mdi mdi-view-list"></i> Overview', 'url' => ['/projects']],
-                ['label' => '<i class="mdi mdi-plus"></i> Create', 'url' => ['/projects/create']]
+                ['label' => '<span class="mdi mdi-view-list"></span> Overview', 'url' => ['/projects']],
+                ['label' => '<span class="mdi mdi-plus"></span> Create', 'url' => ['/projects/create']]
             ]
         ];
-        $menuItems[] = ['label' => '<i class="mdi mdi-book-open-page-variant"></i> Guides', 'items' =>
+        $menuItems[] = ['label' => '<span class="mdi mdi-book-open-page-variant"></span> Guides', 'items' =>
             [
-                ['label' => '<i class="mdi mdi-view-list"></i> Overview', 'url' => ['/guides']],
-                ['label' => '<i class="mdi mdi-plus"></i> Create', 'url' => ['/guides/create']]
+                ['label' => '<span class="mdi mdi-view-list"></span> Overview', 'url' => ['/guides']],
+                ['label' => '<span class="mdi mdi-plus"></span> Create', 'url' => ['/guides/create']]
             ]
         ];
-        $menuItems[] = ['label' => '<i class="mdi mdi-bookmark"></i> Categories', 'items' =>
+        $menuItems[] = ['label' => '<span class="mdi mdi-bookmark"></span> Categories', 'items' =>
             [
-                ['label' => '<i class="mdi mdi-view-list"></i> Overview', 'url' => ['/categories']],
-                ['label' => '<i class="mdi mdi-plus"></i> Create', 'url' => ['/categories/create']]
+                ['label' => '<span class="mdi mdi-view-list"></span> Overview', 'url' => ['/categories']],
+                ['label' => '<span class="mdi mdi-plus"></span> Create', 'url' => ['/categories/create']]
             ]
         ];
-        $menuItems[] = ['label' => '<i class="mdi mdi-translate"></i> Languages', 'items' =>
+        $menuItems[] = ['label' => '<span class="mdi mdi-translate"></span> Languages', 'items' =>
             [
-                ['label' => '<i class="mdi mdi-view-list"></i> Overview', 'url' => ['/languages']],
-                ['label' => '<i class="mdi mdi-plus"></i> Create', 'url' => ['/languages/create']]
+                ['label' => '<span class="mdi mdi-view-list"></span> Overview', 'url' => ['/languages']],
+                ['label' => '<span class="mdi mdi-plus"></span> Create', 'url' => ['/languages/create']]
+            ]
+        ];
+        $menuItems[] = ['label' => '<span class="mdi mdi-file-multiple"></span> Resources', 'items' =>
+            [
+                ['label' => '<span class="mdi mdi-view-list"></span> Overview', 'url' => ['/resources']],
             ]
         ];
 

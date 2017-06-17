@@ -7,6 +7,9 @@ use common\models\Category;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\web\Form;
+use yii\web\View;
+use yii\widgets\ActiveForm;
 
 AppAsset::register($this);
 
@@ -14,6 +17,33 @@ $this->title = $this->title ? $this->title : 'A forgotten title';
 
 // Set canonical for SEO
 $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canonical()]);
+
+$this->registerJs(<<<JS
+    $('#subscription-form').on('beforeSubmit', function(event, jqXHR, settings) {
+        var form = $(this);
+        
+        $.ajax({
+            url: form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize(),
+            dataType: 'json',
+            success: function(result, status, xhr) {
+                console.log(result);
+                if(result.status === "OK") {
+                    form.replaceWith("<div class=' text-lg text-center'><span class='mdi mdi-emoticon-excited'></span> Thank you!</div>");
+                } else if(result.status === "ERROR") {
+                    alert(result.message);
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }).on('submit', function(e) {
+        e.preventDefault();
+    });
+JS
+);
 
 ?>
 <?php $this->beginPage() ?>
@@ -99,7 +129,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <h1 class="text-center"><a class="no-link" href="/">Melle Dijkstra<span class="brand-dot">.</span></a><br/>
-                 <small>A place of thought</small>
+                <small>A place of thought</small>
             </h1>
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
@@ -114,11 +144,36 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
                     <a href="/about">Who's behind all this?</a>
                 </li>
             </ul>
-            <h4 class="margin-lr-20 margin-tb-15"><?= Yii::t('category', 'Categories'); ?></h4>
-            <div class="margin-lr-20 margin-tb-15">
+            <h4 class="margin-tb-15"><?= Yii::t('category', 'Categories'); ?></h4>
+            <div class="margin-tb-15">
                 <em><?= implode('</em>, <em>', Category::find()->select('name')->column()); ?></em>
             </div>
-            <div class="text-lg text-center shadow-text">
+            <hr/>
+            <!-- EMAIL SUBSCRIBE FORM -->
+            <?php
+            $subscriber = new \common\models\Subscription();
+
+            $form = ActiveForm::begin([
+                'action' => '/site/add-subscription',
+                'id' => 'subscription-form',
+                'enableClientValidation' => true,
+                'method' => 'post',
+                'validateOnBlur' => false,
+                'options' => [
+                    'class' => 'text-center',
+                ]
+            ]);
+
+            echo $form->field($subscriber, 'email')
+                ->label('Get notified about new guides')
+                ->input('email');
+
+            echo Html::submitButton('SUBSCRIBE', ['class' => 'btn btn-primary btn-block']);
+
+            ActiveForm::end();
+            ?>
+            <!-- SOCIAL MEDIA -->
+            <div class="margin-tb-20 text-lg text-center">
                 <a target="_blank" href="https://github.com/MelleDijkstra"><span
                             style="color: #333333;" class="mdi mdi-github-circle"></span><span class="hidden">my github account</span></a>
                 <a target="_blank" href="https://twitter.com/dijkstrascience"><span
@@ -131,19 +186,19 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => \yii\helpers\Url::canoni
             </div>
         </div>
         <div id="page-content-wrapper">
+            <!-- WIP BANNER -->
             <div class="padding-10 wip-banner text-center">
                 <span class="text-md mdi mdi-worker"></span>
                 <p>This site is currently in progress, please browse around! But be aware of bugs or mispelled
                     words.</p>
             </div>
-            <div class="visible-xs">
-                <button type="button" class="toggler navbar-toggle collapsed"
-                        onclick="$('#wrapper').toggleClass('toggled');" data-toggle="collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
+            <!-- SIDEBAR TOGGLER -->
+            <button type="button" class="navbar-toggle collapsed"
+                    onclick="$('#wrapper').toggleClass('toggled');" data-toggle="collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <?= Alert::widget() ?>
             <?= $content ?>
         </div>
