@@ -2,6 +2,15 @@
 * Melle's Stylesheet
 */
 
+/**
+ * IMPORTS
+ */
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+/* Material Design Icons */
+@import url('//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css');
+
 /*
  * H1. Reset Styling
  */
@@ -171,6 +180,15 @@ pre code {
 .text-lg { font-size: 2em; }
 .text-md { font-size: 1.5em; }
 .text-sm { font-size: 0.8em; }
+
+.block {
+    display: block;
+    width: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
 
 /**
  * Melle's Colors :D

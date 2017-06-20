@@ -13,6 +13,9 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => '/guides',
     'components' => [
+        'assetManager' => (YII_ENV_PROD) ? [
+            'bundles' => require(__DIR__ . '/assets-compressed.php'),
+        ] : [],
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
