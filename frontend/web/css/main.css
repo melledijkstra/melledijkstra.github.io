@@ -72,7 +72,7 @@ label:focus,
 }
 
 /*
- * H2. Bootstrap and Yii2 overrides
+ * H2. Library overrides
  */
 
 .no-gutter > [class*='col-'] {
