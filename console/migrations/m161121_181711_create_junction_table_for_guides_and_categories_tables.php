@@ -54,6 +54,7 @@ class m161121_181711_create_junction_table_for_guides_and_categories_tables exte
             'category_id',
             'categories',
             'id',
+            'CASCADE',
             'CASCADE'
         );
     }

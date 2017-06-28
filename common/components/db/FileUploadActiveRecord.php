@@ -181,7 +181,7 @@ abstract class FileUploadActiveRecord extends MActiveRecord {
     }
 
     /**
-     * Check if current file exists
+     * Check if current file exists which is linked with this model
      */
     public function fileExists()
     {
@@ -190,6 +190,8 @@ abstract class FileUploadActiveRecord extends MActiveRecord {
 
     /**
      * Checks if this model has a file name set
+     * It does not check if the file exists, use $this->fileExists
+     * @see FileUploadActiveRecord::fileExists
      */
     public function hasFile()
     {

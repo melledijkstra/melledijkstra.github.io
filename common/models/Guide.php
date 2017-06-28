@@ -2,11 +2,11 @@
 
 namespace common\models;
 
-use common\components\db\FileUploadActiveRecord;
 use common\components\db\ImageUploadActiveRecord;
 use common\components\Linkable;
 use kartik\markdown\Markdown;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\helpers\Url;
 
 /**
@@ -25,6 +25,11 @@ use yii\helpers\Url;
  * @property Project $project
  * @property Language $language
  * @property Category[] $categories
+ * @property \yii\db\ActiveQuery $guidesCategories
+ * @property Guide $previousGuide
+ * @property null|string $filePath
+ * @property string $renderCategories
+ * @property Guide $nextGuide
  * @property string $thumbnail
  */
 class Guide extends ImageUploadActiveRecord implements Linkable
@@ -33,13 +38,13 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     /** The maximum difficulty a guide can get */
     const MAX_DIFFICULTY = 5;
 
-    /** @var $guide_text string This is the markdown entered by a user which needs to be saved to a file */
+    /** @var $guide_text string This is the markdown entered by a user or retrieved from linked the file */
     public $guide_text;
 
     /** @var array The linked categories */
-    public $category_ids = [];
+    public $categoryIds = [];
 
-    protected $extensions = ['png','jpg','jpeg','gif'];
+    protected $extensions = ['png', 'jpg', 'jpeg', 'gif'];
 
     protected $fileAttributeName = 'thumbnail';
 
@@ -60,7 +65,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      */
     public function beforeValidate()
     {
-        if(parent::beforeValidate()) {
+        if (parent::beforeValidate()) {
             $this->createUnknownCategories();
             return true;
         };
@@ -72,7 +77,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      */
     public function beforeSave($insert)
     {
-        if(parent::beforeSave($insert) && $this->saveGuideFile($this->guide_text)) {
+        if (parent::beforeSave($insert) && $this->saveGuideFile($this->guide_text)) {
             return true;
         }
         return false;
@@ -84,8 +89,8 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     public function afterSave($insert, $changedAttributes)
     {
         GuidesCategory::deleteAll(['guide_id' => $this->id]);
-        if(is_array($this->category_ids)) {
-            foreach($this->category_ids as $category_id) {
+        if (is_array($this->categoryIds)) {
+            foreach ($this->categoryIds as $category_id) {
                 $this->link('categories', Category::findOne($category_id));
             }
         }
@@ -97,11 +102,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      */
     public function beforeDelete()
     {
-        if(parent::beforeDelete()) {
-            // Try and unlink the file
-            if (file_exists($this->filepath)) {
-                unlink($this->filepath);
-            }
+        if (parent::beforeDelete()) {
             // Delete the file before deleting guide from database
             $this->deleteGuideFile();
             return true;
@@ -115,11 +116,8 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      */
     public function afterFind()
     {
-        if(file_exists($this->filepath)) {
+        if (file_exists($this->filepath)) {
             $this->guide_text = file_get_contents($this->filepath);
-        }
-        foreach($this->categories as $category) {
-            $this->category_ids[] = $category->id;
         }
         parent::afterFind();
     }
@@ -129,7 +127,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      */
     public function rules()
     {
-        return array_merge(parent::rules(),[
+        return array_merge(parent::rules(), [
             [['title', 'guide_text'], 'required'],
             [['project_id', 'language_id', 'difficulty', 'duration'], 'integer'],
             [['title', 'filename', 'thumbnail'], 'string', 'max' => 255],
@@ -137,11 +135,30 @@ class Guide extends ImageUploadActiveRecord implements Linkable
             [['guide_text'], 'string'],
             [['title'], 'unique'],
             [['title'], 'match', 'pattern' => '/^[a-zA-Z0-9_ ]*$/'],
-            [['category_ids'], 'each', 'rule' => [
-                'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id', 'message' => Yii::t('guide','This category does not exist'),
-            ]],
-            [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
-            [['language_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['language_id' => 'id']],
+            [
+                ['categoryIds'],
+                'each',
+                'rule' => [
+                    'exist',
+                    'targetClass' => Category::className(),
+                    'targetAttribute' => 'id',
+                    'message' => Yii::t('guide', 'This category does not exist'),
+                ]
+            ],
+            [
+                ['project_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Project::className(),
+                'targetAttribute' => ['project_id' => 'id']
+            ],
+            [
+                ['language_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Language::className(),
+                'targetAttribute' => ['language_id' => 'id']
+            ],
         ]);
     }
 
@@ -155,7 +172,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
             'title' => Yii::t('guide', 'Title'),
             'sneak_peek' => Yii::t('guide', 'Sneak Peek'),
             'filename' => Yii::t('guide', 'Filename'),
-            'category_ids' => Yii::t('guide', 'Categories'),
+            'categoryIds' => Yii::t('guide', 'Categories'),
             'project_id' => Yii::t('project', 'Project'),
             'difficulty' => Yii::t('guide', 'Difficulty'),
             'duration' => Yii::t('guide', 'Duration'),
@@ -174,41 +191,140 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategories() {
-        return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('guides_categories', ['guide_id' => 'id']);
+    public function getCategories()
+    {
+        return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('guides_categories',
+            ['guide_id' => 'id']);
+    }
+
+    public function getCategoryIds() {
+        if(empty($this->categoryIds)) {
+            foreach ($this->categories as $category) {
+                $this->categoryIds[] = $category->id;
+            }
+        }
+        return $this->categoryIds;
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getLanguage() {
-       return $this->hasOne(Language::className(), ['id' => 'language_id']);
+    public function getLanguage()
+    {
+        return $this->hasOne(Language::className(), ['id' => 'language_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getGuidesCategories() {
+    public function getGuidesCategories()
+    {
         return $this->hasMany(GuidesCategory::className(), ['guide_id' => 'id']);
     }
+
+    public function getPreviousGuide()
+    {
+        /**
+         * SELECT
+         * guides.*
+         * FROM
+         * series_guides sg
+         * JOIN
+         * (-- We get the current `series_id`, `ord`, based on `guide_id`
+         * SELECT series_id, `order`
+         * FROM series_guides sg
+         * WHERE guide_id = 13
+         * ) AS nextsg
+         * -- We want to be in the same series_id, but greater ord
+         * ON sg.series_id = nextsg.series_id AND sg.`order` > nextsg.`order`
+         * JOIN guides ON sg.guide_id = guides.id
+         * ORDER BY sg.`order`LIMIT 1;
+         */
+
+        Guide::find()->joinWith([
+            'series_guides' => function($q) {
+                /** @var $q ActiveQuery */
+                $q->alias('nextsg');
+            }
+        ])->limit(1);
+
+        return Guide::findBySql('SELECT
+  guides.*
+FROM
+  series_guides sg
+  JOIN
+  (-- We get the current `series_id`, `order`, based on `guide_id`
+    SELECT guide_id, series_id, `order`
+    FROM series_guides sg
+    WHERE guide_id = :guide_id
+  ) AS prevsg
+  -- We want to be in the same series_id, but greater order
+    ON sg.series_id = prevsg.series_id AND sg.`order` < prevsg.`order`
+  JOIN guides ON sg.guide_id = guides.id
+ORDER BY sg.`order` DESC LIMIT 1;', ['guide_id' => $this->id]);
+    }
+
+    public function getNextGuide()
+    {
+        /**
+         * SELECT
+         * guides.*
+         * FROM
+         * series_guides sg
+         * JOIN
+         * (-- We get the current `series_id`, `ord`, based on `guide_id`
+         * SELECT series_id, `order`
+         * FROM series_guides sg
+         * WHERE guide_id = 13
+         * ) AS nextsg
+         * -- We want to be in the same series_id, but greater ord
+         * ON sg.series_id = nextsg.series_id AND sg.`order` > nextsg.`order`
+         * JOIN guides ON sg.guide_id = guides.id
+         * ORDER BY sg.`order`LIMIT 1;
+         */
+
+        Guide::find()->joinWith([
+            'series_guides' => function($q) {
+                /** @var $q ActiveQuery */
+                $q->alias('nextsg');
+            }
+        ])->limit(1);
+
+        return Guide::findBySql('SELECT
+  guides.*
+FROM
+  series_guides sg
+  JOIN
+  (-- We get the current `series_id`, `ord`, based on `guide_id`
+    SELECT series_id, `order`
+    FROM series_guides sg
+    WHERE guide_id = :guide_id
+  ) AS nextsg
+  -- We want to be in the same series_id, but greater ord
+    ON sg.series_id = nextsg.series_id AND sg.`order` > nextsg.`order`
+  JOIN guides ON sg.guide_id = guides.id
+ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
+    }
+
 
     /**
      * @return string
      */
     public function renderGuide()
     {
-        if(file_exists($this->filepath)) {
+        if (file_exists($this->filepath)) {
             return Markdown::convert(file_get_contents($this->filepath), [
                 'smartyPants' => false,
             ], Markdown::SMARTYPANTS_ATTR_DO_NOTHING);
         } else {
-            return '<p style="color:red;">'.Yii::t('guide', 'This guide\'s file is not found!').'</p>';
+            return '<p style="color:red;">' . Yii::t('guide', 'This guide\'s file is not found!') . '</p>';
         }
     }
 
-    public function getFilePath() {
-        if(!empty($this->filename)) {
-            return Yii::getAlias('@frontend').'/guides/'.$this->filename;
+    public function getFilePath()
+    {
+        if (!empty($this->filename)) {
+            return Yii::getAlias('@frontend') . '/guides/' . $this->filename;
         } else {
             return null;
         }
@@ -222,9 +338,9 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     private function saveGuideFile($guide_text)
     {
         $this->deleteGuideFile();
-        $filename = substr(hash('md5',time()),0,8).'.md';
-        $filepath = Yii::getAlias('@frontend').'/guides/'.$filename;
-        if(file_put_contents($filepath, $guide_text)) {
+        $filename = substr(hash('md5', time()), 0, 8) . '.md';
+        $filepath = Yii::getAlias('@frontend') . '/guides/' . $filename;
+        if (file_put_contents($filepath, $guide_text)) {
             $this->filename = $filename;
             return true;
         } else {
@@ -238,7 +354,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      */
     private function deleteGuideFile()
     {
-        if(!empty($this->filename) && file_exists($this->filepath)) {
+        if (!empty($this->filename) && file_exists($this->filepath)) {
             return unlink($this->filepath);
         }
         return true;
@@ -253,13 +369,14 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     {
         $html = "";
         $fontSize = (is_numeric($fontSize)) ? "style=\"font-size: {$fontSize}px;\"" : '';
-        foreach($this->categories as $category) {
+        foreach ($this->categories as $category) {
             $html .= "<span {$fontSize} class=\"label label-primary\">{$category->name}</span> ";
         }
         return $html;
     }
 
-    public function getRenderCategories() {
+    public function getRenderCategories()
+    {
         return $this->renderCategories(12);
     }
 
@@ -268,8 +385,11 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      * @param bool $slug If the guide title should use dashes instead of spaces, this is used for links to this guide
      * @return mixed|string The title with or without dashes
      */
-    public function getTitle($slug = false) {
-        if($slug) return strtolower(str_replace(' ','-',$this->title));
+    public function getTitle($slug = false)
+    {
+        if ($slug) {
+            return strtolower(str_replace(' ', '-', $this->title));
+        }
         return $this->title;
     }
 
@@ -278,7 +398,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      */
     public function getLink($absolute = false)
     {
-        return Url::to('/guides/'.$this->getTitle(true), $absolute);
+        return Url::to('/guides/' . $this->getTitle(true), $absolute);
     }
 
     /**
@@ -287,15 +407,15 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     private function createUnknownCategories()
     {
         // Go though every category
-        if(is_array($this->category_ids)) {
-            for($i = 0;$i < count($this->category_ids);$i++) {
+        if (is_array($this->categoryIds)) {
+            for ($i = 0; $i < count($this->categoryIds); $i++) {
                 // if the category is not a number then it doesn't exist yet
-                if(!is_numeric($this->category_ids[$i])) {
+                if (!is_numeric($this->categoryIds[$i])) {
                     // create the new category
-                    $cat = new Category(['name' => $this->category_ids[$i]]);
-                    if($cat->save()) {
+                    $cat = new Category(['name' => $this->categoryIds[$i]]);
+                    if ($cat->save()) {
                         // if it saves correctly override the spot with the new id
-                        $this->category_ids[$i] = $cat->id;
+                        $this->categoryIds[$i] = $cat->id;
                     }
                 }
             }
@@ -308,7 +428,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     public static function difficultyList()
     {
         $list = [];
-        for($i = 1; $i <= self::MAX_DIFFICULTY; $i++) {
+        for ($i = 1; $i <= self::MAX_DIFFICULTY; $i++) {
             $list[$i] = $i;
         }
         return $list;

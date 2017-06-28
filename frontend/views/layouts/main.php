@@ -189,7 +189,7 @@ JS
             <!-- WIP BANNER -->
             <div class="padding-10 wip-banner text-center">
                 <span class="text-md mdi mdi-worker"></span>
-                <p>This site is currently in progress, please browse around! But be aware of bugs or mispelled
+                <p>This site is currently in progress, please browse around! But be aware of bugs or misspelled
                     words.</p>
             </div>
             <!-- SIDEBAR TOGGLER -->

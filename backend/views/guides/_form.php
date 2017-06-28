@@ -68,7 +68,7 @@ $this->registerJsFile('/js/guide_form.js', ['depends' => \yii\web\JqueryAsset::c
         ['prompt' => 'No specific programming language']
     ) ?>
 
-    <?= $form->field($model, 'category_ids')->widget(Select2::className(), [
+    <?= $form->field($model, 'categoryIds')->widget(Select2::className(), [
         'data' => \yii\helpers\ArrayHelper::map($categories, 'id', 'name'),
         'options' => [
             'multiple' => true,

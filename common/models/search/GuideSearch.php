@@ -67,9 +67,9 @@ class GuideSearch extends Guide
     public function search($params)
     {
         // Always sort by the newest Guides
-        $query = Guide::find()->orderBy(['created_at' => SORT_DESC]);
-
-        $query->joinWith('guidesCategories');
+        $query = Guide::find()
+            ->joinWith(['categories', 'language'], true)
+            ->orderBy(['created_at' => SORT_DESC]);
 
         // add conditions that should always apply here
 
