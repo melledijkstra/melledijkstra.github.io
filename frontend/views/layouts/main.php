@@ -7,8 +7,6 @@ use common\models\Category;
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
-use yii\web\Form;
-use yii\web\View;
 use yii\widgets\ActiveForm;
 
 AppAsset::register($this);
@@ -185,7 +183,7 @@ JS
                        class="mdi mdi-stackoverflow"></span><span class="hidden">my stackoverflow account</span></a>
             </div>
         </div>
-        <div id="page-content-wrapper">
+        <div id="page-content">
             <!-- WIP BANNER -->
             <div class="padding-10 wip-banner text-center">
                 <span class="text-md mdi mdi-worker"></span>

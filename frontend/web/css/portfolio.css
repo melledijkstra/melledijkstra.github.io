@@ -1,0 +1,49 @@
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 300 !important;
+    font-size: 16px !important;
+}
+
+h3 {
+    font-size: 28px !important;
+}
+
+#side-menu {
+    width: 240px;
+    overflow: hidden;
+    position: fixed;
+    height: 100%;
+
+    background-color: #ededed;
+
+    padding: 20px;
+}
+
+#social-buttons i {
+    font-size: 28px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0 !important;
+}
+
+#page-content {
+    padding: 20px !important;
+    width: auto !important;
+}
+
+@media (min-width: 950px) {
+    #page-content {
+        margin-left: 240px !important;
+    }
+}
+
+@media (min-width: 550px) {
+    #page-content {
+        margin-left: 240px !important;
+    }
+}
