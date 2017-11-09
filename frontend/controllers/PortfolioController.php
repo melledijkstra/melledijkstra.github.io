@@ -16,7 +16,7 @@ class PortfolioController extends Controller
 
     public function beforeAction($action)
     {
-        $this->layout = 'portfolio';
+        //$this->layout = 'portfolio';
         return parent::beforeAction($action);
     }
 

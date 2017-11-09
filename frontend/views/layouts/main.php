@@ -130,23 +130,16 @@ JS
                 <small>A place of thought</small>
             </h1>
             <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        Work in progress!!
-                    </a>
-                </li>
                 <li>
                     <a href="/guides">Guides</a>
                 </li>
                 <li>
-                    <a href="/about">Who's behind all this?</a>
+                    <a href="/portfolio">Portfolio</a>
+                </li>
+                <li>
+                    <a href="/about">Who's this developer? (resume)</a>
                 </li>
             </ul>
-            <h4 class="margin-tb-15"><?= Yii::t('category', 'Categories'); ?></h4>
-            <div class="margin-tb-15">
-                <em><?= implode('</em>, <em>', Category::find()->select('name')->column()); ?></em>
-            </div>
-            <hr/>
             <!-- EMAIL SUBSCRIBE FORM -->
             <?php
             $subscriber = new \common\models\Subscription();
@@ -158,13 +151,15 @@ JS
                 'method' => 'post',
                 'validateOnBlur' => false,
                 'options' => [
-                    'class' => 'text-center',
+                    'class' => 'margin-tb-10',
                 ]
             ]);
 
             echo $form->field($subscriber, 'email')
-                ->label('Get notified about new guides')
-                ->input('email');
+                ->label('Get notified about new guides', [
+                    'class' => '',
+                ])
+                ->input('email', ['placeholder' => 'Your fantastic email']);
 
             echo Html::submitButton('SUBSCRIBE', ['class' => 'btn btn-primary btn-block']);
 
@@ -184,12 +179,12 @@ JS
             </div>
         </div>
         <div id="page-content">
-            <!-- WIP BANNER -->
-            <div class="padding-10 wip-banner text-center">
-                <span class="text-md mdi mdi-worker"></span>
-                <p>This site is currently in progress, please browse around! But be aware of bugs or mispelled
-                    words.</p>
-            </div>
+            <!-- WIP BANNER
+<!--            <div class="padding-10 wip-banner text-center">-->
+<!--                <span class="text-md mdi mdi-worker"></span>-->
+<!--                <p>This site is currently in progress, please browse around! But be aware of bugs or mispelled-->
+<!--                    words.</p>-->
+<!--            </div>-->
             <!-- SIDEBAR TOGGLER -->
             <button type="button" class="navbar-toggle collapsed"
                     onclick="$('#wrapper').toggleClass('toggled');" data-toggle="collapse">
