@@ -1,7 +1,7 @@
 <?php
 return [
     'name' => 'Melle Dijkstra',
-    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'vendorPath' => dirname(__DIR__, 2) . '/vendor',
     'language' => 'en-US',
     'sourceLanguage' => 'en-US',
     // Special modules for this application

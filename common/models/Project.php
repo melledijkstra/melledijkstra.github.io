@@ -2,9 +2,10 @@
 
 namespace common\models;
 
-use common\components\db\FileUploadActiveRecord;
+use common\components\db\ImageUploadActiveRecord;
 use common\components\Linkable;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\helpers\Url;
 
 /**
@@ -16,16 +17,11 @@ use yii\helpers\Url;
  * @property string $thumbnail
  * @property string $external_url
  *
+ * @property string $link
  * @property Guide[] $guides
  */
-class Project extends FileUploadActiveRecord implements Linkable
+class Project extends ImageUploadActiveRecord implements Linkable
 {
-
-    /**
-     * Overridden allowed extensions
-     * @var array
-     */
-    protected $extensions = ['png', 'jpg', 'jpeg'];
 
     /**
      * Overridden attribute name for the column name
@@ -38,6 +34,16 @@ class Project extends FileUploadActiveRecord implements Linkable
      * @var bool
      */
     protected $fileRequired = false;
+
+    /**
+     * @var int The width of the image
+     */
+    protected $width = 600;
+
+    /**
+     * @var int The height of the image
+     */
+    protected $height = 600;
 
     /**
      * @inheritdoc
@@ -74,9 +80,9 @@ class Project extends FileUploadActiveRecord implements Linkable
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getGuides()
+    public function getGuides(): ActiveQuery
     {
         return $this->hasMany(Guide::className(), ['project_id' => 'id']);
     }
@@ -84,14 +90,14 @@ class Project extends FileUploadActiveRecord implements Linkable
     /**
      * @inheritdoc
      */
-    public function getPublicLink($absolute = false)
+    public function getPublicLink($absolute = false): string
     {
         if(!empty($this->thumbnail) && file_exists(self::$uploadPath.$this->thumbnail)) {
-            $url = ($absolute) ? Url::base(true) : '';
-            return $url.'/uploads/'.$this->tableName().'/'.$this->thumbnail;
-        } else {
-            return 'http://placehold.it/250x200';
+            $url = $absolute ? Url::base(true) : '';
+            return $url.'/uploads/'. static::tableName().'/'.$this->thumbnail;
         }
+
+        return 'http://placehold.it/250x200';
     }
 
     /**
@@ -100,16 +106,19 @@ class Project extends FileUploadActiveRecord implements Linkable
      * @return mixed|string The title with or without dashes
      */
     public function getTitle($slug = false) {
-        if($slug) return strtolower(str_replace(' ','-',$this->title));
+        if($slug) {
+            return strtolower(str_replace(' ', '-', $this->title));
+        }
         return $this->title;
     }
 
     /**
      * @inheritdoc
+     * @throws \yii\base\InvalidParamException
      */
     public function getLink()
     {
-        return Url::to('/projects/'.$this->getTitle(true));
+        return Url::to('/portfolio/'.$this->getTitle(true));
     }
 
 }

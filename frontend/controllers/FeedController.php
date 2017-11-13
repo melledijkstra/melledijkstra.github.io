@@ -16,15 +16,16 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\Controller;
+use yii\web\Response;
 
 class FeedController extends Controller
 {
     public function actionAtom() {
         // Set corresponding headers for the feed
-        Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
+        Yii::$app->response->format = Response::FORMAT_XML;
         // Yii::$app->response->headers->add() doesn't work when returning nothing in this action
         // So I just used old fashioned php headers() function
-        header('Content-Type: text/xml; charset=utf-8', true);
+        header('Content-Type: text/xml; charset=utf-8');
 
         $query = Guide::find()->orderBy(['created_at' => SORT_DESC, 'updated_at' => SORT_DESC]);
 
@@ -37,7 +38,7 @@ class FeedController extends Controller
         /** @var Guide $latestGuide */
         $latestGuide = $query->one();
 
-        $updated = ($latestGuide != null) ?  $latestGuide->updated_at : 1488923760;
+        $updated = ($latestGuide !== null) ?  $latestGuide->updated_at : 1488923760;
         // create the actual feed
         $feed = new Feed(Url::to('', true), Yii::$app->params['siteTitle'], $updated);
         $feed->subtitle = Yii::$app->params['siteSubtitle'];
@@ -52,7 +53,9 @@ class FeedController extends Controller
             $entry->summary = $guide->sneak_peek;
             $entry->link = $guide->getLink(true);
             $entry->content = $guide->renderGuide();
-            if($guide->hasFile()) $entry->logo = $guide->getPublicLink(true);
+            if($guide->hasFile()) {
+                $entry->logo = $guide->getPublicLink(true);
+            }
             $entry->categories = $guide->getCategories()->select('name')->column();
             $entry->published = $guide->created_at;
             $feed->addEntry($entry);

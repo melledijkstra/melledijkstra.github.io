@@ -177,7 +177,9 @@ class Entry
      */
     public function __construct($id, $title, $updated)
     {
-        if (empty($id) || empty($title) || !is_int($updated)) throw new FeedException('Invalid information given');
+        if (empty($id) || empty($title) || !is_int($updated)) {
+            throw new FeedException('Invalid information given');
+        }
         $this->id = $id;
         $this->title = $title;
         $this->updated = $updated;
@@ -186,7 +188,7 @@ class Entry
     /**
      * Returns the rendered entry object
      */
-    public function render()
+    public function render(): string
     {
         $updated = gmdate(DATE_ATOM, $this->updated);
         $entry = <<<ENTRY
@@ -202,7 +204,9 @@ ENTRY;
         $entry .= (!empty($this->icon)) ? "\n\t\t<icon>{$this->icon}</icon>" : '';
         $entry .= (!empty($this->logo)) ? "\n\t\t<logo>{$this->logo}</logo>" : '';
         foreach ($this->categories as $category) {
-            if (!empty($category)) $entry .= "\n\t\t<category term=\"{$category}\"/>";
+            if (!empty($category)) {
+                $entry .= "\n\t\t<category term=\"{$category}\"/>";
+            }
         }
         $entry .= (!empty($this->content)) ? "\n\t\t<content type=\"html\">" . htmlspecialchars($this->content, ENT_QUOTES, 'utf-8') . "</content>" : '';
 

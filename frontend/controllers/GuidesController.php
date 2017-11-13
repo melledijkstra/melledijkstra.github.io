@@ -17,8 +17,9 @@ class GuidesController extends FrontendController
     /**
      * The guides overview page
      * @return string
+     * @throws \yii\base\InvalidParamException
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $guideSearch = new GuideSearch();
         $guideDataProvider = $guideSearch->search(Yii::$app->request->queryParams);
@@ -29,31 +30,30 @@ class GuidesController extends FrontendController
             'content' => 'Learn anything about Science related topics. This is is where I share my latest knowledge and try to guide you through it.',
         ]);
 
-        return $this->render('index', [
-            'guideSearch' => $guideSearch,
-            'guideDataProvider' => $guideDataProvider,
-        ]);
+        return $this->render('index', compact('guideSearch', 'guideDataProvider'));
     }
 
     /**
      * Shows a single guide
      * @param $title string The title of the guide to search for
      * @return string
+     * @throws \yii\base\InvalidParamException
      * @throws NotFoundHttpException When a guide can't be found
      */
-    public function actionView($title)
+    public function actionView($title): string
     {
         if ($guide = Guide::findOne(['title' => str_replace('-', ' ', $title)])) {
             return $this->render('view', ['guide' => $guide]);
-        } else {
-            throw new NotFoundHttpException(Yii::t('guide', 'This guide could not be found'));
         }
+
+        throw new NotFoundHttpException(Yii::t('guide', 'This guide could not be found'));
     }
 
     /**
      * Check how many new guides are here since last visit.
      * And updates a cookie accordingly
      * @return int Count of new guides since last visit
+     * @throws \yii\base\InvalidCallException
      */
     private function checkNewestGuidesCount()
     {
