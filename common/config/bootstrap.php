@@ -1,7 +1,7 @@
 <?php
 Yii::setAlias('@common', dirname(__DIR__));
-Yii::setAlias('@frontend', dirname(dirname(__DIR__)) . '/frontend');
-Yii::setAlias('@backend', dirname(dirname(__DIR__)) . '/backend');
-Yii::setAlias('@console', dirname(dirname(__DIR__)) . '/console');
+Yii::setAlias('@frontend', dirname(__DIR__, 2) . '/frontend');
+Yii::setAlias('@backend', dirname(__DIR__, 2) . '/backend');
+Yii::setAlias('@console', dirname(__DIR__, 2) . '/console');
 
 require Yii::getAlias('@common').'/functions.php';

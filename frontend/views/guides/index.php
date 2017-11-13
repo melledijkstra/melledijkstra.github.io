@@ -19,13 +19,14 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('guides', 'Guides');
 
+// Title fix for when ajax refreshes the page
 if (Yii::$app->request->isAjax && isset(Yii::$app->params['titleSuffix'])) {
     $this->title .= Yii::$app->params['titleSuffix'];
 }
 
 \frontend\assets\MasonryAsset::register($this);
 
-// let bots know there also is a feed
+// let bots know there's a feed available
 $this->registerLinkTag([
     'href' => '/feed/atom',
     'type' => 'application/atom+xml',
@@ -61,14 +62,6 @@ $(document).on('pjax:end', function() { $('#guide-loader-wrap').hide(); });
 JSCRIPT
     , View::POS_END);
 
-$this->registerCss('
-@media (max-width: 992px) {
-    .affix {
-        position: static !important;
-        margin-bottom: 40px;
-    }
-}');
-
 ?>
 <div id="page-loader-wrap">
     <div class="loader"></div>
@@ -99,19 +92,21 @@ $this->registerCss('
                     }
                     ?>
                 </div>
-                <?= \yii\widgets\LinkPager::widget([
-                    'activePageCssClass' => 'link-pager-active',
-                    'nextPageCssClass' => 'link-pager-next-page',
-                    'prevPageCssClass' => 'link-pager-prev-page',
-                    'pageCssClass' => 'link-pager-page',
-                    'nextPageLabel' => '<span class="mdi mdi-arrow-right-bold"></span>',
-                    'prevPageLabel' => '<span class="mdi mdi-arrow-left-bold"></span>',
-                    'pagination' => $guideDataProvider->pagination
-                ]); ?>
+                <div class="text-center">
+                    <?= \yii\widgets\LinkPager::widget([
+                        'activePageCssClass' => 'link-pager-active',
+                        'nextPageCssClass' => 'link-pager-next-page',
+                        'prevPageCssClass' => 'link-pager-prev-page',
+                        'pageCssClass' => 'link-pager-page',
+                        'nextPageLabel' => '<span class="mdi mdi-arrow-right-bold"></span>',
+                        'prevPageLabel' => '<span class="mdi mdi-arrow-left-bold"></span>',
+                        'pagination' => $guideDataProvider->pagination
+                    ]); ?>
+                </div>
                 <?php Pjax::end(); ?>
             </div>
             <div class="col col-xs-12 col-md-3">
-                <div class="affix">
+                <div id="search-menu" class="affix">
                     <h3>Search guides</h3>
 
                     <?php $form = ActiveForm::begin([

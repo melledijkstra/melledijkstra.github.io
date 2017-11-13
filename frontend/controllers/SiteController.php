@@ -51,16 +51,6 @@ class SiteController extends FrontendController
         ];
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return mixed
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
-
     public function actionAddSubscription()
     {
         if(\Yii::$app->request->isAjax) {
@@ -69,12 +59,16 @@ class SiteController extends FrontendController
 
             if ($subscription->load(\Yii::$app->request->post()) && $subscription->save()) {
                 return ['status' => 'OK', 'message' => 'Hey! Thank you for signing up'];
-            } else {
-                return ['status' => 'ERROR', 'message' => $subscription->getFirstError('email')];
             }
-        } else {
-            throw new BadRequestHttpException("This page is only for ajax requests");
+
+            return ['status' => 'ERROR', 'message' => $subscription->getFirstError('email')];
         }
+
+        throw new BadRequestHttpException('This page is only for ajax requests');
+    }
+
+    public function actionResume() {
+        return $this->render('resume');
     }
 
 }

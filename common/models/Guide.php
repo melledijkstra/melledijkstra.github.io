@@ -2,11 +2,11 @@
 
 namespace common\models;
 
-use common\components\db\FileUploadActiveRecord;
 use common\components\db\ImageUploadActiveRecord;
 use common\components\Linkable;
 use kartik\markdown\Markdown;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\helpers\Url;
 
 /**
@@ -25,6 +25,7 @@ use yii\helpers\Url;
  * @property Project $project
  * @property Language $language
  * @property Category[] $categories
+ * @property string[] $categoryStrings
  * @property string $thumbnail
  */
 class Guide extends ImageUploadActiveRecord implements Linkable
@@ -38,8 +39,6 @@ class Guide extends ImageUploadActiveRecord implements Linkable
 
     /** @var array The linked categories */
     public $category_ids = [];
-
-    protected $extensions = ['png','jpg','jpeg','gif'];
 
     protected $fileAttributeName = 'thumbnail';
 
@@ -69,17 +68,16 @@ class Guide extends ImageUploadActiveRecord implements Linkable
 
     /**
      * @inheritdoc
+     * @throws \yii\base\InvalidParamException
      */
     public function beforeSave($insert)
     {
-        if(parent::beforeSave($insert) && $this->saveGuideFile($this->guide_text)) {
-            return true;
-        }
-        return false;
+        return parent::beforeSave($insert) && $this->saveGuideFile($this->guide_text);
     }
 
     /**
      * @inheritdoc
+     * @throws \yii\base\InvalidCallException
      */
     public function afterSave($insert, $changedAttributes)
     {
@@ -95,7 +93,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     /**
      * @inheritdoc
      */
-    public function beforeDelete()
+    public function beforeDelete(): bool
     {
         if(parent::beforeDelete()) {
             // Try and unlink the file
@@ -105,9 +103,9 @@ class Guide extends ImageUploadActiveRecord implements Linkable
             // Delete the file before deleting guide from database
             $this->deleteGuideFile();
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -164,79 +162,84 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getProject()
+    public function getProject(): ActiveQuery
     {
         return $this->hasOne(Project::className(), ['id' => 'project_id']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getCategories() {
+    public function getCategories(): ActiveQuery
+    {
         return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('guides_categories', ['guide_id' => 'id']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getLanguage() {
+    public function getLanguage(): ActiveQuery
+    {
        return $this->hasOne(Language::className(), ['id' => 'language_id']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return GuidesCategory[]|ActiveQuery
      */
-    public function getGuidesCategories() {
+    public function getGuidesCategories(): ActiveQuery
+    {
         return $this->hasMany(GuidesCategory::className(), ['guide_id' => 'id']);
     }
 
     /**
      * @return string
+     * @throws \yii\base\InvalidConfigException
      */
-    public function renderGuide()
+    public function renderGuide(): string
     {
         if(file_exists($this->filepath)) {
             return Markdown::convert(file_get_contents($this->filepath), [
                 'smartyPants' => false,
             ], Markdown::SMARTYPANTS_ATTR_DO_NOTHING);
-        } else {
-            return '<p style="color:red;">'.Yii::t('guide', 'This guide\'s file is not found!').'</p>';
         }
+
+        return '<p style="color:red;">'.Yii::t('guide', 'This guide\'s file is not found!').'</p>';
     }
 
     public function getFilePath() {
         if(!empty($this->filename)) {
             return Yii::getAlias('@frontend').'/guides/'.$this->filename;
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
      * Saves the guide text gives in file and removes the old file if present
      * @param $guide_text
      * @return bool true if file is saved otherwise false
+     * @throws \yii\base\InvalidParamException
      */
-    private function saveGuideFile($guide_text)
+    private function saveGuideFile($guide_text): bool
     {
         $this->deleteGuideFile();
         $filename = substr(hash('md5',time()),0,8).'.md';
-        $filepath = Yii::getAlias('@frontend').'/guides/'.$filename;
+        $filepath = \Yii::getAlias('@frontend').'/guides/'.$filename;
         if(file_put_contents($filepath, $guide_text)) {
             $this->filename = $filename;
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
      * Deletes the file associated with this Guide
      * @return bool
      */
-    private function deleteGuideFile()
+    private function deleteGuideFile(): bool
     {
         if(!empty($this->filename) && file_exists($this->filepath)) {
             return unlink($this->filepath);
@@ -245,22 +248,16 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     }
 
     /**
-     * Renders the categories from this Guide as labels
-     * @param $fontSize int The fontsize of the label
-     * @return string The categories as labels in html
+     * Returns the categories as string in a list
+     * @return array The categories as labels in html
      */
-    public function renderCategories($fontSize = null)
+    public function getCategoryStrings(): array
     {
-        $html = "";
-        $fontSize = (is_numeric($fontSize)) ? "style=\"font-size: {$fontSize}px;\"" : '';
+        $categories = [];
         foreach($this->categories as $category) {
-            $html .= "<span {$fontSize} class=\"label label-primary\">{$category->name}</span> ";
+            $categories[] = $category->name;
         }
-        return $html;
-    }
-
-    public function getRenderCategories() {
-        return $this->renderCategories(12);
+        return $categories;
     }
 
     /**
@@ -269,12 +266,15 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      * @return mixed|string The title with or without dashes
      */
     public function getTitle($slug = false) {
-        if($slug) return strtolower(str_replace(' ','-',$this->title));
+        if($slug) {
+            return strtolower(str_replace(' ', '-', $this->title));
+        }
         return $this->title;
     }
 
     /**
      * @inheritdoc
+     * @throws \yii\base\InvalidParamException
      */
     public function getLink($absolute = false)
     {
@@ -288,7 +288,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     {
         // Go though every category
         if(is_array($this->category_ids)) {
-            for($i = 0;$i < count($this->category_ids);$i++) {
+            foreach ($this->category_ids as $i => $value) {
                 // if the category is not a number then it doesn't exist yet
                 if(!is_numeric($this->category_ids[$i])) {
                     // create the new category
@@ -318,7 +318,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      * Checks if this guide has an image
      * @return bool whether guide has image or not
      */
-    public function hasImage()
+    public function hasImage(): bool
     {
         return ($this->thumbnail !== null);
     }

@@ -6,128 +6,51 @@
  * Time: 23:59
  *
  * @var $this \yii\web\View
- * @var $projects \common\models\Project[]
+ * @var $projectDataProvider \yii\data\ActiveDataProvider
  */
 
-$this->title = 'Portfolio';
+use common\models\Project;
+use yii\web\View;
+
+\frontend\assets\MasonryAsset::register($this);
+
+$this->registerJs(<<<JSCRIPT
+var grid = $('#grid');
+var mason = grid.masonry({
+    columnWidth: '.grid-sizer',
+    itemSelector: '.grid-item',
+    percentPosition: true,
+});
+
+grid.imagesLoaded(function() {
+    // init Masonry after all images have loaded
+    mason.masonry();
+});
+JSCRIPT
+, View::POS_END);
+
+$this->title = \Yii::t('portfolio', 'Portfolio');
 
 ?>
-<h2>Portfolio</h2>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul><ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul><ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul><ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul><ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-</ul>
-
-
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-xs-12 col-md-12">
+            <div class="text-center">
+                <h1>Portfolio</h1>
+            </div>
+            <div id="grid">
+                <div class="grid-sizer col-xs-12 col-sm-6 col-md-4 col-lg-3"></div>
+                <?php
+                if ($projectDataProvider->count > 0) {
+                    foreach ($projectDataProvider->models as $project) {
+                        /** @var $project Project */
+                        echo $this->render('project_view', [
+                            'project' => $project,
+                        ]);
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
