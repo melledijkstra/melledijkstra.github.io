@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'language.name',
             'difficulty',
             [
-                'attribute' => 'category_ids',
+                'attribute' => 'categoryIds',
                 'value' => $model->renderCategories(),
                 'format' => 'html',
             ],

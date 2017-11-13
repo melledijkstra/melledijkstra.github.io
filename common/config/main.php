@@ -7,12 +7,12 @@ return [
     // Special modules for this application
     'modules' => [
         'markdown' => [
-            'class' => 'kartik\markdown\Module',
-        ]
+            'class' => kartik\markdown\Module::className(),
+        ],
     ],
     'components' => [
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => \yii\caching\FileCache::className(),
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -20,7 +20,7 @@ return [
         ],
         // All configuration for authentication
         'authManager' => [
-            'class' => 'yii\rbac\DbManager'
+            'class' => \yii\rbac\DbManager::className(),
         ],
         'formatter' => [
             'class' => \yii\i18n\Formatter::className(),
@@ -38,13 +38,13 @@ return [
         'i18n' => [
             'translations' => [
                 '*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
+                    'class' => \yii\i18n\PhpMessageSource::className(),
                     'basePath' => '@common/translations',
                     'on missingTranslation' => ['common\components\TranslationEventHandler', 'handleMissingTranslation'],
                 ],
                 // This isn't included with the * translations, weird yii behaviour, so need to create separate 'app' part in translations
                 'app' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
+                    'class' => \yii\i18n\PhpMessageSource::className(),
                     'basePath' => '@common/translations',
                     'on missingTranslation' => ['common\components\TranslationEventHandler', 'handleMissingTranslation'],
                 ]
