@@ -13,6 +13,7 @@ use common\models\User;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -68,17 +69,17 @@ abstract class MActiveRecord extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getCreatedBy()
+    public function getCreatedBy(): ActiveQuery
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getUpdatedBy()
+    public function getUpdatedBy(): ActiveQuery
     {
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }

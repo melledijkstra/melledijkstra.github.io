@@ -33,13 +33,15 @@ abstract class ImageUploadActiveRecord extends FileUploadActiveRecord
 
     /**
      * @param string $filepath The path of the image
-     * @param null $newpath (optionally) the new path of the cropped image, if not given the current file is overwritten
+     * @param string $newpath (optionally) the new path of the cropped image, if not given the current file is overwritten
+     * @throws \Imagine\Exception\RuntimeException
+     * @throws \Imagine\Exception\InvalidArgumentException
      */
     protected function convertToThumbnail($filepath, $newpath = null)
     {
         ini_set('memory_limit', '300M');
         // overwrite given file if no new path is given
-        if ($newpath == null) {
+        if ($newpath === null) {
             $newpath = $filepath;
         }
         Image::getImagine()->open($filepath)->thumbnail(new Box($this->width, $this->height))->save($newpath);
@@ -47,11 +49,13 @@ abstract class ImageUploadActiveRecord extends FileUploadActiveRecord
 
     /**
      * @inheritdoc
+     * @throws \Imagine\Exception\InvalidArgumentException
+     * @throws \Imagine\Exception\RuntimeException
      */
     public function afterSave($insert, $changedAttributes)
     {
         // check if the image needs to be cropped (when guide is created or $fileAttributeName is updated)
-        if ($insert || key_exists($this->fileAttributeName, $changedAttributes)) {
+        if ($insert || array_key_exists($this->fileAttributeName, $changedAttributes)) {
             $this->convertToThumbnail($this->filePath());
         }
         parent::afterSave($insert, $changedAttributes);

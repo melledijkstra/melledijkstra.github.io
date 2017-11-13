@@ -168,7 +168,9 @@ class Feed {
      */
     public function __construct($id, $title, $updated)
     {
-        if(empty($id) || empty($title) || !is_int($updated)) throw new FeedException('Invalid information given');
+        if(empty($id) || empty($title) || !is_int($updated)) {
+            throw new FeedException('Invalid information given');
+        }
         $this->id = $id;
         $this->title = $title;
         $this->updated = $updated;
@@ -184,8 +186,10 @@ class Feed {
 
     /**
      * Returns the rendered feed object
+     * @throws \yii\base\InvalidParamException
      */
-    public function render() {
+    public function render(): string
+    {
         $updated = gmdate(DATE_ATOM, $this->updated);
         $this->linkSelf = empty($this->linkSelf) ? Url::to('',true) : $this->linkSelf;
         $feed = <<<FEED
@@ -203,7 +207,9 @@ FEED;
     $feed .= (!empty($this->author) && !empty($this->authorEmail)) ? "\n\t<author>\n\t\t<name>{$this->author}</name>\n\t\t<email>melle210202@gmail.com</email>\n\t</author>" : '';
     $feed .= (!empty($this->icon)) ?        "\n\t<icon>{$this->icon}</icon>" : '';
     foreach($this->categories as $category) {
-        if(!empty($category)) $feed .= "\n\t<category term=\"{$category}\"/>";
+        if(!empty($category)) {
+            $feed .= "\n\t<category term=\"{$category}\"/>";
+        }
     }
     $feed .= (!empty($this->rights)) ?      "\n\t<rights>{$this->rights}</rights>" : '';
 

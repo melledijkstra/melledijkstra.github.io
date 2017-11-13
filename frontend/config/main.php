@@ -1,9 +1,9 @@
 <?php
 $params = array_merge(
-    require(__DIR__ . '/../../common/config/params.php'),
-    require(__DIR__ . '/../../common/config/params-local.php'),
-    require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+    require __DIR__ . '/../../common/config/params.php',
+    require __DIR__ . '/../../common/config/params-local.php',
+    require __DIR__ . '/params.php',
+    require __DIR__ . '/params-local.php'
 );
 
 return [
@@ -13,8 +13,8 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => '/guides',
     'components' => [
-        'assetManager' => (YII_ENV_PROD) ? [
-            'bundles' => require(__DIR__ . '/assets-compressed.php'),
+        'assetManager' => YII_ENV_PROD ? [
+            'bundles' => require __DIR__ . '/assets-compressed.php',
         ] : [],
         'request' => [
             'csrfParam' => '_csrf-frontend',
@@ -42,10 +42,10 @@ return [
         ],
         'urlManager' => [
             'rules' => [
-                '<alias:about>' => 'site/<alias>',
+                '<alias:about|resume>' => 'site/<alias>',
                 '<controller>' => '<controller>/index',
                 'guides/<title:\S*>'    => 'guides/view',
-                'projects/<title:\S*>'  => 'projects/view',
+                'portfolio/<title:\S*>'  => 'portfolio/view',
             ],
         ],
     ],
