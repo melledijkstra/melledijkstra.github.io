@@ -23,7 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'title',
-            'thumbnail',
+            [
+                'attribute' => 'thumbnail',
+                'value' => function($model) {
+                    /** @var $model \common\models\Project */
+                    return "<img class='img-responsive' src='{$model->getPublicLink(true, true)}' />";
+                },
+                'format' => 'html',
+            ],
+            'sizeString',
             'external_url:url',
             'created_at:date',
             'updated_at:date',

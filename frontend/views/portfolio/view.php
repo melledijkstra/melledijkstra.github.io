@@ -10,6 +10,8 @@
 
 use yii\helpers\Url;
 
+$this->title = $project->title;
+
 ?>
 <div class="container-fluid">
     <div class="row">

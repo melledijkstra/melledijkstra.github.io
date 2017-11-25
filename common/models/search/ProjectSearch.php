@@ -15,7 +15,7 @@ class ProjectSearch extends Project
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
@@ -38,8 +38,9 @@ class ProjectSearch extends Project
      * @param array $params
      *
      * @return ActiveDataProvider
+     * @throws \yii\base\InvalidParamException
      */
-    public function search($params)
+    public function search($params): ActiveDataProvider
     {
         $query = Project::find();
 

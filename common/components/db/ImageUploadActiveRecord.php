@@ -17,9 +17,9 @@ use yii\imagine\Image;
 abstract class ImageUploadActiveRecord extends FileUploadActiveRecord
 {
 
-    protected $extensions = ['png', 'jpg', 'jpeg', 'gif'];
+    protected static $extensions = ['png', 'jpg', 'jpeg', 'gif'];
 
-    protected $fileAttributeName = 'image_file';
+    protected static $fileAttributeName = 'image_file';
 
     /**
      * @var int The width of the image
@@ -44,7 +44,10 @@ abstract class ImageUploadActiveRecord extends FileUploadActiveRecord
         if ($newpath === null) {
             $newpath = $filepath;
         }
-        Image::getImagine()->open($filepath)->thumbnail(new Box($this->width, $this->height))->save($newpath);
+        Image::getImagine()
+            ->open($filepath)
+            ->thumbnail(new Box($this->width, $this->height))
+            ->save($newpath);
     }
 
     /**
@@ -55,10 +58,15 @@ abstract class ImageUploadActiveRecord extends FileUploadActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         // check if the image needs to be cropped (when guide is created or $fileAttributeName is updated)
-        if ($insert || array_key_exists($this->fileAttributeName, $changedAttributes)) {
+        if ($insert || array_key_exists(static::$fileAttributeName, $changedAttributes)) {
             $this->convertToThumbnail($this->filePath());
         }
         parent::afterSave($insert, $changedAttributes);
+    }
+
+    public static function getExtensions()
+    {
+        return static::$extensions;
     }
 
 }

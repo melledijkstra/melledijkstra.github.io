@@ -34,22 +34,22 @@ class ProjectsController extends BackendController
     /**
      * Lists all Project models.
      * @return mixed
+     * @throws \yii\base\InvalidParamException
      */
     public function actionIndex()
     {
         $searchModel = new ProjectSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index', compact('searchModel', 'dataProvider'));
     }
 
     /**
      * Displays a single Project model.
      * @param integer $id
      * @return mixed
+     * @throws \yii\web\NotFoundHttpException
+     * @throws \yii\base\InvalidParamException
      */
     public function actionView($id)
     {
@@ -62,6 +62,7 @@ class ProjectsController extends BackendController
      * Creates a new Project model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws \yii\base\InvalidParamException
      */
     public function actionCreate()
     {
@@ -69,11 +70,11 @@ class ProjectsController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -81,12 +82,14 @@ class ProjectsController extends BackendController
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws \yii\base\InvalidParamException
+     * @throws \yii\web\NotFoundHttpException
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if(Yii::$app->request->post('deleteFile', false) == true) {
+        if(Yii::$app->request->post('deleteFile', false) === true) {
             $model->deleteFile();
         }
 
@@ -105,6 +108,7 @@ class ProjectsController extends BackendController
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws \Exception
      */
     public function actionDelete($id)
     {
@@ -120,12 +124,12 @@ class ProjectsController extends BackendController
      * @return Project the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id): Project
     {
         if (($model = Project::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
