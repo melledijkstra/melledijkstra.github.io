@@ -35,7 +35,7 @@ window.twttr = (function(d, s, id) {
   return t;
 }(document, "script", "twitter-wjs"));
 JS
-    , View::POS_BEGIN);
+, View::POS_BEGIN);
 
 // SEO stuff
 $metastuff = [
@@ -115,7 +115,7 @@ $this->title = $guide->title;
             };
             (function () {
                 var d = document, s = d.createElement('script');
-                s.src = 'https://<?= (YII_ENV_PROD) ? 'live-melledijkstra' : 'dev-melledijkstra' ?>.disqus.com/embed.js';
+                s.src = 'https://dev-melledijkstra.disqus.com/embed.js';
                 s.setAttribute('data-timestamp', +new Date());
                 (d.head || d.body).appendChild(s);
             })();

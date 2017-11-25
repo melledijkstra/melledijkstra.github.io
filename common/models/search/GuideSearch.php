@@ -20,7 +20,7 @@ class GuideSearch extends Guide
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'project_id', 'category_id', 'language_id', 'difficulty', 'duration'], 'integer'],
@@ -32,7 +32,7 @@ class GuideSearch extends Guide
     /**
      * @inheritdoc
      */
-    public function formName()
+    public function formName(): string
     {
         return '';
     }
@@ -40,7 +40,7 @@ class GuideSearch extends Guide
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return array_merge(parent::attributeLabels(), [
             'content'       => Yii::t('guide-search', 'Title & Description'),
@@ -51,7 +51,7 @@ class GuideSearch extends Guide
     /**
      * @inheritdoc
      */
-    public function scenarios()
+    public function scenarios(): array
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
@@ -63,8 +63,9 @@ class GuideSearch extends Guide
      * @param array $params
      *
      * @return ActiveDataProvider
+     * @throws \yii\base\InvalidParamException
      */
-    public function search($params)
+    public function search($params): ActiveDataProvider
     {
         // Always sort by the newest Guides
         $query = Guide::find()

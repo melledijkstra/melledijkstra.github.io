@@ -54,7 +54,7 @@ $this->registerJsFile('/js/guide_form.js', ['depends' => \yii\web\JqueryAsset::c
         ]) ?>
     <p>It is best to keep descriptions between 150 and 160 characters.</p>
 
-    <?= $form->field($model, 'guide_text')->widget(MarkdownEditor::className(), [
+    <?= $form->field($model, 'guideText')->widget(MarkdownEditor::className(), [
         'footerMessage' => false,
         'showExport' => false,
     ]); ?>

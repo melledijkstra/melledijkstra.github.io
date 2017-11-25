@@ -121,8 +121,6 @@ JSCRIPT
                     <?= $form->field($guideSearch, 'difficulty')->dropDownList(Guide::difficultyList(),
                         ['prompt' => 'Select Difficulty']) ?>
 
-                    <? //= $form->field($guideSearch, 'duration')->dropDownList(Guide::durationList(), ['prompt' => 'Select Duration']) ?>
-
                     <?= $form->field($guideSearch,
                         'project_id')->dropDownList(ArrayHelper::map(Project::find()->select([
                         'id',

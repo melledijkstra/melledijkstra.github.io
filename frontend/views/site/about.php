@@ -11,8 +11,6 @@ $this->registerJsFile('//platform.twitter.com/widgets.js', [
     'charset' => 'utf-8',
 ]);
 
-$this->registerCss('body { background-color: transparent; } .background-sketch {z-index: -2; top: 0;}');
-
 $this->title = 'About';
 
 ?>

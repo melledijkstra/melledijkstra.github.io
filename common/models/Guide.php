@@ -40,13 +40,13 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     /** The maximum difficulty a guide can get */
     const MAX_DIFFICULTY = 5;
 
-    /** @var $guide_text string This is the markdown entered by a user or retrieved from linked the file */
-    public $guide_text;
+    /** @var $guideText string This is the markdown entered by a user or retrieved from linked file */
+    public $guideText;
 
     /** @var array The linked categories */
     public $categoryIds = [];
 
-    protected $fileAttributeName = 'thumbnail';
+    protected static $fileAttributeName = 'thumbnail';
 
     protected $height = 400;
 
@@ -55,7 +55,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'guides';
     }
@@ -63,9 +63,9 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     /**
      * @inheritdoc
      */
-    public function beforeValidate()
+    public function beforeValidate(): bool
     {
-        if(parent::beforeValidate()) {
+        if (parent::beforeValidate()) {
             $this->createUnknownCategories();
             return true;
         }
@@ -76,9 +76,9 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      * @inheritdoc
      * @throws \yii\base\InvalidParamException
      */
-    public function beforeSave($insert)
+    public function beforeSave($insert): bool
     {
-        return parent::beforeSave($insert) && $this->saveGuideFile($this->guide_text);
+        return parent::beforeSave($insert) && $this->saveGuideFile($this->guideText);
     }
 
     /**
@@ -88,8 +88,8 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     public function afterSave($insert, $changedAttributes)
     {
         GuidesCategory::deleteAll(['guide_id' => $this->id]);
-        if(is_array($this->category_ids)) {
-            foreach($this->category_ids as $category_id) {
+        if (is_array($this->categoryIds)) {
+            foreach ($this->categoryIds as $category_id) {
                 $this->link('categories', Category::findOne($category_id));
             }
         }
@@ -116,7 +116,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     public function afterFind()
     {
         if (file_exists($this->filepath)) {
-            $this->guide_text = file_get_contents($this->filepath);
+            $this->guideText = file_get_contents($this->filepath);
         }
         parent::afterFind();
     }
@@ -124,14 +124,14 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return array_merge(parent::rules(), [
-            [['title', 'guide_text'], 'required'],
+            [['title', 'guideText'], 'required'],
             [['project_id', 'language_id', 'difficulty', 'duration'], 'integer'],
             [['title', 'filename', 'thumbnail'], 'string', 'max' => 255],
             [['sneak_peek'], 'string', 'max' => 700],
-            [['guide_text'], 'string'],
+            [['guideText'], 'string'],
             [['title'], 'unique'],
             [['title'], 'match', 'pattern' => '/^[a-zA-Z0-9_ ]*$/'],
             [
@@ -164,7 +164,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => Yii::t('common', 'ID'),
@@ -317,7 +317,6 @@ FROM
 ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
     }
 
-
     /**
      * @return string
      * @throws \yii\base\InvalidConfigException
@@ -330,15 +329,17 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
             ], Markdown::SMARTYPANTS_ATTR_DO_NOTHING);
         }
 
-        return '<p style="color:red;">'.Yii::t('guide', 'This guide\'s file is not found!').'</p>';
+        return '<p style="color:red;">' . Yii::t('guide', 'This guide\'s file is not found!') . '</p>';
     }
 
     /**
-     * @return string
+     * @return string|null
+     * @throws \yii\base\InvalidParamException
      */
-    public function getFilePath(): string {
-        if(!empty($this->filename)) {
-            return Yii::getAlias('@frontend').'/guides/'.$this->filename;
+    public function getFilePath()
+    {
+        if (!empty($this->filename)) {
+            return \Yii::getAlias('@frontend') . '/guides/' . $this->filename;
         }
 
         return null;
@@ -353,9 +354,9 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
     private function saveGuideFile($guide_text): bool
     {
         $this->deleteGuideFile();
-        $filename = substr(hash('md5',time()),0,8).'.md';
-        $filepath = \Yii::getAlias('@frontend').'/guides/'.$filename;
-        if(file_put_contents($filepath, $guide_text)) {
+        $filename = substr(hash('md5', time()), 0, 8) . '.md';
+        $filepath = \Yii::getAlias('@frontend') . '/guides/' . $filename;
+        if (file_put_contents($filepath, $guide_text)) {
             $this->filename = $filename;
             return true;
         }
@@ -382,7 +383,7 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
     public function getCategoryStrings(): array
     {
         $categories = [];
-        foreach($this->categories as $category) {
+        foreach ($this->categories as $category) {
             $categories[] = $category->name;
         }
         return $categories;
@@ -393,8 +394,9 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
      * @param bool $slug If the guide title should use dashes instead of spaces, this is used for links to this guide
      * @return mixed|string The title with or without dashes
      */
-    public function getTitle($slug = false) {
-        if($slug) {
+    public function getTitle($slug = false)
+    {
+        if ($slug) {
             return strtolower(str_replace(' ', '-', $this->title));
         }
         return $this->title;
@@ -404,7 +406,7 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
      * @inheritdoc
      * @throws \yii\base\InvalidParamException
      */
-    public function getLink($absolute = false)
+    public function getLink($absolute = false): string
     {
         return Url::to('/guides/' . $this->getTitle(true), $absolute);
     }
@@ -415,8 +417,8 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
     private function createUnknownCategories()
     {
         // Go though every category
-        if(is_array($this->category_ids)) {
-            foreach ($this->category_ids as $i => $value) {
+        if (is_array($this->categoryIds)) {
+            foreach ($this->categoryIds as $i => $value) {
                 // if the category is not a number then it doesn't exist yet
                 if (!is_numeric($this->categoryIds[$i])) {
                     // create the new category
@@ -436,7 +438,7 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
     public static function difficultyList()
     {
         $list = [];
-        for ($i = 1; $i <= self::MAX_DIFFICULTY; $i++) {
+        for ($i = 1; $i <= static::MAX_DIFFICULTY; $i++) {
             $list[$i] = $i;
         }
         return $list;

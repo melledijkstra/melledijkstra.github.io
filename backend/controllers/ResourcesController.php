@@ -10,6 +10,7 @@ namespace backend\controllers;
 
 
 use backend\components\web\BackendController;
+use common\components\db\ImageUploadActiveRecord;
 use yii\helpers\FileHelper;
 use yii\web\HttpException;
 use yii\web\UploadedFile;
@@ -23,7 +24,7 @@ class ResourcesController extends BackendController
 
     public function init()
     {
-        $this->path = \Yii::getAlias('@frontend/web/images/');
+        $this->path = \Yii::getAlias('@frontend/web/uploads/');
         parent::init();
     }
 
@@ -31,8 +32,12 @@ class ResourcesController extends BackendController
     {
         $fileList = [];
         if (is_dir($this->path)) {
-            foreach (FileHelper::findFiles($this->path, ['except' => ['.gitignore']]) as $file) {
-                $file = explode('web', FileHelper::normalizePath($file, '/'))[1];
+            foreach (FileHelper::findFiles($this->path, [
+                'only' => ImageUploadActiveRecord::extensions,
+                'except' => ['.gitignore'],
+            ]) as $file) {
+                $split = explode('web', FileHelper::normalizePath($file, '/'));
+                $file = $split[count($split) - 1];
                 $fileList[] = ['name' => $file];
             }
         }
@@ -46,27 +51,27 @@ class ResourcesController extends BackendController
         $image = FileHelper::normalizePath(explode('images', $this->path)[0] . $file);
         if (is_file($image)) {
             unlink($image);
-            \Yii::$app->session->addFlash('success', 'File "' . $file . '" successfully deleted!');
+            \Yii::$app->session->addFlash('success', "File $file successfully deleted!");
         } else {
-            \Yii::$app->session->addFlash('info', 'File "' . $file . '" not found and not deleted!');
+            \Yii::$app->session->addFlash('info', "File $file not found and not deleted!");
         }
         return $this->goBack('/resources');
     }
 
     public function actionUploadGuideImage()
     {
-        $filename = time() . '-' . substr(hash('md5', mt_rand(1, 100)), 0, 5);
+        $filename = time() . '-' . substr(hash('md5', random_int(1, 100)), 0, 5);
         $uploadedFile = UploadedFile::getInstanceByName('pastedImage');
         if ($uploadedFile !== null) {
-            $filename .= '.'.$uploadedFile->extension;
-            if($uploadedFile->saveAs($this->path . 'guides/' . $filename, true)) {
-                $publicpath = explode('web',$this->path)[1].'guides/'.$filename;
-                echo \Yii::$app->params['frontendUrl'].$publicpath;
+            $filename .= '.' . $uploadedFile->extension;
+            if ($uploadedFile->saveAs($this->path . 'guides/' . $filename, true)) {
+                $publicpath = explode('web', $this->path)[1] . 'guides/' . $filename;
+                echo \Yii::$app->params['frontendUrl'] . $publicpath;
             } else {
-                throw new \Exception("Could not save image");
+                throw new \RuntimeException('Could not save image');
             }
         } else {
-            throw new HttpException(400, "There is no image file uploaded");
+            throw new HttpException(400, 'There is no image file uploaded');
         }
         die;
     }

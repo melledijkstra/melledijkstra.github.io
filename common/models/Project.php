@@ -15,6 +15,7 @@ use yii\helpers\Url;
  * @property string $title
  * @property string $description
  * @property string $thumbnail
+ * @property int $size [int(11)]
  * @property string $external_url
  *
  * @property string $link
@@ -27,7 +28,7 @@ class Project extends ImageUploadActiveRecord implements Linkable
      * Overridden attribute name for the column name
      * @var string
      */
-    protected $fileAttributeName = 'thumbnail';
+    protected static $fileAttributeName = 'thumbnail';
 
     /**
      * Overridden attribute so that file isn't required
@@ -46,9 +47,19 @@ class Project extends ImageUploadActiveRecord implements Linkable
     protected $height = 600;
 
     /**
+     * @var array The different sizes for a project
+     */
+    const SIZES = [
+        'Small',
+        'Large',
+        'Landscape',
+        'Portrait',
+    ];
+
+    /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'projects';
     }
@@ -56,10 +67,11 @@ class Project extends ImageUploadActiveRecord implements Linkable
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return array_merge_recursive(parent::rules(),[
             [['title'], 'required'],
+            [['size'], 'integer'],
             [['title'], 'match', 'pattern' => '/^[a-zA-Z0-9_ -]*$/'],
             [['title', 'description', 'thumbnail', 'external_url'], 'string', 'max' => 255],
             [['title'], 'unique'],
@@ -69,12 +81,13 @@ class Project extends ImageUploadActiveRecord implements Linkable
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return array_merge(parent::attributeLabels(),[
             'title' => Yii::t('common', 'Title'),
             'description' => Yii::t('project', 'Description'),
             'thumbnail' => Yii::t('project', 'Thumbnail'),
+            'size' => Yii::t('project', 'Size'),
             'external_url' => Yii::t('project', 'External Url'),
         ]);
     }
@@ -90,10 +103,17 @@ class Project extends ImageUploadActiveRecord implements Linkable
     /**
      * @inheritdoc
      */
-    public function getPublicLink($absolute = false): string
+    public function getPublicLink($absolute = false, $fromBackend = false): string
     {
-        if(!empty($this->thumbnail) && file_exists(self::$uploadPath.$this->thumbnail)) {
-            $url = $absolute ? Url::base(true) : '';
+        if(!empty($this->thumbnail) && file_exists(static::$uploadPath.$this->thumbnail)) {
+            $url = '';
+            if($absolute) {
+                if($fromBackend) {
+                    $url = \Yii::$app->params['frontendUrl'];
+                } else {
+                    $url = Url::base(true);
+                }
+            }
             return $url.'/uploads/'. static::tableName().'/'.$this->thumbnail;
         }
 
@@ -103,9 +123,10 @@ class Project extends ImageUploadActiveRecord implements Linkable
     /**
      * Returns the title of this project
      * @param bool $slug If the project title should use dashes and lowercase instead of spaces, this is used for links to this project
-     * @return mixed|string The title with or without dashes
+     * @return string The title with or without dashes
      */
-    public function getTitle($slug = false) {
+    public function getTitle($slug = false): string
+    {
         if($slug) {
             return strtolower(str_replace(' ', '-', $this->title));
         }
@@ -116,9 +137,17 @@ class Project extends ImageUploadActiveRecord implements Linkable
      * @inheritdoc
      * @throws \yii\base\InvalidParamException
      */
-    public function getLink()
+    public function getLink($absolute = false): string
     {
         return Url::to('/portfolio/'.$this->getTitle(true));
+    }
+
+    /**
+     * @return string
+     */
+    public function getSizeString(): string
+    {
+        return static::SIZES[$this->size];
     }
 
 }

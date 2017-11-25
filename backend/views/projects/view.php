@@ -31,7 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'description',
-            'thumbnail',
+            [
+                'attribute' => 'thumbnail',
+                'value' => "<img class='img-responsive' style='max-height: 200px;' src='{$model->getPublicLink(true, true)}' />",
+                'format' => 'html',
+            ],
+            'sizeString',
             'external_url:url',
             'created_at:datetime',
             'updated_at:datetime',

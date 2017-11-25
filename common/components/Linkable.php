@@ -18,7 +18,8 @@ interface Linkable
 {
     /**
      * Specify the link where this resource can be found
+     * @param bool $absolute If the link has to be an absolute url
      * @return string
      */
-    public function getLink();
+    public function getLink($absolute = false): string;
 }
