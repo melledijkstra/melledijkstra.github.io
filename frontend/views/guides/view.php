@@ -80,25 +80,40 @@ $this->title = $guide->title;
                     - <?= $guide->createdBy->username; ?></small>
             </div>
             <div class="margin-10 guide-share-bar">
-                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=<?= $this->title ?>&url=<?= $guide->getLink(true); ?>&via=dijkstrascience">Tweet</a>
+                <a class="twitter-share-button"
+                   href="https://twitter.com/intent/tweet?text=<?= $this->title ?>&url=<?= $guide->getLink(true); ?>&via=dijkstrascience">Tweet</a>
                 <div class="g-plusone"></div>
                 <!-- facebook share? -->
             </div>
         </div>
+        <div class="series">
+            <?php
+            $prevGuide = $guide->previousGuide;
+            $nextGuide = $guide->nextGuide;
+            ?>
+            <?php if ($prevGuide != null): ?>
+                <div class="pull-left">
+                    <a class="btn btn-primary" href="<?= $prevGuide->getLink(); ?>"><span><- </span> <?= $prevGuide->title; ?></a>
+                </div>
+            <?php endif; ?>
+            <?php if ($nextGuide != null): ?>
+                <div class="pull-right">
+                    <a class="btn btn-primary" href="<?= $nextGuide->getLink(); ?>"><?= $nextGuide->title; ?>
+                        <span> -></span></a>
+                </div>
+            <?php endif; ?>
+        </div>
+        <div class="clearfix"></div>
         <div class="guide-container">
             <?= $guide->renderGuide(); ?>
         </div>
         <div id="disqus_thread"></div>
         <script>
-            /**
-             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-             */
             var disqus_config = function () {
                 this.page.url = "<?= \yii\helpers\Url::canonical(); ?>";  // Replace PAGE_URL with your page's canonical URL variable
                 this.page.identifier = "<?= $guide->getTitle(true); ?>"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
             };
-            (function () { // DON'T EDIT BELOW THIS LINE
+            (function () {
                 var d = document, s = d.createElement('script');
                 s.src = 'https://dev-melledijkstra.disqus.com/embed.js';
                 s.setAttribute('data-timestamp', +new Date());

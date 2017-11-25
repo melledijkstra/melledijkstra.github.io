@@ -6,6 +6,7 @@ use common\components\db\ImageUploadActiveRecord;
 use common\components\Linkable;
 use kartik\markdown\Markdown;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 use yii\helpers\Url;
 
@@ -25,6 +26,11 @@ use yii\helpers\Url;
  * @property Project $project
  * @property Language $language
  * @property Category[] $categories
+ * @property \yii\db\ActiveQuery $guidesCategories
+ * @property Guide $previousGuide
+ * @property null|string $filePath
+ * @property string $renderCategories
+ * @property Guide $nextGuide
  * @property string[] $categoryStrings
  * @property string $thumbnail
  */
@@ -34,7 +40,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     /** The maximum difficulty a guide can get */
     const MAX_DIFFICULTY = 5;
 
-    /** @var $guideText string This is the markdown entered by a user which needs to be saved to a file */
+    /** @var $guideText string This is the markdown entered by a user or retrieved from linked file */
     public $guideText;
 
     /** @var array The linked categories */
@@ -188,6 +194,19 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     {
         return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('guides_categories',
             ['guide_id' => 'id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getCategoryIds(): array
+    {
+        if(empty($this->categoryIds)) {
+            foreach ($this->categories as $category) {
+                $this->categoryIds[] = $category->id;
+            }
+        }
+        return $this->categoryIds;
     }
 
     /**

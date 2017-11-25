@@ -39,10 +39,10 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
 
-        $menuItems[] = ['label' => '<span class="mdi mdi-buffer"></span> Projects', 'items' =>
+        $menuItems[] = ['label' => '<span class="mdi mdi-book-multiple"></span> Series', 'items' =>
             [
-                ['label' => '<span class="mdi mdi-view-list"></span> Overview', 'url' => ['/projects']],
-                ['label' => '<span class="mdi mdi-plus"></span> Create', 'url' => ['/projects/create']]
+                ['label' => '<span class="mdi mdi-view-list"></span> Series', 'url' => ['/series']],
+                ['label' => '<span class="mdi mdi-plus"></span> Create', 'url' => ['/series/create']]
             ]
         ];
         $menuItems[] = ['label' => '<span class="mdi mdi-book-open-page-variant"></span> Guides', 'items' =>

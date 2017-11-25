@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "guides_categories".
@@ -13,7 +14,7 @@ use Yii;
  * @property Category $category
  * @property Guide $guide
  */
-class GuidesCategory extends \yii\db\ActiveRecord
+class GuidesCategory extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -42,8 +43,8 @@ class GuidesCategory extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'guide_id' => Yii::t('guide', 'Guide ID'),
-            'category_id' => Yii::t('guide', 'Category ID'),
+            'guide_id' => Yii::t('guide', 'Guide'),
+            'category_id' => Yii::t('category', 'Category'),
         ];
     }
 
