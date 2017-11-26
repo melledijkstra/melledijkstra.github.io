@@ -12,13 +12,43 @@ $this->registerCss('css/resume.css');
 $this->title = 'Resume';
 
 $skills = [
-    'Problem Solving' => 80,
-    'Design Patterns' => 60,
-    'Web Development' => 60,
-    'Android (Java)' => 90,
-    'Javascript/jQuery' => 45,
-    'PHP/MySQL' => 100,
-    'Photoshop' => 20
+    'Problem Solving' => [
+        80,
+        '',
+    ],
+    'Design Patterns' => [
+        75,
+        'It doesn\'t matter which language you use, it matters how you use it',
+    ],
+    'Web Development' => [
+        95,
+        'Frontend, Backend. You name it, I\'ve mastered the web'
+    ],
+    'Computer Networks' => [
+        60,
+        'I\'ve setup multiple servers and like to work with IoT'
+    ],
+    'Android (Java)' => [
+        65,
+        'Made several Android apps for remote controlling arduino, music player, etc.'
+    ],
+    'Javascript' => [
+        86,
+        'Javascript was the first language I started with!'
+    ],
+    'Photoshop / Illustrator' => [
+        30,
+        'I use it for personal projects and to improve arty skills!'
+    ],
+];
+
+$softwareList = [
+    'Jetbrains Products' => '/images/resume/software/logo-jetbrains.png',
+    'PHPStorm' => '/images/resume/software/logo-phpstorm.png',
+    'Yii2 Framework' => '/images/resume/software/logo-yii2.png',
+    'Arduino' => '/images/resume/software/logo-arduino.png',
+    'PyCharm' => '/images/resume/software/logo-pycharm.png',
+    'Git' => '/images/resume/software/logo-git.png',
 ];
 
 $this->registerCss(<<<CSS
@@ -30,14 +60,16 @@ $this->registerCss(<<<CSS
 CSS
 );
 
+$CVFile = '/files/CV-Europass-Melle-Dijkstra-EN.pdf';
+
 ?>
 <!--<iframe class="block background-sketch full-height affix" src="--><? //= \yii\helpers\Url::to(['/sketches/ConnectedLines/index.html']); ?><!--"></iframe>-->
 <div id="resume-page">
     <div id="slanted-box">
-        <div class="row">
+        <div class="row more-padding">
             <div class="col col-xs-12"><span class="text-lg">Hi,</span></div>
         </div>
-        <div class="row margin-tb-10">
+        <div class="row more-padding margin-tb-10">
             <div class="col col-lg-6 col-md-6">
                 <p>
                     My name is <strong>Melle Dijkstra</strong>. A enthusiastic computer scientist who's passionate
@@ -54,7 +86,7 @@ CSS
                     <li><i class="mdi mdi-phone"></i> <a href="tel:+31611666686">+31611666686</a></li>
                     <li><i class="mdi mdi-email"></i> <a href="mailto:dev.melle@gmail.com">dev.melle@gmail.com</a></li>
                     <li><i class="mdi mdi-download"></i> <a target="_blank"
-                                                            href="/files/CV-Europass-Melle-Dijkstra-EN.pdf">Europass
+                                                            href="<?= $CVFile ?>">Europass
                             CV</a>
                     </li>
                 </ul>
@@ -65,24 +97,25 @@ CSS
         <img id="photo-of-myself" src="/images/resume/melle-working.jpg" alt="Personal photo"/>
     </div>
     <div id="resume-part-2" class="container-fluid padding-tb-20">
-        <div class="row">
+        <div class="row more-padding">
             <div class="col col-sm-12 col-md-6">
                 <h3>· Skills</h3>
                 <ul class="list-unstyled">
-                    <?php foreach ($skills as $skill => $progress): ?>
+                    <?php foreach ($skills as $skill => $info): ?>
                         <li>
                             <div class="margin-tb-20">
                                 <p class="no-margin"><?= $skill ?></p>
-                                <small class="no-margin text-grey">Installed multiple webservers</small>
+                                <small class="no-margin text-grey"><?= $info[1]; ?></small>
                             </div>
                             <div class="skill-container">
-                                <div class="skill" style="width: <?= $progress; ?>%;"></div>
+                                <div class="skill" style="width: <?= $info[0]; ?>%;"></div>
                             </div>
                         </li>
                     <?php endforeach; ?>
                 </ul>
                 <p class="margin-tb-20">
-                    <small>These skills are demonstrated in the <a href="/guides">guides</a> on
+                    <small class="text-sm">
+                        These skills are demonstrated in the <a href="/guides">guides</a> I write on
                         this site.
                     </small>
                 </p>
@@ -93,8 +126,8 @@ CSS
                     <tbody>
                     <tr>
                         <td>
-                            <a href="https://www.hanze.nl/eng">
-                                <img class="resume-logo" src="/images/resume/logo-hanze-white.png"
+                            <a target="_blank" href="https://www.hanze.nl/eng">
+                                <img class="resume-logo grayscale" src="/images/resume/logo-hanze.png"
                                      alt="Logo Hanzehogeschool Groningen"/>
                             </a>
                         </td>
@@ -113,7 +146,7 @@ CSS
                     <tr>
                         <td>
                             <a target="_blank" href="https://bouw7.nl">
-                                <img class="resume-logo" src="/images/resume/logo-bouw7-white.png"
+                                <img class="resume-logo grayscale" src="/images/resume/logo-bouw7.png"
                                      alt="Logo Bouw7"/>
                             </a>
                         </td>
@@ -126,7 +159,7 @@ CSS
                     </tr>
                     <tr>
                         <td>
-                            <img class="resume-logo" src="/images/resume/logo-stroetenga-design-white.png"
+                            <img class="resume-logo grayscale" src="/images/resume/logo-stroetenga-design.png"
                                  alt="Logo Stroetenga Design"/>
                         </td>
                         <td>
@@ -138,8 +171,10 @@ CSS
                     </tr>
                     <tr>
                         <td>
-                            <img class="resume-logo" src="/images/resume/logo-kweekvijvernoord-white.jpg"
-                                 alt="Logo Kweekvijvernoord"/>
+                            <a target="_blank" href="http://kweekvijvernoord.com/">
+                                <img class="resume-logo grayscale" src="/images/resume/logo-kweekvijvernoord.jpg"
+                                     alt="Logo Kweekvijvernoord"/>
+                            </a>
                         </td>
                         <td>
                             <h4>Kweekvijvernoord</h4>
@@ -150,29 +185,25 @@ CSS
                     </tr>
                     </tbody>
                 </table>
+                <div class="text-center">
+                    Please <a target="_blank" href="<?= $CVFile ?>">download <i class="mdi mdi-download"></i></a> my
+                    resume for more in-depth information about my experiences
+                </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row more-padding">
             <div class="col col-xs-12">
                 <h3>· Software & Tools I <span class="mdi mdi-heart"></span></h3>
             </div>
             <div class="col col-xs-12">
                 <div id="software-container">
-                    <div class="pull-left text-center margin-lr-20">
-                        <img class="resume-logo" src="/images/resume/software/logo-jetbrains.png"/>
-                        <p>Jetbrains Products</p>
-                    </div>
-                    <div class="pull-left text-center margin-lr-20">
-                        <img class="resume-logo" src="/images/resume/software/logo-phpstorm.png"/>
-                        <p>PHPStorm</p>
-                    </div>
-                    <div class="pull-left text-center margin-lr-20">
-                        <img class="resume-logo" src="/images/resume/software/logo-yii2.png"/>
-                        <p>Yii2 Framework</p>
-                    </div>
-                    <div class="pull-left text-center margin-lr-20">
-                        <img class="resume-logo" src="/images/resume/software/logo-arduino.png"/>
-                        <p>Arduino</p>
+                    <div class="row no-gutter">
+                        <?php foreach ($softwareList as $name => $url): ?>
+                            <div class="software-item col-xs-6 col-md-3 col-lg-2 text-center">
+                                <img class="resume-logo grayscale" src="<?= $url ?>"/>
+                                <p><?= $name ?></p>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

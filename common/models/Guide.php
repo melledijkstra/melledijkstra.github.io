@@ -8,6 +8,7 @@ use kartik\markdown\Markdown;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use yii\helpers\Url;
 
 /**
@@ -26,7 +27,7 @@ use yii\helpers\Url;
  * @property Project $project
  * @property Language $language
  * @property Category[] $categories
- * @property \yii\db\ActiveQuery $guidesCategories
+ * @property ActiveQuery $guidesCategories
  * @property Guide $previousGuide
  * @property null|string $filePath
  * @property string $renderCategories
@@ -227,9 +228,9 @@ class Guide extends ImageUploadActiveRecord implements Linkable
 
     /**
      * Retrieves the previous guide in the series
-     * @return Guide
+     * @return ActiveQuery
      */
-    public function getPreviousGuide(): Guide
+    public function getPreviousGuide(): ActiveQuery
     {
         /**
          * SELECT
@@ -273,9 +274,9 @@ ORDER BY sg.`order` DESC LIMIT 1;', ['guide_id' => $this->id]);
 
     /**
      * Retrieves the next guide in the series
-     * @return Guide
+     * @return ActiveQuery
      */
-    public function getNextGuide(): Guide
+    public function getNextGuide(): ActiveQuery
     {
         /**
          * SELECT
