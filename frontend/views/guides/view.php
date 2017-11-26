@@ -91,12 +91,12 @@ $this->title = $guide->title;
             $prevGuide = $guide->previousGuide;
             $nextGuide = $guide->nextGuide;
             ?>
-            <?php if ($prevGuide != null): ?>
+            <?php if ($prevGuide !== null): ?>
                 <div class="pull-left">
                     <a class="btn btn-primary" href="<?= $prevGuide->getLink(); ?>"><span><- </span> <?= $prevGuide->title; ?></a>
                 </div>
             <?php endif; ?>
-            <?php if ($nextGuide != null): ?>
+            <?php if ($nextGuide !== null): ?>
                 <div class="pull-right">
                     <a class="btn btn-primary" href="<?= $nextGuide->getLink(); ?>"><?= $nextGuide->title; ?>
                         <span> -></span></a>
