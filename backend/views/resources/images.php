@@ -1,4 +1,5 @@
-<?php
+<?php use yii\grid\ActionColumn;
+
 /**
  * Created by PhpStorm.
  * User: melle
@@ -22,12 +23,12 @@
             'attribute' => 'Image',
             'value' => function ($model) {
                 $publicPath = \Yii::$app->params['frontendUrl'] . $model['name'];
-                return "<img class='img-responsive thumbnail' style='max-height: 300px;' src='$publicPath' alt='guide image' />";
+                return "<img class='img-responsive thumbnail' style='max-height: 150px;' src='$publicPath' alt='guide image' />";
             },
             'format' => 'html',
         ],
         [
-            'class' => 'yii\grid\ActionColumn',
+            'class' => ActionColumn::class,
             'template' => '{delete}',
             'urlCreator' => function ($action, $model) {
                 return \yii\helpers\Url::to(['resources/delete-image', 'file' => $model['name']]);

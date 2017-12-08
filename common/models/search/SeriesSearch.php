@@ -15,7 +15,7 @@ class SeriesSearch extends Series
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
@@ -26,7 +26,7 @@ class SeriesSearch extends Series
     /**
      * @inheritdoc
      */
-    public function scenarios()
+    public function scenarios(): array
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
@@ -38,8 +38,9 @@ class SeriesSearch extends Series
      * @param array $params
      *
      * @return ActiveDataProvider
+     * @throws \yii\base\InvalidParamException
      */
-    public function search($params)
+    public function search($params): ActiveDataProvider
     {
         $query = Series::find();
 

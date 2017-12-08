@@ -6,6 +6,7 @@ use common\components\db\ImageUploadActiveRecord;
 use common\components\Linkable;
 use kartik\markdown\Markdown;
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -89,7 +90,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
     public function afterSave($insert, $changedAttributes)
     {
         GuidesCategory::deleteAll(['guide_id' => $this->id]);
-        if (is_array($this->categoryIds)) {
+        if (\is_array($this->categoryIds)) {
             foreach ($this->categoryIds as $category_id) {
                 $this->link('categories', Category::findOne($category_id));
             }
@@ -320,15 +321,16 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
 
     /**
      * @return string
-     * @throws \yii\base\InvalidConfigException
      */
     public function renderGuide(): string
     {
-        if (file_exists($this->filepath)) {
-            return Markdown::convert(file_get_contents($this->filepath), [
-                'smartyPants' => false,
-            ], Markdown::SMARTYPANTS_ATTR_DO_NOTHING);
-        }
+        try {
+            if (file_exists($this->filepath)) {
+                return Markdown::convert(file_get_contents($this->filepath), [
+                    'smartyPants' => false,
+                ], Markdown::SMARTYPANTS_ATTR_DO_NOTHING);
+            }
+        } catch(InvalidConfigException $e) {}
 
         return '<p style="color:red;">' . Yii::t('guide', 'This guide\'s file is not found!') . '</p>';
     }
@@ -344,6 +346,10 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
         }
 
         return null;
+    }
+
+    public function getImageFilePath() {
+
     }
 
     /**
@@ -407,9 +413,11 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
      * @inheritdoc
      * @throws \yii\base\InvalidParamException
      */
-    public function getLink($absolute = false): string
+    public function getLink($absolute = false, $fromBackend = false): string
     {
-        return Url::to('/guides/' . $this->getTitle(true), $absolute);
+        $url = $fromBackend ? \Yii::$app->params['frontendUrl'] : '';
+        $url .= Url::to('/guides/' . $this->getTitle(true), $fromBackend ? false : $absolute);
+        return $url;
     }
 
     /**
@@ -418,7 +426,7 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
     private function createUnknownCategories()
     {
         // Go though every category
-        if (is_array($this->categoryIds)) {
+        if (\is_array($this->categoryIds)) {
             foreach ($this->categoryIds as $i => $value) {
                 // if the category is not a number then it doesn't exist yet
                 if (!is_numeric($this->categoryIds[$i])) {

@@ -13,18 +13,26 @@ use backend\components\web\BackendController;
 use common\components\db\ImageUploadActiveRecord;
 use yii\helpers\FileHelper;
 use yii\web\HttpException;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 class ResourcesController extends BackendController
 {
 
-    public $path;
+    protected $path;
+
+    protected $pastedImagesFolder = 'guide-images';
 
     public $defaultAction = 'images';
 
     public function init()
     {
         $this->path = \Yii::getAlias('@frontend/web/uploads/');
+        try {
+            FileHelper::createDirectory($this->path.$this->pastedImagesFolder);
+        } catch (\Exception $e) {
+            \Yii::$app->session->addFlash('danger', $e->getMessage());
+        }
         parent::init();
     }
 
@@ -32,12 +40,16 @@ class ResourcesController extends BackendController
     {
         $fileList = [];
         if (is_dir($this->path)) {
+            $extensions = [];
+            foreach (ImageUploadActiveRecord::$extensions as $extension) {
+                $extensions[] = '*.'.$extension;
+            }
             foreach (FileHelper::findFiles($this->path, [
-                'only' => ImageUploadActiveRecord::extensions,
+                'only' => $extensions,
                 'except' => ['.gitignore'],
             ]) as $file) {
                 $split = explode('web', FileHelper::normalizePath($file, '/'));
-                $file = $split[count($split) - 1];
+                $file = $split[\count($split) - 1];
                 $fileList[] = ['name' => $file];
             }
         }
@@ -45,12 +57,15 @@ class ResourcesController extends BackendController
         return $this->render('images', ['fileList' => $fileList]);
     }
 
-
-    public function actionDeleteImage($file)
+    /**
+     * @param $file
+     * @return Response
+     */
+    public function actionDeleteImage($file): Response
     {
-        $image = FileHelper::normalizePath(explode('images', $this->path)[0] . $file);
-        if (is_file($image)) {
-            unlink($image);
+        $imagePath = FileHelper::normalizePath($this->path . explode('uploads', $file)[1]);
+        if (is_file($imagePath)) {
+            unlink($imagePath);
             \Yii::$app->session->addFlash('success', "File $file successfully deleted!");
         } else {
             \Yii::$app->session->addFlash('info', "File $file not found and not deleted!");
@@ -58,14 +73,19 @@ class ResourcesController extends BackendController
         return $this->goBack('/resources');
     }
 
+    /**
+     * @throws \RuntimeException
+     * @throws HttpException
+     * @throws \Exception
+     */
     public function actionUploadGuideImage()
     {
         $filename = time() . '-' . substr(hash('md5', random_int(1, 100)), 0, 5);
         $uploadedFile = UploadedFile::getInstanceByName('pastedImage');
         if ($uploadedFile !== null) {
             $filename .= '.' . $uploadedFile->extension;
-            if ($uploadedFile->saveAs($this->path . 'guides/' . $filename, true)) {
-                $publicpath = explode('web', $this->path)[1] . 'guides/' . $filename;
+            if ($uploadedFile->saveAs($this->path . $this->pastedImagesFolder . '/' . $filename)) {
+                $publicpath = explode('web', $this->path)[1] . $this->pastedImagesFolder. '/' . $filename;
                 echo \Yii::$app->params['frontendUrl'] . $publicpath;
             } else {
                 throw new \RuntimeException('Could not save image');

@@ -101,8 +101,8 @@ label {
     padding-left: 0;
 }
 .less-gutter > [class*='col-'] {
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .navbar {
@@ -409,6 +409,7 @@ pre {
     background-color: #2b2b2b;
     color: #fff;
     border-radius: 0;
+    padding: 0;
 }
 
 .row-no-padding > [class*="col-"] {
@@ -604,14 +605,25 @@ pre {
  *----------------------------------------------------------------------------------*/
 #guide-view {
     max-width: 800px;
+    font-size: 20px;
 }
 
 /* Everything in the container is parsed from the markdown */
-.guide-container {
+#guide-container {
     word-wrap: break-word;
 }
 
-.guide-container h1 {
+#guide-container pre > code.hljs {
+    padding: 0.6em;
+    font-size: 1.15em;
+}
+
+#guide-container img {
+    width: 100%;
+    height: auto;
+}
+
+#guide-container h1 {
     font-family: "Lato", Helvetica, Arial, sans-serif;
 }
 

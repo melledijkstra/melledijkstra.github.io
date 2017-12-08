@@ -51,9 +51,14 @@ class SiteController extends FrontendController
         ];
     }
 
-    public function actionAddSubscription()
+    /**
+     * Ajax request for adding subscription
+     * @return array
+     * @throws BadRequestHttpException
+     */
+    public function actionAddSubscription(): array
     {
-        if(\Yii::$app->request->isAjax) {
+        if (\Yii::$app->request->isAjax) {
             \Yii::$app->response->format = Response::FORMAT_JSON;
             $subscription = new Subscription();
 
@@ -67,7 +72,31 @@ class SiteController extends FrontendController
         throw new BadRequestHttpException('This page is only for ajax requests');
     }
 
-    public function actionResume() {
+    /**
+     * Remove subscription
+     * @param string $email
+     */
+    public function actionUnsubscribe(string $email)
+    {
+        $sub = Subscription::findOne(['email' => $email]);
+        if ($sub !== null) {
+            try {
+                if ($sub->delete()) {
+                    echo 'Successfully unsubscribed!';
+                } else {
+                    echo 'Failed to unsubscribe, is this email correct: ' . $email;
+                }
+            } catch (\Exception $e) {
+                echo "Something went wrong ({$e->getMessage()})";
+            }
+        } else {
+            echo "Subscription with email '$email' is already unsubscribed";
+        }
+        die;
+    }
+
+    public function actionResume()
+    {
         return $this->render('resume');
     }
 

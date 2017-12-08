@@ -17,6 +17,7 @@ use yii\helpers\Url;
  * @property string $thumbnail
  * @property int $size [int(11)]
  * @property string $external_url
+ * @property string $externalUrl
  *
  * @property string $link
  * @property Guide[] $guides
@@ -72,6 +73,7 @@ class Project extends ImageUploadActiveRecord implements Linkable
         return array_merge_recursive(parent::rules(),[
             [['title'], 'required'],
             [['size'], 'integer'],
+            [['external_url'], 'url', 'defaultScheme' => 'http'],
             [['title'], 'match', 'pattern' => '/^[a-zA-Z0-9_ -]*$/'],
             [['title', 'description', 'thumbnail', 'external_url'], 'string', 'max' => 255],
             [['title'], 'unique'],
@@ -143,11 +145,30 @@ class Project extends ImageUploadActiveRecord implements Linkable
     }
 
     /**
+     * Retrieve the external URL of this project
+     * @throws \yii\base\InvalidParamException
+     */
+    public function getExternalUrl(): string
+    {
+        $url = Url::isRelative($this->external_url) ? 'http://'.$this->external_url : $this->external_url;
+        return $url;
+    }
+
+    /**
      * @return string
      */
     public function getSizeString(): string
     {
         return static::SIZES[$this->size];
+    }
+
+    /**
+     * Check if project has an url defined
+     * @return bool
+     */
+    public function hasUrl(): bool
+    {
+        return !empty($this->external_url);
     }
 
 }

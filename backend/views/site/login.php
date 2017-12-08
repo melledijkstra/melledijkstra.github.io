@@ -27,6 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
 
+                <a href="<?= \yii\helpers\Url::to(['/site/request-password-reset', 'email' => $model->email]) ?>">Forgot password?</a>
+
             <?php ActiveForm::end(); ?>
         </div>
     </div>

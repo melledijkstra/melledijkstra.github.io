@@ -1,7 +1,9 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
+/**
+ * @var $this \yii\web\View
+ * @var $content string
+ */
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
@@ -9,6 +11,37 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+
+$navItems = [
+    'Projects' => [
+        'route' => 'projects',
+        'icon' => 'book-multiple'
+    ],
+    'Series' => [
+        'route' => 'series',
+        'icon' => 'book-multiple',
+    ],
+    'Guides' => [
+        'route' => 'guides',
+        'icon' => 'book-open-page-variant',
+    ],
+    'Categories' => [
+        'route' => 'categories',
+        'icon' => 'bookmark',
+    ],
+    'Languages' => [
+        'route' => 'languages',
+        'icon' => 'translate',
+    ],
+    'Subscriptions' => [
+        'route' => 'subscriptions',
+        'icon' => 'rss',
+    ],
+    'Resources' => [
+        'route' => 'resources',
+        'icon' => 'file-multiple',
+    ],
+];
 
 AppAsset::register($this);
 ?>
@@ -18,6 +51,14 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/favicons/manifest.json">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#46aac7">
+    <link rel="shortcut icon" href="/favicons/favicon.ico">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ac9c80">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -38,39 +79,22 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-
-        $menuItems[] = ['label' => '<span class="mdi mdi-book-multiple"></span> Series', 'items' =>
-            [
-                ['label' => '<span class="mdi mdi-view-list"></span> Series', 'url' => ['/series']],
-                ['label' => '<span class="mdi mdi-plus"></span> Create', 'url' => ['/series/create']]
-            ]
-        ];
-        $menuItems[] = ['label' => '<span class="mdi mdi-book-open-page-variant"></span> Guides', 'items' =>
-            [
-                ['label' => '<span class="mdi mdi-view-list"></span> Overview', 'url' => ['/guides']],
-                ['label' => '<span class="mdi mdi-plus"></span> Create', 'url' => ['/guides/create']]
-            ]
-        ];
-        $menuItems[] = ['label' => '<span class="mdi mdi-bookmark"></span> Categories', 'items' =>
-            [
-                ['label' => '<span class="mdi mdi-view-list"></span> Overview', 'url' => ['/categories']],
-                ['label' => '<span class="mdi mdi-plus"></span> Create', 'url' => ['/categories/create']]
-            ]
-        ];
-        $menuItems[] = ['label' => '<span class="mdi mdi-translate"></span> Languages', 'items' =>
-            [
-                ['label' => '<span class="mdi mdi-view-list"></span> Overview', 'url' => ['/languages']],
-                ['label' => '<span class="mdi mdi-plus"></span> Create', 'url' => ['/languages/create']]
-            ]
-        ];
-        $menuItems[] = ['label' => '<span class="mdi mdi-file-multiple"></span> Resources', 'items' =>
-            [
-                ['label' => '<span class="mdi mdi-view-list"></span> Overview', 'url' => ['/resources']],
-            ]
-        ];
+        foreach ($navItems as $label => $info) {
+            $menuItems[] = [
+                'label' => "<span class=\"mdi mdi-{$info['icon']}\"></span> {$label}",
+                'items' =>
+                    [
+                        [
+                            'label' => "<span class=\"mdi mdi-view-list\"></span> {$label}",
+                            'url' => ["/{$info['route']}"]
+                        ],
+                        ['label' => '<span class="mdi mdi-plus"></span> Create', 'url' => ["/{$info['route']}/create"]]
+                    ]
+            ];
+        }
 
         $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
+            . Html::beginForm(['/site/logout'])
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']

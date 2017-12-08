@@ -16,10 +16,10 @@ class GuidesController extends FrontendController
 
     /**
      * The guides overview page
-     * @return string
+     * @return string|mixed
      * @throws \yii\base\InvalidParamException
      */
-    public function actionIndex(): string
+    public function actionIndex()
     {
         $guideSearch = new GuideSearch();
         $guideDataProvider = $guideSearch->search(Yii::$app->request->queryParams);
@@ -36,11 +36,11 @@ class GuidesController extends FrontendController
     /**
      * Shows a single guide
      * @param $title string The title of the guide to search for
-     * @return string
+     * @return string|mixed
      * @throws \yii\base\InvalidParamException
      * @throws NotFoundHttpException When a guide can't be found
      */
-    public function actionView($title): string
+    public function actionView($title)
     {
         if ($guide = Guide::findOne(['title' => str_replace('-', ' ', $title)])) {
             return $this->render('view', ['guide' => $guide]);

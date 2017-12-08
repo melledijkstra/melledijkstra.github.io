@@ -20,6 +20,9 @@ return [
                 ],
             ],
         ],
+        'urlManager' => [
+            'baseUrl' => $params['frontendUrl'],
+        ],
     ],
     'params' => $params,
 ];

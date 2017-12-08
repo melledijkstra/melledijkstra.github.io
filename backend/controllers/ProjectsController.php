@@ -21,7 +21,7 @@ class ProjectsController extends BackendController
      */
     public function behaviors()
     {
-        return array_merge(parent::behaviors(),[
+        return array_merge(parent::behaviors(), [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -89,7 +89,7 @@ class ProjectsController extends BackendController
     {
         $model = $this->findModel($id);
 
-        if(Yii::$app->request->post('deleteFile', false) === true) {
+        if (Yii::$app->request->post('deleteFile', false) === true) {
             $model->deleteFile();
         }
 

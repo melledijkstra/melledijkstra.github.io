@@ -10,6 +10,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use yii\web\ErrorAction;
+use yii\captcha\CaptchaAction;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -19,12 +22,12 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['index', 'logout', 'signup'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -32,7 +35,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['index', 'logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -54,19 +57,28 @@ class SiteController extends Controller
     {
         return [
             'error' => [
-                'class' => 'yii\web\ErrorAction',
+                'class' => ErrorAction::class,
             ],
             'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
+                'class' => CaptchaAction::class,
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }
 
     /**
+     * Overview backend
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionIndex() {
+        return $this->render('index');
+    }
+
+    /**
      * Login action.
      *
-     * @return string
+     * @return string|Response
+     * @throws \yii\base\InvalidParamException
      */
     public function actionLogin()
     {
@@ -79,29 +91,31 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->loginAdmin()) {
             return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('login', [
+            'model' => $model,
+        ]);
     }
 
     /**
      * Requests password reset.
      *
      * @return mixed
+     * @throws \yii\base\InvalidParamException
      */
     public function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
+        $model->email = $model->email ?? \Yii::$app->request->getQueryParam('email');
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
                 Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
 
                 return $this->goHome();
-            } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
             }
+
+            Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
         }
 
         return $this->render('requestPasswordResetToken', [
@@ -114,6 +128,7 @@ class SiteController extends Controller
      *
      * @param string $token
      * @return mixed
+     * @throws \yii\base\InvalidParamException
      * @throws BadRequestHttpException
      */
     public function actionResetPassword($token)
@@ -138,7 +153,7 @@ class SiteController extends Controller
     /**
      * Logout action.
      *
-     * @return string
+     * @return string|mixed
      */
     public function actionLogout()
     {

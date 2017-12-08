@@ -17,14 +17,20 @@ $classes = [
 
 $size = ($project->size >= count($classes)) ? count($classes) - 1 : $project->size;
 
+$hasUrl = $project->hasUrl();
+
 ?>
 <div class="grid-item col-xs-12 col-sm-6 <?= $classes[$size]; ?>">
     <div class="grid-item-content">
-        <a href="<?= $project->getLink(); ?>">
-            <div id="project-item<?= $project->id ?>" class="project-item margin-tb-5"
-                style="background-image: url('<?= $project->getPublicLink(); ?>');">
-                <h3 class="title"><?= $project->title; ?></h3>
+        <?php if ($hasUrl): ?>
+        <a target="_blank" href="<?= $project->externalUrl ?: ''; ?>">
+            <?php endif; ?>
+            <div id="project-item<?= $project->id ?>" class="project-item margin-tb-10"
+                 style="background-image: url('<?= $project->getPublicLink(); ?>');">
+                <h3 class="title"><?= $project->title; ?><?= $hasUrl ? ' <i class="mdi mdi-open-in-new"></i>' : ''; ?></h3>
             </div>
+            <?php if ($hasUrl): ?>
         </a>
+    <?php endif; ?>
     </div>
 </div>

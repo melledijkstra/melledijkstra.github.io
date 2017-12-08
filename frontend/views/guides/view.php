@@ -104,18 +104,18 @@ $this->title = $guide->title;
             <?php endif; ?>
         </div>
         <div class="clearfix"></div>
-        <div class="guide-container">
+        <div id="guide-container">
             <?= $guide->renderGuide(); ?>
         </div>
         <div id="disqus_thread"></div>
         <script>
             var disqus_config = function () {
-                this.page.url = "<?= \yii\helpers\Url::canonical(); ?>";  // Replace PAGE_URL with your page's canonical URL variable
-                this.page.identifier = "<?= $guide->getTitle(true); ?>"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                this.page.url = "<?= \yii\helpers\Url::canonical(); ?>";
+                this.page.identifier = "<?= $guide->getTitle(true); ?>";
             };
             (function () {
                 var d = document, s = d.createElement('script');
-                s.src = 'https://dev-melledijkstra.disqus.com/embed.js';
+                s.src = 'https://<?= \Yii::$app->params['disqusId']; ?>.disqus.com/embed.js';
                 s.setAttribute('data-timestamp', +new Date());
                 (d.head || d.body).appendChild(s);
             })();
