@@ -71,7 +71,7 @@ class SiteController extends Controller
      * @throws \yii\base\InvalidParamException
      */
     public function actionIndex() {
-        return $this->render('index');
+        return $this->render('dashboard');
     }
 
     /**

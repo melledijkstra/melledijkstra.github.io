@@ -35,7 +35,7 @@ window.twttr = (function(d, s, id) {
   return t;
 }(document, "script", "twitter-wjs"));
 JS
-, View::POS_BEGIN);
+    , View::POS_BEGIN);
 
 // SEO stuff
 $metastuff = [
@@ -61,13 +61,6 @@ foreach ($metastuff as $name => $content) {
     ], $name);
 }
 
-$this->registerCss(<<<CSS
-#disqus_thread {
-    margin-top: 50px;
-}
-CSS
-);
-
 $this->title = $guide->title;
 
 ?>
@@ -76,15 +69,17 @@ $this->title = $guide->title;
         <div class="jumbotron">
             <h1 class="guide-title"><?= $guide->title ?></h1>
             <div>
-                <small class="guide-date"><?= Yii::$app->formatter->asDate($guide->created_at, 'medium'); ?>
+                <small class="guide-date"><?= \Yii::$app->formatter->asDate($guide->created_at, 'medium'); ?>
                     - <?= $guide->createdBy->username; ?></small>
             </div>
             <div class="margin-10 guide-share-bar">
                 <a class="twitter-share-button"
                    href="https://twitter.com/intent/tweet?text=<?= $this->title ?>&url=<?= $guide->getLink(true); ?>&via=dijkstrascience">Tweet</a>
-                <div class="g-plusone"></div>
-                <!-- facebook share? -->
+                <div data-action="share" data-height="20" class="g-plus"></div>
             </div>
+        </div>
+        <div id="guide-container">
+            <?= $guide->renderGuide(); ?>
         </div>
         <div class="series">
             <?php
@@ -93,20 +88,18 @@ $this->title = $guide->title;
             ?>
             <?php if ($prevGuide !== null): ?>
                 <div class="pull-left">
-                    <a class="btn btn-primary" href="<?= $prevGuide->getLink(); ?>"><span><- </span> <?= $prevGuide->title; ?></a>
+                    <a class="btn btn-primary"
+                       href="<?= $prevGuide->getLink(); ?>"><i class="mdi mdi-arrow-left"></i> <?= $prevGuide->title; ?></a>
                 </div>
             <?php endif; ?>
             <?php if ($nextGuide !== null): ?>
                 <div class="pull-right">
                     <a class="btn btn-primary" href="<?= $nextGuide->getLink(); ?>"><?= $nextGuide->title; ?>
-                        <span> -></span></a>
+                        <i class="mdi mdi-arrow-right"></i></a>
                 </div>
             <?php endif; ?>
         </div>
         <div class="clearfix"></div>
-        <div id="guide-container">
-            <?= $guide->renderGuide(); ?>
-        </div>
         <div id="disqus_thread"></div>
         <script>
             var disqus_config = function () {

@@ -254,6 +254,10 @@ pre code {
     font-size: 16px;
 }
 
+.text-lightgrey {
+    color: #8a8a8a;
+}
+
 .text-grey {
     color: #6b6b6b;
 }
@@ -615,11 +619,11 @@ pre {
 
 #guide-container pre > code.hljs {
     padding: 0.6em;
-    font-size: 1.15em;
+    font-size: 1.05em;
 }
 
 #guide-container img {
-    width: 100%;
+    width: auto;
     height: auto;
 }
 
@@ -637,6 +641,10 @@ pre {
 
 .guide-header {
     margin-bottom: 20px;
+}
+
+#disqus_thread {
+    margin-top: 50px;
 }
 
 /*----------------------------------------------------------------------------------*
@@ -788,6 +796,13 @@ pre {
 }
 #resume-page .row.more-padding > [class*="col-"] {
     padding: 0 60px;
+}
+
+@media (max-width: 500px) {
+    #resume-page .row.more-padding > [class*="col-"] {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
 }
 
 #slanted-box {

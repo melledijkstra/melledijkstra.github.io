@@ -203,7 +203,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      */
     public function getCategoryIds(): array
     {
-        if(empty($this->categoryIds)) {
+        if (empty($this->categoryIds)) {
             foreach ($this->categories as $category) {
                 $this->categoryIds[] = $category->id;
             }
@@ -330,7 +330,8 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
                     'smartyPants' => false,
                 ], Markdown::SMARTYPANTS_ATTR_DO_NOTHING);
             }
-        } catch(InvalidConfigException $e) {}
+        } catch (InvalidConfigException $e) {
+        }
 
         return '<p style="color:red;">' . Yii::t('guide', 'This guide\'s file is not found!') . '</p>';
     }
@@ -348,7 +349,8 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
         return null;
     }
 
-    public function getImageFilePath() {
+    public function getImageFilePath()
+    {
 
     }
 
@@ -361,7 +363,7 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
     private function saveGuideFile($guide_text): bool
     {
         $this->deleteGuideFile();
-        $filename = substr(hash('md5', time()), 0, 8) . '.md';
+        $filename = $this->getTitle(true) . '_' . time() . '.md'; // example filename: guide-title_12343827.md
         $filepath = \Yii::getAlias('@frontend') . '/guides/' . $filename;
         if (file_put_contents($filepath, $guide_text)) {
             $this->filename = $filename;

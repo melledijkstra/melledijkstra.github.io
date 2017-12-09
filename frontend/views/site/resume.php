@@ -60,10 +60,14 @@ $this->registerCss(<<<CSS
 CSS
 );
 
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => 'Hi! My name is Melle Dijkstra. A enthusiastic computer scientist who\'s passionate for all kinds of science',
+]);
+
 $CVFile = '/files/CV-Europass-Melle-Dijkstra-EN.pdf';
 
 ?>
-<!--<iframe class="block background-sketch full-height affix" src="--><? //= \yii\helpers\Url::to(['/sketches/ConnectedLines/index.html']); ?><!--"></iframe>-->
 <div id="resume-page">
     <div id="slanted-box">
         <div class="row more-padding">
@@ -73,7 +77,7 @@ $CVFile = '/files/CV-Europass-Melle-Dijkstra-EN.pdf';
             <div class="col col-lg-6 col-md-6">
                 <p>
                     My name is <strong>Melle Dijkstra</strong>. A enthusiastic computer scientist who's passionate
-                    for all kinds of science - <i class="mdi mdi-lab"></i> Physics, Biology and Astrophysics and the
+                    for all kinds of science - Physics, Biology and Astrophysics and the
                     relation in them. Also love
                     traveling and Philosophy.
                 </p>
@@ -105,7 +109,7 @@ $CVFile = '/files/CV-Europass-Melle-Dijkstra-EN.pdf';
                         <li>
                             <div class="margin-tb-20">
                                 <p class="no-margin"><?= $skill ?></p>
-                                <small class="no-margin text-grey"><?= $info[1]; ?></small>
+                                <small class="no-margin text-lightgrey"><?= $info[1]; ?></small>
                             </div>
                             <div class="skill-container">
                                 <div class="skill" style="width: <?= $info[0]; ?>%;"></div>

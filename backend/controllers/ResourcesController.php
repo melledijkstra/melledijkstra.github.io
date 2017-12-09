@@ -29,7 +29,7 @@ class ResourcesController extends BackendController
     {
         $this->path = \Yii::getAlias('@frontend/web/uploads/');
         try {
-            FileHelper::createDirectory($this->path.$this->pastedImagesFolder);
+            FileHelper::createDirectory($this->path . $this->pastedImagesFolder);
         } catch (\Exception $e) {
             \Yii::$app->session->addFlash('danger', $e->getMessage());
         }
@@ -42,13 +42,13 @@ class ResourcesController extends BackendController
         if (is_dir($this->path)) {
             $extensions = [];
             foreach (ImageUploadActiveRecord::$extensions as $extension) {
-                $extensions[] = '*.'.$extension;
+                $extensions[] = '*.' . $extension;
             }
             foreach (FileHelper::findFiles($this->path, [
                 'only' => $extensions,
                 'except' => ['.gitignore'],
             ]) as $file) {
-                $split = explode('web', FileHelper::normalizePath($file, '/'));
+                $split = explode('d/web', FileHelper::normalizePath($file, '/'));
                 $file = $split[\count($split) - 1];
                 $fileList[] = ['name' => $file];
             }
@@ -80,12 +80,12 @@ class ResourcesController extends BackendController
      */
     public function actionUploadGuideImage()
     {
-        $filename = time() . '-' . substr(hash('md5', random_int(1, 100)), 0, 5);
         $uploadedFile = UploadedFile::getInstanceByName('pastedImage');
         if ($uploadedFile !== null) {
-            $filename .= '.' . $uploadedFile->extension;
+            $hash = time() . '-' . substr(hash('md5', random_int(1, 100)), 0, 5);
+            $filename = "$hash.{$uploadedFile->extension}";
             if ($uploadedFile->saveAs($this->path . $this->pastedImagesFolder . '/' . $filename)) {
-                $publicpath = explode('web', $this->path)[1] . $this->pastedImagesFolder. '/' . $filename;
+                $publicpath = explode('d/web', $this->path)[1] . $this->pastedImagesFolder . '/' . $filename;
                 echo \Yii::$app->params['frontendUrl'] . $publicpath;
             } else {
                 throw new \RuntimeException('Could not save image');
