@@ -30,29 +30,36 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'title',
-            'filename',
-            [
-                'attribute' => 'project_id',
-                'value' => ($model->project) ? $model->project->title : null,
+    <?php
+    try {
+        echo DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                'title',
+                'filename',
+                [
+                    'attribute' => 'project_id',
+                    'value' => $model->project ? $model->project->title : null,
+                ],
+                'thumbnail',
+                'language.name',
+                'difficulty',
+                [
+                    'attribute' => 'categoryIds',
+                    'value' => function($model) {
+                        /** @var $model \common\models\Guide */
+                        implode(', ', $model->categoryStrings);
+                    },
+                    'format' => 'html',
+                ],
+                'created_at:datetime',
+                'updated_at:datetime',
+                'createdBy.username',
+                'updatedBy.username',
             ],
-            'thumbnail',
-            'language.name',
-            'difficulty',
-            [
-                'attribute' => 'categoryIds',
-                'value' => $model->renderCategories(),
-                'format' => 'html',
-            ],
-            'created_at:datetime',
-            'updated_at:datetime',
-            'createdBy.username',
-            'updatedBy.username',
-        ],
-    ]) ?>
+        ]);
+    } catch (Exception $e) {}
+    ?>
 
     <h2><?= Yii::t('guide', 'Preview'); ?></h2>
     <div class="guide-preview">

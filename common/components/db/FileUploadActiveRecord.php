@@ -24,7 +24,7 @@ abstract class FileUploadActiveRecord extends MActiveRecord
     /**
      * @var array The accepted extensions
      */
-    protected static $extensions;
+    public static $extensions;
 
     /**
      * @var bool Specifies if a file needs to be uploaded

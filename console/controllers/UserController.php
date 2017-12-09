@@ -16,16 +16,6 @@ class UserController extends Controller
 {
 
     /**
-     * Creates a default user account
-     */
-    public function actionCreateDefaultUser() {
-        $defaultUser = new User(['username' => 'Admin', 'email' => 'admin@example.com']);
-        $defaultUser->setPassword('123456');
-        $defaultUser->generateAuthKey();
-        $defaultUser->save();
-    }
-
-    /**
      * Creates a user account with information given
      */
     public function actionCreateUser() {
@@ -50,11 +40,11 @@ class UserController extends Controller
         ]);
 
         $user->generateAuthKey();
-        if($user->save(true)) {
+        if($user->save()) {
             echo "user '$user->username' created (role: $user->role)";
         } else {
             var_dump($user->errors);
-            echo "Some info was incorrect, try again...";
+            echo 'Some info was incorrect, try again...';
         }
     }
 
@@ -70,7 +60,7 @@ class UserController extends Controller
             ['email' => $usernameOrEmail],
         ])->one();
 
-        if($user == null) {
+        if($user === null) {
             echo 'User with this email or username does not exist';
         } else {
             echo "User found (username: $user->username, email: $user->email)\n";
@@ -83,7 +73,7 @@ class UserController extends Controller
             if($user->save()) {
                 echo "Password changed correctly\n";
             } else {
-                echo "Something went wrong";
+                echo 'Something went wrong';
                 print_r($user->errors);
             }
         }

@@ -17,20 +17,32 @@ use yii\web\NotFoundHttpException;
 class PortfolioController extends Controller
 {
 
-    public function actionIndex() {
-
+    /**
+     * @return string
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionIndex(): string
+    {
         $projectSearch = new ProjectSearch();
         $projectDataProvider = $projectSearch->search(\Yii::$app->request->queryParams);
 
         return $this->render('index', compact('projectDataProvider'));
     }
 
-    public function actionView($title) {
-        if($project = Project::findOne(['title' => str_replace('-',' ',$title)])) {
-            return $this->render('view', ['project' => $project]);
-        }
-
-        throw new NotFoundHttpException(\Yii::t('project',"Project with title '{title}' could not be found", ['title' => Html::encode($title)]));
-    }
+//    /**
+//     * @param $title
+//     * @return string
+//     * @throws \yii\base\InvalidParamException
+//     * @throws NotFoundHttpException
+//     */
+//    public function actionView($title): string
+//    {
+//        if ($project = Project::findOne(['title' => str_replace('-', ' ', $title)])) {
+//            return $this->render('view', ['project' => $project]);
+//        }
+//
+//        throw new NotFoundHttpException(\Yii::t('project', "Project with title '{title}' could not be found",
+//            ['title' => Html::encode($title)]));
+//    }
 
 }

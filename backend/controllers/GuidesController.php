@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\components\web\BackendController;
 use common\models\Category;
+use common\models\Subscription;
 use Yii;
 use common\models\Guide;
 use common\models\search\GuideSearch;
@@ -33,6 +34,7 @@ class GuidesController extends BackendController
     /**
      * Lists all Guide models.
      * @return mixed
+     * @throws \yii\base\InvalidParamException
      */
     public function actionIndex()
     {
@@ -49,6 +51,8 @@ class GuidesController extends BackendController
      * Displays a single Guide model.
      * @param integer $id
      * @return mixed
+     * @throws \yii\base\InvalidParamException
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -61,19 +65,40 @@ class GuidesController extends BackendController
      * Creates a new Guide model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws \yii\base\InvalidParamException
      */
     public function actionCreate()
     {
         $model = new Guide();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            // Mail every subscription that there is a new guide
+            $messages = [];
+            foreach (Subscription::find()->each() as $subscription) {
+                /** @var $subscription Subscription */
+                $messages[] = \Yii::$app->mailer->compose('guide-created', [
+                    'guide' => $model,
+                    'recipient' => $subscription->email,
+                ])
+                    ->setTo($subscription->email)
+                    ->setFrom('dev.melle@gmail.com')
+                    ->setReplyTo('dev.melle@gmail.com')
+                    ->setSubject("Melle's new guide: {$model->title}");
+            }
+            $successfullMessages = Yii::$app->mailer->sendMultiple($messages);
+            $failedMessages = \count($messages) - $successfullMessages;
+            if(\count($messages) === $successfullMessages) {
+                \Yii::$app->session->addFlash('success', 'All mails successfully sent!');
+            } else {
+                \Yii::$app->session->addFlash('danger', "$failedMessages mail(s) failed to send!");
+            }
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-                'categories' => Category::find()->asArray()->all(),
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+            'categories' => Category::find()->asArray()->all(),
+        ]);
     }
 
     /**
@@ -81,6 +106,8 @@ class GuidesController extends BackendController
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws \yii\base\InvalidParamException
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
@@ -88,12 +115,12 @@ class GuidesController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-                'categories' => Category::find()->all(),
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+            'categories' => Category::find()->all(),
+        ]);
     }
 
     /**
@@ -101,6 +128,9 @@ class GuidesController extends BackendController
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws \yii\db\StaleObjectException
+     * @throws \Exception
+     * @throws NotFoundHttpException
      */
     public function actionDelete($id)
     {
@@ -116,12 +146,12 @@ class GuidesController extends BackendController
      * @return Guide the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id): Guide
     {
         if (($model = Guide::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

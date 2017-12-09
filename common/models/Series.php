@@ -23,23 +23,26 @@ class Series extends ImageUploadActiveRecord
     public $guideIds = [];
 
     /** @var string  */
-    protected $fileAttributeName = 'image';
+    protected static $fileAttributeName = 'image';
 
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'series';
     }
 
     /**
      * @inheritdoc
+     * @throws \yii\base\InvalidCallException
      */
     public function afterSave($insert, $changedAttributes)
     {
         // When updating first delete all links
-        if(!$insert) SeriesGuides::deleteAll(['series_id' => $this->id]);
+        if(!$insert) {
+            SeriesGuides::deleteAll(['series_id' => $this->id]);
+        }
         $order = 1;
         foreach($this->guideIds as $guideId) {
             $this->link('guides', Guide::findOne((int)$guideId), ['order' => $order]);
@@ -62,15 +65,15 @@ class Series extends ImageUploadActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return array_merge(parent::rules(), [
-            [['created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['created_at', 'updated_at', 'created_by', 'updated_by', 'image'], 'integer'],
             [['title', 'image'], 'string', 'max' => 255],
             [['title'], 'unique'],
             [['image'], 'unique'],
             [['guideIds'], 'each', 'rule' => [
-                'exist', 'targetClass' => SeriesGuides::className(), 'targetAttribute' => 'guide_id',
+                'unique', 'targetClass' => SeriesGuides::className(), 'targetAttribute' => 'guide_id',
                 'message' => Yii::t('series', 'The guide with id {value} is already in a series')
             ]],
             [['guideIds'], 'each', 'rule' => [
@@ -83,7 +86,7 @@ class Series extends ImageUploadActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return array_merge(parent::attributeLabels(), [
             'title' => Yii::t('series', 'Title'),
@@ -92,7 +95,7 @@ class Series extends ImageUploadActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return SeriesGuides[]|\yii\db\ActiveQuery
      */
     public function getSeriesGuides()
     {

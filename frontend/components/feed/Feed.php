@@ -168,7 +168,7 @@ class Feed {
      */
     public function __construct($id, $title, $updated)
     {
-        if(empty($id) || empty($title) || !is_int($updated)) {
+        if(empty($id) || empty($title) || !\is_int($updated)) {
             throw new FeedException('Invalid information given');
         }
         $this->id = $id;
@@ -201,17 +201,17 @@ class Feed {
     <updated>{$updated}</updated>
     <link href="{$this->linkSelf}" rel="self" />
 FEED;
-    $feed .= (!empty($this->subtitle)) ?    "\n\t<subtitle>{$this->subtitle}</subtitle>" : '';
-    $feed .= (!empty($this->link)) ?        "\n\t<link href=\"{$this->link}\" />" : '';
-    $feed .= (!empty($this->language)) ?    "\n\t<language>{$this->language}</language>" : '';
-    $feed .= (!empty($this->author) && !empty($this->authorEmail)) ? "\n\t<author>\n\t\t<name>{$this->author}</name>\n\t\t<email>melle210202@gmail.com</email>\n\t</author>" : '';
-    $feed .= (!empty($this->icon)) ?        "\n\t<icon>{$this->icon}</icon>" : '';
+    $feed .= !empty($this->subtitle) ?    "\n\t<subtitle>{$this->subtitle}</subtitle>" : '';
+    $feed .= !empty($this->link) ?        "\n\t<link href=\"{$this->link}\" />" : '';
+    $feed .= !empty($this->language) ?    "\n\t<language>{$this->language}</language>" : '';
+    $feed .= (!empty($this->author) && !empty($this->authorEmail)) ? "\n\t<author>\n\t\t<name>{$this->author}</name>\n\t\t<email>dev.melle@gmail.com</email>\n\t</author>" : '';
+    $feed .= !empty($this->icon) ?        "\n\t<icon>{$this->icon}</icon>" : '';
     foreach($this->categories as $category) {
         if(!empty($category)) {
             $feed .= "\n\t<category term=\"{$category}\"/>";
         }
     }
-    $feed .= (!empty($this->rights)) ?      "\n\t<rights>{$this->rights}</rights>" : '';
+    $feed .= !empty($this->rights) ?      "\n\t<rights>{$this->rights}</rights>" : '';
 
     $feed .= "\n\n";
 

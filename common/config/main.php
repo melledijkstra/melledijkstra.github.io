@@ -1,4 +1,7 @@
 <?php
+
+use common\components\TranslationEventHandler;
+
 return [
     'name' => 'Melle Dijkstra',
     'vendorPath' => dirname(__DIR__, 2) . '/vendor',
@@ -8,6 +11,9 @@ return [
     'modules' => [
         'markdown' => [
             'class' => kartik\markdown\Module::className(),
+            'customConversion' => [
+                '<img' => '<img class="img-responsive"',
+            ],
         ],
     ],
     'components' => [
@@ -40,13 +46,13 @@ return [
                 '*' => [
                     'class' => \yii\i18n\PhpMessageSource::className(),
                     'basePath' => '@common/translations',
-                    'on missingTranslation' => ['common\components\TranslationEventHandler', 'handleMissingTranslation'],
+                    'on missingTranslation' => [TranslationEventHandler::class, 'handleMissingTranslation'],
                 ],
                 // This isn't included with the * translations, weird yii behaviour, so need to create separate 'app' part in translations
                 'app' => [
                     'class' => \yii\i18n\PhpMessageSource::className(),
                     'basePath' => '@common/translations',
-                    'on missingTranslation' => ['common\components\TranslationEventHandler', 'handleMissingTranslation'],
+                    'on missingTranslation' => [TranslationEventHandler::class, 'handleMissingTranslation'],
                 ]
             ],
         ],

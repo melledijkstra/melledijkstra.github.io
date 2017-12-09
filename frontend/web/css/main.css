@@ -101,8 +101,8 @@ label {
     padding-left: 0;
 }
 .less-gutter > [class*='col-'] {
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .navbar {
@@ -252,6 +252,10 @@ pre code {
 
 .text-normal {
     font-size: 16px;
+}
+
+.text-lightgrey {
+    color: #8a8a8a;
 }
 
 .text-grey {
@@ -409,6 +413,7 @@ pre {
     background-color: #2b2b2b;
     color: #fff;
     border-radius: 0;
+    padding: 0;
 }
 
 .row-no-padding > [class*="col-"] {
@@ -604,14 +609,25 @@ pre {
  *----------------------------------------------------------------------------------*/
 #guide-view {
     max-width: 800px;
+    font-size: 20px;
 }
 
 /* Everything in the container is parsed from the markdown */
-.guide-container {
+#guide-container {
     word-wrap: break-word;
 }
 
-.guide-container h1 {
+#guide-container pre > code.hljs {
+    padding: 0.6em;
+    font-size: 1.05em;
+}
+
+#guide-container img {
+    width: auto;
+    height: auto;
+}
+
+#guide-container h1 {
     font-family: "Lato", Helvetica, Arial, sans-serif;
 }
 
@@ -625,6 +641,10 @@ pre {
 
 .guide-header {
     margin-bottom: 20px;
+}
+
+#disqus_thread {
+    margin-top: 50px;
 }
 
 /*----------------------------------------------------------------------------------*
@@ -776,6 +796,13 @@ pre {
 }
 #resume-page .row.more-padding > [class*="col-"] {
     padding: 0 60px;
+}
+
+@media (max-width: 500px) {
+    #resume-page .row.more-padding > [class*="col-"] {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
 }
 
 #slanted-box {

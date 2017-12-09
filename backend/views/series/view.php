@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div>
         <ol>
             <?php foreach ($model->seriesGuides as $seriesGuide): ?>
-                <li><?= $seriesGuide->guide->title ?> <a href="<?= $seriesGuide->guide->getLink(true); ?>">link</a> (<?= $seriesGuide->order ?>)</li>
+                <li><?= $seriesGuide->guide->title ?> <a target="_blank" href="<?= $seriesGuide->guide->getLink(true, true); ?>">link</a> (<?= $seriesGuide->order ?>)</li>
             <?php endforeach; ?>
         </ol>
     </div>

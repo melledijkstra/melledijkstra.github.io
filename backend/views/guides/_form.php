@@ -43,7 +43,7 @@ $this->registerJsFile('/js/guide_form.js', ['depends' => \yii\web\JqueryAsset::c
     <?= $form->field($model, 'title')->textInput(
         [
             'maxlength' => true,
-            'onchange' => '$(".guide-item-title a").first().text(this.value);',
+            'onchange' => 'setTitle(this.value)',
         ]) ?>
 
     <?= $form->field($model, 'sneak_peek')->textarea(
@@ -98,7 +98,7 @@ $this->registerJsFile('/js/guide_form.js', ['depends' => \yii\web\JqueryAsset::c
     <div class="clearfix"></div>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('common', 'Create') : Yii::t('common', 'Update'),
+        <?= Html::submitButton(Yii::t('common', $model->isNewRecord ? 'Create' : 'Update'),
             ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 

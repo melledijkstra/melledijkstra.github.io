@@ -17,7 +17,7 @@ use yii\imagine\Image;
 abstract class ImageUploadActiveRecord extends FileUploadActiveRecord
 {
 
-    protected static $extensions = ['png', 'jpg', 'jpeg', 'gif'];
+    public static $extensions = ['png', 'jpg', 'jpeg', 'gif'];
 
     protected static $fileAttributeName = 'image_file';
 
@@ -58,7 +58,10 @@ abstract class ImageUploadActiveRecord extends FileUploadActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         // check if the image needs to be cropped (when guide is created or $fileAttributeName is updated)
-        if ($insert || array_key_exists(static::$fileAttributeName, $changedAttributes)) {
+        if (
+            ($insert || array_key_exists(static::$fileAttributeName, $changedAttributes))
+            && $this->fileExists()
+        ) {
             $this->convertToThumbnail($this->filePath());
         }
         parent::afterSave($insert, $changedAttributes);
