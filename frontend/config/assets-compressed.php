@@ -47,6 +47,7 @@ return [
         'sourcePath' => null,
         'js' => [],
         'css' => [
+            'https://fonts.googleapis.com/css?family=Open+Sans:300,400',
             'https://fonts.googleapis.com/css?family=Lato',
             'https://fonts.googleapis.com/css?family=Raleway',
             '//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css',
