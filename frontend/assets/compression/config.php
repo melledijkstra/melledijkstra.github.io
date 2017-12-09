@@ -1,4 +1,5 @@
-<?php
+<?php use yii\web\AssetBundle;
+
 /**
  * Configuration file for the "yii asset" console command.
  */
@@ -27,7 +28,7 @@ return [
     // Asset bundle for compression output:
     'targets' => [
         'all' => [
-            'class' => 'yii\web\AssetBundle',
+            'class' => AssetBundle::class,
             'basePath' => '@webroot',
             'baseUrl' => '@web',
             'js' => 'compiled-assets/all-{hash}.js',
