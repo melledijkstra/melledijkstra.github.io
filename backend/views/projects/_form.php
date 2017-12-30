@@ -20,6 +20,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'uploadedFile')->fileInput(); ?>
 
+    <?= $form->field($model, 'credits')->textInput(); ?>
+
     <?php
     if (!$model->isNewRecord) {
         echo "<img class='img-responsive thumbnail' style='max-height: 200px;' src='{$model->getPublicLink(true, true)}' />".

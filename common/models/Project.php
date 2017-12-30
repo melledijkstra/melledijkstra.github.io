@@ -75,7 +75,7 @@ class Project extends ImageUploadActiveRecord implements Linkable
             [['size'], 'integer'],
             [['external_url'], 'url', 'defaultScheme' => 'http'],
             [['title'], 'match', 'pattern' => '/^[a-zA-Z0-9_ -]*$/'],
-            [['title', 'description', 'thumbnail', 'external_url'], 'string', 'max' => 255],
+            [['title', 'description', 'thumbnail', 'external_url', 'credits'], 'string', 'max' => 255],
             [['title'], 'unique'],
         ]);
     }

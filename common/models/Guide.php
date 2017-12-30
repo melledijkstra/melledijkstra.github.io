@@ -133,7 +133,7 @@ class Guide extends ImageUploadActiveRecord implements Linkable
             [['project_id', 'language_id', 'difficulty', 'duration'], 'integer'],
             [['title', 'filename', 'thumbnail'], 'string', 'max' => 255],
             [['sneak_peek'], 'string', 'max' => 700],
-            [['guideText'], 'string'],
+            [['guideText', 'credits'], 'string'],
             [['title'], 'unique'],
             [['title'], 'match', 'pattern' => '/^[a-zA-Z0-9_ ]*$/'],
             [

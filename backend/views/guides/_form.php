@@ -63,6 +63,8 @@ $this->registerJsFile('/js/guide_form.js', ['depends' => \yii\web\JqueryAsset::c
         'onchange' => 'previewImg(this);',
     ]); ?>
 
+    <?= $form->field($model, 'credits')->textInput(); ?>
+
     <?= $form->field($model, 'language_id')->dropDownList(
         Language::find()->select(['name', 'id'])->indexBy('id')->column(),
         ['prompt' => 'No specific programming language']

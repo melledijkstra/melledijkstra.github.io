@@ -27,7 +27,9 @@ $hasUrl = $project->hasUrl();
         <?php endif; ?>
             <div id="project-item<?= $project->id ?>" class="project-item margin-tb-10"
                  style="background-image: url('<?= $project->getPublicLink(); ?>');">
-                <p class="credits"><small><span class="mdi mdi-unsplash"></span>Photo by Jason Rosewell on Unsplash<?= $project->credits; ?></small></p>
+                <?php if($project->credits !== null): ?>
+                    <p class="credits"><small><span class="mdi mdi-unsplash"></span><?= $project->credits; ?></small></p>
+                <?php endif; ?>
                 <h3 class="title"><?= $project->title; ?><?= $hasUrl ? ' <i class="mdi mdi-open-in-new"></i>' : ''; ?></h3>
             </div>
         <?php if ($hasUrl): ?>
