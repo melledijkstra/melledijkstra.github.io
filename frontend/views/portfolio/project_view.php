@@ -24,13 +24,14 @@ $hasUrl = $project->hasUrl();
     <div class="grid-item-content">
         <?php if ($hasUrl): ?>
         <a target="_blank" href="<?= $project->externalUrl ?: ''; ?>">
-            <?php endif; ?>
+        <?php endif; ?>
             <div id="project-item<?= $project->id ?>" class="project-item margin-tb-10"
                  style="background-image: url('<?= $project->getPublicLink(); ?>');">
+                <p class="credits"><small><span class="mdi mdi-unsplash"></span>Photo by Jason Rosewell on Unsplash<?= $project->credits; ?></small></p>
                 <h3 class="title"><?= $project->title; ?><?= $hasUrl ? ' <i class="mdi mdi-open-in-new"></i>' : ''; ?></h3>
             </div>
-            <?php if ($hasUrl): ?>
+        <?php if ($hasUrl): ?>
         </a>
-    <?php endif; ?>
+        <?php endif; ?>
     </div>
 </div>

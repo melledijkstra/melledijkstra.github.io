@@ -31,10 +31,10 @@ use yii\helpers\Url;
  * @property ActiveQuery $guidesCategories
  * @property Guide $previousGuide
  * @property null|string $filePath
- * @property string $renderCategories
  * @property Guide $nextGuide
  * @property string[] $categoryStrings
  * @property string $thumbnail
+ * @property string $credits [varchar(255)]
  */
 class Guide extends ImageUploadActiveRecord implements Linkable
 {

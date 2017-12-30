@@ -12,6 +12,7 @@ use yii\db\ActiveQuery;
  * @property integer $id
  * @property string $title
  * @property string $image
+ * @property string $credits [varchar(255)]
  *
  * @property Guide[] $guides
  * @property SeriesGuides[] $seriesGuides

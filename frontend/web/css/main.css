@@ -770,12 +770,22 @@ pre {
 .project-item > a {
     text-decoration: none;
 }
-.project-item:hover .title {
+.project-item:hover .title,
+.project-item:hover .credits {
     opacity: 1;
 }
 .project-item .image {
     width: 100%;
     height: auto;
+}
+
+.project-item .credits {
+    text-underline: none;
+    display: inline-block;
+    opacity: 0;
+    padding: 5px;
+    background-color: rgba(0,0,0,0.2);
+    color: #fefefe;
 }
 
 /*----------------------------------------------------------------------------------*

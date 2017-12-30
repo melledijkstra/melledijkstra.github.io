@@ -19,8 +19,8 @@ use yii\helpers\Url;
  * @property string $external_url
  * @property string $externalUrl
  *
- * @property string $link
  * @property Guide[] $guides
+ * @property string $credits [varchar(255)]
  */
 class Project extends ImageUploadActiveRecord implements Linkable
 {
