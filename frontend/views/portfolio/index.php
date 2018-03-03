@@ -1,10 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: melle
- * Date: 4-11-2017
- * Time: 23:59
- *
  * @var $this \yii\web\View
  * @var $projectDataProvider \yii\data\ActiveDataProvider
  */

@@ -1,4 +1,8 @@
 <?php
+
+use common\models\User;
+use yii\log\FileTarget;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -20,7 +24,7 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => User::class,
             'enableAutoLogin' => true,
             'identityCookie' => [
                 'name' => '_identity-frontend',
@@ -38,7 +42,7 @@ return [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => FileTarget::class,
                     'levels' => ['error', 'warning'],
                 ],
             ],
@@ -48,7 +52,7 @@ return [
         ],
         'urlManager' => [
             'rules' => [
-                '<alias:about|resume>' => 'site/<alias>',
+                '<alias:resume>' => 'site/<alias>',
                 '<controller>' => '<controller>/index',
                 'guides/<title:\S*>'    => 'guides/view',
                 'portfolio/<title:\S*>'  => 'portfolio/view',

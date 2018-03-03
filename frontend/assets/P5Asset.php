@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: melle
- * Date: 18-6-2017
- * Time: 18:50
- */
 
 namespace frontend\assets;
 

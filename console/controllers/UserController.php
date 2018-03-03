@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: melle
- * Date: 13-5-2017
- * Time: 23:34
- */
 
 namespace console\controllers;
 
@@ -18,15 +12,16 @@ class UserController extends Controller
     /**
      * Creates a user account with information given
      */
-    public function actionCreateUser() {
+    public function actionCreateUser()
+    {
         $userInfo = [];
         $userInfo['username'] = $this->prompt('Choose username:');
         $userInfo['email'] = $this->prompt('Choose email:');
-        $userInfo['role'] = $this->prompt('Choose role (0,1):',[0,1]);
+        $userInfo['role'] = $this->prompt('Choose role (0,1):', [0, 1]);
         $userInfo['password'] = $this->prompt('Choose password:');
 
         foreach ($userInfo as $key => $value) {
-            if(empty($value)) {
+            if (empty($value)) {
                 echo "$key can't be empty!";
                 exit;
             }
@@ -40,7 +35,7 @@ class UserController extends Controller
         ]);
 
         $user->generateAuthKey();
-        if($user->save()) {
+        if ($user->save()) {
             echo "user '$user->username' created (role: $user->role)";
         } else {
             var_dump($user->errors);
@@ -51,7 +46,8 @@ class UserController extends Controller
     /**
      * Change the password of a user
      */
-    public function actionChangePassword() {
+    public function actionChangePassword()
+    {
         $usernameOrEmail = $this->prompt('Username of email of user:');
         /** @var User $user */
         $user = User::find()->where([
@@ -60,17 +56,17 @@ class UserController extends Controller
             ['email' => $usernameOrEmail],
         ])->one();
 
-        if($user === null) {
+        if ($user === null) {
             echo 'User with this email or username does not exist';
         } else {
             echo "User found (username: $user->username, email: $user->email)\n";
             $password = $this->prompt('Type new password:');
-            if(empty($password)) {
+            if (empty($password)) {
                 echo "Password is empty\n";
                 exit;
             }
             $user->setPassword($password);
-            if($user->save()) {
+            if ($user->save()) {
                 echo "Password changed correctly\n";
             } else {
                 echo 'Something went wrong';

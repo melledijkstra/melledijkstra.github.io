@@ -1,10 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: melle
- * Date: 13-11-2017
- * Time: 15:09
- *
  * @var $project \common\models\Project
  */
 

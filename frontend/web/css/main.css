@@ -748,6 +748,14 @@ pre {
 .project-item:hover {
     box-shadow: /*0 5px 20px rgba(0, 0, 0, 0.3),*/ inset 0 -30px 500px rgba(0, 0, 0, 0.9);
 }
+.project-item .title,
+.project-item .credits {
+    opacity: 0;
+
+    -webkit-transition: all 0.6s ease;
+    -moz-transition: all 0.6s ease;
+    -o-transition: all 0.6s ease;
+}
 .project-item .title {
     position: absolute;
     bottom: 0;
@@ -760,12 +768,6 @@ pre {
 
     display: table-cell;
     vertical-align: middle;
-
-    opacity: 0;
-
-    -webkit-transition: all 0.6s ease;
-    -moz-transition: all 0.6s ease;
-    -o-transition: all 0.6s ease;
 }
 .project-item > a {
     text-decoration: none;
@@ -778,11 +780,9 @@ pre {
     width: 100%;
     height: auto;
 }
-
 .project-item .credits {
     text-underline: none;
     display: inline-block;
-    opacity: 0;
     padding: 5px;
     background-color: rgba(0,0,0,0.2);
     color: #fefefe;

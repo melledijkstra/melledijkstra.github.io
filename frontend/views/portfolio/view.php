@@ -1,10 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: melle
- * Date: 13-11-2017
- * Time: 17:27
- *
  * @var $project \common\models\Project
  */
 
@@ -17,7 +12,7 @@ $this->title = $project->title;
     <div class="row">
         <div class="col-sm-12">
             <h1><?= $project->title ?>
-                <small class="badge"><?= Yii::$app->formatter->asDate($project->created_at); ?></small>
+                <small class="badge"><?= \Yii::$app->formatter->asDate($project->created_at); ?></small>
             </h1>
         </div>
     </div>

@@ -65,7 +65,7 @@ $this->registerMetaTag([
     'content' => 'Hi! My name is Melle Dijkstra. A enthusiastic computer scientist who\'s passionate for all kinds of science',
 ]);
 
-$CVFile = '/files/CV-Europass-Melle-Dijkstra-EN.pdf';
+$CVFile = '/files/CV-Melle-Dijkstra-EN.pdf';
 
 ?>
 <div id="resume-page">

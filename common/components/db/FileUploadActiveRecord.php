@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Melle Dijkstra
- * Date: 9-2-2017
- * Time: 02:15
- */
 
 namespace common\components\db;
 

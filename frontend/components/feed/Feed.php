@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Melle Dijkstra
- * Date: 7-3-2017
- * Time: 16:35
- */
 
 namespace frontend\components\feed;
 use \Yii;

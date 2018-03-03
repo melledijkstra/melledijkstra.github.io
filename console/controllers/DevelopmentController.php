@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Melle
- * Date: 12/8/2017
- * Time: 11:18 PM
- */
 
 namespace console\controllers;
 
@@ -24,8 +18,8 @@ class DevelopmentController extends Controller
                 'recipient' => $mailAddress,
             ])
                 ->setTo($mailAddress)
-                ->setReplyTo('dev.melle@gmail.com')
-                ->setFrom('dev.melle@gmail.com');
+                ->setReplyTo(\Yii::$app->params['adminEmail'])
+                ->setFrom(\Yii::$app->params['adminEmail']);
 
             if ($message->send()) {
                 $this->stdout("Mail sent!\n");
