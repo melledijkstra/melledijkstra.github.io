@@ -82,7 +82,7 @@ $CVFile = '/files/CV-Melle-Dijkstra-EN.pdf';
                     traveling and Philosophy.
                 </p>
                 <p>
-                    Currently I'm studying computer science at Hanze Hogeschool Groningen.
+                    Currently I'm studying computer science at Hanze University of Applied Sciences in Groningen.
                 </p>
             </div>
             <div class="col col-xs-12 col-md-6 margin-t-20">
