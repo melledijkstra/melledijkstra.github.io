@@ -10,8 +10,10 @@
  */
 
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 
 $cardStyling = $guide->language ? "style='border-bottom: 3px solid {$guide->language->color};'" : '';
+$sneakPeekLength = 197; // length 200 - the 3 dots for ellipsis
 
 ?>
 <div class="grid-item col-xs-12 col-sm-12 col-md-6 col-lg-4">
@@ -24,7 +26,7 @@ $cardStyling = $guide->language ? "style='border-bottom: 3px solid {$guide->lang
                 </div>
             </a>
         <?php endif; ?>
-        <div class="content card-content">
+        <div class="card-content">
             <?php if (null !== $guide->language): ?>
                 <small class="programming-language-tooltip"
                        style="background-color: <?= $guide->language->color; ?>;"> <?= Html::encode($guide->language->name); ?></small>
@@ -46,7 +48,7 @@ $cardStyling = $guide->language ? "style='border-bottom: 3px solid {$guide->lang
                     </div>
                 <?php endif; ?>
             </div>
-            <?= (null !== $guide->sneak_peek) ? '<p class="sneak-peek">' . Html::encode($guide->sneak_peek) . '</p>' : '' ?>
+            <?= ($guide->sneak_peek !== null) ? '<p class="sneak-peek">' . Html::encode(StringHelper::truncate($guide->sneak_peek, $sneakPeekLength)) . '</p>' : '' ?>
         </div>
     </div>
 </div>

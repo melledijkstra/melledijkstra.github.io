@@ -685,6 +685,8 @@ pre {
 }
 
 .guide-item .sneak-peek {
+    text-overflow: ellipsis;
+    word-wrap: break-word;
     margin: 10px 0 15px 0;
     color: #868686;
 }

@@ -28,7 +28,7 @@ use yii\helpers\Url;
  * @property Project $project
  * @property Language $language
  * @property Category[] $categories
- * @property ActiveQuery $guidesCategories
+ * @property GuidesCategory[] $guidesCategories
  * @property Guide $previousGuide
  * @property null|string $filePath
  * @property Guide $nextGuide
@@ -117,8 +117,14 @@ class Guide extends ImageUploadActiveRecord implements Linkable
      */
     public function afterFind()
     {
+        // load the guide text
         if (file_exists($this->filepath)) {
             $this->guideText = file_get_contents($this->filepath);
+        }
+        // set linked category ids
+        foreach ($this->guidesCategories as $guidesCategory) {
+            /** @var $guidesCategory GuidesCategory */
+            $this->categoryIds[] = $guidesCategory->category_id;
         }
         parent::afterFind();
     }

@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Guide */
 
 HighLightAsset::register($this);
-$this->registerJs('hljs.initHighlightingOnLoad();',View::POS_READY);
+$this->registerJs('hljs.initHighlightingOnLoad();', View::POS_READY);
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('guide', 'Guides'), 'url' => ['index']];
@@ -31,34 +31,32 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php
-    try {
-        echo DetailView::widget([
-            'model' => $model,
-            'attributes' => [
-                'title',
-                'filename',
-                [
-                    'attribute' => 'project_id',
-                    'value' => $model->project ? $model->project->title : null,
-                ],
-                'thumbnail',
-                'language.name',
-                'difficulty',
-                [
-                    'attribute' => 'categoryIds',
-                    'value' => function($model) {
-                        /** @var $model \common\models\Guide */
-                        implode(', ', $model->categoryStrings);
-                    },
-                    'format' => 'html',
-                ],
-                'created_at:datetime',
-                'updated_at:datetime',
-                'createdBy.username',
-                'updatedBy.username',
+    /** @noinspection PhpUnhandledExceptionInspection */
+    echo DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'title',
+            'filename',
+            [
+                'attribute' => 'project_id',
+                'value' => $model->project ? $model->project->title : null,
             ],
-        ]);
-    } catch (Exception $e) {}
+            'thumbnail',
+            'language.name',
+            'difficulty',
+            [
+                'attribute' => 'categoryIds',
+                'value' => function ($model) {
+                    /** @var $model \common\models\Guide */
+                    return implode(', ', $model->categoryStrings);
+                },
+            ],
+            'created_at:datetime',
+            'updated_at:datetime',
+            'createdBy.username',
+            'updatedBy.username',
+        ],
+    ]);
     ?>
 
     <h2><?= Yii::t('guide', 'Preview'); ?></h2>

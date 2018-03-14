@@ -76,18 +76,18 @@ $CVFile = '/files/CV-Melle-Dijkstra-EN.pdf';
         <div class="row more-padding margin-tb-10">
             <div class="col col-lg-6 col-md-6">
                 <p>
-                    My name is <strong>Melle Dijkstra</strong>. A enthusiastic computer scientist who's passionate
+                    My name is <strong>Melle Dijkstra</strong>. An enthusiastic computer scientist who's passionate
                     for all kinds of science - Physics, Biology and Astrophysics and the
                     relation in them. Also love
                     traveling and Philosophy.
                 </p>
                 <p>
-                    Currently I'm studying computer science at Hanze University of Applied Sciences in Groningen.
+                    Currently I'm studying computer science at the Hanze University of Applied Sciences in Groningen.
                 </p>
             </div>
             <div class="col col-xs-12 col-md-6 margin-t-20">
                 <ul id="contact-list" class="list-unstyled">
-                    <li><i class="mdi mdi-phone"></i> <a href="tel:+31611666686">+31611666686</a></li>
+                    <li><i class="mdi mdi-phone"></i> <a href="tel:+31611666686">(+31)611666686</a></li>
                     <li><i class="mdi mdi-email"></i> <a href="mailto:dev.melle@gmail.com">dev.melle@gmail.com</a></li>
                     <li><i class="mdi mdi-download"></i> <a target="_blank"
                                                             href="<?= $CVFile ?>">Europass
