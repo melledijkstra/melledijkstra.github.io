@@ -1,7 +1,7 @@
 # Melle Dijkstra's personal website
 
 This repository contains the official source code used 
-for my personal website: [melledijkstra](http://melledijkstra.nl)
+for my personal website: [https://melledijkstra.com](https://melledijkstra.com)
 
 Copyright © 2016 - 2018 Melle Dijkstra, All rights reserved
 

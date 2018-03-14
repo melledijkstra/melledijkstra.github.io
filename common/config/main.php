@@ -13,6 +13,7 @@ return [
             'class' => kartik\markdown\Module::className(),
             'customConversion' => [
                 '<img' => '<img class="img-responsive"',
+                '<table' => '<table class="table"'
             ],
         ],
     ],
