@@ -631,6 +631,11 @@ pre {
     font-family: "Lato", Helvetica, Arial, sans-serif;
 }
 
+#guide-container iframe {
+    width: 100%;
+    margin: 10px 0;
+}
+
 .guide-date {
     color: #87949c;
 }
