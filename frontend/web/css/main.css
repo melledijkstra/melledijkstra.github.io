@@ -12,7 +12,7 @@
 @import url('//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css');
 
 /*
- Primary Site color: #DCCBA7
+ Primary Site color: #b2a38a
 */
 
 /**********************************************************************************
@@ -54,7 +54,7 @@ h1 {
 
 hr {
     height: 3px;
-    background-color: #DCCBA7;
+    background-color: #b2a38a;
     border: none;
 }
 
@@ -141,7 +141,7 @@ label {
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus {
-    background-color: #DCCBA7 !important;
+    background-color: #b2a38a !important;
 }
 
 .btn-default {
@@ -176,8 +176,8 @@ pre code {
 
 .link-pager-active a {
     color: #FFF !important;
-    background-color: #DCCBA7 !important;
-    /*background-color: #DCCBA7 !important;*/
+    background-color: #b2a38a !important;
+    /*background-color: #b2a38a !important;*/
 }
 
 /**********************************************************************************
@@ -280,7 +280,7 @@ pre code {
  */
 /* BACKGROUND COLORS */
 .bg-primary {
-    background-color: #DCCBA7;
+    background-color: #b2a38a;
     color: #FEFEFE;
 }
 
@@ -351,7 +351,7 @@ pre code {
 .loader {
     display: block;
     border: 16px solid #f3f3f3;
-    border-top: 16px solid #DCCBA7;
+    border-top: 16px solid #b2a38a;
     border-radius: 50%;
 
     width: 120px;
@@ -543,7 +543,7 @@ pre {
 }
 
 .sidebar-nav li a:hover {
-    color: #a5964b;
+    color: #8f8068;
 }
 
 .sidebar-nav i + span {
@@ -887,7 +887,7 @@ pre {
 }
 .skill-container .skill {
     height: 2px;
-    background-color: #DCCBA7;
+    background-color: #b2a38a;
 }
 
 img.grayscale {
@@ -913,9 +913,9 @@ img.grayscale:hover {
     position: relative;
     background-color: white;
 
-    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
 
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
@@ -960,7 +960,7 @@ img.grayscale:hover {
 }
 
 .wip-banner {
-    background-color: #DCCBA7;
+    background-color: #b2a38a;
     color: #FFFFFF;
 }
 

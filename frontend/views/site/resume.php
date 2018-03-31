@@ -9,7 +9,7 @@
  */
 
 $this->registerCss('css/resume.css');
-$this->title = 'Resume';
+$this->title = 'Melle Dijkstra';
 
 $skills = [
     'Problem Solving' => [
@@ -21,12 +21,12 @@ $skills = [
         'It doesn\'t matter which language you use, it matters how you use it',
     ],
     'Web Development' => [
-        95,
+        96,
         'Frontend, Backend. You name it, I\'ve mastered the web'
     ],
-    'Computer Networks' => [
+    'Computer Networks & Communication' => [
         60,
-        'I\'ve setup multiple servers and like to work with IoT'
+        'I\'ve setup multiple linux servers and like to work with IoT'
     ],
     'Android (Java)' => [
         65,
@@ -35,6 +35,10 @@ $skills = [
     'Javascript' => [
         86,
         'Javascript was the first language I started with!'
+    ],
+    'Machine Learning & AI' => [
+        20,
+        'Inspired by it, and definitely a topic I want to learn more about'
     ],
     'Photoshop / Illustrator' => [
         30,
@@ -46,9 +50,9 @@ $softwareList = [
     'Jetbrains Products' => '/images/resume/software/logo-jetbrains.png',
     'PHPStorm' => '/images/resume/software/logo-phpstorm.png',
     'Yii2 Framework' => '/images/resume/software/logo-yii2.png',
+    'Git' => '/images/resume/software/logo-git.png',
     'Arduino' => '/images/resume/software/logo-arduino.png',
     'PyCharm' => '/images/resume/software/logo-pycharm.png',
-    'Git' => '/images/resume/software/logo-git.png',
 ];
 
 $this->registerCss(<<<CSS
@@ -62,7 +66,7 @@ CSS
 
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => 'Hi! My name is Melle Dijkstra. A enthusiastic computer scientist who\'s passionate for all kinds of science',
+    'content' => 'Hi! My name is Melle Dijkstra. An enthusiastic computer scientist!',
 ]);
 
 $CVFile = '/files/CV-Melle-Dijkstra-EN.pdf';

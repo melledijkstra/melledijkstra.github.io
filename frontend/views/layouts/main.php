@@ -1,12 +1,13 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
+/**
+ * @var $this \yii\web\View
+ * @var $content string
+ */
 
-use common\models\Category;
-use yii\helpers\Html;
-use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use frontend\assets\AppAsset;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 AppAsset::register($this);
@@ -64,15 +65,16 @@ JS
     <meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ac9c80">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) . (Yii::$app->params['titleSuffix'] ?? '') ?></title>
+    <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-61555186-3"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
-
         gtag('config', 'UA-61555186-3');
     </script>
 </head>
@@ -92,7 +94,7 @@ JS
                 <a href="/portfolio"><i class="mdi mdi-pencil"></i> <span class="text-right">Portfolio</span></a>
             </li>
             <li>
-                <a href="/resume"><i class="mdi mdi-account-card-details"></i> <span
+                <a href="/"><i class="mdi mdi-account-card-details"></i> <span
                             class="text-right">Resume</span></a>
             </li>
         </ul>
@@ -144,11 +146,11 @@ JS
 
     <div id="page-content">
         <!-- WIP BANNER -->
-<!--        <div class="padding-10 wip-banner text-center">-->
-<!--            <span class="text-md mdi mdi-worker"></span>-->
-<!--            <p>This site is currently in progress, please browse around! But be aware of bugs or misspelled-->
-<!--                words.</p>-->
-<!--        </div>-->
+        <!--        <div class="padding-10 wip-banner text-center">-->
+        <!--            <span class="text-md mdi mdi-worker"></span>-->
+        <!--            <p>This site is currently in progress, please browse around! But be aware of bugs or misspelled-->
+        <!--                words.</p>-->
+        <!--        </div>-->
         <!-- SIDEBAR TOGGLER -->
         <button type="button" class="navbar-toggle collapsed"
                 onclick="$('#wrap').toggleClass('toggled');" data-toggle="collapse">

@@ -10,12 +10,14 @@ use yii\helpers\ArrayHelper;
 use yii\web\View;
 use yii\widgets\Pjax;
 
-/* @var $this yii\web\View */
-/* @var $newest_guide Guide */
-/* @var $guideSearch \common\models\search\GuideSearch */
-/* @var $last_visit_count int */
-/* @var $filter string */
-/* @var $guideDataProvider \yii\data\ActiveDataProvider */
+/**
+ * @var $this yii\web\View
+ * @var $newest_guide Guide
+ * @var $guideSearch \common\models\search\GuideSearch
+ * @var $last_visit_count int
+ * @var $filter string
+ * @var $guideDataProvider \yii\data\ActiveDataProvider
+ */
 
 $this->title = Yii::t('guides', 'Guides');
 
@@ -107,6 +109,7 @@ JSCRIPT
             </div>
             <div class="col col-xs-12 col-md-3">
                 <div id="search-menu" class="affix">
+
                     <h3>Search guides</h3>
 
                     <?php $form = ActiveForm::begin([
@@ -141,9 +144,11 @@ JSCRIPT
 
                     <?= Html::submitButton('Search', ['class' => 'btn btn-block btn-primary']); ?>
 
-                    <div class="margin-tb-10" id="guide-loader-wrap">
+                    <div class="margin-tb-10 pull-left" id="guide-loader-wrap">
                         <div class="loader"></div>
                     </div>
+
+                    <a href="/feed/atom" class="margin-tb-10 mdi pull-right mdi-rss-box"> RSS Feed</a>
 
                     <?php ActiveForm::end(); ?>
                 </div>

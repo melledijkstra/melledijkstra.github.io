@@ -15,7 +15,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
-    'defaultRoute' => '/guides',
+    'defaultRoute' => '/site/resume',
     'components' => [
         'assetManager' => YII_ENV_PROD ? [
             'bundles' => require __DIR__ . '/assets-compressed.php',
