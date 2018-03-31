@@ -14,7 +14,10 @@ use yii\web\Controller;
 
 class BackendController extends Controller
 {
-    public function behaviors()
+    /**
+     * @return array
+     */
+    public function behaviors(): array
     {
         return [
             'access' => [
