@@ -17,7 +17,7 @@ class CategoriesController extends BackendController
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return array_merge(parent::behaviors(), [
             'verbs' => [

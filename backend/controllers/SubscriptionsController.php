@@ -17,7 +17,7 @@ class SubscriptionsController extends BackendController
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [
