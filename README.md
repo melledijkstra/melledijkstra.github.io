@@ -7,6 +7,22 @@ Copyright © 2016 - 2018 Melle Dijkstra, All rights reserved
 
 Created using the Yii2 Framework.
 
+## Impression
+
+Guides overview page where I display my latest written guides/articles.
+It used a [masonry layout](https://masonry.desandro.com/), which is a javascript library
+that places the elements in optimal position based on available vertical space. 
+
+![Guides Overview](project-files/guides-overview.png)
+
+Portfolio page
+
+![Portfolio](project-files/portfolio.jpg)
+
+Resume page
+
+![Resume](project-files/resume.jpg)
+
 ## Yii 2 Advanced Project Template
 
 Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
