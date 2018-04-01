@@ -15,7 +15,8 @@ $this->title = 'About';
 
 ?>
 <div class="site-about">
-    <iframe class="block background-sketch full-height affix" src="<?= \yii\helpers\Url::to(['/sketches/ConnectedLines/index.html']); ?>"></iframe>
+    <iframe class="block background-sketch full-height affix"
+            src="<?= \yii\helpers\Url::to(['/sketches/ConnectedLines/index.html']); ?>"></iframe>
     <div class="jumbotron">
         <img src="/images/me_in_mountains.jpg"
              class="mel-about-image img-circle" alt="image of myself"/>
@@ -25,7 +26,9 @@ $this->title = 'About';
             <div class="col col-xs-12 col-md-6 col-lg-3">
                 <div class="card">
                     <div class="card-content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam aspernatur culpa doloribus eius, fuga ipsa iste magnam natus numquam odio officia porro quas quidem rem sed sit totam.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam aspernatur culpa
+                        doloribus eius, fuga ipsa iste magnam natus numquam odio officia porro quas quidem rem sed sit
+                        totam.
                     </div>
                 </div>
             </div>
@@ -45,7 +48,9 @@ $this->title = 'About';
             <div class="col col-xs-12 col-md-6 col-lg-3">
                 <div class="card">
                     <div class="card-content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam aspernatur culpa doloribus eius, fuga ipsa iste magnam natus numquam odio officia porro quas quidem rem sed sit totam.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam aspernatur culpa
+                        doloribus eius, fuga ipsa iste magnam natus numquam odio officia porro quas quidem rem sed sit
+                        totam.
                     </div>
                 </div>
             </div>
@@ -66,7 +71,9 @@ $this->title = 'About';
             <div class="col col-xs-12 col-md-6 col-lg-3">
                 <div class="card">
                     <div class="card-content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam aspernatur culpa doloribus eius, fuga ipsa iste magnam natus numquam odio officia porro quas quidem rem sed sit totam.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam aspernatur culpa
+                        doloribus eius, fuga ipsa iste magnam natus numquam odio officia porro quas quidem rem sed sit
+                        totam.
                     </div>
                 </div>
             </div>
@@ -86,13 +93,15 @@ $this->title = 'About';
             <div class="col col-xs-12 col-md-6 col-lg-3">
                 <div class="card">
                     <div class="card-content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam aspernatur culpa doloribus eius, fuga ipsa iste magnam natus numquam odio officia porro quas quidem rem sed sit totam.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam aspernatur culpa
+                        doloribus eius, fuga ipsa iste magnam natus numquam odio officia porro quas quidem rem sed sit
+                        totam.
                     </div>
                 </div>
             </div>
             <div class="col col-xs-12 col-md-6 col-lg-3">
                 <div class="card">
-                <div class="card-content">
+                    <div class="card-content">
                         Hi this is me!, bla die bla die bla
                     </div>
                 </div>
@@ -106,7 +115,9 @@ $this->title = 'About';
             <div class="col col-xs-12 col-md-6 col-lg-3">
                 <div class="card">
                     <div class="card-content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam aspernatur culpa doloribus eius, fuga ipsa iste magnam natus numquam odio officia porro quas quidem rem sed sit totam.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam aspernatur culpa
+                        doloribus eius, fuga ipsa iste magnam natus numquam odio officia porro quas quidem rem sed sit
+                        totam.
                     </div>
                 </div>
             </div>

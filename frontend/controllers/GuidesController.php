@@ -3,11 +3,9 @@
 namespace frontend\controllers;
 
 use common\models\Guide;
-use common\models\GuidesCategory;
 use common\models\search\GuideSearch;
 use frontend\components\FrontendController;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\web\Cookie;
 use yii\web\NotFoundHttpException;
 

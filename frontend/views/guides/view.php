@@ -89,7 +89,8 @@ $this->title = $guide->title;
             <?php if ($prevGuide !== null): ?>
                 <div class="pull-left">
                     <a class="btn btn-primary"
-                       href="<?= $prevGuide->getLink(); ?>"><i class="mdi mdi-arrow-left"></i> <?= $prevGuide->title; ?></a>
+                       href="<?= $prevGuide->getLink(); ?>"><i class="mdi mdi-arrow-left"></i> <?= $prevGuide->title; ?>
+                    </a>
                 </div>
             <?php endif; ?>
             <?php if ($nextGuide !== null): ?>

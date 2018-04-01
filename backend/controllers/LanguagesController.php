@@ -2,12 +2,12 @@
 
 namespace backend\controllers;
 
-use Yii;
+use backend\components\web\BackendController;
 use common\models\Language;
 use common\models\search\LanguageSearch;
-use backend\components\web\BackendController;
-use yii\web\NotFoundHttpException;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 /**
  * LanguageController implements the CRUD actions for Language model.
@@ -19,7 +19,7 @@ class LanguagesController extends BackendController
      */
     public function behaviors(): array
     {
-        return array_merge(parent::behaviors(),[
+        return array_merge(parent::behaviors(), [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

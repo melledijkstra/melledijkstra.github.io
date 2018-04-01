@@ -18,9 +18,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'project')->dropDownList(ArrayHelper::map(Project::find()->all(),'id','title'), ['prompt'=>'']) ?>
+    <?= $form->field($model, 'project')->dropDownList(ArrayHelper::map(Project::find()->all(), 'id', 'title'), ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(Category::find()->all(),'id','name'), ['prompt'=>'']); ?>
+    <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'name'), ['prompt' => '']); ?>
 
     <?= $form->field($model, 'created_at') ?>
 

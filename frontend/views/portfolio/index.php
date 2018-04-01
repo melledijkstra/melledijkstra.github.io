@@ -38,7 +38,7 @@ $this->title = \Yii::t('portfolio', 'Portfolio');
             if ($projectDataProvider->count > 0) {
                 foreach ($projectDataProvider->models as $project) {
                     /** @var $project Project */
-                    if($project->hasFile()) {
+                    if ($project->hasFile()) {
                         echo $this->render('project_view', [
                             'project' => $project,
                         ]);

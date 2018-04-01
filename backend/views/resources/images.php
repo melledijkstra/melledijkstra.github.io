@@ -11,7 +11,7 @@
  */
 
 ?>
-<h2>Images</h2>
+    <h2>Images</h2>
 
 <?= \yii\grid\GridView::widget([
     'dataProvider' => new \yii\data\ArrayDataProvider([

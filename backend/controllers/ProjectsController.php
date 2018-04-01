@@ -3,13 +3,11 @@
 namespace backend\controllers;
 
 use backend\components\web\BackendController;
-use common\components\db\MActiveRecord;
-use Yii;
 use common\models\Project;
 use common\models\search\ProjectSearch;
-use yii\web\NotFoundHttpException;
+use Yii;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
+use yii\web\NotFoundHttpException;
 
 /**
  * ProjectController implements the CRUD actions for Project model.

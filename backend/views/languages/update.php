@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model common\models\Language */
 
 $this->title = Yii::t('language', 'Update {modelClass}: ', [
-    'modelClass' => 'Language',
-]) . $model->name;
+        'modelClass' => 'Language',
+    ]) . $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('language', 'Languages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('language', 'Update');
