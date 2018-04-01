@@ -1,17 +1,20 @@
 <?php
+
 namespace backend\controllers;
 
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
+use backend\models\PasswordResetRequestForm;
+use backend\models\ResetPasswordForm;
+use common\models\LoginForm;
+use common\models\search\GuideSearch;
+use common\models\search\ProjectSearch;
 use Yii;
 use yii\base\InvalidParamException;
+use yii\captcha\CaptchaAction;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
 use yii\web\ErrorAction;
-use yii\captcha\CaptchaAction;
 use yii\web\Response;
 
 /**
@@ -70,8 +73,12 @@ class SiteController extends Controller
      * Overview backend
      * @throws \yii\base\InvalidParamException
      */
-    public function actionIndex() {
-        return $this->render('dashboard');
+    public function actionIndex(): string
+    {
+        $projects = (new ProjectSearch())->search([]);
+        $guides = (new GuideSearch())->search([]);
+
+        return $this->render('dashboard', compact('projects', 'guides'));
     }
 
     /**
@@ -106,6 +113,7 @@ class SiteController extends Controller
      */
     public function actionRequestPasswordReset()
     {
+        $this->layout = 'login';
         $model = new PasswordResetRequestForm();
         $model->email = $model->email ?? \Yii::$app->request->getQueryParam('email');
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {

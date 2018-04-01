@@ -1,7 +1,7 @@
 <?php
 
 namespace frontend\components\feed;
-use \Yii;
+
 use yii\helpers\Url;
 
 /**
@@ -9,7 +9,8 @@ use yii\helpers\Url;
  * @package frontend\components\feed
  * @see https://validator.w3.org/feed/docs/atom.html
  */
-class Feed {
+class Feed
+{
 
     /**
      * Identifies the feed using a universally unique and permanent URI.
@@ -162,7 +163,7 @@ class Feed {
      */
     public function __construct($id, $title, $updated)
     {
-        if(empty($id) || empty($title) || !\is_int($updated)) {
+        if (empty($id) || empty($title) || !\is_int($updated)) {
             throw new FeedException('Invalid information given');
         }
         $this->id = $id;
@@ -174,7 +175,8 @@ class Feed {
      * Adds an entry to this feed
      * @param Entry $entry
      */
-    public function addEntry(Entry $entry) {
+    public function addEntry(Entry $entry)
+    {
         $this->entries[] = $entry;
     }
 
@@ -185,7 +187,7 @@ class Feed {
     public function render(): string
     {
         $updated = gmdate(DATE_ATOM, $this->updated);
-        $this->linkSelf = empty($this->linkSelf) ? Url::to('',true) : $this->linkSelf;
+        $this->linkSelf = empty($this->linkSelf) ? Url::to('', true) : $this->linkSelf;
         $feed = <<<FEED
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -195,27 +197,27 @@ class Feed {
     <updated>{$updated}</updated>
     <link href="{$this->linkSelf}" rel="self" />
 FEED;
-    $feed .= !empty($this->subtitle) ?    "\n\t<subtitle>{$this->subtitle}</subtitle>" : '';
-    $feed .= !empty($this->link) ?        "\n\t<link href=\"{$this->link}\" />" : '';
-    $feed .= !empty($this->language) ?    "\n\t<language>{$this->language}</language>" : '';
-    $feed .= (!empty($this->author) && !empty($this->authorEmail)) ? "\n\t<author>\n\t\t<name>{$this->author}</name>\n\t\t<email>dev.melle@gmail.com</email>\n\t</author>" : '';
-    $feed .= !empty($this->icon) ?        "\n\t<icon>{$this->icon}</icon>" : '';
-    foreach($this->categories as $category) {
-        if(!empty($category)) {
-            $feed .= "\n\t<category term=\"{$category}\"/>";
+        $feed .= !empty($this->subtitle) ? "\n\t<subtitle>{$this->subtitle}</subtitle>" : '';
+        $feed .= !empty($this->link) ? "\n\t<link href=\"{$this->link}\" />" : '';
+        $feed .= !empty($this->language) ? "\n\t<language>{$this->language}</language>" : '';
+        $feed .= (!empty($this->author) && !empty($this->authorEmail)) ? "\n\t<author>\n\t\t<name>{$this->author}</name>\n\t\t<email>dev.melle@gmail.com</email>\n\t</author>" : '';
+        $feed .= !empty($this->icon) ? "\n\t<icon>{$this->icon}</icon>" : '';
+        foreach ($this->categories as $category) {
+            if (!empty($category)) {
+                $feed .= "\n\t<category term=\"{$category}\"/>";
+            }
         }
-    }
-    $feed .= !empty($this->rights) ?      "\n\t<rights>{$this->rights}</rights>" : '';
+        $feed .= !empty($this->rights) ? "\n\t<rights>{$this->rights}</rights>" : '';
 
-    $feed .= "\n\n";
+        $feed .= "\n\n";
 
-    foreach($this->entries as $entry) {
-        $feed .= $entry->render();
-    }
+        foreach ($this->entries as $entry) {
+            $feed .= $entry->render();
+        }
 
-    $feed .= "\n</feed>";
+        $feed .= "\n</feed>";
 
-    return $feed;
+        return $feed;
     }
 
 }

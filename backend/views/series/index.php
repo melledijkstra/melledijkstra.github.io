@@ -1,9 +1,9 @@
 <?php
 
-use yii\grid\SerialColumn;
 use yii\grid\ActionColumn;
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\grid\SerialColumn;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\SeriesSearch */
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             [
                 'attribute' => 'image',
-                'value' => function($model) {
+                'value' => function ($model) {
                     /** @var $model \common\models\Series */
                     return $model->getPublicLink(true);
                 },

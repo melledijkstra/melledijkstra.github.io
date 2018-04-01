@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             [
                 'attribute' => 'image',
-                'value' => function($model) {
+                'value' => function ($model) {
                     /** @var $model \common\models\Series */
                     return $model->getPublicLink(true);
                 },
@@ -44,11 +44,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_by',
         ],
     ]) ?>
-    
+
     <div>
         <ol>
             <?php foreach ($model->seriesGuides as $seriesGuide): ?>
-                <li><?= $seriesGuide->guide->title ?> <a target="_blank" href="<?= $seriesGuide->guide->getLink(true, true); ?>">link</a> (<?= $seriesGuide->order ?>)</li>
+                <li><?= $seriesGuide->guide->title ?> <a target="_blank"
+                                                         href="<?= $seriesGuide->guide->getLink(true, true); ?>">link</a>
+                    (<?= $seriesGuide->order ?>)
+                </li>
             <?php endforeach; ?>
         </ol>
     </div>

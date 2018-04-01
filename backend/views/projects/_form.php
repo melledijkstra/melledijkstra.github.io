@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?php
     if (!$model->isNewRecord) {
-        echo "<img class='img-responsive thumbnail' style='max-height: 200px;' src='{$model->getPublicLink(true, true)}' />".
+        echo "<img class='img-responsive thumbnail' style='max-height: 200px;' src='{$model->getPublicLink(true, true)}' />" .
             Html::label(Yii::t('project', 'Delete current file?')) .
             '<br />' .
             Html::checkbox('deleteFile');

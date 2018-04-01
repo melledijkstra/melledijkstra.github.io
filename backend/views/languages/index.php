@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\LanguageSearch */
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             [
                 'attribute' => 'color',
-                'value' => function($model, $key, $index, $column) {
+                'value' => function ($model, $key, $index, $column) {
                     /** @var $model \common\models\Language */
                     return "<span style=\"padding: 5px;color: white;background-color: {$model->color};\">{$model->name}</span>";
                 },

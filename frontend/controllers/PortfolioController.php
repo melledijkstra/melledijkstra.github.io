@@ -8,11 +8,8 @@
 
 namespace frontend\controllers;
 
-use common\models\Project;
 use common\models\search\ProjectSearch;
-use yii\helpers\Html;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 
 class PortfolioController extends Controller
 {

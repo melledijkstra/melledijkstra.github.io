@@ -4,12 +4,12 @@ namespace backend\controllers;
 
 use backend\components\web\BackendController;
 use common\models\Category;
-use common\models\Subscription;
-use Yii;
 use common\models\Guide;
 use common\models\search\GuideSearch;
-use yii\web\NotFoundHttpException;
+use common\models\Subscription;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 /**
  * GuideController implements the CRUD actions for Guide model.
@@ -21,7 +21,7 @@ class GuidesController extends BackendController
      */
     public function behaviors(): array
     {
-        return array_merge(parent::behaviors(),[
+        return array_merge(parent::behaviors(), [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -87,7 +87,7 @@ class GuidesController extends BackendController
             }
             $successfullMessages = Yii::$app->mailer->sendMultiple($messages);
             $failedMessages = \count($messages) - $successfullMessages;
-            if(\count($messages) === $successfullMessages) {
+            if (\count($messages) === $successfullMessages) {
                 \Yii::$app->session->addFlash('success', 'All mails successfully sent!');
             } else {
                 \Yii::$app->session->addFlash('danger', "$failedMessages mail(s) failed to send!");

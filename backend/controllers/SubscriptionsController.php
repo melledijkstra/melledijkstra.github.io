@@ -2,12 +2,12 @@
 
 namespace backend\controllers;
 
-use Yii;
-use common\models\Subscription;
-use common\models\search\SubscriptionSearch;
 use backend\components\web\BackendController;
-use yii\web\NotFoundHttpException;
+use common\models\search\SubscriptionSearch;
+use common\models\Subscription;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 /**
  * SubscriptionsController implements the CRUD actions for Subscription model.

@@ -1,20 +1,13 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: melle
- * Date: 13-11-2016
- * Time: 16:09
+ * @var $this \yii\web\View
+ * @var $content string
  */
 
-/* @var $this \yii\web\View */
-/* @var $content string */
-
 use backend\assets\AppAsset;
-use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use yii\helpers\Html;
 
 AppAsset::register($this);
 ?>

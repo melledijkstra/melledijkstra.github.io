@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\ProjectSearch */
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             [
                 'attribute' => 'thumbnail',
-                'value' => function($model) {
+                'value' => function ($model) {
                     /** @var $model \common\models\Project */
                     return "<img class='img-responsive' src='{$model->getPublicLink(true, true)}' />";
                 },

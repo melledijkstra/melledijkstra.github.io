@@ -31,7 +31,7 @@ class AppAsset extends AssetBundle
     public function init()
     {
         // add dynamic css from frontend
-        $this->css[] = \Yii::$app->params['frontendUrl'].'/css/main.css';
+        $this->css[] = \Yii::$app->params['frontendUrl'] . '/css/main.css';
         parent::init();
     }
 

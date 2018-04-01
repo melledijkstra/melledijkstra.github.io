@@ -20,7 +20,8 @@ use yii\web\Response;
 
 class FeedController extends Controller
 {
-    public function actionAtom() {
+    public function actionAtom()
+    {
         // Set corresponding headers for the feed
         Yii::$app->response->format = Response::FORMAT_XML;
         // Yii::$app->response->headers->add() doesn't work when returning nothing in this action
@@ -38,7 +39,7 @@ class FeedController extends Controller
         /** @var Guide $latestGuide */
         $latestGuide = $query->one();
 
-        $updated = ($latestGuide !== null) ?  $latestGuide->updated_at : 1488923760;
+        $updated = ($latestGuide !== null) ? $latestGuide->updated_at : 1488923760;
         // create the actual feed
         $feed = new Feed(Url::to('', true), Yii::$app->params['siteTitle'], $updated);
         $feed->subtitle = Yii::$app->params['siteSubtitle'];
@@ -46,14 +47,14 @@ class FeedController extends Controller
         $feed->authorEmail = 'melle.dev@gmail.com';
         $feed->categories = ['Tech', 'Computer Science'];
 
-        foreach($dataProvider->models as $guide) {
+        foreach ($dataProvider->models as $guide) {
             /** @var $guide Guide */
             $entry = new Entry($guide->getLink(true), $guide->title, $guide->updated_at);
             $entry->author = $guide->createdBy->username;
             $entry->summary = $guide->sneak_peek;
             $entry->link = $guide->getLink(true);
             $entry->content = $guide->renderGuide();
-            if($guide->hasFile()) {
+            if ($guide->hasFile()) {
                 $entry->logo = $guide->getPublicLink(true);
             }
             $entry->categories = $guide->getCategories()->select('name')->column();

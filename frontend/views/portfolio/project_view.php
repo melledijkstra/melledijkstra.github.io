@@ -19,16 +19,18 @@ $hasUrl = $project->hasUrl();
     <div class="grid-item-content">
         <?php if ($hasUrl): ?>
         <a target="_blank" href="<?= $project->externalUrl ?: ''; ?>">
-        <?php endif; ?>
+            <?php endif; ?>
             <div id="project-item<?= $project->id ?>" class="project-item margin-tb-10"
                  style="background-image: url('<?= $project->getPublicLink(); ?>');">
-                <?php if($project->credits !== null): ?>
-                    <p class="credits"><small><span class="mdi mdi-unsplash"></span><?= $project->credits; ?></small></p>
+                <?php if ($project->credits !== null): ?>
+                    <p class="credits">
+                        <small><span class="mdi mdi-unsplash"></span><?= $project->credits; ?></small>
+                    </p>
                 <?php endif; ?>
                 <h3 class="title"><?= $project->title; ?><?= $hasUrl ? ' <i class="mdi mdi-open-in-new"></i>' : ''; ?></h3>
             </div>
-        <?php if ($hasUrl): ?>
+            <?php if ($hasUrl): ?>
         </a>
-        <?php endif; ?>
+    <?php endif; ?>
     </div>
 </div>

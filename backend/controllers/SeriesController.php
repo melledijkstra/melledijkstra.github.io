@@ -2,14 +2,14 @@
 
 namespace backend\controllers;
 
-use common\models\Guide;
-use Yii;
-use common\models\Series;
-use common\models\search\SeriesSearch;
 use backend\components\web\BackendController;
+use common\models\Guide;
+use common\models\search\SeriesSearch;
+use common\models\Series;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * SeriesController implements the CRUD actions for Series model.
@@ -67,7 +67,7 @@ class SeriesController extends BackendController
     {
         $model = new Series();
 
-        $guides = ArrayHelper::map(Guide::find()->select(['id','title'])->asArray()->all(),'id','title');
+        $guides = ArrayHelper::map(Guide::find()->select(['id', 'title'])->asArray()->all(), 'id', 'title');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -89,7 +89,7 @@ class SeriesController extends BackendController
     {
         $model = $this->findModel($id);
 
-        $guides = ArrayHelper::map(Guide::find()->select(['id','title'])->asArray()->all(),'id','title');
+        $guides = ArrayHelper::map(Guide::find()->select(['id', 'title'])->asArray()->all(), 'id', 'title');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 

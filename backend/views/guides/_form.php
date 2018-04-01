@@ -29,7 +29,7 @@ $this->registerJsFile('/js/guide_form.js', ['depends' => \yii\web\JqueryAsset::c
 ?>
 
 <div class="margin-tb-20 center-text center-block">
-    <img class="center-block" id="uploadImagePreview" src="#" alt="paste upload image preview" />
+    <img class="center-block" id="uploadImagePreview" src="#" alt="paste upload image preview"/>
 </div>
 <button class="btn btn-primary btn-lg center-block">Upload image and use in guide</button>
 
