@@ -1,10 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: melle
- * Date: 11-11-2017
- * Time: 23:44
- *
  * @var $this \yii\web\View
  */
 
@@ -12,36 +7,32 @@ $this->registerCss('css/resume.css');
 $this->title = 'Melle Dijkstra';
 
 $skills = [
-    'Problem Solving' => [
-        80,
-        '',
-    ],
     'Design Patterns' => [
-        75,
+        'Proficient',
         'It doesn\'t matter which language you use, it matters how you use it',
     ],
     'Web Development' => [
-        96,
+        'Professional',
         'Frontend, Backend. You name it, I\'ve mastered the web'
     ],
     'Computer Networks & Communication' => [
-        60,
+        'Intermediate',
         'I\'ve setup multiple linux servers and like to work with IoT'
     ],
     'Android (Java)' => [
-        65,
-        'Made several Android apps for remote controlling arduino, music player, etc.'
+        'Intermediate',
+        'Made several Android apps for remote controlling Arduino, music player, etc.'
     ],
     'Javascript' => [
-        86,
-        'Javascript was the first language I started with!'
+        'Professional',
+        'Javascript was the first programming language I started with!'
     ],
     'Machine Learning & AI' => [
-        20,
+        'Basic',
         'Inspired by it, and definitely a topic I want to learn more about'
     ],
     'Photoshop / Illustrator' => [
-        30,
+        'Basic',
         'I use it for personal projects and to improve arty skills!'
     ],
 ];
@@ -69,7 +60,7 @@ $this->registerMetaTag([
     'content' => 'Hi! My name is Melle Dijkstra. An enthusiastic computer scientist!',
 ]);
 
-$CVFile = '/files/CV-Melle-Dijkstra-EN.pdf';
+$CVFile = '/files/Melle-Dijkstra-Resume.pdf';
 
 ?>
 <div id="resume-page">
@@ -94,8 +85,7 @@ $CVFile = '/files/CV-Melle-Dijkstra-EN.pdf';
                     <li><i class="mdi mdi-phone"></i> <a href="tel:+31611666686">(+31)611666686</a></li>
                     <li><i class="mdi mdi-email"></i> <a href="mailto:dev.melle@gmail.com">dev.melle@gmail.com</a></li>
                     <li><i class="mdi mdi-download"></i> <a target="_blank"
-                                                            href="<?= $CVFile ?>">Europass
-                            CV</a>
+                                                            href="<?= $CVFile ?>">Download Resume</a>
                     </li>
                 </ul>
             </div>
@@ -112,11 +102,8 @@ $CVFile = '/files/CV-Melle-Dijkstra-EN.pdf';
                     <?php foreach ($skills as $skill => $info): ?>
                         <li>
                             <div class="margin-tb-20">
-                                <p class="no-margin"><?= $skill ?></p>
+                                <p class="no-margin"><?= $skill ?> <sub class="text-lightgrey">(<?= $info[0]; ?>)</sub></p>
                                 <small class="no-margin text-lightgrey"><?= $info[1]; ?></small>
-                            </div>
-                            <div class="skill-container">
-                                <div class="skill" style="width: <?= $info[0]; ?>%;"></div>
                             </div>
                         </li>
                     <?php endforeach; ?>
@@ -194,7 +181,7 @@ $CVFile = '/files/CV-Melle-Dijkstra-EN.pdf';
                     </tbody>
                 </table>
                 <div class="text-center">
-                    Please <a target="_blank" href="<?= $CVFile ?>">download <i class="mdi mdi-download"></i></a> my
+                    Please <a target="_blank" href="<?= $CVFile ?>">download<i class="mdi mdi-download"></i></a> my
                     resume for more in-depth information about my experiences
                 </div>
             </div>
@@ -219,9 +206,9 @@ $CVFile = '/files/CV-Melle-Dijkstra-EN.pdf';
         <!-- Unsplash Credits -->
         <div class="margin-tb-10 text-center">
             <small>
-                Background by <a
+                Background by <a target="_blank"
                         href="https://unsplash.com/photos/fUd_0iyYFVg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Joshua
-                    Newton</a> on <a
+                    Newton</a> on <a target="_blank"
                         href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
             </small>
         </div>

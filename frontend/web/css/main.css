@@ -1,12 +1,13 @@
 /**
 * Melle's Stylesheet
 */
+
 /**
  * IMPORTS
  */
+
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
-@import url('https://fonts.googleapis.com/css?family=Lato');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 /* Material Design Icons */
 @import url('//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css');
@@ -612,6 +613,10 @@ pre {
     font-size: 20px;
 }
 
+#guide-view h1 {
+    font-size: 2.5em;
+}
+
 /* Everything in the container is parsed from the markdown */
 #guide-container {
     word-wrap: break-word;
@@ -625,10 +630,6 @@ pre {
 #guide-container img {
     width: auto;
     height: auto;
-}
-
-#guide-container h1 {
-    font-family: "Lato", Helvetica, Arial, sans-serif;
 }
 
 #guide-container iframe {
