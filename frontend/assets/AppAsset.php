@@ -14,6 +14,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/main.css',
+        'css/materialdesignicons.min.css'
     ];
     public $depends = [
         'yii\web\YiiAsset',
