@@ -110,10 +110,10 @@ JSCRIPT
             <div class="col col-xs-12 col-md-3">
                 <div id="search-menu" class="affix">
 
-                    <h3>Search guides</h3>
+                    <h3>Filter</h3>
 
                     <?php $form = ActiveForm::begin([
-                        'action' => '/guides',
+                        'action' => '/writing',
                         'options' => ['data' => ['pjax' => true]],
                         'id' => 'guide-filter-form',
                         'method' => 'get',

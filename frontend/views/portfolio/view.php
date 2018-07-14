@@ -25,7 +25,7 @@ $this->title = $project->title;
                 <ul class="affix">
                     <li><b>Related Guides</b></li>
                     <?php foreach ($project->guides as $guide): ?>
-                        <li><a href="<?= Url::to('/guides/' . $guide->getTitle(true)) ?>"><?= $guide->title; ?></a></li>
+                        <li><a href="<?= Url::to('/writing/' . $guide->getTitle(true)) ?>"><?= $guide->title; ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

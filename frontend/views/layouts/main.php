@@ -84,16 +84,17 @@ JS
 <?php $this->beginBody() ?>
 <div id="wrap">
     <div id="sidebar-wrapper">
-        <h1 class="text-center"><a class="no-link" href="/">Melle Dijkstra<span class="brand-dot">.</span></a><br/>
+        <h1 class="text-center"><a class="no-link" href="/">Dijkstra<span class="brand-dot">.</span></a><br/>
             <small>A place of thought</small>
         </h1>
         <ul class="sidebar-nav">
             <li>
-                <a href="/guides"><i class="mdi mdi-book-open-page-variant"></i> <span
-                            class="text-right">Guides</span></a>
+                <a href="/writing"><i class="mdi mdi-pencil"></i> <span
+                            class="text-right">Writing</span></a>
             </li>
             <li>
-                <a href="/portfolio"><i class="mdi mdi-pencil"></i> <span class="text-right">Portfolio</span></a>
+                <a href="/portfolio"><i class="mdi mdi-book-open-page-variant"></i> <span
+                            class="text-right">Portfolio</span></a>
             </li>
             <li>
                 <a href="/"><i class="mdi mdi-account-card-details"></i> <span
@@ -116,9 +117,7 @@ JS
         ]);
 
         echo $form->field($subscriber, 'email')
-            ->label('Get notified about new guides', [
-                'class' => '',
-            ])
+            ->label('Get notified about new posts')
             ->input('email', ['placeholder' => 'Your fantastic email']);
 
         echo Html::submitButton('SUBSCRIBE', ['class' => 'btn btn-primary btn-block']);
@@ -147,12 +146,6 @@ JS
     </div>
 
     <div id="page-content">
-        <!-- WIP BANNER -->
-        <!--        <div class="padding-10 wip-banner text-center">-->
-        <!--            <span class="text-md mdi mdi-worker"></span>-->
-        <!--            <p>This site is currently in progress, please browse around! But be aware of bugs or misspelled-->
-        <!--                words.</p>-->
-        <!--        </div>-->
         <!-- SIDEBAR TOGGLER -->
         <button type="button" class="navbar-toggle collapsed"
                 onclick="$('#wrap').toggleClass('toggled');" data-toggle="collapse">
@@ -160,11 +153,11 @@ JS
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <?= Alert::widget() ?>
+        <?= Alert::widget(); ?>
         <?= $content ?>
     </div>
 </div>
-<?php $this->endBody() ?>
+<?php $this->endBody(); ?>
 </body>
 </html>
-<?php $this->endPage() ?>
+<?php $this->endPage(); ?>

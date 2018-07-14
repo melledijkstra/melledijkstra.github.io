@@ -9,7 +9,7 @@ use Yii;
 use yii\web\Cookie;
 use yii\web\NotFoundHttpException;
 
-class GuidesController extends FrontendController
+class WritingController extends FrontendController
 {
 
     /**

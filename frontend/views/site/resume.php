@@ -110,7 +110,7 @@ $CVFile = '/files/Melle-Dijkstra-Resume.pdf';
                 </ul>
                 <p class="margin-tb-20">
                     <small class="text-sm">
-                        These skills are demonstrated in the <a href="/guides">guides</a> I write on
+                        These skills are demonstrated in the <a href="/writing">guides</a> I write on
                         this site.
                     </small>
                 </p>
@@ -183,23 +183,6 @@ $CVFile = '/files/Melle-Dijkstra-Resume.pdf';
                 <div class="text-center">
                     Please <a target="_blank" href="<?= $CVFile ?>">download<i class="mdi mdi-download"></i></a> my
                     resume for more in-depth information about my experiences
-                </div>
-            </div>
-        </div>
-        <div class="row more-padding">
-            <div class="col col-xs-12">
-                <h3>· Software & Tools I <span class="mdi mdi-heart"></span></h3>
-            </div>
-            <div class="col col-xs-12">
-                <div id="software-container">
-                    <div class="row no-gutter">
-                        <?php foreach ($softwareList as $name => $url): ?>
-                            <div class="software-item col-xs-6 col-md-3 col-lg-2 text-center">
-                                <img class="resume-logo grayscale" src="<?= $url ?>"/>
-                                <p><?= $name ?></p>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
                 </div>
             </div>
         </div>
