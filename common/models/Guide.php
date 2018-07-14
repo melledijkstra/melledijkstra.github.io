@@ -424,7 +424,7 @@ ORDER BY sg.`order` ASC LIMIT 1;', ['guide_id' => $this->id]);
     public function getLink($absolute = false, $fromBackend = false): string
     {
         $url = $fromBackend ? \Yii::$app->params['frontendUrl'] : '';
-        $url .= Url::to('/guides/' . $this->getTitle(true), $fromBackend ? false : $absolute);
+        $url .= Url::to('/writing/' . $this->getTitle(true), $fromBackend ? false : $absolute);
         return $url;
     }
 

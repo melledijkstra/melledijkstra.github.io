@@ -95,7 +95,7 @@ $this->registerJsFile('/js/guide_form.js', ['depends' => \yii\web\JqueryAsset::c
 
     <h3>Preview</h3>
     <div class="margin-tb-10">
-        <?= $this->render('@frontend/views/guides/guide_view', ['guide' => $modeldummy]); ?>
+        <?= $this->render('@frontend/views/writing/guide_view', ['guide' => $modeldummy]); ?>
     </div>
     <div class="clearfix"></div>
 

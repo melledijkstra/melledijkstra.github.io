@@ -54,7 +54,7 @@ return [
             'rules' => [
                 '<alias:resume>' => 'site/<alias>',
                 '<controller>' => '<controller>/index',
-                'guides/<title:\S*>' => 'guides/view',
+                'writing/<title:\S*>' => 'writing/view',
                 'portfolio/<title:\S*>' => 'portfolio/view',
             ],
         ],
