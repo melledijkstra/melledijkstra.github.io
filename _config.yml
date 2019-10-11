@@ -18,7 +18,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Melle Dijkstra
+title: 'Melle Dijkstra'
+subtitle: 'A place of thought'
+titleSuffix: ' · Melle Dijkstra'
 email: dev.melle@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
@@ -29,8 +31,15 @@ url: "https://melledijkstra.github.io" # the base hostname & protocol for your s
 twitter_username: dijkstrascience
 github_username:  melledijkstra
 
+permalink: pretty
+
+# Collections
+collections:
+  - stories
+
+
 # Build settings
-theme: minima
+# theme: minima
 plugins:
   - jekyll-feed
 

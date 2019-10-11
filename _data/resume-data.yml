@@ -1,0 +1,32 @@
+CVFile: '/files/Melle-Dijkstra-Resume.pdf'
+
+skills:
+    Design Patterns:
+        - "Proficient"
+        - "It doesn't matter which language you use, it matters how you use it"
+    Web Development:
+        - 'Professional'
+        - "Frontend, Backend. You name it, I've mastered the web"
+    Computer Networks & Communication:
+        - 'Intermediate'
+        - "I've setup multiple linux servers and like to work with IoT"
+    Android (Java):
+        - 'Intermediate'
+        - 'Made several Android apps for remote controlling Arduino, music player, etc.'
+    Javascript:
+        - 'Professional'
+        - 'Javascript was the first programming language I started with!'
+    Machine Learning & AI:
+        - 'Basic'
+        - 'Inspired by it, and definitely a topic I want to learn more about'
+    Photoshop / Illustrator:
+        - 'Basic'
+        - 'I use it for personal projects and to improve arty skills!'
+
+software-list:
+    Jetbrains Products: '/images/resume/software/logo-jetbrains.png'
+    PHPStorm: '/images/resume/software/logo-phpstorm.png'
+    Yii2 Framework: '/images/resume/software/logo-yii2.png'
+    Git: '/images/resume/software/logo-git.png'
+    Arduino: '/images/resume/software/logo-arduino.png'
+    PyCharm: '/images/resume/software/logo-pycharm.png'

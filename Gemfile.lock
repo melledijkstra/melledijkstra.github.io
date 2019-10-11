@@ -245,7 +245,6 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll (~> 3.5)
-  minima (~> 2.5)
 
 BUNDLED WITH
    2.0.2
