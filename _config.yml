@@ -31,17 +31,32 @@ url: "https://melledijkstra.github.io" # the base hostname & protocol for your s
 twitter_username: dijkstrascience
 github_username:  melledijkstra
 
-permalink: pretty
+permalink: /:title
+
+defaults:
+  - scope:
+      path: "" # an empty string means all files in the project
+      type: "posts"
+    values:
+      layout: "writing"
 
 # Collections
 collections:
   - stories
+  - projects
 
 
 # Build settings
 # theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-paginate
+
+
+# plugin configuration
+# - jekyll-paginate
+paginate: 30
+paginate-path: "/stories/page:num/"
 
 # Exclude from processing.
 # The following items will not be processed, by default.

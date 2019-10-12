@@ -39,6 +39,11 @@
         gtag('js', new Date());
         gtag('config', 'UA-61555186-3');
     </script>
+    {% if page.head_js %}
+    {% for js in page.head_js %}
+    <script src="{{ js }}"></script>
+    {% endfor %}
+    {% endif %}
 </head>
 <body>
 <div id="wrap">
@@ -60,5 +65,10 @@
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
+{% if page.foot_js %}
+{% for js in page.foot_js %}
+<script src="{{ js }}"></script>
+{% endfor %}
+{% endif %}
 </body>
 </html>

@@ -3,7 +3,9 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: default
+title: Melle Dijkstra
 description: 'Hi! My name is Melle Dijkstra. An enthusiastic computer scientist!'
+CVFile: '/files/Melle-Dijkstra-Resume.pdf'
 ---
 <style>
     #page-content {
@@ -35,7 +37,7 @@ description: 'Hi! My name is Melle Dijkstra. An enthusiastic computer scientist!
                     <li><i class="mdi mdi-phone"></i> <a href="tel:+31611666686">(+31)611666686</a></li>
                     <li><i class="mdi mdi-email"></i> <a href="mailto:dev.melle@gmail.com">dev.melle@gmail.com</a></li>
                     <li><i class="mdi mdi-download"></i> <a target="_blank"
-                                                            href="">Download Resume</a>
+                                                            href="{{ page.CVFile }}">Download Resume</a>
                     </li>
                 </ul>
             </div>
@@ -49,11 +51,12 @@ description: 'Hi! My name is Melle Dijkstra. An enthusiastic computer scientist!
             <div class="col col-sm-12 col-md-6">
                 <h3>· Skills</h3>
                 <ul class="list-unstyled">
-                    {% for skill in skills %}
+                    {% for skill in site.data.resume.skills %}
                     <li>
                         <div class="margin-tb-20">
-                            <p class="no-margin">{{ skill }}} <sub class="text-lightgrey">({{ skill[0] }}</sub></p>
-                            <small class="no-margin text-lightgrey">{{ skill[1] }}</small>
+                            <p class="no-margin">{{ skill.name }} <sub class="text-lightgrey">({{ skill.level }})</sub>
+                            </p>
+                            <small class="no-margin text-lightgrey">{{ skill.desc }}</small>
                         </div>
                     </li>
                     {% endfor %}
@@ -131,7 +134,7 @@ description: 'Hi! My name is Melle Dijkstra. An enthusiastic computer scientist!
                     </tbody>
                 </table>
                 <div class="text-center">
-                    Please <a target="_blank" href="{{ CVFile }}">download<i class="mdi mdi-download"></i></a> my
+                    Please <a target="_blank" href="{{ page.CVFile }}">download<i class="mdi mdi-download"></i></a> my
                     resume for more in-depth information about my experiences
                 </div>
             </div>
