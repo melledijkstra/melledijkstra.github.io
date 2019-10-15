@@ -9,13 +9,13 @@
     desc: "I've setup multiple linux servers and like to work with IoT"
 -   name: Android (Java)
     level: 'Intermediate'
-    desc: 'Made several Android apps for remote controlling Arduino, music player, etc.'
+    desc: 'Made several Android apps for remote controlling Arduino, remote music player, etc.'
 -   name: Javascript
     level: 'Professional'
     desc: 'Javascript was the first programming language I started with!'
 -   name: Machine Learning & AI
-    level: 'Basic'
-    desc: 'Inspired by it, and definitely a topic I want to learn more about'
+    level: 'Intermediate'
+    desc: 'Inspired by it, and definitely a topic I want to learn more about. I control the basics and can play around with virtual neurons'
 -   name: Photoshop / Illustrator
     level: 'Basic'
     desc: 'I use it for personal projects and to improve arty skills!'

@@ -1,0 +1,56 @@
+---
+layout: default
+description: 'Learn anything about Science related topics. This is is where I share my latest knowledge and try to guide you through it.'
+head_js:
+  - 'https://apis.google.com/js/platform.js'
+---
+<script>
+    window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+            t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));
+</script>
+<div id="guide-view" class="container">
+    <div class="jumbotron">
+        <h1 class="guide-title">{{ page.title }}</h1>
+        <div>
+            <small class="guide-date">{{ page.date | date: "%F" }}</small>
+        </div>
+        <div class="margin-10 guide-share-bar">
+            <a class="twitter-share-button"
+               href="https://twitter.com/intent/tweet?text={{page.title}}&url={{page.url}}&via=dijkstrascience">Tweet</a>
+            <div data-action="share" data-height="20" class="g-plus"></div>
+        </div>
+    </div>
+    <div id="guide-container">
+        {{ content }}
+    </div>
+    <div class="clearfix"></div>
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = "{{ page.url }}";
+            this.page.identifier = "{{ page.url | replace: ' ', '-' | strip }}";
+        };
+        (function () {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://{{ site.disqusId }}.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+</div>

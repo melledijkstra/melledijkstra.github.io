@@ -2,34 +2,34 @@
     <div class="story-item card margin-10">
         <a href="{{ include.story.url }}">
             <div class="trim">
-                <img class="image center-block img-responsive" src="{{ include.story.imageurl }}"
+                <img class="image center-block img-responsive"
+                     src="/uploads/guides/{{ include.story.date | date: '%F' }}.jpg"
                      alt="story image"/>
             </div>
         </a>
         <div class="card-content">
-            {% if include.story.language %}
+            {% if include.story.language != nil %}
             <small class="programming-language-tooltip"
-                   style="background-color: {{ include.story.language.color }};">{{ include.story.language.name }}</small>
+                   style="background-color: #{{ include.story.language.color }};"
+            >{{ include.story.language.name }}</small>
             {% endif %}
             <h2 class="title">
                 <a data-pjax="0" href="{{ include.story.url }}">{{ include.story.title }}</a>
             </h2>
             <div class="info">
                 <div class="time">
-                    <span class="mdi mdi-clock"></span> {{ include.story.created_at }}
+                    <span class="mdi mdi-clock"></span> {{ include.story.date | date: '%F' }}
                 </div>
                 {% if include.story.categories %}
                 <div class="categories">
                     <span class="mdi mdi-tag"></span>
                     <small>
-                        {{ include.story.categories }}
+                        {{ include.story.categories | join: ', ' }}
                     </small>
                 </div>
                 {% endif %}
             </div>
-            {% if include.story.sneak_peek %}
-            <p class="sneak-peek">{{ include.story.sneak_peek }}</p>
-            {% endif %}
+            <p class="sneak-peek">{{ include.story.excerpt }}</p>
         </div>
     </div>
 </div>

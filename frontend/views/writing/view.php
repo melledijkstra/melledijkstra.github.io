@@ -3,19 +3,6 @@
 use common\assets\HighLightAsset;
 use yii\web\View;
 
-/* @var $this yii\web\View */
-/* @var $guide \common\models\Guide */
-
-// Highlight code with hljs library
-HighLightAsset::register($this);
-$this->registerJs('hljs.initHighlightingOnLoad();', View::POS_READY);
-
-// Place this tag in your head or just before your close body tag.
-$this->registerJsFile('https://apis.google.com/js/platform.js', [
-    'async' => '',
-    'defer' => '',
-]);
-
 // twitter stuff
 $this->registerJs(<<<JS
 window.twttr = (function(d, s, id) {
@@ -100,21 +87,6 @@ $this->title = $guide->title;
                 </div>
             <?php endif; ?>
         </div>
-        <div class="clearfix"></div>
-        <div id="disqus_thread"></div>
-        <script>
-            var disqus_config = function () {
-                this.page.url = "<?= \yii\helpers\Url::canonical(); ?>";
-                this.page.identifier = "<?= $guide->getTitle(true); ?>";
-            };
-            (function () {
-                var d = document, s = d.createElement('script');
-                s.src = 'https://<?= \Yii::$app->params['disqusId']; ?>.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
-                Disqus.</a></noscript>
+
     </div>
 </div>
