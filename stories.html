@@ -1,0 +1,43 @@
+---
+title: Stories
+layout: default
+permalink: /writing/
+head_js:
+- '/assets/js/imagesloaded.pkgd.min.js'
+- '/assets/js/masonry.pkgd.min.js'
+foot_js:
+- '/assets/js/stories.js'
+---
+
+<div id="guides-overview-page">
+    <div id="page-loader-wrap">
+        <div class="loader"></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col col-xs-12">
+                <div class="no-gutter" id="grid"
+                     data-masonry='{"columnWidth": ".grid-sizer", "itemSelector": ".grid-item", "percentPosition": true}'>
+                    <div class="grid-sizer col-xs-12 col-sm-12 col-md-6 col-lg-4"></div>
+                    {% for post in site.posts %}
+                    {% include story_view.html story=post %}
+                    {% endfor %}
+                </div>
+
+                <div class="text-center">
+                    <!-- HOW TO FIX PAGINATION? -->
+                    <!--                    <<?= \yii\widgets\LinkPager::widget([-->
+                    <!--                        'activePageCssClass' => 'link-pager-active',-->
+                    <!--                    'nextPageCssClass' => 'link-pager-next-page',-->
+                    <!--                    'prevPageCssClass' => 'link-pager-prev-page',-->
+                    <!--                    'pageCssClass' => 'link-pager-page',-->
+                    <!--                    'nextPageLabel' => '<span class="mdi mdi-arrow-right-bold"></span>',-->
+                    <!--                    'prevPageLabel' => '<span class="mdi mdi-arrow-left-bold"></span>',-->
+                    <!--                    'pagination' => $guideDataProvider->pagination-->
+                    <!--                    ]); ?>>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
