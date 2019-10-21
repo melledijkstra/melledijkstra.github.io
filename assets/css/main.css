@@ -507,6 +507,34 @@ pre {
     transition: all 0.5s ease;
 }
 
+/** SIDE BAR LOGIC */
+@media (min-width: 658px) {
+    #sidebar-wrapper {
+        width: 250px;
+        left: 0;
+    }
+
+    .navbar-toggle {
+        display: none;
+    }
+
+    #page-content {
+        position: relative;
+        padding-left: 250px;
+    }
+}
+
+@media (min-width: 950px) {
+    #sidebar-wrapper {
+        width: 350px;
+    }
+
+    #page-content {
+        position: relative;
+        padding-left: 350px;
+    }
+}
+
 #sidebar-wrapper::-webkit-scrollbar {
     width: 5px;
 }
@@ -527,8 +555,8 @@ pre {
 
 .sidebar-nav {
     width: 100%;
-    margin: 20px 0;
-    padding: 0;
+    margin: 30px 0;
+    padding: 0 30px;
     list-style: none;
 }
 
@@ -569,34 +597,6 @@ pre {
 
 .social-buttons .stackoverflow:hover {
     color: #F48024;
-}
-
-/** SIDE BAR LOGIC */
-@media (min-width: 658px) {
-    #sidebar-wrapper {
-        width: 250px;
-        left: 0;
-    }
-
-    .navbar-toggle {
-        display: none;
-    }
-
-    #page-content {
-        position: relative;
-        padding-left: 250px;
-    }
-}
-
-@media (min-width: 950px) {
-    #sidebar-wrapper {
-        width: 300px;
-    }
-
-    #page-content {
-        position: relative;
-        padding-left: 300px;
-    }
 }
 
 /**********************************************************************************
