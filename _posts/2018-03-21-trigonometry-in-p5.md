@@ -3,14 +3,17 @@ layout: post
 title:  "Trigonometry in p5"
 date:   2018-03-21 01:10:19 +0200
 categories: p5 mathematics
+image: 2018-03-21.jpg
 language:
     color: f0db4f
     name: Javascript
 ---
+Trigonometry sketch created with P5 a graphics library in JavaScript. The sketch uses trigonometry functions to translate polar coordinates to Cartesian coordinates.
+<!--more-->
+
 [P5.js](https://p5js.org/) is a graphics library for JavaScript, it is based on [Processing](https://processing.org). In the process of learning p5, I wanted to create something challenging.
 
 Another topic I was reading about was **[Polar coordinates](https://en.wikipedia.org/wiki/Polar_coordinate_system)** and the translation to **Cartesian coordinates**. So, I decided to do something with trigonometry. The Wikipedia page might look intimidating. However, translating the coordinates between the two is just some basic math. Just check out the code below!
-<!--more-->
 
 ### Here is the result:
 

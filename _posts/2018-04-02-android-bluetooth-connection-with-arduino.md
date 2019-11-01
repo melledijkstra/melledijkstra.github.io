@@ -3,18 +3,35 @@ layout: post
 title:  "Android bluetooth connection with arduino"
 date:   2018-04-02, 13:58:54 +0200
 categories: android java bluetooth
+image: 2018-04-02.jpg
+language:
+    color: 8bc34a
+    name: Android
 ---
+This guide describes how to communicate from Android to Arduino using bluetooth communication. It describes the process of creating an application which notifies the user if the noise level is above a certain limit. Data is gathered from a sensor on the Arduino (KY-038). Bluetooth communication with (HC-04)
+<!--more-->
+
 All of the code used in this guide can be found on the following GitHub links:
 
-| Platform | Repository                                                   |
-| -------- | ------------------------------------------------------------ |
-| Android  | [github.com/MelleDijkstra/SmartVolume](https://github.com/MelleDijkstra/SmartVolume) |
-| Arduino  | [github.com/MelleDijkstra/ArduinoProjects/bluetooth-soundsensor](https://github.com/MelleDijkstra/ArduinoProjects/tree/master/bluetooth-soundsensor) |
+<table class="table table-condensed">
+    <tr>
+        <th>Platform</th>
+        <th>Repository</th>
+    </tr>
+    <tr>
+        <td><i class="mdi mdi-android"></i> Android</td>
+        <td><a target="_blank" href="https://github.com/MelleDijkstra/SmartVolume">github/MelleDijkstra/SmartVolume</a></td>
+    </tr>
+    <tr>
+        <td><i class="mdi mdi-console-line"></i> Arduino</td>
+        <td><a target="_blank" href="https://github.com/MelleDijkstra/ArduinoProjects/tree/master/bluetooth-soundsensor">github/MelleDijkstra/ArduinoProjects/bluetooth-soundsensor</a></td>
+    </tr>
+</table>
 
 There are numerous ways to have a wireless connection between devices. One of them is bluetooth, which is actually quite easy to implement in Android. In this guide, I'll show you how to connect to a *paired* bluetooth device with the Android API.
 
 Android has a specific API for Bluetooth connection. For in-depth information refer to their API guide [https://developer.android.com/guide/topics/connectivity/bluetooth.html](https://developer.android.com/guide/topics/connectivity/bluetooth.html)
-<!--more-->
+
 ## Prerequisites
 
 - Android device
@@ -39,7 +56,7 @@ Instead of explaining how to use bluetooth in Android, I will be explaining how 
 
 We need permissions to use bluetooth & vibrate in the application:
 
-```xml
+{% highlight xml %}
 <manifest ... >
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -48,7 +65,7 @@ We need permissions to use bluetooth & vibrate in the application:
     <uses-permission android:name="android.permission.VIBRATE"/>
     ...
 </manifest>
-```
+{% endhighlight %}
 
 ### Step 2 - Android Code
 
@@ -60,7 +77,7 @@ The interface is simply a single activity with the following fields:
 
 ```java
 public class MainActivity extends AppCompatActivity {
-    // A unique request code which identifies that a result was from a enable bluetooth request
+    // A unique request code which identifies that a result was from a enable bluetooth request 
     final int REQUEST_ENABLE_BT = 32456;
     // The bluetooth adapter class which can be used to communicate with the bluetooth module
     // on this device
@@ -73,15 +90,14 @@ public class MainActivity extends AppCompatActivity {
     private int threshold = 100;
     // The unique identifier for the threshold SharedPreference, so it is persistent even if the application is closed
     private static final String PREF_THRESHOLD = "nl.melledijkstra.smartvolume.THRESHOLD";
-
     ...
 ```
 
 In `onCreate` I retrieve the bluetooth adapter of this device:
 
-```java
+{% highlight java %}
 mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-```
+{% endhighlight %}
 
 In `onStart` I retrieve the current threshold value from persistent storage (shared preference).
 
@@ -94,7 +110,7 @@ The user can update this preference when clicking on the `Settings` option in th
 
 I left in the default `FloatingActionButton` which is implemented when you create a new Android application. When the button is clicked I check if bluetooth is enabled, if so select a bluetooth device to connect with, if not, enable bluetooth first.
 
-```java
+{% highlight java %}
 @Override
 public void onClick(View view) {
     if (mBluetoothAdapter != null) {
@@ -110,7 +126,7 @@ public void onClick(View view) {
         Toast.makeText(MainActivity.this, "Your device doesn't support bluetooth, sorry!", Toast.LENGTH_SHORT).show();
     }
 }
-```
+{% endhighlight %}
 
 When `selectBluetoothDevice()` is run I show a dialog with the option to select a paired bluetooth device. The chosen bluetooth device is then used to communicate.
 
@@ -268,7 +284,7 @@ That's it for the Android part!
 
 ### Step 1 - Building the circuit
 
-![image of circuit](/uploads/guide-images/1522669477-812b4.png)
+![image of circuit](/uploads/story-images/1522669477-812b4.png)
 
 The sound sensor that I use is the KY-038 (Also called "big sound").
 
@@ -292,7 +308,7 @@ The bluetooth module is the HC-04. Connecting it is a little harder than the sou
 
 Because the bluetooth module uses 3.3v for the data connection pins (RX & TX), it can't handle 5v from the Arduino. So the Arduino TX (transmit) pin which outputs 5v should be divided. This can be done with a 1K ohm resistor and a 2K ohm resistor. For specifics on wiring the HC-04 see [howtomechatronics](http://howtomechatronics.com/tutorials/arduino/arduino-and-hc-05-bluetooth-module-tutorial/).
 
-![second image of circuit](/uploads/guide-images/circuit.jpg)
+![second image of circuit](/uploads/story-images/circuit.jpg)
 
 ### Step 2 - Arduino Code
 
@@ -333,6 +349,6 @@ void loop()
        </div>
     </div>
     <div class="col col-xs-12 col-md-4">
-      <img src="/uploads/guide-images/demo.gif" alt="Android Demo" />
+      <img src="/uploads/story-images/demo.gif" alt="Android Demo" />
     </div>
 </div>

@@ -12,6 +12,9 @@
 /* Material Design Icons */
 @import url('//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css');
 
+/* Import Highlight Native skin (this is used showing code nicely on the site) */
+@import "hightlight.css";
+
 /*
  Primary Site color: #b2a38a
 */
@@ -411,9 +414,7 @@ pre code {
 }
 
 pre {
-    background-color: #2b2b2b;
-    color: #fff;
-    border-radius: 0;
+    border-radius: 3px;
     padding: 0;
 }
 
@@ -507,6 +508,34 @@ pre {
     transition: all 0.5s ease;
 }
 
+/** SIDE BAR LOGIC */
+@media (min-width: 658px) {
+    #sidebar-wrapper {
+        width: 250px;
+        left: 0;
+    }
+
+    .navbar-toggle {
+        display: none;
+    }
+
+    #page-content {
+        position: relative;
+        padding-left: 250px;
+    }
+}
+
+@media (min-width: 950px) {
+    #sidebar-wrapper {
+        width: 350px;
+    }
+
+    #page-content {
+        position: relative;
+        padding-left: 350px;
+    }
+}
+
 #sidebar-wrapper::-webkit-scrollbar {
     width: 5px;
 }
@@ -527,8 +556,8 @@ pre {
 
 .sidebar-nav {
     width: 100%;
-    margin: 20px 0;
-    padding: 0;
+    margin: 30px 0;
+    padding: 0 30px;
     list-style: none;
 }
 
@@ -571,34 +600,6 @@ pre {
     color: #F48024;
 }
 
-/** SIDE BAR LOGIC */
-@media (min-width: 658px) {
-    #sidebar-wrapper {
-        width: 250px;
-        left: 0;
-    }
-
-    .navbar-toggle {
-        display: none;
-    }
-
-    #page-content {
-        position: relative;
-        padding-left: 250px;
-    }
-}
-
-@media (min-width: 950px) {
-    #sidebar-wrapper {
-        width: 300px;
-    }
-
-    #page-content {
-        position: relative;
-        padding-left: 300px;
-    }
-}
-
 /**********************************************************************************
  *
  *   Guide Styling
@@ -622,9 +623,8 @@ pre {
     word-wrap: break-word;
 }
 
-#guide-container pre > code.hljs {
-    padding: 0.6em;
-    font-size: 1.05em;
+#guide-container .highlight pre {
+    padding: 10px;
 }
 
 #guide-container img {
@@ -708,7 +708,7 @@ pre {
 }
 
 .programming-language-tooltip {
-    font-size: 13px;
+    font-size: 15px;
     color: white;
     position: absolute;
     bottom: 0;
