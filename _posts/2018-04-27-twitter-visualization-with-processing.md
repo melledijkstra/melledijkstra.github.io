@@ -3,11 +3,18 @@ layout: post
 title:  "Twitter visualization with Processing"
 date:   2018-04-27 22:53:32 +0200
 categories: twitter processing
+image: 2018-04-27.jpg
+language:
+    color: e76f00
+    name: Java
 ---
+Twitter visualization of the latest trends created with the Java programming language. Created with Processing and the twitter4j library.
+<!--more-->
+
 With the Twitter4j library, you can retrieve Twitter data in the Java programming language fairly simple. In addition, the processing framework lets you create artful visualizations very easy, also with the Java language.
 
 I wanted to combine the two, create a Twitter visualization. I choose to retrieve the newest trends from the whole world and let them slide on the window. The Twitter4j library can be found [here](http://twitter4j.org/en/index.html). And Processing [here](https://processing.org).
-<!--more-->
+
 The actual code and repository can be found here:
 
 https://github.com/MelleDijkstra/TwitterWave
@@ -100,7 +107,7 @@ class FloatingTrend {
 
 ### Impression
 
-![Twitter Wave](/uploads/guide-images/twitterwave.png)
+![Twitter Wave](/uploads/story-images/twitterwave.png)
 
 **Improvements**
 

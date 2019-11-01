@@ -12,6 +12,9 @@
 /* Material Design Icons */
 @import url('//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css');
 
+/* Import Highlight Native skin (this is used showing code nicely on the site) */
+@import "hightlight.css";
+
 /*
  Primary Site color: #b2a38a
 */
@@ -411,9 +414,7 @@ pre code {
 }
 
 pre {
-    background-color: #2b2b2b;
-    color: #fff;
-    border-radius: 0;
+    border-radius: 3px;
     padding: 0;
 }
 
@@ -622,9 +623,8 @@ pre {
     word-wrap: break-word;
 }
 
-#guide-container pre > code.hljs {
-    padding: 0.6em;
-    font-size: 1.05em;
+#guide-container .highlight pre {
+    padding: 10px;
 }
 
 #guide-container img {
@@ -708,7 +708,7 @@ pre {
 }
 
 .programming-language-tooltip {
-    font-size: 13px;
+    font-size: 15px;
     color: white;
     position: absolute;
     bottom: 0;
