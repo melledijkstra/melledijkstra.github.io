@@ -284,7 +284,7 @@ That's it for the Android part!
 
 ### Step 1 - Building the circuit
 
-![image of circuit](/uploads/story-images/1522669477-812b4.png)
+![image of circuit](/assets/images/story-images/1522669477-812b4.png)
 
 The sound sensor that I use is the KY-038 (Also called "big sound").
 
@@ -308,7 +308,7 @@ The bluetooth module is the HC-04. Connecting it is a little harder than the sou
 
 Because the bluetooth module uses 3.3v for the data connection pins (RX & TX), it can't handle 5v from the Arduino. So the Arduino TX (transmit) pin which outputs 5v should be divided. This can be done with a 1K ohm resistor and a 2K ohm resistor. For specifics on wiring the HC-04 see [howtomechatronics](http://howtomechatronics.com/tutorials/arduino/arduino-and-hc-05-bluetooth-module-tutorial/).
 
-![second image of circuit](/uploads/story-images/circuit.jpg)
+![second image of circuit](/assets/images/story-images/circuit.jpg)
 
 ### Step 2 - Arduino Code
 
@@ -349,6 +349,6 @@ void loop()
        </div>
     </div>
     <div class="col col-xs-12 col-md-4">
-      <img src="/uploads/story-images/demo.gif" alt="Android Demo" />
+      <img src="/assets/images/story-images/demo.gif" alt="Android Demo" />
     </div>
 </div>

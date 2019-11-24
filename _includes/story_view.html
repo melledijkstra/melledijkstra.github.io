@@ -1,13 +1,18 @@
+{% if include.story.language != nil %}
+    {% capture cardStyling %}style='border-bottom: 3px solid #{{ include.story.language.color }};'{% endcapture %}
+{% else %}
+    {%- assign cardStyling = "" -%}
+{% endif %}
 <div class="grid-item col-xs-12 col-sm-12 col-md-6 col-lg-4">
     <div class="story-item card margin-10">
         <a href="{{ include.story.url }}">
             <div class="trim">
                 <img class="image center-block img-responsive"
-                     src="/uploads/stories/{{ include.story.image }}"
+                     src="/assets/images/stories/{{ include.story.image }}"
                      alt="story image"/>
             </div>
         </a>
-        <div class="card-content">
+        <div class="card-content" {{ cardStyling }}>
             {% if include.story.language != nil %}
             <small class="programming-language-tooltip"
                    style="background-color: #{{ include.story.language.color }};"

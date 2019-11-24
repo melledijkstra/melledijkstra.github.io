@@ -1,19 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Melle Dijkstra
- * Date: 15-2-2017
- * Time: 14:07
- *
- * @var $this \yii\web\View
- * @var $guide \common\models\Guide
- */
-
-use yii\helpers\Html;
-use yii\helpers\StringHelper;
 
 $cardStyling = $guide->language ? "style='border-bottom: 3px solid {$guide->language->color};'" : '';
-$sneakPeekLength = 197; // length 200 - the 3 dots for ellipsis
 
 ?>
 <div class="grid-item col-xs-12 col-sm-12 col-md-6 col-lg-4">
@@ -48,7 +35,6 @@ $sneakPeekLength = 197; // length 200 - the 3 dots for ellipsis
                     </div>
                 <?php endif; ?>
             </div>
-            <?= ($guide->sneak_peek !== null) ? '<p class="sneak-peek">' . Html::encode(StringHelper::truncate($guide->sneak_peek, $sneakPeekLength)) . '</p>' : '' ?>
         </div>
     </div>
 </div>
