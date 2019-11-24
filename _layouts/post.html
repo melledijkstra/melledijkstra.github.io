@@ -30,7 +30,7 @@ head_js:
         </div>
         <div class="margin-10 guide-share-bar">
             <a class="twitter-share-button"
-               href="https://twitter.com/intent/tweet?text={{page.title}}&url={{page.url}}&via=dijkstrascience">Tweet</a>
+               href="https://twitter.com/intent/tweet?url={{ site.url | append: page.url | url_encode }}&text={{ page.title }}&via=dijkstrascience">Tweet</a>
             <div data-action="share" data-height="20" class="g-plus"></div>
         </div>
     </div>

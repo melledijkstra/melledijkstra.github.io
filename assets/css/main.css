@@ -27,7 +27,7 @@
 
 html, body {
     height: 100%;
-    color: #3C4A53;
+    color: #000;
     background: #fefefe; /* For browsers that do not support gradients */
     /*background: linear-gradient(to top right, #fefefe, #fff9f2);*/
     font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
