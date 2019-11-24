@@ -27,7 +27,7 @@
 
 html, body {
     height: 100%;
-    color: #3C4A53;
+    color: #000;
     background: #fefefe; /* For browsers that do not support gradients */
     /*background: linear-gradient(to top right, #fefefe, #fff9f2);*/
     font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -610,16 +610,42 @@ pre {
  *  Guide View Page
  *----------------------------------------------------------------------------------*/
 #guide-view {
-    max-width: 800px;
+    max-width: 100%;
     font-size: 20px;
 }
 
-#guide-view h1 {
+#guide-view .jumbotron {
+    background-color: #202020;
+    color: #fff;
+    margin: 0 auto 50px auto;
+    padding-bottom: 0;
+}
+
+#guide-view .jumbotron .post-image {
+    height: 100px;
+    width: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    border-top: 2px solid white;
+    border-bottom: 2px solid black;
+
+    margin-top: 30px;
+}
+
+#guide-view .guide-title {
     font-size: 2.5em;
+}
+
+#guide-view .jumbotron .guide-date {
+    font-size: 25px;
 }
 
 /* Everything in the container is parsed from the markdown */
 #guide-container {
+    max-width: 1000px;
     word-wrap: break-word;
 }
 
@@ -637,14 +663,6 @@ pre {
     margin: 10px 0;
 }
 
-.guide-date {
-    color: #87949c;
-}
-
-.guide-title {
-    margin: 0;
-}
-
 .guide-header {
     margin-bottom: 20px;
 }
@@ -652,6 +670,17 @@ pre {
 #disqus_thread {
     margin-top: 50px;
 }
+
+.guide-share-bar {
+    display: inline-block;
+}
+
+/* this class can be used to use the full width of the  */
+/*.fat {*/
+/*    width: 100vw;*/
+/*    position: relative;*/
+/*    left: calc(-50vw + 50%);*/
+/*}*/
 
 /*----------------------------------------------------------------------------------*
  * Guides page & Guide items

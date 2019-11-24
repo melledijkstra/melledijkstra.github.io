@@ -107,7 +107,7 @@ class FloatingTrend {
 
 ### Impression
 
-![Twitter Wave](/uploads/story-images/twitterwave.png)
+![Twitter Wave](/assets/images/story-images/twitterwave.png)
 
 **Improvements**
 
