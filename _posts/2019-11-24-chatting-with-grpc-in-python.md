@@ -237,5 +237,9 @@ if __name__ == '__main__':
 That is how simple it is to implement gRPC in a bi-directional streaming application. I hope it is clear how every piece
 of code connects into the whole structure. If not, please let me know in the comments section! 
 
+Here is a small demonstration of the working product.
+
+![Chat interation demo](/assets/images/story-images/chat-system-inaction.gif)
+
 Thank you for reading and good luck with any gRPC projects! :D
 
