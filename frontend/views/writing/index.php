@@ -144,7 +144,7 @@ JSCRIPT
 
                     <?= Html::submitButton('Search', ['class' => 'btn btn-block btn-primary']); ?>
 
-                    <div class="margin-tb-10 pull-left" id="guide-loader-wrap">
+                    <div class="margin-tb-10 pull-left" id="story-loader-wrap">
                         <div class="loader"></div>
                     </div>
 

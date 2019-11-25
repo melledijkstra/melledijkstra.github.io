@@ -5,7 +5,7 @@ Copyright © 2016 - 2018 Melle Dijkstra, All rights reserved
 
 ## Impression
 
-Guides overview page where I display my latest written guides/articles.
+Stories overview page where I display my latest written stories/articles.
 It uses a [masonry layout](https://masonry.desandro.com/), which is a javascript library
 that places the elements in optimal position based on available vertical space. 
 
