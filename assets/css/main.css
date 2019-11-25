@@ -371,11 +371,11 @@ pre code {
     z-index: 2001;
 }
 
-#guide-loader-wrap {
+#story-loader-wrap {
     display: none;
 }
 
-#guide-loader-wrap .loader {
+#story-loader-wrap .loader {
     border-width: 5px;
 
     width: 30px;
@@ -405,7 +405,7 @@ pre code {
     color: #978870;
 }
 
-.guide-preview {
+.story-preview {
     background-color: #FFF;
     padding: 5px;
     -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -602,26 +602,26 @@ pre {
 
 /**********************************************************************************
  *
- *   Guide Styling
+ *   Story Styling
  *
  **********************************************************************************/
 
 /*----------------------------------------------------------------------------------*
- *  Guide View Page
+ *  Story View Page
  *----------------------------------------------------------------------------------*/
-#guide-view {
+#story-view {
     max-width: 100%;
     font-size: 20px;
 }
 
-#guide-view .jumbotron {
+#story-view .jumbotron {
     background-color: #202020;
     color: #fff;
     margin: 0 auto 50px auto;
     padding-bottom: 0;
 }
 
-#guide-view .jumbotron .post-image {
+#story-view .jumbotron .post-image {
     height: 100px;
     width: 100%;
 
@@ -635,35 +635,35 @@ pre {
     margin-top: 30px;
 }
 
-#guide-view .guide-title {
+#story-view .story-title {
     font-size: 2.5em;
 }
 
-#guide-view .jumbotron .guide-date {
+#story-view .jumbotron .story-date {
     font-size: 25px;
 }
 
 /* Everything in the container is parsed from the markdown */
-#guide-container {
+#story-container {
     max-width: 1000px;
     word-wrap: break-word;
 }
 
-#guide-container .highlight pre {
+#story-container .highlight pre {
     padding: 10px;
 }
 
-#guide-container img {
+#story-container img {
     width: 100%;
     height: auto;
 }
 
-#guide-container iframe {
+#story-container iframe {
     width: 100%;
     margin: 10px 0;
 }
 
-.guide-header {
+.story-header {
     margin-bottom: 20px;
 }
 
@@ -671,7 +671,7 @@ pre {
     margin-top: 50px;
 }
 
-.guide-share-bar {
+.story-share-bar {
     display: inline-block;
 }
 
@@ -685,49 +685,41 @@ pre {
 /*----------------------------------------------------------------------------------*
  * Guides page & Guide items
  *----------------------------------------------------------------------------------*/
-#search-menu {
-    margin-right: 25px;
-}
 
-@media (max-width: 992px) {
-    #search-menu {
-        position: static !important;
-        margin-bottom: 40px;
-        margin-right: 0;
-    }
-}
-
-.guide-item .image {
+.story-item .image {
     width: 100%;
     height: auto;
     max-width: 800px;
 }
 
-/* this class makes sure the guide image doesn't get to big */
-.guide-item .trim {
-    max-height: 400px;
+/* this class makes sure the story image doesn't get to big */
+.story-item .trim {
+    max-height: 500px;
     overflow: hidden;
 }
 
-.guide-item .title {
+.story-item h2.title {
+    width: 100%;
+
+    margin-bottom: 10px;
+
     font-size: 24px;
     font-family: "Lato", Helvetica, Arial, sans-serif;
     display: inline-block;
 }
 
-.guide-item .title a {
-    color: inherit;
+.story-item .title a {
+    /*color: inherit;*/
 }
 
-.guide-item .sneak-peek {
+.story-item .sneak-peek {
     text-overflow: ellipsis;
     word-wrap: break-word;
     margin: 10px 0 15px 0;
     color: #868686;
 }
 
-.guide-item .info {
-    font-size: 13px;
+.story-item .info {
     color: #555555;
 }
 

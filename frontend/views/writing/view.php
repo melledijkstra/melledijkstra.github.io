@@ -1,28 +1,5 @@
 <?php
 
-use common\assets\HighLightAsset;
-use yii\web\View;
-
-// twitter stuff
-$this->registerJs(<<<JS
-window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
-
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
-
-  return t;
-}(document, "script", "twitter-wjs"));
-JS
-    , View::POS_BEGIN);
 
 // SEO stuff
 $metastuff = [
@@ -48,24 +25,22 @@ foreach ($metastuff as $name => $content) {
     ], $name);
 }
 
-$this->title = $guide->title;
-
 ?>
 <div id="guide-view-page">
-    <div id="guide-view" class="container-fluid">
+    <div id="story-view" class="container-fluid">
         <div class="jumbotron">
-            <h1 class="guide-title"><?= $guide->title ?></h1>
+            <h1 class="story-title"><?= $guide->title ?></h1>
             <div>
-                <small class="guide-date"><?= \Yii::$app->formatter->asDate($guide->created_at, 'medium'); ?>
+                <small class="story-date"><?= \Yii::$app->formatter->asDate($guide->created_at, 'medium'); ?>
                     - <?= $guide->createdBy->username; ?></small>
             </div>
-            <div class="margin-10 guide-share-bar">
+            <div class="margin-10 story-share-bar">
                 <a class="twitter-share-button"
                    href="https://twitter.com/intent/tweet?text=<?= $this->title ?>&url=<?= $guide->getLink(true); ?>&via=dijkstrascience">Tweet</a>
                 <div data-action="share" data-height="20" class="g-plus"></div>
             </div>
         </div>
-        <div id="guide-container">
+        <div id="story-container">
             <?= $guide->renderGuide(); ?>
         </div>
         <div class="series">

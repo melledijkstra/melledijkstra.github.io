@@ -2,13 +2,18 @@
 layout: default
 description: 'Learn anything about Science related topics. This is is where I share my latest knowledge and try to guide you through it.'
 head_js:
-  - 'https://apis.google.com/js/platform.js'
+- 'https://apis.google.com/js/platform.js'
 meta:
-  -
+-
 ---
+{% if site.url contains "localhost" %}
+{% assign disqusId = "dev-melledijkstra" %}
+{% else %}
+{% assign disqusId = "live-melledijkstra" %}
+{% endif %}
 <!-- Twitter share button required scripts -->
 <script>
-    window.twttr = (function(d, s, id) {
+    window.twttr = (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0],
             t = window.twttr || {};
         if (d.getElementById(id)) return t;
@@ -18,7 +23,7 @@ meta:
         fjs.parentNode.insertBefore(js, fjs);
 
         t._e = [];
-        t.ready = function(f) {
+        t.ready = function (f) {
             t._e.push(f);
         };
 
@@ -27,23 +32,24 @@ meta:
 </script>
 <!-- Load Facebook SDK for JavaScript -->
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script>(function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
+    js = d.createElement(s);
+    js.id = id;
     js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div id="guide-view">
+<div id="story-view">
     <div class="jumbotron">
 
-        <h1 class="guide-title">{{ page.title }}</h1>
+        <h1 class="story-title">{{ page.title }}</h1>
         <div>
-            <small class="guide-date">{{ page.date | date: "%F" }}</small>
+            <small class="story-date">{{ page.date | date: '%e %b %Y %R' }}</small>
         </div>
 
-        <div class="margin-10 guide-share-bar">
+        <div class="margin-10 story-share-bar">
             <!-- Twitter share button -->
             <a class="twitter-share-button" data-size="large"
                href="https://twitter.com/intent/tweet?url={{ site.url | append: page.url | url_encode }}&text={{ page.title }}&via=dijkstrascience">Tweet</a>
@@ -60,24 +66,28 @@ meta:
 
         <div class="post-image" style="background-image: url('/assets/images/stories/{{ page.image }}');"></div>
     </div>
-    <div id="guide-container" class="container-fluid">
+    <div id="story-container" class="container-fluid">
         {{ content }}
 
         <div class="clearfix"></div>
         <div id="disqus_thread"></div>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
     </div>
     <script>
-        var disqus_config = function () {
-            this.page.url = "{{ site.url | append: page.url }}";
-            this.page.identifier = "{{ page.title | replace: ' ', '-' | downcase | strip }}";
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+         */
+        let disqus_config = function () {
+            this.page.url = "{{ site.url | append: page.url }}";  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = "{{ page.id }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
         };
-        (function () {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://{{ site.disqusId }}.disqus.com/embed.js';
+        (function () { // DON'T EDIT BELOW THIS LINE
+            let d = document, s = d.createElement('script');
+            s.src = 'https://{{disqusId}}.disqus.com/embed.js';
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
-        Disqus.</a></noscript>
 </div>
