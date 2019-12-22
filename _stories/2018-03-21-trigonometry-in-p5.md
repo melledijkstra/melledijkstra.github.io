@@ -1,9 +1,8 @@
 ---
-layout: post
 title:  "Trigonometry in p5"
 date:   2018-03-21 01:10:19 +0200
 categories: p5 mathematics
-image: 2018-03-21.jpg
+image: /assets/images/stories/2018-03-21.jpg
 language:
     color: f0db4f
     name: Javascript

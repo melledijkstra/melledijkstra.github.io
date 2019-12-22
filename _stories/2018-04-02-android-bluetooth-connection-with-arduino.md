@@ -1,9 +1,8 @@
 ---
-layout: post
 title:  "Android bluetooth connection with arduino"
 date:   2018-04-02, 13:58:54 +0200
 categories: android java bluetooth
-image: 2018-04-02.jpg
+image: /assets/images/stories/2018-04-02.jpg
 language:
     color: 8bc34a
     name: Android

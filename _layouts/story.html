@@ -1,6 +1,5 @@
 ---
 layout: default
-description: 'Learn anything about Science related topics. This is is where I share my latest knowledge and try to guide you through it.'
 head_js:
 - 'https://apis.google.com/js/platform.js'
 meta:
@@ -64,7 +63,7 @@ meta:
             <script type="IN/Share" data-url="{{ site.url | append: page.url }}"></script>
         </div>
 
-        <div class="post-image" style="background-image: url('/assets/images/stories/{{ page.image }}');"></div>
+        <div class="post-image" style="background-image: url('{{ page.image }}');"></div>
     </div>
     <div id="story-container" class="container-fluid">
         {{ content }}

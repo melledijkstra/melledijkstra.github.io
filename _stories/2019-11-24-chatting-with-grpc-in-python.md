@@ -1,9 +1,8 @@
 ---
-layout: post
 title:  "Chatting with gRPC in python"
 date:   2019-11-24 18:36:00 +0200
 categories: python grpc
-image: 2019-11-24.png
+image: /assets/images/stories/2019-11-24.png
 language:
     color: 3572A5
     name: Python
