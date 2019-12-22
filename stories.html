@@ -19,8 +19,8 @@ foot_js:
                 <div class="no-gutter" id="grid"
                      data-masonry='{"columnWidth": ".grid-sizer", "itemSelector": ".grid-item", "percentPosition": true}'>
                     <div class="grid-sizer col-xs-12 col-sm-12 col-md-6 col-lg-4"></div>
-                    {% for post in site.posts %}
-                    {% include story_view.html story=post %}
+                    {% for story in site.stories %}
+                    {% include story_view.html story=story %}
                     {% endfor %}
                 </div>
 

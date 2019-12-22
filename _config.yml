@@ -23,35 +23,44 @@ tagline: 'A place of thought'
 # titleSuffix: ' · Melle Dijkstra'
 email: dev.melle@gmail.com
 description: 'A place of thought'
-    # >- # this means to ignore newlines until "baseurl:"
-    # Learn anything about science related topics. This is is where I share my latest ideas.
+# >- # this means to ignore newlines until "baseurl:"
+# Learn anything about science related topics. This is is where I share my latest ideas.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://melledijkstra.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 disqusId: "live-melledijkstra"
 
 excerpt_separator: <!--more-->
 
-permalink: /:title
+permalink: /:collection/:title
+
+# Collections
+collections:
+    stories:
+        output: true
+    projects:
 
 defaults:
     -   scope:
             path: "" # an empty string means all files in the project
-            type: "posts"
+            type: "stories"
         values:
-            layout: "writing"
+            layout: "story"
             tagline: 'A place of thought'
-
-# Collections
-collections:
-    - stories
-    - projects
-
+    -   scope:
+            path: "files"
+        values:
+            sitemap: false
+    -   scope:
+            path: "sketches"
+        values:
+            sitemap: false
 
 # Build settings
 # theme: minima
 plugins:
     - jekyll-feed
     - jekyll-seo-tag
+    - jekyll-sitemap
     # - jekyll-paginate
 
 #

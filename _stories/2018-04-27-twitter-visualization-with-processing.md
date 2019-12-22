@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "Twitter visualization with Processing"
 date:   2018-04-27 22:53:32 +0200
 categories: twitter processing
