@@ -2,7 +2,7 @@
 title: "Electron gRPC Chat"
 date: 2019-12-29 14:26:00 +0200
 categories: javscript grpc
-image: 
+image: /assets/images/stories/martin-brechtl-sEkTsMYTqY0-unsplash.jpg
 language:
     color: f0db4f
     name: Javascript
@@ -104,7 +104,7 @@ Okay, it seems there are no pre-build libraries yet for electron version 7.1.7 s
 ...<br/>
 ...<br/>
 
-In the mean time let's copy the proto file which I used for the python part of the application.
+In the meantime, let's copy the proto file which I used for the python part of the application.
 It is a really simple protobuf file.
 
 ```proto
