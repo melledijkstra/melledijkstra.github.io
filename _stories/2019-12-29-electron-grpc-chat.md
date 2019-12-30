@@ -152,3 +152,26 @@ This will generate the proto files in the `./proto` directory
 <img class="img-responsive" style="height: 200px; width: auto;" src="/assets/images/story-images/proto-compiled.png" alt="Static proto compiled" />
 
 The proto generated files are ready to be used and we can start with creating a structure for the electron application.
+
+```javascript
+let client = new service.ChatServerClient('localhost:11912', grpc.credentials.createInsecure())
+let note = new chat.Note()
+note.setMessage('Hello from electron')
+console.log('sending note to server')
+client.sendNote(note, function(err, response) {
+    console.log('received reply', response);
+});
+```
+
+Start running the application by the following command: `npm start`
+
+![Failed attempt](/assets/images/story-images/failed-attempt-1.png)
+
+And... nothing 😿. The problem? Apparently the grpc module is not build for this system. This is quite strange because I build
+it from source on the same device with `npm install grpc --build-from-source`.
+
+After some googling around, I tried recompiling the stuff with `electron-rebuild`. And I got success 😎!
+
+![Electron success](/assets/images/story-images/electron-success.png)
+
+The biggest challenge now is setting up the bi-directional streaming part.
