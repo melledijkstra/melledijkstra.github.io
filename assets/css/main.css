@@ -9,6 +9,7 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css2?family=Petit+Formal+Script&display=swap');
 /* Material Design Icons */
 @import url('//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css');
 
@@ -182,6 +183,13 @@ pre code {
     color: #FFF !important;
     background-color: #b2a38a !important;
     /*background-color: #b2a38a !important;*/
+}
+
+table.table td, table.table th {
+    font-size: 4vw;
+    font-size: 18px;
+
+    word-break: break-all;
 }
 
 /**********************************************************************************
@@ -434,10 +442,10 @@ pre {
 
 .slanted-down {
     clip-path: polygon(
-            0 0%, /* top left */
-            100% 6%, /* top right */
-            100% 100%, /* bottom right */
-            0 94% /* bottom left */
+        0 0%, /* top left */
+        100% 6%, /* top right */
+        100% 100%, /* bottom right */
+        0 94% /* bottom left */
     );
 }
 
@@ -523,6 +531,10 @@ pre {
         position: relative;
         padding-left: 250px;
     }
+
+    .social-buttons {
+        font-size: 2em;
+    }
 }
 
 @media (min-width: 950px) {
@@ -600,87 +612,9 @@ pre {
     color: #F48024;
 }
 
-/**********************************************************************************
- *
- *   Story Styling
- *
- **********************************************************************************/
-
-/*----------------------------------------------------------------------------------*
- *  Story View Page
- *----------------------------------------------------------------------------------*/
-#story-view {
-    max-width: 100%;
-    font-size: 20px;
+.social-buttons .spotify:hover {
+    color: #1DB954;
 }
-
-#story-view .jumbotron {
-    background-color: #202020;
-    color: #fff;
-    margin: 0 auto 50px auto;
-    padding-bottom: 0;
-}
-
-#story-view .jumbotron .post-image {
-    height: 100px;
-    width: 100%;
-
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    border-top: 2px solid white;
-    border-bottom: 2px solid black;
-
-    margin-top: 30px;
-}
-
-#story-view .story-title {
-    font-size: 2.5em;
-}
-
-#story-view .jumbotron .story-date {
-    font-size: 25px;
-}
-
-/* Everything in the container is parsed from the markdown */
-#story-container {
-    max-width: 1000px;
-    word-wrap: break-word;
-}
-
-#story-container .highlight pre {
-    padding: 10px;
-}
-
-#story-container img {
-    width: 100%;
-    height: auto;
-}
-
-#story-container iframe {
-    width: 100%;
-    margin: 10px 0;
-}
-
-.story-header {
-    margin-bottom: 20px;
-}
-
-#disqus_thread {
-    margin-top: 50px;
-}
-
-.story-share-bar {
-    display: inline-block;
-}
-
-/* this class can be used to use the full width of the  */
-/*.fat {*/
-/*    width: 100vw;*/
-/*    position: relative;*/
-/*    left: calc(-50vw + 50%);*/
-/*}*/
 
 /*----------------------------------------------------------------------------------*
  * Guides page & Guide items
@@ -876,6 +810,7 @@ pre {
     z-index: 3;
     border: 2px solid white;
 }
+
 @media(max-width: 800px) {
     #photo-of-myself {
         height: 100px;

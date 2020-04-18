@@ -1,9 +1,7 @@
 ---
 layout: default
-head_js:
-- 'https://apis.google.com/js/platform.js'
-meta:
--
+head_css:
+  - '/assets/css/story.css'
 ---
 {% if site.url contains "localhost" %}
 {% assign disqusId = "dev-melledijkstra" %}
@@ -39,20 +37,19 @@ meta:
     js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-
 <div id="story-view">
     <div class="jumbotron">
 
         <h1 class="story-title">{{ page.title }}</h1>
+        <hr style="width: 10%" />
         <div>
-            <small class="story-date">{{ page.date | date: '%e %b %Y %R' }}</small>
+            <small class="story-date">{{ page.date | date: '%e %B %Y' }}</small>
         </div>
 
-        <div class="margin-10 story-share-bar">
+        <div class="share-buttons">
             <!-- Twitter share button -->
-            <a class="twitter-share-button" data-size="large"
+            <a class="twitter-share-button" data-size="small"
                href="https://twitter.com/intent/tweet?url={{ site.url | append: page.url | url_encode }}&text={{ page.title }}&via=dijkstrascience">Tweet</a>
-            <div data-action="share" data-height="20" class="g-plus"></div>
             <!-- Facebook share button -->
             <div class="fb-share-button"
                  data-href="{{ site.url | append: page.url }}"
@@ -62,10 +59,9 @@ meta:
             <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
             <script type="IN/Share" data-url="{{ site.url | append: page.url }}"></script>
         </div>
-
-        <div class="post-image" style="background-image: url('{{ page.image }}');"></div>
     </div>
-    <div id="story-container" class="container-fluid">
+    <div class="post-image" style="background-image: url('{{ page.image }}');"></div>
+    <div id="story" class="container-fluid">
         {{ content }}
 
         <div class="clearfix"></div>

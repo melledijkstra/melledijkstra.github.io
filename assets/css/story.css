@@ -1,0 +1,125 @@
+/**********************************************************************************
+ *
+ *   Story Styling
+ *
+ **********************************************************************************/
+
+/*----------------------------------------------------------------------------------*
+ *  Story View Page
+ *----------------------------------------------------------------------------------*/
+#story-view {
+    max-width: 100%;
+}
+
+#story-view .jumbotron {
+    padding: 40px 48px;
+    text-align: left;
+}
+
+#story-view .jumbotron hr {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#story-view .post-image {
+    height: 300px;
+    width: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    filter: drop-shadow(0 0 10px gray);
+    -webkit-filter: drop-shadow(0 0 10px gray);
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#story-view .story-title {
+    font-family: 'Petit Formal Script', cursive;
+    font-size: 70px;
+    margin-top: 0;
+}
+
+#story-view .jumbotron .story-date {
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+/* Everything in the container is parsed from the markdown */
+#story {
+    max-width: 1000px;
+    word-wrap: break-word;
+}
+
+#story {
+    font-size: 21px;
+}
+
+#story > p:nth-child(1):first-letter {
+    font-size: 35px;
+}
+
+#story > p {
+    padding: 0 40px;
+}
+
+#story > p, #story > blockquote {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#story .highlight pre {
+    padding: 10px;
+}
+
+#story img {
+    width: 100%;
+    height: auto;
+}
+
+#story iframe {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.story-header {
+    margin-bottom: 20px;
+}
+
+#disqus_thread {
+    margin-top: 50px;
+}
+
+.share-buttons {
+    margin-top: 15px;
+}
+
+.share-buttons > * {
+    vertical-align: bottom;
+}
+
+@media (max-width: 658px) {
+    #story-view .story-title {
+        font-size: 50px;
+    }
+
+    #story-view .jumbotron {
+        padding: 30px 48px;
+    }
+}
+
+@media (max-width: 950px) {
+    #story-view .story-title {
+        font-size: 40px;
+    }
+
+    #story-view .jumbotron .story-date {
+        font-size: 20px;
+    }
+
+    #story-view .jumbotron {
+        padding: 75px 20px 20px 20px;
+    }
+}

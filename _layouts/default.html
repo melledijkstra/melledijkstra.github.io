@@ -21,10 +21,20 @@
     <meta name="msapplication-TileImage" content="/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ac9c80">
 
+    <!-- Pinterest Tag -->
+    <meta name="p:domain_verify" content="528f8d5e26a7c45be1eacbef1d62ca2f"/>
+
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/assets/css/site.css"/>
     <link rel="stylesheet" href="/assets/css/main.css"/>
     <link rel="stylesheet" href="/assets/css/materialdesignicons.min.css"/>
+
+    {% if layout.head_css %}
+    {% for css_file in layout.head_css %}
+    <link rel="stylesheet" href="{{ css_file }}" />
+    {% endfor %}
+    {% endif %}
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-61555186-3"></script>
     <script>
