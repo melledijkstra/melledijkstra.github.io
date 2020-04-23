@@ -1,5 +1,5 @@
 {% if include.story.language != nil %}
-    {% capture cardStyling %}style='border-bottom: 3px solid #{{ include.story.language.color }};'{% endcapture %}
+    {% capture cardStyling %}style='border-bottom: 3px solid #ad9977;'{% endcapture %}
 {% else %}
     {%- assign cardStyling = "" -%}
 {% endif %}
@@ -15,7 +15,7 @@
         <div class="card-content" {{ cardStyling }}>
             {% if include.story.language != nil %}
             <small class="programming-language-tooltip"
-                   style="background-color: #{{ include.story.language.color }};"
+                   style="background-color: #ad9977;"
             >{{ include.story.language.name }}</small>
             {% endif %}
             <h2 class="title">
@@ -25,11 +25,11 @@
                 <div class="time">
                     <span class="mdi mdi-clock"></span> {{ include.story.date | date: '%e %b %Y %R' }}
                 </div>
-                {% if include.story.categories %}
+                {% if include.story.tags %}
                 <div class="categories">
                     <span class="mdi mdi-tag"></span>
                     <small>
-                        {{ include.story.categories | join: ', ' }}
+                        {{ include.story.tags | join: ', ' }}
                     </small>
                 </div>
                 {% endif %}

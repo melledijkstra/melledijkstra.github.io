@@ -4,6 +4,31 @@
  *
  **********************************************************************************/
 
+/* Import Highlight Native skin (this is used showing code nicely on the site) */
+@import "hightlight.css";
+
+body {
+    background: linear-gradient(to top right, #fefefe, #fff9f2);
+}
+
+h4 {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+h2:before { content: "٢\00a0"; }
+h3:before { content: "٣\00a0\00a0"; }
+h4:before { content: "٤\00a0\00a0\00a0"; }
+h5:before { content: "٥\00a0\00a0\00a0\00a0"; }
+
+ul {
+    list-style-type: circle;
+}
+
+ol {
+    list-style-type: upper-roman;
+}
+
 /*----------------------------------------------------------------------------------*
  *  Story View Page
  *----------------------------------------------------------------------------------*/
@@ -108,6 +133,11 @@
     #story-view .jumbotron {
         padding: 30px 48px;
     }
+
+    #story p {
+        font-size: 18px;
+        padding: 0 20px;
+    }
 }
 
 @media (max-width: 950px) {
@@ -120,6 +150,6 @@
     }
 
     #story-view .jumbotron {
-        padding: 75px 20px 20px 20px;
+        padding: 40px 20px 20px 20px;
     }
 }

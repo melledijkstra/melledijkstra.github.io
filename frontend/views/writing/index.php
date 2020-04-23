@@ -1,15 +1,3 @@
-<?php
-
-use common\models\Category;
-use common\models\Guide;
-use common\models\Language;
-use common\models\Project;
-use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Html;
-use yii\helpers\ArrayHelper;
-use yii\web\View;
-use yii\widgets\Pjax;
-
 /**
  * @var $this yii\web\View
  * @var $newest_guide Guide
@@ -18,15 +6,6 @@ use yii\widgets\Pjax;
  * @var $filter string
  * @var $guideDataProvider \yii\data\ActiveDataProvider
  */
-
-$this->title = Yii::t('guides', 'Guides');
-
-// Title fix for when ajax refreshes the page
-if (Yii::$app->request->isAjax && isset(Yii::$app->params['titleSuffix'])) {
-    $this->title .= Yii::$app->params['titleSuffix'];
-}
-
-\frontend\assets\MasonryAsset::register($this);
 
 // let bots know there's a feed available
 $this->registerLinkTag([

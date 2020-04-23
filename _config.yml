@@ -31,21 +31,36 @@ disqusId: "live-melledijkstra"
 
 excerpt_separator: <!--more-->
 
-permalink: /:collection/:title
+collections_dir: collections
 
 # Collections
 collections:
-    stories:
+    science:
         output: true
-    projects:
+        permalink: /:collection/:title
+#    travel:
+#        output: true
+#        permalink: /:collection/:title
+#    thoughts:
+#        output: true
+#        permalink: /:collection/:title
 
 defaults:
     -   scope:
             path: "" # an empty string means all files in the project
-            type: "stories"
+            type: "science"
         values:
             layout: "story"
-            tagline: 'A place of thought'
+    -   scope:
+            path: ""
+            type: "thoughts"
+        values:
+            layout: "story"
+    -   scope:
+            path: ""
+            type: "travel"
+        values:
+            layout: "story"
     -   scope:
             path: "files"
         values:
@@ -104,7 +119,8 @@ social:
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
+exclude:
+    - project-files/
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/

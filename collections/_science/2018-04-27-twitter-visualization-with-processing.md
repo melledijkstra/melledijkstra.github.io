@@ -1,7 +1,7 @@
 ---
 title:  "Twitter visualization with Processing"
 date:   2018-04-27 22:53:32 +0200
-categories: twitter processing
+tags: twitter processing
 image: /assets/images/stories/2018-04-27.jpg
 language:
     color: e76f00

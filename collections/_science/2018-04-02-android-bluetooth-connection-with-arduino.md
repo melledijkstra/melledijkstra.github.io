@@ -1,7 +1,7 @@
 ---
 title:  "Android bluetooth connection with arduino"
 date:   2018-04-02, 13:58:54 +0200
-categories: android java bluetooth
+tags: android java bluetooth
 image: /assets/images/stories/2018-04-02.jpg
 language:
     color: 8bc34a

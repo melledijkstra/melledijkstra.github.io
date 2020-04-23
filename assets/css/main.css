@@ -13,8 +13,13 @@
 /* Material Design Icons */
 @import url('//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css');
 
-/* Import Highlight Native skin (this is used showing code nicely on the site) */
-@import "hightlight.css";
+.petit-formal-script {
+    font-family: 'Petit Formal Script', cursive;
+}
+
+.raleway {
+    font-family: 'Raleway', sans-serif;
+}
 
 /*
  Primary Site color: #b2a38a
@@ -30,7 +35,6 @@ html, body {
     height: 100%;
     color: #000;
     background: #fefefe; /* For browsers that do not support gradients */
-    /*background: linear-gradient(to top right, #fefefe, #fff9f2);*/
     font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 18px;
     font-weight: 300;
@@ -38,11 +42,11 @@ html, body {
 }
 
 a {
-    color: #9f8e6d;
+    color: #86775c;
 }
 
 a:hover {
-    color: #746650;
+    color: #5f5442;
 }
 
 ::selection {
@@ -617,8 +621,75 @@ pre {
 }
 
 /*----------------------------------------------------------------------------------*
- * Guides page & Guide items
+ * Stories page & Story items
  *----------------------------------------------------------------------------------*/
+
+#collection-list {
+    display: block;
+    text-align: center;
+    z-index: 10;
+    left: 10%
+}
+
+#collection-list a {
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 25px 30px 15px 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    border: 2px solid #b2a38a;
+    color: #b2a38a;
+    letter-spacing: 2px;
+    font-size: .8em;
+
+    background-color: transparent;
+    text-decoration: none;
+
+    transition: all .45s ease-out;
+}
+
+@media (max-width: 950px) {
+    #collection-list a {
+        font-size: .6em;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 658px) {
+    #collection-list a {
+        font-size: .5em;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+#collection-list .underline {
+    position: absolute;
+    width: 0;
+    height: 2.5px;
+    background: white;
+    transition: all .3s ease-Out;
+    bottom: 0;
+    left: 0;
+}
+
+#collection-list a:hover .underline {
+    width: 100%;
+}
+
+#collection-list a:hover, #collection-list a.active {
+    color: white;
+    background-color: #b2a38a;
+}
+
+#grid {
+    padding-bottom: 30px;
+    margin: 15px auto 0;
+}
 
 .story-item .image {
     width: 100%;
@@ -638,7 +709,7 @@ pre {
     margin-bottom: 10px;
 
     font-size: 24px;
-    font-family: "Lato", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     display: inline-block;
 }
 
@@ -657,12 +728,8 @@ pre {
     color: #555555;
 }
 
-#grid {
-    padding-bottom: 30px;
-    margin: 15px auto 0;
-}
-
-.programming-language-tooltip {
+.story-item .programming-language-tooltip {
+    border-radius: 3px;
     font-size: 15px;
     color: white;
     position: absolute;

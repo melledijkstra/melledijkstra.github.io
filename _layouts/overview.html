@@ -1,14 +1,12 @@
 ---
-title: Stories
 layout: default
-permalink: /writing/
 head_js:
 - '/assets/js/masonry.pkgd.min.js'
 - '/assets/js/imagesloaded.pkgd.min.js'
 foot_js:
 - '/assets/js/stories.js'
 ---
-
+<!-- use includes!! -->
 <div id="guides-overview-page">
     <div id="page-loader-wrap">
         <div class="loader"></div>
@@ -16,12 +14,23 @@ foot_js:
     <div class="container-fluid">
         <div class="row">
             <div class="col col-xs-12">
+                <div id="collection-list">
+                    {% for collection in site.collections %}
+                        {% if collection.label == 'posts' %}
+                            {% continue %}
+                        {% endif %}
+                        {% assign coll_url = '/writing/' | append: collection.label %}
+                    <a class="collection-item {% if page.url == coll_url %}active{% endif %}" href="{{ coll_url }}" >
+                        {{ collection.label }}
+                        <div class="underline"></div>
+                    </a>
+
+                    {% endfor %}
+                </div>
                 <div class="no-gutter" id="grid"
                      >
                     <div class="grid-sizer col-xs-12 col-sm-12 col-md-6 col-lg-4"></div>
-                    {% for story in site.stories %}
-                    {% include story_view.html story=story %}
-                    {% endfor %}
+                    {{ content }}
                 </div>
 
                 <div class="text-center">
