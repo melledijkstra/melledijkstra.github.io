@@ -8,3 +8,6 @@ vendor
 
 # ignore any google verification file
 google*
+
+# thanks MacOS
+.DS_Store
