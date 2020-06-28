@@ -1,4 +1,4 @@
-/.idea
+.idea/
 
 _site
 .sass-cache
@@ -8,3 +8,6 @@ vendor
 
 # ignore any google verification file
 google*
+
+# thanks MacOS
+.DS_Store
