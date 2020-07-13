@@ -9,8 +9,13 @@ CVFile: '/files/Melle-Dijkstra-Resume.pdf'
         background-color: #070909;
         color: #fefefe;
     }
-</style>
 
+    [class*='LI-badge-container'] {
+        margin-top: 10px;
+        text-align: left;
+    }
+</style>
+<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
 <div id="resume-page">
     <div id="slanted-box">
         <div class="row more-padding">
@@ -19,18 +24,26 @@ CVFile: '/files/Melle-Dijkstra-Resume.pdf'
         <div class="row more-padding margin-tb-10">
             <div class="col col-lg-6 col-md-6">
                 <p>
-                    My name is <strong>Melle Dijkstra</strong>. Experienced <b>Software Engineer</b> with 5 years of demonstrated history of working in the computer software
-                    industry. Currently in the 4th year of study with diverse <b>hard</b> and <b>soft</b> skills developed through various
+                    My name is <strong>Melle Dijkstra</strong>. Experienced <b>Software Engineer</b> with 5 years of
+                    demonstrated history of working in the computer software
+                    industry. with diverse <b>hard</b> and <b>soft</b> skills developed through various
                     projects including <b>Team Leadership</b> and <b>Software Architecture</b>.
                 </p>
-                <p>Please refer to my <a target="_blank" href="{{ page.CVFile }}">resume</a> for a complete idea of profile and experiences</p>
+                <p>Working with computer science tools to create better solutions for the world.</p>
             </div>
             <div class="col col-xs-12 col-md-6 margin-t-20">
                 <ul id="contact-list" class="list-unstyled" style="max-width: 300px;">
-                    <li><i class="mdi mdi-phone"></i> <a href="" style="text-shadow: 0 0 6px #1f201e;color: transparent;">(+12)345678910</a></li>
-                    <li><i class="mdi mdi-email"></i> <a href="" style="text-shadow: 0 0 6px #1f201e;color: transparent;">example@gmail.com</a></li>
-                    <li><i class="mdi mdi-download"></i> <a target="_blank" href="/files/Melle-Dijkstra-Resume.pdf">Download Resume</a></li>
-                    <li style="font-size: 13px;">Email and phone deliberately not stated here anymore out of security reasons, <a href="https://linkedin.com/in/melledijkstra/" target="_blank">please contact me on LinkedIn</a></li>
+                    <li><i class="mdi mdi-phone"></i> <a href=""
+                                                         style="text-shadow: 0 0 6px #1f201e;color: transparent;">(+12)345678910</a>
+                    </li>
+                    <li><i class="mdi mdi-email"></i> <a href=""
+                                                         style="text-shadow: 0 0 6px #1f201e;color: transparent;">example@gmail.com</a>
+                    </li>
+                    <li><i class="mdi mdi-download"></i> <a target="_blank" href="/files/Melle-Dijkstra-Resume.pdf">Download
+                        Resume</a></li>
+                    <li style="font-size: 13px;">Email and phone deliberately not stated here anymore out of security
+                        reasons, <a href="https://linkedin.com/in/melledijkstra/" target="_blank">please contact me on
+                            LinkedIn</a></li>
                 </ul>
             </div>
         </div>
@@ -55,7 +68,7 @@ CVFile: '/files/Melle-Dijkstra-Resume.pdf'
                 </ul>
                 <p class="margin-tb-20">
                     <small class="text-sm">
-                        These skills are demonstrated in the <a href="/writing">stories</a> I write on
+                        These skills are demonstrated in the <a href="/writing/science">stories</a> I write on
                         this site.
                     </small>
                 </p>
@@ -96,51 +109,36 @@ CVFile: '/files/Melle-Dijkstra-Resume.pdf'
                             </p>
                         </td>
                     </tr>
+                    {% for experience in site.data.resume.experiences %}
                     <tr>
                         <td>
-                            <a target="_blank" href="https://bouw7.nl">
-                                <img class="resume-logo grayscale" src="assets/images/resume/logo-bouw7.png"
-                                     alt="Logo Bouw7"/>
+                            {% if experience.url %}
+                            <a target="_blank" href="{{experience.url}}">
+                                {% endif %}
+                                <img class="resume-logo grayscale" src="{{experience.image}}"
+                                     alt="Logo {{experience.title}}"/>
+                                {% if experience.url %}
                             </a>
+                            {% endif %}
                         </td>
                         <td>
-                            <h4>Bouw7</h4>
+                            <h4>{{experience.title}}</h4>
                             <p>
-                                <small>Software Developer</small>
+                                <small>{{experience.desc}}</small>
                             </p>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <img class="resume-logo grayscale" src="assets/images/resume/logo-stroetenga-design.png"
-                                 alt="Logo Stroetenga Design"/>
-                        </td>
-                        <td>
-                            <h4>Stroetenga Design</h4>
-                            <p>
-                                <small>Internship Application Developer</small>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a target="_blank" href="http://kweekvijvernoord.com/">
-                                <img class="resume-logo grayscale" src="assets/images/resume/logo-kweekvijvernoord.jpg"
-                                     alt="Logo Kweekvijvernoord"/>
-                            </a>
-                        </td>
-                        <td>
-                            <h4>Kweekvijvernoord</h4>
-                            <p>
-                                <small>Internship Application Developer</small>
-                            </p>
-                        </td>
-                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
                 <div class="text-center">
-                    Please <a target="_blank" href="{{ page.CVFile }}">download<i class="mdi mdi-download"></i></a> my
-                    resume for more in-depth information about my experiences
+                    <p>Please <a target="_blank" href="{{ page.CVFile }}">download<i class="mdi mdi-download"></i></a>
+                        my resume for more in-depth information about my experiences</p>
+
+                    <div class="LI-profile-badge text-center" data-version="v1" data-size="medium" data-locale="en_US"
+                         data-type="horizontal" data-theme="dark" data-vanity="melledijkstra">
+                        <a class="LI-simple-link" href='https://linkedin.com/in/melledijkstra?trk=profile-badge'>Melle
+                            Dijkstra</a></div>
                 </div>
             </div>
         </div>
