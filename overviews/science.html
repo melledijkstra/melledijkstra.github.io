@@ -3,6 +3,6 @@ title: Science Stories
 layout: overview
 permalink: /writing/science
 ---
-{% for story in site.science %}
+{% for story in site.science reversed %}
     {% include story_item.html story=story %}
 {% endfor %}

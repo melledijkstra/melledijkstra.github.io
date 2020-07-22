@@ -3,7 +3,7 @@ title: Travel Stories
 layout: overview
 permalink: /writing/travel
 ---
-{% for story in site.travel %}
+{% for story in site.travel reversed %}
     {% include story_item.html story=story %}
 {% else %}
     It seems I have not written any articles for this collection yet!

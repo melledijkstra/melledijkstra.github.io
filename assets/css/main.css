@@ -16,11 +16,11 @@
 @import 'hightlight.css';
 
 .petit-formal-script {
-    font-family: 'Petit Formal Script', cursive;
+    font-family: 'Petit Formal Script', Arial, "Times New Roman", serif;
 }
 
 .raleway {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway', serif;
 }
 
 /*
@@ -37,7 +37,7 @@ html, body {
     height: 100%;
     color: #000;
     background: #fefefe; /* For browsers that do not support gradients */
-    font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', "Helvetica Neue", Arial, serif;
     font-size: 18px;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
@@ -635,7 +635,7 @@ pre {
 
 #collection-list a {
     position: relative;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway', serif;
     display: inline-block;
     padding: 10px 20px;
     margin: 25px 30px 15px 30px;
@@ -711,7 +711,7 @@ pre {
     margin-bottom: 10px;
 
     font-size: 24px;
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', Arial, serif;
     display: inline-block;
 }
 
@@ -825,7 +825,6 @@ pre {
  *----------------------------------------------------------------------------------*/
 #resume-page {
     height: 100%;
-
     background: url('/assets/images/resume/joshua-newton.png') no-repeat bottom;
     -ms-background-size: cover;
     -o-background-size: cover;
