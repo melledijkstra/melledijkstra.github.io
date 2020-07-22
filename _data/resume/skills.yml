@@ -1,21 +1,24 @@
 -   name: Design Patterns
     level: "Proficient"
-    desc: "It doesn't matter which language you use, it matters how you use it"
+    desc: "It doesn't matter which programming language you use, it matters how you use it"
 -   name: Web Development
     level: 'Professional'
-    desc: "Frontend, Backend. You name it, I've mastered the web"
+    desc: "Experience for many years working on web solutions including many frontend and backend frameworks"
+-   name: Machine Learning & AI
+    level: 'Proficient'
+    desc: 'Inspired by it, my final thesis consisted of using NLP techniques to create a successful solution'
+-   name: Javascript
+    level: 'Professional'
+    desc: 'Javascript was the first programming language I started with!'
+-   name: Continuous Development
+    level: 'Professional'
+    desc: "During development I know to use the tooling to focus on the real work"
 -   name: Computer Networks & Communication
     level: 'Intermediate'
     desc: "I've setup multiple linux servers and like to work with IoT"
 -   name: Android (Java)
     level: 'Intermediate'
     desc: 'Made several Android apps for remote controlling Arduino, remote music player, etc.'
--   name: Javascript
-    level: 'Professional'
-    desc: 'Javascript was the first programming language I started with!'
--   name: Machine Learning & AI
-    level: 'Intermediate'
-    desc: 'Inspired by it, and definitely a topic I want to learn more about. I control the basics and can play around with virtual neurons'
 -   name: Photoshop / Illustrator
     level: 'Basic'
     desc: 'I use it for personal projects and to improve art skills!'
