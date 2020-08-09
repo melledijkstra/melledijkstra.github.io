@@ -2,7 +2,7 @@
 title: "Extracting Duolingo vocabulary to Quizlet"
 date: 2020-07-05 14:06:00 +0200
 tags: duolingo quizlet javascript python
-image: /assets/images/stories/2020-07-05.jpg
+image: /assets/images/stories/joshua-hoehne-1UDjq8s8cy0-unsplash.jpg
 language:
     name: Python
 ---

@@ -1,0 +1,153 @@
+@import '_variables.scss';
+
+/**********************************************************************************
+ *
+ *     Reset Styling
+ *
+ **********************************************************************************/
+
+html, body {
+  height: 100%;
+  color: #000;
+  background: #fefefe;
+
+  /* For browsers that do not support gradients */
+  font-family: $ff-sans;
+  font-size: 100%;
+  font-weight: 200;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: #86775c;
+
+  &:hover {
+    color: #5f5442;
+  }
+}
+
+::selection, ::-moz-selection {
+  background: rgba(15, 113, 115, 0.5);
+}
+
+hr {
+  height: 3px;
+  background-color: #b2a38a;
+  border: none;
+}
+
+iframe {
+  border: none;
+  border-radius: 0;
+}
+
+textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus {
+  outline: 0 !important;
+}
+
+button {
+  &:focus, &:active, &:hover {
+    outline: 0 !important;
+  }
+}
+
+label:focus {
+  outline: 0 !important;
+}
+
+.btn {
+  &:active, &.active {
+    outline: 0 !important;
+  }
+}
+
+label {
+  font-weight: 400;
+}
+
+/**********************************************************************************
+ *
+ *   Library Overrides
+ *
+ **********************************************************************************/
+
+.form-control:focus, .has-success .form-control:focus, .has-error .form-control:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.no-gutter > [class*='col-'] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.less-gutter > [class*='col-'] {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.kv-md-editor, .breadcrumb, .form-control, .btn, .alert, .badge, .label {
+  border-radius: 0;
+}
+
+#wrap {
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+/* Buttons */
+
+.btn {
+  border: none;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.btn-primary {
+  color: #FFF;
+  background-color: #7f7f7f;
+
+  &:hover, &:active, &:focus {
+    background-color: #b2a38a !important;
+  }
+}
+
+.btn-default {
+  background-color: #D3D3D3;
+
+  &:hover, &:active, &:focus {
+    color: #FFF;
+    background-color: #7f7f7f !important;
+  }
+}
+
+.navbar > .container .navbar-brand {
+  margin-left: 0;
+}
+
+pre code {
+  white-space: inherit;
+}
+
+.modal-content {
+  border-radius: 0;
+}
+
+table.table {
+  td, th {
+    font-size: 18px;
+    word-break: break-all;
+  }
+}

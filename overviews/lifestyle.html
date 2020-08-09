@@ -1,0 +1,8 @@
+---
+title: Lifestyle
+layout: overview
+permalink: /writing/lifestyle
+---
+{% for story in site.lifestyle reversed %}
+    {% include story_item.html story=story %}
+{% endfor %}

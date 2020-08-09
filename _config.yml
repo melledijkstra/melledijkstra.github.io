@@ -38,9 +38,9 @@ collections:
     science:
         output: true
         permalink: /:collection/:title
-#    travel:
-#        output: true
-#        permalink: /:collection/:title
+    lifestyle:
+        output: true
+        permalink: /:collection/:title
 #    thoughts:
 #        output: true
 #        permalink: /:collection/:title
@@ -53,12 +53,7 @@ defaults:
             layout: "story"
     -   scope:
             path: ""
-            type: "thoughts"
-        values:
-            layout: "story"
-    -   scope:
-            path: ""
-            type: "travel"
+            type: "lifestyle"
         values:
             layout: "story"
     -   scope:
@@ -121,6 +116,7 @@ social:
 #
 exclude:
     - project-files/
+    - .idea/
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
@@ -131,3 +127,41 @@ exclude:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+# KramdownPermalink
+    #Kramdown is the default Markdown renderer for Jekyll. Below is a list of the currently supported options:
+    #
+kramdown:
+    # Prefix used for automatically generated header IDs
+    # auto_id_prefix: ''
+    # auto_id_stripping - Strip all formatting from header text for automatic ID generation
+    # auto_ids - Use automatic header ID generation
+    # coderay_bold_every - Defines how often a line number should be made bold
+    # coderay_css - Defines how the highlighted code gets styled
+    # coderay_default_lang - Sets the default language for highlighting code blocks
+    # coderay_line_number_start - The start value for the line numbers
+    # coderay_line_numbers - Defines how and if line numbers should be shown
+    # coderay_tab_width - The tab width used in highlighted code
+    # coderay_wrap - Defines how the highlighted code should be wrapped
+    # enable_coderay - Use coderay for syntax highlighting
+    # entity_output - Defines how entities are output
+    # footnote_backlink - Defines the text that should be used for the footnote backlinks
+    # footnote_backlink_inline - Specifies whether the footnote backlink should always be inline
+    # footnote_nr - The number of the first footnote
+    # gfm_quirks - Enables a set of GFM specific quirks
+    # hard_wrap - Interprets line breaks literally
+    # header_offset - Sets the output offset for headers
+    # html_to_native - Convert HTML elements to native elements
+    # line_width - Defines the line width to be used when outputting a document
+    # link_defs - Pre-defines link definitions
+    # math_engine - Set the math engine
+    # math_engine_opts - Set the math engine options
+    # parse_block_html: true # - Process kramdown syntax in block HTML tags
+    # parse_span_html - Process kramdown syntax in span HTML tags
+    # smart_quotes - Defines the HTML entity names or code points for smart quote output
+    # syntax_highlighter - Set the syntax highlighter
+    # syntax_highlighter_opts - Set the syntax highlighter options
+    # toc_levels - Defines the levels that are used for the table of contents
+    # transliterated_header_ids - Transliterate the header text before generating the ID
+    # typographic_symbols - Defines a mapping from typographical symbol to output characters
+

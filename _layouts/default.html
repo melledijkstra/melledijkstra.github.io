@@ -32,15 +32,18 @@
     })(window,document,'script','dataLayer','GTM-KPKS5SL');</script>
     <!-- End Google Tag Manager -->
 
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/assets/css/site.css"/>
     <link rel="stylesheet" href="/assets/css/main.css"/>
     <link rel="stylesheet" href="/assets/css/materialdesignicons.min.css"/>
 
     {% if layout.head_css %}
-    {% for css_file in layout.head_css %}
-    <link rel="stylesheet" href="{{ css_file }}" />
-    {% endfor %}
+        {% for css_file in layout.head_css %}
+        <link rel="stylesheet" href="{{ css_file }}" />
+        {% endfor %}
+    {% endif %}
+    {% if page.head_css %}
+        {% for css_file in page.head_css %}
+        <link rel="stylesheet" href="{{ css_file }}" />
+        {% endfor %}
     {% endif %}
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -60,14 +63,14 @@
             crossorigin="anonymous"></script>
     <!-- todo: mix this together -->
     {% if layout.head_js %}
-    {% for js in layout.head_js %}
-    <script src="{{ js }}"></script>
-    {% endfor %}
+        {% for js in layout.head_js %}
+        <script src="{{ js }}"></script>
+        {% endfor %}
     {% endif %}
     {% if page.head_js %}
-    {% for js in page.head_js %}
-    <script src="{{ js }}"></script>
-    {% endfor %}
+        {% for js in page.head_js %}
+        <script src="{{ js }}"></script>
+        {% endfor %}
     {% endif %}
 
     <!-- !Plugins! -->

@@ -1,0 +1,112 @@
+---
+---
+
+@import 'variables';
+
+/*----------------------------------------------------------------------------------*
+ * Resume page
+ *----------------------------------------------------------------------------------*/
+
+#resume-page {
+    height: 100%;
+    background: url('/assets/images/resume/joshua-newton.png') no-repeat bottom;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+
+    h3 {
+        margin-bottom: 30px;
+    }
+
+    .row.more-padding > [class*="col-"] {
+        padding: 0 60px;
+    }
+}
+
+#slanted-box {
+    position: relative;
+    background-color: #fefefe;
+    color: #212220;
+    padding: 30px 20px 50px;
+    opacity: 0.85;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 50px), 0 100%);
+    z-index: 2;
+
+    p {
+        font-family: $ff-serif;
+    }
+}
+
+#contact-list {
+    a {
+        color: #212220;
+        text-decoration: underline;
+    }
+
+    i {
+        margin-right: 20px;
+    }
+}
+
+#photo-of-myself {
+    position: absolute;
+    right: 10%;
+    height: 150px;
+    top: -150px;
+    width: auto;
+    z-index: 3;
+    border: 2px solid white;
+}
+
+.resume-table {
+    td {
+        padding-bottom: 20px;
+    }
+
+    .resume-logo {
+        margin-right: 30px;
+    }
+}
+
+.resume-logo {
+    width: 70px;
+    height: auto;
+}
+
+#software-container {
+    .resume-logo {
+        height: 70px;
+        width: auto;
+        margin-bottom: 10px;
+    }
+
+    .software-item {
+        height: 150px;
+    }
+}
+
+.skill-container {
+    width: 100%;
+    background-color: #4b4b4b;
+
+    .skill {
+        height: 2px;
+        background-color: #b2a38a;
+    }
+}
+
+@media (max-width: 800px) {
+    #photo-of-myself {
+        height: 100px;
+        top: -50px;
+    }
+}
+
+@media (max-width: 500px) {
+    #resume-page .row.more-padding > [class*="col-"] {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+}

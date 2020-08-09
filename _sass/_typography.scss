@@ -1,0 +1,44 @@
+/**
+ * Typography Styling
+ */
+
+@import "variables";
+
+html {
+  font-size: 100%;
+}
+
+h1 {
+  font-family: $ff-serif;
+  line-height: 1.25;
+  font-size: $f-xlg;
+}
+
+@media screen and (min-width: 1024px) {
+  h1 {
+    font-size: $f-xhr;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  h1 {
+    font-size: $f-hero;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 700px){
+  h1 {
+    font-size: 3.5rem; // 56px
+  }
+}
+
+@media (min-width: 1000px){
+  h1 {
+    font-size: 4.75rem; // 76px
+  }
+}
+
+blockquote p {
+  font-size: 1.5em;
+}
