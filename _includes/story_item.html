@@ -18,12 +18,12 @@
                    style="background-color: #ad9977;"
             >{{ include.story.language.name }}</small>
             {% endif %}
-            <h2 class="title">
+            <h2 class="title sans">
                 <a href="{{ include.story.url }}">{{ include.story.title }}</a>
             </h2>
             <div class="info">
                 <div class="time">
-                    <span class="mdi mdi-clock"></span> {{ include.story.date | date: '%e %b %Y %R' }}
+                    <span class="mdi mdi-clock"></span> {{ include.story.date | date: '%e %b %Y' }}
                 </div>
                 {% if include.story.tags %}
                 <div class="categories">
@@ -34,7 +34,9 @@
                 </div>
                 {% endif %}
             </div>
-            <p class="sneak-peek">{{ include.story.excerpt }}</p>
+            <p class="sneak-peek serif softcolor">
+                {{ include.story.excerpt | strip_html }}
+            </p>
         </div>
     </div>
 </div>

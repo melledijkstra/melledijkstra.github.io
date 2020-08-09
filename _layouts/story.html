@@ -37,38 +37,43 @@ head_css:
     js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div id="story-view">
-    <div class="jumbotron">
-
-        <h1 class="story-title">{{ page.title }}</h1>
-        <hr style="width: 10%" />
-        <div>
-            <small class="story-date">{{ page.date | date: '%e %B %Y' }}</small>
-        </div>
-
-        <div class="share-buttons">
-            <!-- Twitter share button -->
-            <a class="twitter-share-button" data-size="small"
-               href="https://twitter.com/intent/tweet?url={{ site.url | append: page.url | url_encode }}&text={{ page.title }}&via=dijkstrascience">Tweet</a>
-            <!-- Facebook share button -->
-            <div class="fb-share-button"
-                 data-href="{{ site.url | append: page.url }}"
-                 data-layout="button_count">
+<main id="story-view">
+    <article>
+        <img class="story-image" alt="Story Image" src="{{ page.image }}" />
+        <div class="jumbotron">
+            <h1 class="story-title">{{ page.title }}</h1>
+            <hr style="width: 10%" />
+            <div>
+                <small class="story-date serif">{{ page.date | date: '%e %B %Y' }}</small>
             </div>
-            <!-- LinkedIn share button -->
-            <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-            <script type="IN/Share" data-url="{{ site.url | append: page.url }}"></script>
-        </div>
-    </div>
-    <div class="post-image" style="background-image: url('{{ page.image }}');"></div>
-    <div id="story" class="container-fluid">
-        {{ content }}
+            {% assign img = page.image | remove: '/assets/images/stories/' %}
+            {% if site.data.images contains img %}
+                <p class="serif softcolor">Photo by <a target="_blank" href="{{site.data.images[img].url}}">{{site.data.images[img].owner}}</a></p>
+            {% endif %}
 
-        <div class="clearfix"></div>
-        <div id="disqus_thread"></div>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
-            Disqus.</a></noscript>
-    </div>
+            <div class="share-buttons">
+                <!-- Twitter share button -->
+                <a class="twitter-share-button" data-size="small"
+                   href="https://twitter.com/intent/tweet?url={{ site.url | append: page.url | url_encode }}&text={{ page.title }}&via=dijkstrascience">Tweet</a>
+                <!-- Facebook share button -->
+                <div class="fb-share-button"
+                     data-href="{{ site.url | append: page.url }}"
+                     data-layout="button_count">
+                </div>
+                <!-- LinkedIn share button -->
+                <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+                <script type="IN/Share" data-url="{{ site.url | append: page.url }}"></script>
+            </div>
+        </div>
+        <div id="story" class="container-fluid">
+            {{ content }}
+
+            <div class="clearfix"></div>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
+        </div>
+    </article>
     <script>
         /**
          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -85,4 +90,4 @@ head_css:
             (d.head || d.body).appendChild(s);
         })();
     </script>
-</div>
+</main>

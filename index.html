@@ -2,6 +2,10 @@
 layout: default
 title: Melle Dijkstra
 CVFile: '/files/Melle-Dijkstra-Resume.pdf'
+head_css:
+- '/assets/css/about.css'
+head_js:
+- 'https://platform.twitter.com/widgets.js'
 ---
 <style>
     #page-content {
@@ -25,9 +29,11 @@ CVFile: '/files/Melle-Dijkstra-Resume.pdf'
             <div class="col col-lg-6 col-md-6">
                 <p>
                     My name is <strong>Melle Dijkstra</strong>. Experienced <b>Software Engineer</b> with 5 years of
-                    demonstrated history of working in the computer software industry. Graduated from Hanze University
-                    of Applied sciences with diverse <b>hard</b> and <b>soft</b> skills developed through various
-                    projects including <b>Team Leadership</b> and <b>Software Architecture</b>.
+                    demonstrated history of working in the communication and informatics industry
+                    with diverse <b>hard</b> and <b>soft</b> skills developed through various
+                    projects including <b>Team Leadership</b> and <b>Software Architecture</b>.<br />
+                    🌍 Global development and 🤝🏼 social innovation makes me excited 😎. Proud to be a global citizen
+                    thinking without borders and limits.
                 </p>
                 <p>Personal tagline: <i>"ICT for global development & social good"</i>.</p>
             </div>
@@ -53,25 +59,8 @@ CVFile: '/files/Melle-Dijkstra-Resume.pdf'
     </div>
     <div id="resume-part-2" class="container-fluid padding-tb-20">
         <div class="row more-padding">
-            <div class="col col-sm-12 col-md-6">
-                <h3>· Skills</h3>
-                <ul class="list-unstyled">
-                    {% for skill in site.data.resume.skills %}
-                    <li>
-                        <div class="margin-tb-20">
-                            <p>{{ skill.name }} <sub class="text-lightgrey">({{ skill.level }})</sub>
-                            </p>
-                            <small class="no-margin text-lightgrey">{{ skill.desc }}</small>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <p class="margin-tb-20">
-                    <small class="text-sm">
-                        These skills are demonstrated in the <a href="/writing/science">stories</a> I write on
-                        this site.
-                    </small>
-                </p>
+            <div class="col col-sm-12 col-md-6 text-center margin-tb-20">
+                <a class="twitter-timeline text-center margin-tb-20" data-width="500" data-height="1000" data-theme="dark" href="https://twitter.com/dijkstrascience?ref_src=twsrc%5Etfw">Tweets by dijkstrascience</a>
             </div>
             <div class="col col-sm-12 col-md-6">
                 <h3>· Education</h3>
@@ -80,7 +69,7 @@ CVFile: '/files/Melle-Dijkstra-Resume.pdf'
                     <tr>
                         <td>
                             <a target="_blank" href="https://www.hanze.nl/eng">
-                                <img class="resume-logo grayscale" src="assets/images/resume/logo-hanze.png"
+                                <img class="resume-logo filter-grayscale" src="assets/images/resume/logo-hanze.png"
                                      alt="Logo Hanzehogeschool Groningen"/>
                             </a>
                         </td>
@@ -115,7 +104,7 @@ CVFile: '/files/Melle-Dijkstra-Resume.pdf'
                             {% if experience.url %}
                             <a target="_blank" href="{{experience.url}}">
                                 {% endif %}
-                                <img class="resume-logo grayscale" src="{{experience.image}}"
+                                <img class="resume-logo filter-grayscale" src="{{experience.image}}"
                                      alt="Logo {{experience.title}}"/>
                                 {% if experience.url %}
                             </a>
