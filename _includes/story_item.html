@@ -1,10 +1,5 @@
-{% if include.story.language != nil %}
-    {% capture cardStyling %}style='border-bottom: 3px solid #ad9977;'{% endcapture %}
-{% else %}
-    {%- assign cardStyling = "" -%}
-{% endif %}
 <div class="grid-item col-xs-12 col-sm-12 col-md-6 col-lg-4">
-    <div class="story-item card margin-10">
+    <div class="story-item card margin-15">
         <a href="{{ include.story.url }}">
             <div class="trim">
                 <img class="image center-block img-responsive"
@@ -12,19 +7,19 @@
                      alt="story image"/>
             </div>
         </a>
-        <div class="card-content" {{ cardStyling }}>
+        <div class="card-content">
             {% if include.story.language != nil %}
             <small class="programming-language-tooltip"
-                   style="background-color: #ad9977;"
             >{{ include.story.language.name }}</small>
             {% endif %}
-            <h2 class="title sans">
+            <h2 class="title serif">
                 <a href="{{ include.story.url }}">{{ include.story.title }}</a>
             </h2>
             <div class="info">
-                <div class="time">
+                <span class="time">
                     <span class="mdi mdi-clock"></span> {{ include.story.date | date: '%e %b %Y' }}
-                </div>
+                </span>
+                <span><i class="mdi mdi-book-open-page-variant"></i> {{ include.story.content | number_of_words | divided_by: 225 | floor }} min</span>
                 {% if include.story.tags %}
                 <div class="categories">
                     <span class="mdi mdi-tag"></span>

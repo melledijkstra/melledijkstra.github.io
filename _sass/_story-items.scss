@@ -1,0 +1,159 @@
+@import 'variables';
+@import 'helpers';
+
+/*----------------------------------------------------------------------------------*
+ * Stories overview page & Story items
+ *----------------------------------------------------------------------------------*/
+
+#collection-navigation {
+  display: block;
+  text-align: center;
+  z-index: 10;
+  left: 10%;
+
+  a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 25px 30px 15px 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 2px solid #b2a38a;
+    color: #b2a38a;
+    letter-spacing: 2px;
+    font-size: .8em;
+    background-color: transparent;
+    text-decoration: none;
+    transition: all .45s ease-out;
+  }
+
+  .underline {
+    position: absolute;
+    width: 0;
+    height: 2.5px;
+    background: white;
+    transition: all .3s ease-Out;
+    bottom: 0;
+    left: 0;
+  }
+
+  a {
+    &:hover {
+      .underline {
+        width: 100%;
+      }
+
+      color: white;
+      background-color: #b2a38a;
+    }
+
+    &.active {
+      color: white;
+      background-color: #b2a38a;
+    }
+  }
+}
+
+#grid {
+  padding-bottom: 30px;
+  margin: 15px auto 0;
+}
+
+.story-item {
+  .image {
+    width: 100%;
+    height: auto;
+  }
+
+  &:hover .image {
+
+  }
+
+  /* this class makes sure the story image doesn't get to big */
+  .trim {
+    max-height: 500px;
+    overflow: hidden;
+
+    @include prefix(box-shadow, (0 0 5px rgba(0,0,0,0.5)), webkit moz o);
+  }
+}
+
+.softcolor {
+  color: #868686;
+}
+
+/***************
+ *  Cards
+ ***************/
+
+.card {
+  position: relative;
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 0;
+
+  @include prefix(transition, (all 0.3s), webkit moz o);
+
+  border-radius: 3px;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+
+  .card-content {
+    $left: 5%;
+    $border-color: #ad9977;
+
+    position: relative;
+    background-color: white;
+    top: -3vh;
+    margin-left: $left;
+    margin-right: 2%;
+    padding: 25px 16px 15px 25px;
+
+    border-top: 2px solid $border-color;
+
+    @include prefix(box-shadow, (0 0 4px rgba(0,0,0,0.3)), webkit moz o);
+
+    .title {
+      width: 100%;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    .title:after {
+      content: '';
+      width: 25%;
+      height: 3px;
+      background-color: $primary-color;
+    }
+
+    .sneak-peek {
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      margin: 10px 0 13px 0;
+    }
+
+    .info {
+      color: #727272;
+    }
+
+    .programming-language-tooltip {
+      background-color: $border-color;
+      font-size: 15px;
+      color: white;
+      position: absolute;
+      padding: 5px;
+
+      border-radius: 2px;
+
+      top: -20px;
+      right: 15px;
+
+      @include prefix(box-shadow, (0 1px 4px 0 rgba(0, 0, 0, 0.2)), webkit moz);
+    }
+
+  }
+
+}
+

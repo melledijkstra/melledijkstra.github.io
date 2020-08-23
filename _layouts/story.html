@@ -48,8 +48,9 @@ head_css:
             </div>
             {% assign img = page.image | remove: '/assets/images/stories/' %}
             {% if site.data.images contains img %}
-                <p class="serif softcolor">Photo by <a target="_blank" href="{{site.data.images[img].url}}">{{site.data.images[img].owner}}</a></p>
+            <p class="serif softcolor no-margin-tb"><i class="mdi mdi-camera"></i> Photo by <a target="_blank" href="{{site.data.images[img].url}}">{{site.data.images[img].owner}}</a></p>
             {% endif %}
+            <p class="serif softcolor small no-margin-tb"><i class="mdi mdi-book-open-page-variant"></i> {{ page.content | number_of_words | divided_by: 225 | floor }} min</p>
 
             <div class="share-buttons">
                 <!-- Twitter share button -->
