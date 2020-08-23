@@ -1,7 +1,7 @@
 ---
 title: "Electron gRPC Chat"
 date: 2019-12-29 14:26:00 +0200
-tags: javscript grpc
+tags: javascript grpc
 image: /assets/images/stories/martin-brechtl-sEkTsMYTqY0-unsplash.jpg
 language:
     color: f0db4f
