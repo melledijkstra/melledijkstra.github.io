@@ -1,37 +1,43 @@
 <div class="grid-item col-xs-12 col-sm-12 col-md-6 col-lg-4">
     <div class="story-item card margin-15">
-        <a href="{{ include.story.url }}">
-            <div class="trim">
-                <img class="image center-block img-responsive"
-                     src="{{ include.story.image }}"
-                     alt="story image"/>
-            </div>
-        </a>
-        <div class="card-content">
-            {% if include.story.language != nil %}
-            <small class="programming-language-tooltip"
-            >{{ include.story.language.name }}</small>
-            {% endif %}
-            <h2 class="title serif">
-                <a href="{{ include.story.url }}">{{ include.story.title }}</a>
-            </h2>
+        <div class="card-header">
             <div class="info">
-                <span class="time">
-                    <span class="mdi mdi-clock"></span> {{ include.story.date | date: '%e %b %Y' }}
-                </span>
-                <span><i class="mdi mdi-book-open-page-variant"></i> {{ include.story.content | number_of_words | divided_by: 225 | floor }} min</span>
+                <div class="margin-b-5">
+                    {% if include.story.author %}
+                        <span class="author">{{ include.story.author }}</span>
+                    {% endif %}
+                    <span class="badge date">{{ include.story.date | date: '%e %b, %Y' }}</span>
+                    <span>{{ include.story.content | number_of_words | divided_by: 225 | floor }} min</span>
+                </div>
                 {% if include.story.tags %}
                 <div class="categories">
-                    <span class="mdi mdi-tag"></span>
                     <small>
                         {{ include.story.tags | join: ', ' }}
                     </small>
                 </div>
                 {% endif %}
             </div>
-            <p class="sneak-peek serif softcolor">
-                {{ include.story.excerpt | strip_html }}
-            </p>
+        </div>
+        <div class="move-up">
+            <a href="{{ include.story.url }}">
+                <div class="trim">
+                    <img class="image center-block img-responsive"
+                        src="{{ include.story.image }}"
+                        alt="story image"/>
+                </div>
+            </a>
+            <div class="card-content">
+                {% if include.story.language != nil %}
+                <small class="programming-language-tooltip"
+                >{{ include.story.language.name }}</small>
+                {% endif %}
+                <h2 class="title serif">
+                    <a href="{{ include.story.url }}">{{ include.story.title }}</a>
+                </h2>
+                <p class="sneak-peek serif softcolor">
+                    {{ include.story.excerpt | strip_html }}
+                </p>
+            </div>
         </div>
     </div>
 </div>
