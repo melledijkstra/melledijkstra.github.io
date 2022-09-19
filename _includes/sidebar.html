@@ -3,14 +3,16 @@
         <small id="subtitle">{{ site.tagline }}</small>
     </h1>
     <ul class="sidebar-nav">
-        <li>
-            <a href="/writing/science"><i class="mdi mdi-atom"></i> <span
-                    class="text-right">Science</span></a>
-        </li>
-        <li>
-            <a href="/writing/lifestyle"><i class="mdi mdi-yin-yang"></i> <span
-                    class="text-right">Lifestyle</span></a>
-        </li>
+        {% for collection in site.collections %}
+            {% if collection.label == 'posts' %}
+                {% continue %}
+            {% endif %}
+            {% assign coll_url = '/writing/' | append: collection.label %}
+            <li>
+                <a href="{{ coll_url }}"><i class="mdi mdi-atom"></i> <span
+                        class="text-right">{{ collection.label }}</span></a>
+            </li>
+        {% endfor %}
         <li>
             <a href="/"><i class="mdi mdi-account-card-details"></i> <span
                     class="text-right">About</span></a>
