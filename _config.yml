@@ -38,9 +38,9 @@ collections:
     science:
         output: true
         permalink: /:collection/:title
-    lifestyle:
-        output: true
-        permalink: /:collection/:title
+#    lifestyle:
+#        output: true
+#        permalink: /:collection/:title
 #    thoughts:
 #        output: true
 #        permalink: /:collection/:title
