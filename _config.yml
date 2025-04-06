@@ -91,18 +91,12 @@ webmaster_verifications:
 
 author:
     name: Melle Dijkstra
-    twitter: dijkstrascience
-
-twitter:
-    username: dijkstrascience
-    card: summary
 
 logo: '/assets/images/logo.png'
 
 social:
     name: Melle Dijkstra
     links:
-        - https://twitter.com/dijkstrascience
         - https://www.linkedin.com/in/melledijkstra
         - https://github.com/melledijkstra
 

@@ -10,7 +10,7 @@ function windowResized() {
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
-    background(241, 241, 241);
+    background(0, 0, 0);
 
     fill(255);
     noStroke();

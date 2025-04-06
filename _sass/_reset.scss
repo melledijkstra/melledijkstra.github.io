@@ -41,26 +41,6 @@ iframe {
   border-radius: 0;
 }
 
-textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus {
-  outline: 0 !important;
-}
-
-button {
-  &:focus, &:active, &:hover {
-    outline: 0 !important;
-  }
-}
-
-label:focus {
-  outline: 0 !important;
-}
-
-.btn {
-  &:active, &.active {
-    outline: 0 !important;
-  }
-}
-
 label {
   font-weight: 400;
 }
