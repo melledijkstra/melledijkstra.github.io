@@ -1,7 +1,7 @@
 # Melle Dijkstra's personal website
 
 This repository contains the official source code used for my personal website
-Copyright © 2016 - 2018 Melle Dijkstra, All rights reserved
+Copyright © 2016 - 2026 Melle Dijkstra, All rights reserved
 
 ## Installation
 
