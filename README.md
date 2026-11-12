@@ -7,18 +7,18 @@ Copyright © 2016 - 2018 Melle Dijkstra, All rights reserved
 
 ### Unix based systems
 
-reference: https://help.github.com/en/enterprise/2.14/user/articles/setting-up-your-github-pages-site-locally-with-jekyll
+reference: https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll
 
 Open the terminal.
 
-Check whether you have Ruby 2.1.0 or higher installed:
+Check whether you have Ruby 3.4 or higher installed:
 
 ```
 $ ruby --version
-> ruby 2.X.X
+> ruby 3.4.X
 ```
 
-If you don't have Ruby installed, install Ruby 2.1.0 or higher.
+If you don't have Ruby installed, install Ruby 3.4 or higher.
 
 Install Bundler:
 

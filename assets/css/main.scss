@@ -5,6 +5,11 @@
  * IMPORTS
  */
 
+@use 'variables' as *;
+@use 'reset' as *;
+@use 'helpers' as *;
+@use 'story-items' as *;
+
 // Google Fonts
 @import url('https://fonts.googleapis.com/css2?family=Petit+Formal+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital@0;1&display=swap');
@@ -12,13 +17,7 @@
 // Material Design Icons
 @import url('//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css');
 
-// partial imports
-@import 'variables';
-@import 'reset';
-@import 'helpers';
-@import 'story-items';
-
-@import "bootstrap.min.css";
+@import url("bootstrap.min.css");
 
 .serif {
     font-family: $ff-serif;

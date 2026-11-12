@@ -1,5 +1,5 @@
-@import 'variables';
-@import 'helpers';
+@use 'variables' as *;
+@use 'helpers' as *;
 
 /*----------------------------------------------------------------------------------*
  * Stories overview page & Story items

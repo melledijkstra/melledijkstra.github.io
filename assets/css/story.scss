@@ -7,11 +7,11 @@
  *
  **********************************************************************************/
 
-@import 'variables';
-@import 'typography';
+@use 'variables' as *;
+@use 'typography' as *;
 
 /* Import Highlight Native skin, to display code blocks nicely on the website */
-@import "hightlight.css";
+@import url("hightlight.css");
 
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital@0;1&display=swap');
 
