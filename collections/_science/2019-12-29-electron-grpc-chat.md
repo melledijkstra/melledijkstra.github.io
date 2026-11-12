@@ -10,9 +10,9 @@ language:
 An electron application with gRPC connected with a python chatting server.
 <!--more-->
 Find the repository for this article here:
-<table class="table table-condensed">
+<table class="table table-sm">
     <tr>
-        <td><i class="mdi mdi-github-circle"></i></td>
+        <td><i class="mdi mdi-github"></i></td>
         <td><a target="_blank" href="https://github.com/melledijkstra/electron-grpc">github.com/melledijkstra/electron-grpc</a></td>
     </tr>
 </table>
@@ -149,7 +149,7 @@ grpc_tools_node_protoc --js_out=import_style=commonjs,binary:. --grpc_out=. --pl
 
 This will generate the proto files in the `./proto` directory
 
-<img class="img-responsive" style="height: 200px; width: auto;" src="/assets/images/story-images/proto-compiled.png" alt="Static proto compiled" />
+<img class="img-fluid" style="height: 200px; width: auto;" src="/assets/images/story-images/proto-compiled.png" alt="Static proto compiled" />
 
 The proto generated files are ready to be used and we can start with creating a structure for the electron application.
 

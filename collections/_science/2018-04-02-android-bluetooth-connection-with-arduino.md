@@ -12,7 +12,7 @@ This guide describes how to communicate from Android to Arduino using bluetooth 
 
 All of the code used in this guide can be found on the following GitHub links:
 
-<table class="table table-condensed">
+<table class="table table-sm">
     <tr>
         <th>Platform</th>
         <th>Repository</th>
@@ -342,12 +342,12 @@ void loop()
 ## Demo
 
 <div class="row">
-    <div class="col col-xs-12 col-md-8">
-        <div class="embed-responsive embed-responsive-16by9">
+    <div class="col-12 col-md-8">
+        <div class="ratio ratio-16x9">
 	    <iframe class="embed-responsive-item" width="853" height="480" src="https://www.youtube.com/embed/tWXILDYlIUk?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
        </div>
     </div>
-    <div class="col col-xs-12 col-md-4">
+    <div class="col-12 col-md-4">
       <img src="/assets/images/story-images/demo.gif" alt="Android Demo" />
     </div>
 </div>
