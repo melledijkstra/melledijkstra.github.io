@@ -2,7 +2,7 @@
  * Typography Styling
  */
 
-@import "variables";
+@use "variables" as *;
 
 html {
   font-size: 100%;
