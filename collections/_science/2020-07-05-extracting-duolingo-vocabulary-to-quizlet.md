@@ -9,9 +9,9 @@ language:
 
 You probably arrived here because you are also interested in extracting the vocabulary for a specific language from Duolingo and use the vocabulary for further purposes. In this case I used it to import it into Quizlet.
 <!--more-->
-<table class="table table-condensed">
+<table class="table table-sm">
     <tr>
-        <td><i class="mdi mdi-github-circle"></i></td>
+        <td><i class="mdi mdi-github"></i></td>
         <td><a target="_blank" href="https://github.com/melledijkstra/duolingo-vocab-extractor">github.com/melledijkstra/duolingo-vocab-extractor</a></td>
     </tr>
 </table>
@@ -147,7 +147,7 @@ if __name__ == '__main__':
         json.dump(lexicon, fp)
 ```
 
-<div class="embed-responsive margin-tb-20 embed-responsive-16by9">
+<div class="ratio ratio-16x9 margin-tb-20">
     <video controls="controls">
       <source src="/assets/images/story-images/video-duolingo-extract.mp4" type="video/mp4" />
       Your browser does not support the video tag.

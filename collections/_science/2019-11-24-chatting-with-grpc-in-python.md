@@ -29,7 +29,7 @@ This example can be found on the official [protobufs homepage](https://developer
 
 <div class="fat">
     <div class="row">
-        <div class="col-sm-12 col-md-4">
+        <div class="col-12 col-sm-12 col-md-4">
         <i>The protobug language</i>
             {% highlight protobuf %}
 message Person {
@@ -39,7 +39,7 @@ message Person {
 }
 {% endhighlight %}
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-12 col-sm-12 col-md-4">
         <i>The instantiation in Java</i>
 {% highlight java %}
 Person john = Person.newBuilder()
@@ -51,7 +51,7 @@ output = new FileOutputStream(args[0]);
 john.writeTo(output);
 {% endhighlight %}
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-12 col-sm-12 col-md-4">
         <i>The interpretation in C++</i>
 {% highlight cpp %}
 Person john;

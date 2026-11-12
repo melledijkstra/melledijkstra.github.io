@@ -39,9 +39,6 @@
         {% endfor %}
     {% endif %}
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-            crossorigin="anonymous"></script>
     <!-- todo: mix this together -->
     {% if layout.head_js %}
         {% for js in layout.head_js %}
@@ -68,7 +65,7 @@
     <div id="page-content">
         <!-- SIDEBAR TOGGLER -->
         <button type="button" class="navbar-toggle collapsed"
-                onclick="$('#wrap').toggleClass('toggled');" data-toggle="collapse">
+                onclick="document.getElementById('wrap').classList.toggle('toggled');" data-bs-toggle="collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
