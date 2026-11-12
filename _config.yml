@@ -27,6 +27,7 @@ description: 'A place of thought'
 # Learn anything about science related topics. This is is where I share my latest ideas.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://melledijkstra.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+repository: "melledijkstra/melledijkstra.github.io"
 disqusId: "live-melledijkstra"
 
 excerpt_separator: <!--more-->

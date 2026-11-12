@@ -23,3 +23,5 @@ jobs:
         run: bundle exec jekyll build --strict_front_matter
         env:
           JEKYLL_ENV: production
+          PAGES_REPO_NWO: ${{ github.repository }}
+          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
