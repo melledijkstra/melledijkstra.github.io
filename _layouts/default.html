@@ -17,20 +17,13 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
     <link rel="manifest" href="/assets/favicons/manifest.json">
-    <meta name="msapplication-TileColor" content="#ac9c80">
-    <meta name="msapplication-TileImage" content="/assets/favicons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ac9c80">
 
     <!-- Pinterest Tag -->
     <meta name="p:domain_verify" content="528f8d5e26a7c45be1eacbef1d62ca2f"/>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-KPKS5SL');</script>
-    <!-- End Google Tag Manager -->
+    <!-- TODO: Analytics / Tag Manager (Previously GTM-KPKS5SL & Universal Analytics UA-61555186-3).
+         To re-enable analytics in the future, configure Google Analytics 4 (G-XXXXXXXXXX) or a privacy-first alternative (e.g., Cloudflare Web Analytics / Plausible) via _config.yml. -->
 
     <link rel="stylesheet" href="/assets/css/main.css"/>
     <link rel="stylesheet" href="/assets/css/materialdesignicons.min.css"/>
@@ -46,18 +39,6 @@
         {% endfor %}
     {% endif %}
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-61555186-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-        gtag('config', 'UA-61555186-3');
-    </script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
             crossorigin="anonymous"></script>
@@ -78,14 +59,9 @@
     {% seo %}
     <!-- !End Plugins! -->
 
-    <!-- Google AdSense -->
-    <script data-ad-client="ca-pub-9230984255763944" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- TODO: Google AdSense (Previously ca-pub-9230984255763944) -->
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KPKS5SL"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 <div id="wrap">
     {% include sidebar.html %}
 

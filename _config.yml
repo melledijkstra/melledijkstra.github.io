@@ -29,6 +29,8 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://melledijkstra.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 repository: "melledijkstra/melledijkstra.github.io"
 disqusId: "live-melledijkstra"
+# TODO: Configure modern analytics (e.g. Google Analytics 4 G-XXXXXXXXXX or Plausible/Cloudflare)
+# google_analytics: "G-XXXXXXXXXX"
 
 excerpt_separator: <!--more-->
 

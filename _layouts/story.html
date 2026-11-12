@@ -8,16 +8,6 @@ head_css:
 {% else %}
 {% assign disqusId = "live-melledijkstra" %}
 {% endif %}
-<!-- Load Facebook SDK for JavaScript -->
-<div id="fb-root"></div>
-<script>(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 <main id="story-view">
     <article>
         <img class="story-image" alt="Story Image" src="{{ page.image }}" />
@@ -33,16 +23,8 @@ head_css:
             {% endif %}
             <p class="serif softcolor small no-margin-tb"><i class="mdi mdi-book-open-page-variant"></i> {{ page.content | number_of_words | divided_by: 225 | floor }} min</p>
 
-            <div class="share-buttons">
-                <!-- Facebook share button -->
-                <div class="fb-share-button"
-                     data-href="{{ site.url | append: page.url }}"
-                     data-layout="button_count">
-                </div>
-                <!-- LinkedIn share button -->
-                <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-                <script type="IN/Share" data-url="{{ site.url | append: page.url }}"></script>
-            </div>
+            <!-- TODO: Modern Social Share Buttons (Previously Facebook SDK v3.0 & LinkedIn InShare).
+                 Can be implemented with lightweight HTML share links (e.g. https://www.linkedin.com/sharing/share-offsite/?url={{ site.url | append: page.url | uri_escape }}) or Web Share API. -->
         </div>
         <div id="story" class="container-fluid">
             {{ content }}
