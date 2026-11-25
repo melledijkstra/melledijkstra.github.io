@@ -344,7 +344,7 @@ void loop()
 <div class="row">
     <div class="col-12 col-md-8">
         <div class="ratio ratio-16x9">
-	    <iframe class="embed-responsive-item" width="853" height="480" src="https://www.youtube.com/embed/tWXILDYlIUk?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+	    <iframe width="853" height="480" src="https://www.youtube.com/embed/tWXILDYlIUk?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
        </div>
     </div>
     <div class="col-12 col-md-4">
