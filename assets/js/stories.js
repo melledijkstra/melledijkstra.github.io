@@ -1,4 +1,9 @@
+let storiesMasonry = null;
+
 window.addEventListener('load', function () {
+    if (storiesMasonry) {
+        storiesMasonry.layout();
+    }
     const loader = document.getElementById('page-loader-wrap');
     if (loader) {
         loader.style.transition = 'opacity 500ms';
@@ -13,7 +18,7 @@ function initStoriesGrid() {
     const gridElement = document.getElementById('grid');
     if (!gridElement) return;
 
-    const msnry = new Masonry(gridElement, {
+    storiesMasonry = new Masonry(gridElement, {
         columnWidth: '.grid-sizer',
         itemSelector: '.grid-item',
         percentPosition: true
@@ -21,7 +26,7 @@ function initStoriesGrid() {
 
     imagesLoaded(gridElement).on('progress', function () {
         // init Masonry after all images have loaded
-        msnry.layout();
+        storiesMasonry.layout();
     });
 }
 
